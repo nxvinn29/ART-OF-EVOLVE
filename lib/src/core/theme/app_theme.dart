@@ -83,14 +83,14 @@ class AppTheme {
           horizontal: 20,
           vertical: 16,
         ),
-        hintStyle: TextStyle(color: textSecondary.withOpacity(0.7)),
+        hintStyle: TextStyle(color: textSecondary.withValues(alpha: 0.7)),
       ),
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: surface,
         elevation: 10,
-        shadowColor: Colors.black.withOpacity(0.1),
-        indicatorColor: primary.withOpacity(0.2),
-        labelTextStyle: MaterialStateProperty.all(
+        shadowColor: Colors.black.withValues(alpha: 0.1),
+        indicatorColor: primary.withValues(alpha: 0.2),
+        labelTextStyle: WidgetStateProperty.all(
           const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
         ),
       ),

@@ -67,9 +67,9 @@ class DashboardView extends StatelessWidget {
               const SizedBox(height: 10),
 
               // 6. Habits List (Horizontal Timeline)
-              SizedBox(
+              const SizedBox(
                 height: 160,
-                child: const HabitsList(isEmbedded: true, isHorizontal: true),
+                child: HabitsList(isEmbedded: true, isHorizontal: true),
               ),
               const SizedBox(height: 80), // Bottom padding for nav bar logic
             ],

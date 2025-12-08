@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'todos_controller.dart';
-import '../domain/todo.dart';
 import 'package:intl/intl.dart';
 import '../../../core/presentation/animated_checkbox.dart';
 
@@ -120,7 +119,7 @@ class TodosScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 16),
               DropdownButtonFormField<String>(
-                value: selectedCategory,
+                initialValue: selectedCategory,
                 items: ['Personal', 'Work', 'Fitness', 'Learning']
                     .map((c) => DropdownMenuItem(value: c, child: Text(c)))
                     .toList(),

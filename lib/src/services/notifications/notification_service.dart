@@ -29,6 +29,7 @@ class NotificationService implements INotificationService {
   final FlutterLocalNotificationsPlugin _notificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
+  @override
   Future<void> init() async {
     tz.initializeTimeZones();
 
@@ -52,6 +53,7 @@ class NotificationService implements INotificationService {
     await _notificationsPlugin.initialize(initializationSettings);
   }
 
+  @override
   Future<void> requestPermissions() async {
     await _notificationsPlugin
         .resolvePlatformSpecificImplementation<
@@ -66,6 +68,7 @@ class NotificationService implements INotificationService {
         ?.requestPermissions(alert: true, badge: true, sound: true);
   }
 
+  @override
   Future<void> scheduleDailyNotification({
     required int id,
     required String title,
@@ -94,6 +97,7 @@ class NotificationService implements INotificationService {
     );
   }
 
+  @override
   Future<void> scheduleOneOffNotification({
     required int id,
     required String title,
@@ -122,6 +126,7 @@ class NotificationService implements INotificationService {
     );
   }
 
+  @override
   Future<void> cancelNotification(int id) async {
     await _notificationsPlugin.cancel(id);
   }

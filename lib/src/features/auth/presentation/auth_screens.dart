@@ -99,8 +99,9 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     ),
                   ),
                   validator: (value) {
-                    if (value == null || value.isEmpty)
+                    if (value == null || value.isEmpty) {
                       return 'Please enter email';
+                    }
                     return null;
                   },
                 ),
@@ -118,8 +119,9 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   ),
                   obscureText: true,
                   validator: (value) {
-                    if (value == null || value.isEmpty)
+                    if (value == null || value.isEmpty) {
                       return 'Please enter password';
+                    }
                     return null;
                   },
                 ),
@@ -291,8 +293,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     ),
                   ),
                   validator: (value) {
-                    if (value == null || value.isEmpty)
+                    if (value == null || value.isEmpty) {
                       return 'Please enter email';
+                    }
                     return null;
                   },
                 ),
@@ -310,8 +313,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   ),
                   obscureText: true,
                   validator: (value) {
-                    if (value == null || value.isEmpty)
+                    if (value == null || value.isEmpty) {
                       return 'Please enter password';
+                    }
                     return null;
                   },
                 ),

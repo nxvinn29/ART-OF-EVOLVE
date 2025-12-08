@@ -41,6 +41,30 @@ class SelfCareScreen extends ConsumerWidget {
 class _JournalTab extends ConsumerWidget {
   const _JournalTab();
 
+  static const List<Map<String, dynamic>> _moods = [
+    {
+      'label': 'Happy',
+      'icon': Icons.sentiment_very_satisfied,
+      'color': Colors.amber,
+    },
+    {'label': 'Calm', 'icon': Icons.spa, 'color': Colors.green},
+    {'label': 'Neutral', 'icon': Icons.sentiment_neutral, 'color': Colors.grey},
+    {
+      'label': 'Sad',
+      'icon': Icons.sentiment_dissatisfied,
+      'color': Colors.blueGrey,
+    },
+    {'label': 'Stress', 'icon': Icons.bolt, 'color': Colors.redAccent},
+    {'label': 'Grateful', 'icon': Icons.favorite, 'color': Colors.pink},
+  ];
+
+  Map<String, dynamic> _getMoodDetails(String label) {
+    return _moods.firstWhere(
+      (m) => m['label'] == label,
+      orElse: () => {'label': label, 'icon': Icons.label, 'color': Colors.grey},
+    );
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final entriesAsync = ref.watch(journalControllerProvider);
@@ -48,17 +72,31 @@ class _JournalTab extends ConsumerWidget {
     return Scaffold(
       body: entriesAsync.when(
         data: (entries) {
-          // Filter out Gratitude specific entries to keep Journal clean?
-          // Or show all? Let's show non-gratitude or all.
-          // For now, let's show everything in Journal, but only Gratitude in Gratitude.
           if (entries.isEmpty) {
-            return const Center(child: Text('Write your first journal entry.'));
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.book, size: 64, color: Colors.grey[300]),
+                  const SizedBox(height: 16),
+                  const Text(
+                    'Write your first journal entry.',
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ],
+              ),
+            );
           }
+          final sortedEntries = List.of(entries)
+            ..sort((a, b) => b.date.compareTo(a.date));
+
           return ListView.builder(
-            itemCount: entries.length,
+            itemCount: sortedEntries.length,
             padding: const EdgeInsets.all(12),
             itemBuilder: (context, index) {
-              final entry = entries[index];
+              final entry = sortedEntries[index];
+              final moodDetails = _getMoodDetails(entry.mood);
+
               return Dismissible(
                 key: Key(entry.id),
                 direction: DismissDirection.endToStart,
@@ -70,36 +108,114 @@ class _JournalTab extends ConsumerWidget {
                 background: Container(
                   color: Colors.red,
                   alignment: Alignment.centerRight,
+                  padding: const EdgeInsets.only(right: 20),
                   child: const Icon(Icons.delete, color: Colors.white),
                 ),
                 child: Card(
-                  child: ListTile(
-                    title: Text(
-                      entry.title.isNotEmpty ? entry.title : 'Untitled',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Text(
-                      entry.content,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    trailing: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                  elevation: 2,
+                  margin: const EdgeInsets.only(bottom: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          DateFormat.MMMd().format(entry.date),
-                          style: const TextStyle(fontSize: 12),
-                        ),
-                        if (entry.mood.isNotEmpty)
-                          Chip(
-                            label: Text(
-                              entry.mood,
-                              style: const TextStyle(fontSize: 10),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Mood Icon
+                            Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: (moodDetails['color'] as Color)
+                                    .withOpacity(0.1),
+                                shape: BoxShape.circle,
+                              ),
+                              child: Icon(
+                                moodDetails['icon'] as IconData,
+                                color: moodDetails['color'] as Color,
+                              ),
                             ),
-                            padding: EdgeInsets.zero,
-                            visualDensity: VisualDensity.compact,
+                            const SizedBox(width: 12),
+                            // Content
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  if (entry.prompt != null &&
+                                      entry.prompt!.isNotEmpty) ...[
+                                    Text(
+                                      entry.prompt!,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontStyle: FontStyle.italic,
+                                        color: Theme.of(context).primaryColor,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4),
+                                  ],
+                                  if (entry.title.isNotEmpty)
+                                    Text(
+                                      entry.title,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  Text(
+                                    entry.content,
+                                    maxLines: 3,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      color: Colors.grey[800],
+                                      height: 1.4,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            // Date
+                            Text(
+                              DateFormat.MMMd().format(entry.date),
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        if (entry.tags.isNotEmpty) ...[
+                          const SizedBox(height: 12),
+                          Wrap(
+                            spacing: 8,
+                            runSpacing: 4,
+                            children: entry.tags.map((tag) {
+                              return Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 2,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[100],
+                                  borderRadius: BorderRadius.circular(4),
+                                  border: Border.all(color: Colors.grey[300]!),
+                                ),
+                                child: Text(
+                                  '#$tag',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.grey[700],
+                                  ),
+                                ),
+                              );
+                            }).toList(),
                           ),
+                        ],
                       ],
                     ),
                   ),

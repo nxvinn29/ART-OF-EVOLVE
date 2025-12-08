@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../services/quote_service.dart';
 import 'goals_controller.dart';
-import '../domain/goal.dart';
 
 class GoalsScreen extends ConsumerWidget {
   const GoalsScreen({super.key});

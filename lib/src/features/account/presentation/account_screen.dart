@@ -20,7 +20,7 @@ class AccountScreen extends ConsumerWidget {
     final isLoggedIn = authState.value != null;
 
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -274,7 +274,7 @@ class AccountScreen extends ConsumerWidget {
                     onChanged: (val) {
                       ref.read(settingsProvider.notifier).toggle24HourTime();
                     },
-                    activeColor: const Color(0xFF26C6DA),
+                    activeThumbColor: const Color(0xFF26C6DA),
                   ),
                 ),
                 _SettingsItem(

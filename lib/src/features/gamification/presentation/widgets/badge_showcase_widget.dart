@@ -39,7 +39,7 @@ class BadgeShowcaseWidget extends ConsumerWidget {
               final badgeId = unlockedIds[index];
               final badge = app_badge.Badge.allBadges.firstWhere(
                 (b) => b.id == badgeId,
-                orElse: () => app_badge.Badge(
+                orElse: () => const app_badge.Badge(
                   id: 'unknown',
                   name: '???',
                   description: '',

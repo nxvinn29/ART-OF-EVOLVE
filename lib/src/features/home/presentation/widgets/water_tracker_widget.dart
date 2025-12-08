@@ -68,16 +68,18 @@ class WaterTrackerWidget extends ConsumerWidget {
               _buildButton(
                 icon: Icons.remove,
                 onTap: () {
-                  if (intake > 0)
+                  if (intake > 0) {
                     ref.read(waterIntakeProvider.notifier).state--;
+                  }
                 },
               ),
               const SizedBox(width: 8),
               _buildButton(
                 icon: Icons.add,
                 onTap: () {
-                  if (intake < 8)
+                  if (intake < 8) {
                     ref.read(waterIntakeProvider.notifier).state++;
+                  }
                 },
               ),
             ],

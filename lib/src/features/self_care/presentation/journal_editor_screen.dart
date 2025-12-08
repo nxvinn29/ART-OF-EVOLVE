@@ -15,7 +15,7 @@ class _JournalEditorScreenState extends ConsumerState<JournalEditorScreen> {
   final _contentController = TextEditingController();
   final _tagController = TextEditingController();
   String _selectedMood = 'Neutral';
-  List<String> _tags = [];
+  final List<String> _tags = [];
   String? _currentPrompt;
 
   final List<Map<String, dynamic>> _moods = [
@@ -133,8 +133,9 @@ class _JournalEditorScreenState extends ConsumerState<JournalEditorScreen> {
                       selected: isSelected,
                       selectedColor: mood['color'],
                       onSelected: (selected) {
-                        if (selected)
+                        if (selected) {
                           setState(() => _selectedMood = mood['label']);
+                        }
                       },
                     ),
                   );
