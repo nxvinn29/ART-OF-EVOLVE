@@ -18,7 +18,7 @@ class MiniTodoListWidget extends ConsumerWidget {
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 15,
             offset: const Offset(0, 8),
           ),
@@ -31,7 +31,7 @@ class MiniTodoListWidget extends ConsumerWidget {
           Positioned.fill(
             child: CustomPaint(
               painter: GridPaperPainter(
-                color: Colors.blueGrey.withOpacity(0.1),
+                color: Colors.blueGrey.withValues(alpha: 0.1),
                 spacing: 24.0,
               ),
             ),
@@ -57,7 +57,7 @@ class MiniTodoListWidget extends ConsumerWidget {
                     Container(
                       padding: const EdgeInsets.all(6),
                       decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.05),
+                        color: Colors.black.withValues(alpha: 0.05),
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(
@@ -122,10 +122,10 @@ class MiniTodoListWidget extends ConsumerWidget {
   Widget _buildRichTodoItem(dynamic todo, int index, WidgetRef ref) {
     // Vibrant highlighter colors
     final List<Color> highlighterColors = [
-      const Color(0xFFFF80AB).withOpacity(0.3), // Pink
-      const Color(0xFF80D8FF).withOpacity(0.3), // Blue
-      const Color(0xFFFFEA00).withOpacity(0.3), // Yellow
-      const Color(0xFFB9F6CA).withOpacity(0.3), // Green
+      const Color(0xFFFF80AB).withValues(alpha: 0.3), // Pink
+      const Color(0xFF80D8FF).withValues(alpha: 0.3), // Blue
+      const Color(0xFFFFEA00).withValues(alpha: 0.3), // Yellow
+      const Color(0xFFB9F6CA).withValues(alpha: 0.3), // Green
     ];
 
     final highlightColor = highlighterColors[index % highlighterColors.length];

@@ -36,7 +36,7 @@ class _MoodTrackerWidgetState extends State<MoodTrackerWidget> {
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.03),
+            color: Colors.black.withValues(alpha: 0.03),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -65,7 +65,7 @@ class _MoodTrackerWidgetState extends State<MoodTrackerWidget> {
                   decoration: BoxDecoration(
                     color: isSelected
                         ? mood['color']
-                        : mood['color'].withOpacity(0.3),
+                        : mood['color'].withValues(alpha: 0.3),
                     shape: BoxShape.circle,
                   ),
                   child: Icon(

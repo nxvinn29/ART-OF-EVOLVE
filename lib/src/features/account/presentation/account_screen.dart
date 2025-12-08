@@ -64,7 +64,7 @@ class AccountScreen extends ConsumerWidget {
                   border: Border.all(color: Colors.white, width: 4),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
+                      color: Colors.black.withValues(alpha: 0.1),
                       blurRadius: 20,
                       offset: const Offset(0, 10),
                     ),
@@ -108,11 +108,11 @@ class AccountScreen extends ConsumerWidget {
                   width: double.infinity,
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.8),
+                    color: Colors.white.withValues(alpha: 0.8),
                     borderRadius: BorderRadius.circular(24),
                     boxShadow: [
                       BoxShadow(
-                        color: const Color(0xFF6B4EFF).withOpacity(0.1),
+                        color: const Color(0xFF6B4EFF).withValues(alpha: 0.1),
                         blurRadius: 20,
                         offset: const Offset(0, 8),
                       ),
@@ -225,7 +225,7 @@ class AccountScreen extends ConsumerWidget {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black87.withOpacity(0.8),
+                    color: Colors.black87.withValues(alpha: 0.8),
                   ),
                 ),
               ),
@@ -254,7 +254,7 @@ class AccountScreen extends ConsumerWidget {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black87.withOpacity(0.8),
+                    color: Colors.black87.withValues(alpha: 0.8),
                   ),
                 ),
               ),
@@ -314,13 +314,13 @@ class AccountScreen extends ConsumerWidget {
   Widget _buildSettingsGroup(BuildContext context, List<_SettingsItem> items) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.9), // Glassmorphism-ish
+        color: Colors.white.withValues(alpha: 0.9), // Glassmorphism-ish
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
             color: const Color(
               0xFF6B4EFF,
-            ).withOpacity(0.05), // Soft purple shadow
+            ).withValues(alpha: 0.05), // Soft purple shadow
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),

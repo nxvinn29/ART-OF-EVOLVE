@@ -56,8 +56,12 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    const Color(0xFFE55D87).withOpacity(0.3), // Soft Pink tint
-                    const Color(0xFF5FC3E4).withOpacity(0.1), // Soft Blue tint
+                    const Color(
+                      0xFFE55D87,
+                    ).withValues(alpha: 0.3), // Soft Pink tint
+                    const Color(
+                      0xFF5FC3E4,
+                    ).withValues(alpha: 0.1), // Soft Blue tint
                   ],
                 ),
               ),
@@ -75,7 +79,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   ),
                   child: LinearProgressIndicator(
                     value: (_currentPage + 1) / 5,
-                    backgroundColor: Colors.white.withOpacity(0.3),
+                    backgroundColor: Colors.white.withValues(alpha: 0.3),
                     valueColor: const AlwaysStoppedAnimation(Colors.white),
                     minHeight: 6,
                     borderRadius: BorderRadius.circular(10),
@@ -333,7 +337,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
+                      color: Colors.black.withValues(alpha: 0.05),
                       blurRadius: 10,
                       offset: const Offset(0, 4),
                     ),

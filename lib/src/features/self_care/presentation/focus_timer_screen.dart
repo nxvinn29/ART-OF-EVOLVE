@@ -223,7 +223,7 @@ class _FocusTimerScreenState extends ConsumerState<FocusTimerScreen> {
       label: Text(label),
       selected: isSelected,
       onSelected: (_) => _setMode(label, duration),
-      selectedColor: const Color(0xFF4F46E5).withOpacity(0.2),
+      selectedColor: const Color(0xFF4F46E5).withValues(alpha: 0.2),
       labelStyle: TextStyle(
         color: isSelected ? const Color(0xFF4F46E5) : Colors.black54,
         fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
