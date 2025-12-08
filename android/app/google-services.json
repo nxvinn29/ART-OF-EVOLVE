@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "204318970766",
+    "project_id": "art-of-evolve",
+    "storage_bucket": "art-of-evolve.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:204318970766:android:143f9fd25b1b3d62230adf",
+        "android_client_info": {
+          "package_name": "com.example.art_of_evolve"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGWTVApbkI4B66rta85HE2krLK7frHB6U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
