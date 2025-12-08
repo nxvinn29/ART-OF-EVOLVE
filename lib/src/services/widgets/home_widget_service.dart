@@ -1,8 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:home_widget/home_widget.dart';
 
 class HomeWidgetService {
-  static const String _appGroupId =
-      'group.com.example.artofevolve'; // Replace with actual Group ID for iOS
+  // static const String _appGroupId = 'group.com.example.artofevolve';
   static const String _androidWidgetName =
       'ArtOfEvolveWidget'; // Matches android/app/src/main/res/xml/widget_info.xml
 
@@ -18,7 +18,7 @@ class HomeWidgetService {
             'com.example.artofevolve.ArtOfEvolveWidget', // Replace with actual class path
       );
     } catch (e) {
-      print("Error updating widget: $e");
+      debugPrint("Error updating widget: $e");
     }
   }
 }

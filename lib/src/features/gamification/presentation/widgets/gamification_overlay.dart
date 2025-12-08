@@ -60,8 +60,8 @@ class _GamificationOverlayState extends ConsumerState<GamificationOverlay> {
             next.unlockedBadgeIds.last; // Simple assumption for now
         // In a real app we'd diff the sets to find exactly which one
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Badge Unlocked! Keep it up!'),
+          SnackBar(
+            content: Text('Badge Unlocked: $newBadgeId! Keep it up!'),
             backgroundColor: Colors.amber,
             behavior: SnackBarBehavior.floating,
           ),

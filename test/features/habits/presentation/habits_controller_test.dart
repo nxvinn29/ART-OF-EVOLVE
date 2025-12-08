@@ -80,7 +80,6 @@ class MockGamificationController extends StateNotifier<UserStats>
   @override
   Future<void> resetStats() async {}
 
-  @override
   Future<void> unlockBadge(String badgeId) async {}
 }
 
