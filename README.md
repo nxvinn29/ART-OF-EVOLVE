@@ -7,7 +7,7 @@
 [![Hive](https://img.shields.io/badge/Storage-Hive-orange?style=for-the-badge)](https://docs.hivedb.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-**Art of Evolve** is a holistic self-improvement application built with Flutter. It combines habit tracking, task management, journaling, and focus tools into a single, beautiful "Soft Pastel" aesthetic interface. Gamify your life, track your growth, and evolve into your best self.
+**Art of Evolve** is a holistic self-improvement application built with Flutter. It combines habit tracking, task management, journaling, and focus tools into a single, beautiful "Soft Pastel" aesthetic interface. Gamify your life, track your growth, and evolve into your best self.  
 
 ---
 
