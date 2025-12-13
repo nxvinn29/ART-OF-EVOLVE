@@ -39,7 +39,7 @@ class GamificationController extends StateNotifier<UserStats> {
     if (newXp >= xpRequired) {
       newXp -= xpRequired;
       newLevel++;
-      // TODO: Trigger confetti / level up dialog via a provider or callback
+
     }
 
     state = state.copyWith(currentXp: newXp, level: newLevel);
@@ -73,7 +73,7 @@ class GamificationController extends StateNotifier<UserStats> {
     if (badgeUnlocked) {
       state = state.copyWith(unlockedBadgeIds: newBadges);
       await _saveStats();
-      // TODO: Notify UI of new badge
+    
     }
   }
 

@@ -6,6 +6,12 @@ import 'package:timezone/timezone.dart' as tz;
 abstract class INotificationService {
   Future<void> init();
   Future<void> requestPermissions();
+  Future<void> scheduleReminder({
+    required int id,
+    required String title,
+    required String body,
+    required DateTime scheduledDate,
+  });
   Future<void> scheduleDailyNotification({
     required int id,
     required String title,
@@ -19,53 +25,86 @@ abstract class INotificationService {
     required Duration delay,
   });
   Future<void> cancelNotification(int id);
+  Future<void> cancelReminder(int id);
 }
 
 class NotificationService implements INotificationService {
+  static final FlutterLocalNotificationsPlugin _notifications =
+      FlutterLocalNotificationsPlugin();
+
+  // Singleton pattern for static access if needed, but we used instance in controller
   static final NotificationService _instance = NotificationService._internal();
-  factory NotificationService() => _instance;
+
+  factory NotificationService() {
+    return _instance;
+  }
+
   NotificationService._internal();
 
-  final FlutterLocalNotificationsPlugin _notificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+  // Static helper for main.dart if we want to keep static init style,
+  // but main.dart was updated to use static init.
+  // We should support both or revert main.dart to use instance.
+  // To match previous main.dart usage validation, let's just make sure init is available as instance method.
+
+  static Future<void> initStatic() async {
+    await _instance.init();
+  }
 
   @override
   Future<void> init() async {
     tz.initializeTimeZones();
+    const androidSettings = AndroidInitializationSettings(
+      '@mipmap/ic_launcher',
+    );
+    const iosSettings = DarwinInitializationSettings();
+    const settings = InitializationSettings(
+      android: androidSettings,
+      iOS: iosSettings,
+    );
 
-    const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
-
-    // Darwin for iOS/macOS
-    const DarwinInitializationSettings initializationSettingsDarwin =
-        DarwinInitializationSettings(
-          requestSoundPermission: false,
-          requestBadgePermission: false,
-          requestAlertPermission: false,
-        );
-
-    const InitializationSettings initializationSettings =
-        InitializationSettings(
-          android: initializationSettingsAndroid,
-          iOS: initializationSettingsDarwin,
-        );
-
-    await _notificationsPlugin.initialize(initializationSettings);
+    await _notifications.initialize(settings);
   }
 
   @override
   Future<void> requestPermissions() async {
-    await _notificationsPlugin
+    await _notifications
         .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin
         >()
         ?.requestNotificationsPermission();
-
-    await _notificationsPlugin
+    await _notifications
         .resolvePlatformSpecificImplementation<
           IOSFlutterLocalNotificationsPlugin
         >()
         ?.requestPermissions(alert: true, badge: true, sound: true);
+  }
+
+  @override
+  Future<void> scheduleReminder({
+    required int id,
+    required String title,
+    required String body,
+    required DateTime scheduledDate,
+  }) async {
+    await _notifications.zonedSchedule(
+      id,
+      title,
+      body,
+      tz.TZDateTime.from(scheduledDate, tz.local),
+      const NotificationDetails(
+        android: AndroidNotificationDetails(
+          'journal_reminders',
+          'Journal Reminders',
+          channelDescription: 'Reminders for journal entries',
+          importance: Importance.high,
+          priority: Priority.high,
+        ),
+        iOS: DarwinNotificationDetails(),
+      ),
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+    );
   }
 
   @override
@@ -75,17 +114,31 @@ class NotificationService implements INotificationService {
     required String body,
     required TimeOfDay time,
   }) async {
-    await _notificationsPlugin.zonedSchedule(
+    final now = tz.TZDateTime.now(tz.local);
+    var scheduledDate = tz.TZDateTime(
+      tz.local,
+      now.year,
+      now.month,
+      now.day,
+      time.hour,
+      time.minute,
+    );
+
+    if (scheduledDate.isBefore(now)) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    }
+
+    await _notifications.zonedSchedule(
       id,
       title,
       body,
-      _nextInstanceOfTime(time),
+      scheduledDate,
       const NotificationDetails(
         android: AndroidNotificationDetails(
-          'daily_habit_channel',
+          'daily_habits',
           'Daily Habits',
-          channelDescription: 'Reminders for your daily habits',
-          importance: Importance.max,
+          channelDescription: 'Daily reminders for habits',
+          importance: Importance.high,
           priority: Priority.high,
         ),
         iOS: DarwinNotificationDetails(),
@@ -98,27 +151,29 @@ class NotificationService implements INotificationService {
   }
 
   @override
+  Future<void> cancelNotification(int id) => cancelReminder(id);
+
+  @override
   Future<void> scheduleOneOffNotification({
     required int id,
     required String title,
     required String body,
     required Duration delay,
   }) async {
-    await _notificationsPlugin.zonedSchedule(
+    await _notifications.zonedSchedule(
       id,
       title,
       body,
       tz.TZDateTime.now(tz.local).add(delay),
       const NotificationDetails(
         android: AndroidNotificationDetails(
-          'focus_timer_channel',
+          'focus_timer',
           'Focus Timer',
-          channelDescription: 'Notifications for Focus Timer completion',
-          importance: Importance.max,
+          channelDescription: 'Timer completion notifications',
+          importance: Importance.high,
           priority: Priority.high,
-          playSound: true,
         ),
-        iOS: DarwinNotificationDetails(presentSound: true),
+        iOS: DarwinNotificationDetails(),
       ),
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       uiLocalNotificationDateInterpretation:
@@ -127,23 +182,7 @@ class NotificationService implements INotificationService {
   }
 
   @override
-  Future<void> cancelNotification(int id) async {
-    await _notificationsPlugin.cancel(id);
-  }
-
-  tz.TZDateTime _nextInstanceOfTime(TimeOfDay time) {
-    final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
-    tz.TZDateTime scheduledDate = tz.TZDateTime(
-      tz.local,
-      now.year,
-      now.month,
-      now.day,
-      time.hour,
-      time.minute,
-    );
-    if (scheduledDate.isBefore(now)) {
-      scheduledDate = scheduledDate.add(const Duration(days: 1));
-    }
-    return scheduledDate;
+  Future<void> cancelReminder(int id) async {
+    await _notifications.cancel(id);
   }
 }

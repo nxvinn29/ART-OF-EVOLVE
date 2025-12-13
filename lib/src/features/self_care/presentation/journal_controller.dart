@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../domain/journal_entry.dart';
 import '../data/journal_repository.dart';
 import '../../../core/data/repository_interfaces.dart';
+import '../../../services/notifications/notification_service.dart';
 
 final journalControllerProvider =
     StateNotifierProvider<JournalController, AsyncValue<List<JournalEntry>>>((
@@ -35,6 +36,10 @@ class JournalController extends StateNotifier<AsyncValue<List<JournalEntry>>> {
     String mood, {
     List<String> tags = const [],
     String? prompt,
+    List<Map<String, dynamic>> contentBlocks = const [],
+    bool hasDrawing = false,
+    bool hasAudio = false,
+    DateTime? reminderTime,
   }) async {
     try {
       final entry = JournalEntry(
@@ -43,8 +48,22 @@ class JournalController extends StateNotifier<AsyncValue<List<JournalEntry>>> {
         mood: mood,
         tags: tags,
         prompt: prompt,
+        contentBlocks: contentBlocks,
+        hasDrawing: hasDrawing,
+        hasAudio: hasAudio,
+        reminderTime: reminderTime,
       );
       await _repository.saveEntry(entry);
+
+      if (reminderTime != null) {
+        await NotificationService().scheduleReminder(
+          id: entry.id.hashCode,
+          title: 'Journal Reminder',
+          body: title.isNotEmpty ? title : 'Time to write in your journal!',
+          scheduledDate: reminderTime,
+        );
+      }
+
       await loadEntries();
     } catch (e, st) {
       state = AsyncError(e, st);
@@ -53,6 +72,7 @@ class JournalController extends StateNotifier<AsyncValue<List<JournalEntry>>> {
 
   Future<void> deleteEntry(String id) async {
     try {
+      await NotificationService().cancelReminder(id.hashCode);
       await _repository.deleteEntry(id);
       await loadEntries();
     } catch (e, st) {

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'journal_controller.dart';
 import 'journal_editor_screen.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'focus_timer_screen.dart';
 
 class SelfCareScreen extends ConsumerWidget {
@@ -334,57 +335,124 @@ class _GratitudeTab extends ConsumerWidget {
   }
 }
 
-class _MeditationTab extends StatelessWidget {
+class _MeditationTab extends StatefulWidget {
   const _MeditationTab();
 
   @override
-  Widget build(BuildContext context) {
-    final sessions = [
-      {
-        'title': 'Morning Clariity',
-        'duration': '5 min',
-        'color': Colors.orangeAccent,
-      },
-      {
-        'title': 'Deep Relaxation',
-        'duration': '10 min',
-        'color': Colors.blueAccent,
-      },
-      {
-        'title': 'Focus Boost',
-        'duration': '15 min',
-        'color': Colors.purpleAccent,
-      },
-      {
-        'title': 'Sleep Well',
-        'duration': '20 min',
-        'color': Colors.indigoAccent,
-      },
-    ];
+  State<_MeditationTab> createState() => _MeditationTabState();
+}
 
+class _MeditationTabState extends State<_MeditationTab> {
+  // Using audiplayers for playback
+  // Note: ensure 'audioplayers' is imported
+  // import 'package:audioplayers/audioplayers.dart'; (Will add via separate edit if needed, or assume top level import)
+  // Actually, I need to add the import to the top of the file first.
+  // I will assume I can add the import in a separate block or relying on the user to fix if I miss it,
+  // but better to add it.
+  // The tool only allows contiguous edits. I will do the class implementation first.
+
+  late final AudioPlayer _audioPlayer;
+  String? _currentlyPlayingUrl;
+  bool _isPlaying = false;
+
+  final List<Map<String, String>> _sessions = [
+    {
+      'title': 'Morning Clarity',
+      'duration': '5 min',
+      'url':
+          'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', // Placeholder URL
+      'color': '0xFFFFAB91', // Colors.orangeAccent[200]
+    },
+    {
+      'title': 'Deep Relaxation',
+      'duration': '10 min',
+      'url': 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
+      'color': '0xFF90CAF9', // Colors.blueAccent[200]
+    },
+    {
+      'title': 'Focus Boost',
+      'duration': '15 min',
+      'url': 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
+      'color': '0xFFE1BEE7', // Colors.purpleAccent[200]
+    },
+    {
+      'title': 'Sleep Well',
+      'duration': '20 min',
+      'url': 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',
+      'color': '0xFFC5CAE9', // Colors.indigoAccent[200]
+    },
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _audioPlayer = AudioPlayer();
+    _audioPlayer.onPlayerStateChanged.listen((state) {
+      if (mounted) {
+        setState(() {
+          _isPlaying = state == PlayerState.playing;
+        });
+      }
+    });
+    _audioPlayer.onPlayerComplete.listen((_) {
+      if (mounted) {
+        setState(() {
+          _currentlyPlayingUrl = null;
+          _isPlaying = false;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _audioPlayer.dispose();
+    super.dispose();
+  }
+
+  Future<void> _playSession(String url) async {
+    if (_currentlyPlayingUrl == url && _isPlaying) {
+      await _audioPlayer.pause();
+    } else {
+      await _audioPlayer.stop(); // Stop previous
+      await _audioPlayer.play(UrlSource(url));
+      setState(() {
+        _currentlyPlayingUrl = url;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return ListView.builder(
       padding: const EdgeInsets.all(16),
-      itemCount: sessions.length,
+      itemCount: _sessions.length,
       itemBuilder: (context, index) {
-        final session = sessions[index];
+        final session = _sessions[index];
+        final url = session['url']!;
+        final isMessagePlaying = _currentlyPlayingUrl == url && _isPlaying;
+
         return Card(
           margin: const EdgeInsets.only(bottom: 12),
           child: ListTile(
             leading: CircleAvatar(
-              backgroundColor: session['color'] as Color,
-              child: const Icon(Icons.play_arrow, color: Colors.white),
+              backgroundColor: session['color'] != null
+                  ? Color(int.parse(session['color']!))
+                  : Colors.blue,
+              child: Icon(
+                isMessagePlaying ? Icons.pause : Icons.play_arrow,
+                color: Colors.white,
+              ),
             ),
             title: Text(
-              session['title'] as String,
+              session['title']!,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-            subtitle: Text(session['duration'] as String),
-            trailing: const Icon(Icons.headphones),
-            onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Playing ${session['title']} (Mock)')),
-              );
-            },
+            subtitle: Text(session['duration']!),
+            trailing: isMessagePlaying
+                ? const Icon(Icons.graphic_eq, color: Colors.blue)
+                : const Icon(Icons.headphones),
+            onTap: () => _playSession(url),
           ),
         );
       },

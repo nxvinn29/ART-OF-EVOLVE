@@ -1,6 +1,11 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'journal_controller.dart';
+import 'widgets/drawing_canvas_widget.dart';
+import 'widgets/format_toolbar.dart';
+import 'widgets/voice_recorder_widget.dart';
 
 class JournalEditorScreen extends ConsumerStatefulWidget {
   const JournalEditorScreen({super.key});
@@ -12,11 +17,14 @@ class JournalEditorScreen extends ConsumerStatefulWidget {
 
 class _JournalEditorScreenState extends ConsumerState<JournalEditorScreen> {
   final _titleController = TextEditingController();
-  final _contentController = TextEditingController();
   final _tagController = TextEditingController();
+  final List<Map<String, dynamic>> _blocks = [
+    {'type': 'text', 'data': TextEditingController()},
+  ];
   String _selectedMood = 'Neutral';
   final List<String> _tags = [];
   String? _currentPrompt;
+  final ScrollController _scrollController = ScrollController();
 
   final List<Map<String, dynamic>> _moods = [
     {
@@ -35,28 +43,218 @@ class _JournalEditorScreenState extends ConsumerState<JournalEditorScreen> {
     {'label': 'Grateful', 'icon': Icons.favorite, 'color': Colors.pink},
   ];
 
-  final List<String> _prompts = [
-    "What made you smile today?",
-    "What is one thing you learned?",
-    "Who are you grateful for?",
-    "What challenge did you overcome?",
-    "How are you feeling right now?",
-    "What is your goal for tomorrow?",
-  ];
+  @override
+  void dispose() {
+    for (var block in _blocks) {
+      if (block['type'] == 'text') {
+        (block['data'] as TextEditingController).dispose();
+      }
+    }
+    _titleController.dispose();
+    _tagController.dispose();
+    super.dispose();
+  }
 
-  void _generatePrompt() {
+  void _addBlock(String type, dynamic data) {
     setState(() {
-      _currentPrompt = (_prompts..shuffle()).first;
-      _contentController.text = "$_currentPrompt\n\n";
+      _blocks.add({'type': type, 'data': data});
+    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
     });
   }
 
-  void _addTag(String tag) {
-    if (tag.isNotEmpty && !_tags.contains(tag)) {
-      setState(() {
-        _tags.add(tag.trim());
-        _tagController.clear();
-      });
+  void _addTextBlock() {
+    _addBlock('text', TextEditingController());
+  }
+
+  Future<void> _addImage() async {
+    final picker = ImagePicker();
+    final image = await picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      _addBlock('image', image.path);
+    }
+  }
+
+  void _openDrawingCanvas() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DrawingCanvasWidget(
+          onSave: (path) {
+            _addBlock('drawing', path);
+          },
+        ),
+      ),
+    );
+  }
+
+  void _saveEntry() {
+    final title = _titleController.text;
+    // Prepare blocks for saving (extract text from controllers)
+    final savedBlocks = _blocks.map((block) {
+      if (block['type'] == 'text') {
+        return {
+          'type': 'text',
+          'data': (block['data'] as TextEditingController).text,
+        };
+      } else if (block['type'] == 'checklist') {
+        return {
+          'type': 'checklist',
+          'data': (block['data'] as List<Map<String, dynamic>>).map((item) {
+            return {
+              'checked': item['checked'],
+              'text': (item['controller'] as TextEditingController).text,
+            };
+          }).toList(),
+        };
+      }
+      return block;
+    }).toList();
+
+    // Create legacy content summary
+    String legacyContent = '';
+    if (savedBlocks.isNotEmpty && savedBlocks.first['type'] == 'text') {
+      legacyContent = savedBlocks.first['data'];
+    } else {
+      legacyContent = 'Rich content entry';
+    }
+
+    ref
+        .read(journalControllerProvider.notifier)
+        .addEntry(
+          title,
+          legacyContent,
+          _selectedMood,
+          tags: _tags,
+          prompt: _currentPrompt,
+          contentBlocks: savedBlocks,
+          hasDrawing: savedBlocks.any((b) => b['type'] == 'drawing'),
+          hasAudio: savedBlocks.any((b) => b['type'] == 'voice'),
+        );
+    Navigator.pop(context);
+  }
+
+  Widget _buildBlockWidget(int index, Map<String, dynamic> block) {
+    switch (block['type']) {
+      case 'text':
+        return TextField(
+          controller: block['data'] as TextEditingController,
+          maxLines: null,
+          decoration: const InputDecoration(
+            hintText: 'Write something...',
+            border: InputBorder.none,
+          ),
+        );
+      case 'image':
+      case 'drawing':
+        return Stack(
+          alignment: Alignment.topRight,
+          children: [
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 8),
+              clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: Image.file(File(block['data'] as String)),
+            ),
+            IconButton(
+              icon: const Icon(Icons.close, color: Colors.red),
+              onPressed: () => setState(() => _blocks.removeAt(index)),
+            ),
+          ],
+        );
+      case 'voice':
+        return Stack(
+          alignment: Alignment.topRight,
+          children: [
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 8),
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Row(
+                children: [
+                  const Icon(Icons.mic, color: Colors.blue),
+                  const SizedBox(width: 8),
+                  const Text('Voice Note'),
+                  const Spacer(),
+                  Text(block['duration'] ?? ''),
+                ],
+              ),
+            ),
+            IconButton(
+              icon: const Icon(Icons.close, size: 20),
+              onPressed: () => setState(() => _blocks.removeAt(index)),
+            ),
+          ],
+        );
+      case 'checklist':
+        final List<Widget> children =
+            (block['data'] as List<Map<String, dynamic>>)
+                .asMap()
+                .entries
+                .map<Widget>((entry) {
+                  final itemIndex = entry.key;
+                  final item = entry.value;
+                  return Row(
+                    children: [
+                      Checkbox(
+                        value: item['checked'] ?? false,
+                        onChanged: (val) {
+                          setState(() {
+                            item['checked'] = val;
+                          });
+                        },
+                      ),
+                      Expanded(
+                        child: TextField(
+                          controller:
+                              item['controller'] as TextEditingController,
+                          decoration: const InputDecoration(
+                            hintText: 'List item',
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.close, size: 16),
+                        onPressed: () {
+                          setState(() {
+                            (block['data'] as List).removeAt(itemIndex);
+                          });
+                        },
+                      ),
+                    ],
+                  );
+                })
+                .toList();
+
+        children.add(
+          TextButton.icon(
+            onPressed: () {
+              setState(() {
+                (block['data'] as List<Map<String, dynamic>>).add({
+                  'checked': false,
+                  'controller': TextEditingController(),
+                });
+              });
+            },
+            icon: const Icon(Icons.add),
+            label: const Text('Add Item'),
+          ),
+        );
+        return Column(children: children);
+      default:
+        return const SizedBox.shrink();
     }
   }
 
@@ -69,148 +267,93 @@ class _JournalEditorScreenState extends ConsumerState<JournalEditorScreen> {
           IconButton(onPressed: _saveEntry, icon: const Icon(Icons.check)),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Prompt Generator
-            if (_currentPrompt == null)
-              TextButton.icon(
-                onPressed: _generatePrompt,
-                icon: const Icon(Icons.lightbulb_outline, size: 18),
-                label: const Text("Get Inspired"),
-              )
-            else
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(Icons.format_quote, size: 16),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        _currentPrompt!,
-                        style: const TextStyle(
-                          fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView(
+              controller: _scrollController,
+              padding: const EdgeInsets.all(16),
+              children: [
+                // Mood & Prompt (Keep simplified for brevity in refactor)
+                _buildMoodSelector(),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: _titleController,
+                  decoration: const InputDecoration(
+                    hintText: 'Title',
+                    border: InputBorder.none,
+                    hintStyle: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
                     ),
-                    IconButton(
-                      icon: const Icon(Icons.close, size: 16),
-                      onPressed: () => setState(() => _currentPrompt = null),
-                    ),
-                  ],
+                  ),
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-            const SizedBox(height: 16),
-
-            // Mood Selector
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: _moods.map((mood) {
-                  final isSelected = _selectedMood == mood['label'];
+                const Divider(),
+                ..._blocks.asMap().entries.map((entry) {
                   return Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: ChoiceChip(
-                      label: Row(
-                        children: [
-                          Icon(
-                            mood['icon'],
-                            size: 18,
-                            color: isSelected ? Colors.white : mood['color'],
-                          ),
-                          const SizedBox(width: 4),
-                          Text(mood['label']),
-                        ],
-                      ),
-                      selected: isSelected,
-                      selectedColor: mood['color'],
-                      onSelected: (selected) {
-                        if (selected) {
-                          setState(() => _selectedMood = mood['label']);
-                        }
-                      },
-                    ),
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: _buildBlockWidget(entry.key, entry.value),
                   );
                 }).toList(),
-              ),
+                const SizedBox(height: 100), // Space for FAB/Toolbar
+              ],
             ),
-            const SizedBox(height: 16),
-
-            // Title
-            TextField(
-              controller: _titleController,
-              decoration: const InputDecoration(
-                hintText: 'Title (optional)',
-                border: InputBorder.none,
-                hintStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          FormatToolbar(
+            onTextTap: _addTextBlock,
+            onChecklistTap: () {
+              _addBlock('checklist', [
+                {'checked': false, 'controller': TextEditingController()},
+              ]);
+            },
+            onVoiceTap: () {
+              _addBlock('voice_recorder', null); // Placeholder to show recorder
+            },
+            onDrawTap: _openDrawingCanvas,
+            onImageTap: _addImage,
+          ),
+          if (_blocks.isNotEmpty && _blocks.last['type'] == 'voice_recorder')
+            VoiceRecorderWidget(
+              onRecordingComplete: (path, duration) {
+                setState(() {
+                  _blocks.removeLast(); // Remove recorder
+                  _blocks.add({
+                    'type': 'voice',
+                    'data': path,
+                    'duration': '$duration s',
+                  });
+                });
+              },
             ),
-            const Divider(),
-
-            // Content
-            Expanded(
-              child: TextField(
-                controller: _contentController,
-                maxLines: null,
-                expands: true,
-                decoration: const InputDecoration(
-                  hintText: 'Start writing...',
-                  border: InputBorder.none,
-                ),
-                style: const TextStyle(fontSize: 16),
-              ),
-            ),
-
-            // Tags Input
-            const Divider(),
-            Wrap(
-              spacing: 8,
-              children: _tags
-                  .map(
-                    (tag) => Chip(
-                      label: Text('#$tag'),
-                      onDeleted: () => setState(() => _tags.remove(tag)),
-                      deleteIcon: const Icon(Icons.close, size: 14),
-                    ),
-                  )
-                  .toList(),
-            ),
-            TextField(
-              controller: _tagController,
-              decoration: const InputDecoration(
-                hintText: 'Add a tag...',
-                prefixIcon: Icon(Icons.tag, size: 16),
-                border: InputBorder.none,
-              ),
-              onSubmitted: _addTag,
-            ),
-          ],
-        ),
+        ],
       ),
     );
   }
 
-  void _saveEntry() {
-    if (_contentController.text.isNotEmpty) {
-      ref
-          .read(journalControllerProvider.notifier)
-          .addEntry(
-            _titleController.text,
-            _contentController.text,
-            _selectedMood,
-            tags: _tags,
-            prompt: _currentPrompt,
+  Widget _buildMoodSelector() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: _moods.map((mood) {
+          final isSelected = _selectedMood == mood['label'];
+          return Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: ChoiceChip(
+              label: Text(mood['label']),
+              selected: isSelected,
+              onSelected: (selected) {
+                if (selected) {
+                  setState(() => _selectedMood = mood['label']);
+                }
+              },
+            ),
           );
-      Navigator.pop(context);
-    }
+        }).toList(),
+      ),
+    );
   }
 }

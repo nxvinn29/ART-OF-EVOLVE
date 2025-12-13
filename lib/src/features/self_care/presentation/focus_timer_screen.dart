@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:art_of_evolve/src/services/notifications/notification_service.dart';
 
 // Simple provider for NotificationService access
@@ -90,14 +91,34 @@ class _FocusTimerScreenState extends ConsumerState<FocusTimerScreen> {
         );
   }
 
-  void _onTimerComplete() {
+  final AudioPlayer _audioPlayer = AudioPlayer();
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _audioPlayer.dispose();
+    super.dispose();
+  }
+
+  void _onTimerComplete() async {
     setState(() {
       _isRunning = false;
-      _remainingTime =
-          _totalDuration; // Reset or stay at 0? Reset is friendlier.
+      _remainingTime = _totalDuration;
     });
 
+    // Play sound
+    try {
+      // Using a default system notification sound or a generic url if assets not available
+      // For reliability without assets, we'll try a generic short beep url
+      await _audioPlayer.play(
+        UrlSource('https://actions.google.com/sounds/v1/alarms/beep_short.ogg'),
+      );
+    } catch (e) {
+      debugPrint('Error playing sound: $e');
+    }
+
     // Show Dialog
+    if (!mounted) return;
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -117,12 +138,6 @@ class _FocusTimerScreenState extends ConsumerState<FocusTimerScreen> {
     final int m = seconds ~/ 60;
     final int s = seconds % 60;
     return '${m.toString().padLeft(2, '0')}:${s.toString().padLeft(2, '0')}';
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
   }
 
   @override

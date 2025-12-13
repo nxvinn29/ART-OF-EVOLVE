@@ -26,6 +26,18 @@ class JournalEntry extends HiveObject {
   @HiveField(6)
   final String? prompt;
 
+  @HiveField(7, defaultValue: [])
+  final List<Map<String, dynamic>> contentBlocks;
+
+  @HiveField(8, defaultValue: false)
+  final bool hasDrawing;
+
+  @HiveField(9, defaultValue: false)
+  final bool hasAudio;
+
+  @HiveField(10)
+  final DateTime? reminderTime;
+
   JournalEntry({
     String? id,
     this.title = '',
@@ -34,6 +46,10 @@ class JournalEntry extends HiveObject {
     this.mood = '',
     this.tags = const [],
     this.prompt,
+    this.contentBlocks = const [],
+    this.hasDrawing = false,
+    this.hasAudio = false,
+    this.reminderTime,
   }) : id = id ?? const Uuid().v4(),
        date = date ?? DateTime.now();
 
@@ -43,6 +59,10 @@ class JournalEntry extends HiveObject {
     String? mood,
     List<String>? tags,
     String? prompt,
+    List<Map<String, dynamic>>? contentBlocks,
+    bool? hasDrawing,
+    bool? hasAudio,
+    DateTime? reminderTime,
   }) {
     return JournalEntry(
       id: id,
@@ -52,6 +72,10 @@ class JournalEntry extends HiveObject {
       mood: mood ?? this.mood,
       tags: tags ?? this.tags,
       prompt: prompt ?? this.prompt,
+      contentBlocks: contentBlocks ?? this.contentBlocks,
+      hasDrawing: hasDrawing ?? this.hasDrawing,
+      hasAudio: hasAudio ?? this.hasAudio,
+      reminderTime: reminderTime ?? this.reminderTime,
     );
   }
 }

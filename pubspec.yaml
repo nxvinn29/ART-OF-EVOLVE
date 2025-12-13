@@ -54,6 +54,13 @@ dependencies:
   confetti: ^0.8.0
 
   timezone: any
+  flutter_drawing_board: ^0.9.8
+  record: ^6.1.2
+  audioplayers: ^6.5.1
+  image_picker: ^1.2.1
+  path_provider: ^2.1.5
+  permission_handler: ^12.0.1
+  record_windows: ^1.0.7
 dev_dependencies:
   flutter_test:
     sdk: flutter

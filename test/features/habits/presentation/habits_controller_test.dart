@@ -64,6 +64,17 @@ class MockNotificationService implements INotificationService {
     required String body,
     required Duration delay,
   }) async {}
+
+  @override
+  Future<void> scheduleReminder({
+    required int id,
+    required String title,
+    required String body,
+    required DateTime scheduledDate,
+  }) async {}
+
+  @override
+  Future<void> cancelReminder(int id) async {}
 }
 
 // Mock GamificationController

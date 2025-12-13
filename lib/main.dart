@@ -13,8 +13,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   await HiveService.init();
-  await NotificationService().init();
-  await NotificationService().requestPermissions();
+  await NotificationService.initStatic();
 
   runApp(const ProviderScope(child: ArtOfEvolveApp()));
 }
