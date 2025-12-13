@@ -21,8 +21,14 @@
 
 ### 📝 **Journal 2.0**
 *   **Rich Entries**: Capture your day with text, mood icons, and tags.
+*   **Voice Notes**: Record your thoughts when you're on the go. 🎙️
+*   **Creative Canvas**: Express yourself with drawings and sketches. 🎨
 *   **Get Inspired**: Stuck? Use the built-in "Prompt Generator" for ideas.
 *   **Mood Tracking**: beautifully animated mood selector.
+
+### 📱 **Home Widgets**
+*   **Quick Glance**: View your daily habit progress right from your home screen.
+*   **Stay Motivated**: Keeping your goals visible ensures you never miss a beat.
 
 ### ⏱️ **Focus Timer (Pomodoro)**
 *   **Stay Flow**: Built-in circular timer for deep work sessions.
@@ -43,6 +49,10 @@
 *   **Local Database**: Hive (NoSQL, fast & offline-first)
 *   **Backend**: Firebase (Auth & Firestore Sync)
 *   **Navigation**: GoRouter
+*   **Audio & Media**: `audioplayers`, `record`
+*   **Creative**: `flutter_drawing_board`
+*   **Widgets**: `home_widget`
+*   **Polishing**: `confetti`
 *   **Theme**: Custom "Soft Pastel" & "Vibrant" Design Systems
 
 ---
