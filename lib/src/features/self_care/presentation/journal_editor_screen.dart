@@ -298,7 +298,7 @@ class _JournalEditorScreenState extends ConsumerState<JournalEditorScreen> {
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: _buildBlockWidget(entry.key, entry.value),
                   );
-                }).toList(),
+                }),
                 const SizedBox(height: 100), // Space for FAB/Toolbar
               ],
             ),

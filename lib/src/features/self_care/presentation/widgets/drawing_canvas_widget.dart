@@ -43,10 +43,9 @@ class _DrawingCanvasWidgetState extends State<DrawingCanvasWidget> {
         actions: [
           IconButton(
             icon: const Icon(Icons.check),
-            onPressed: () {
-              _saveDrawing().then((_) {
-                if (mounted) Navigator.pop(context);
-              });
+            onPressed: () async {
+              await _saveDrawing();
+              if (context.mounted) Navigator.pop(context);
             },
           ),
         ],

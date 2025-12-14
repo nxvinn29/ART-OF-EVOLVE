@@ -7,12 +7,14 @@ import 'package:audioplayers/audioplayers.dart';
 import 'focus_timer_screen.dart';
 
 class SelfCareScreen extends ConsumerWidget {
-  const SelfCareScreen({super.key});
+  final int initialIndex;
+  const SelfCareScreen({super.key, this.initialIndex = 0});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return DefaultTabController(
       length: 4,
+      initialIndex: initialIndex,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Self Care'),
@@ -411,14 +413,22 @@ class _MeditationTabState extends State<_MeditationTab> {
   }
 
   Future<void> _playSession(String url) async {
-    if (_currentlyPlayingUrl == url && _isPlaying) {
-      await _audioPlayer.pause();
-    } else {
-      await _audioPlayer.stop(); // Stop previous
-      await _audioPlayer.play(UrlSource(url));
-      setState(() {
-        _currentlyPlayingUrl = url;
-      });
+    try {
+      if (_currentlyPlayingUrl == url && _isPlaying) {
+        await _audioPlayer.pause();
+      } else {
+        await _audioPlayer.stop(); // Stop previous
+        await _audioPlayer.play(UrlSource(url));
+        setState(() {
+          _currentlyPlayingUrl = url;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Failed to play audio: $e')));
+      }
     }
   }
 

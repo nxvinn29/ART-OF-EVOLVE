@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../self_care/presentation/self_care_screen.dart';
 
 class SelfCareWidget extends StatelessWidget {
   const SelfCareWidget({super.key});
@@ -43,34 +44,59 @@ class SelfCareWidget extends StatelessWidget {
             childAspectRatio: 1.1,
             children: [
               _buildCareItem(
+                context,
                 Icons.sentiment_very_satisfied,
                 "do something\nfun-for you!",
                 const Color(0xFFFFCC80),
+                onTap: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("You deserve some fun! Go for it!"),
+                    ),
+                  );
+                },
               ),
               _buildCareItem(
+                context,
                 Icons.phonelink_lock,
                 "take a break\nfrom your devices",
                 const Color(0xFF90CAF9),
+                onTap: () => _navigateToSelfCare(context, 1), // Focus
               ),
               _buildCareItem(
+                context,
                 Icons.edit,
                 "write down\nwhat you're\ngrateful for",
                 const Color(0xFFFFF59D),
+                onTap: () => _navigateToSelfCare(context, 2), // Gratitude
               ),
               _buildCareItem(
+                context,
                 Icons.music_note,
                 "listen to\nsongs that\nuplift you",
                 const Color(0xFFFFAB91),
+                onTap: () =>
+                    _navigateToSelfCare(context, 3), // Meditation (has music)
               ),
               _buildCareItem(
+                context,
                 Icons.spa,
                 "meditate\neven for just\n5 minutes",
                 const Color(0xFF80DEEA),
+                onTap: () => _navigateToSelfCare(context, 3), // Meditation
               ),
               _buildCareItem(
+                context,
                 Icons.image,
                 "spend time in nature\n(or look at\nlandscape photos!)",
                 const Color(0xFFB39DDB),
+                onTap: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Take a deep breath and look outside!"),
+                    ),
+                  );
+                },
               ),
             ],
           ),
@@ -79,36 +105,55 @@ class SelfCareWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildCareItem(IconData icon, String label, Color color) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.05),
-                blurRadius: 5,
-                offset: const Offset(0, 2),
-              ),
-            ],
+  void _navigateToSelfCare(BuildContext context, int index) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SelfCareScreen(initialIndex: index),
+      ),
+    );
+  }
+
+  Widget _buildCareItem(
+    BuildContext context,
+    IconData icon,
+    String label,
+    Color color, {
+    VoidCallback? onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(16),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.05),
+                  blurRadius: 5,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Icon(icon, color: Colors.white, size: 28),
           ),
-          child: Icon(icon, color: Colors.white, size: 28),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          label,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontSize: 12,
-            color: Color(0xFF2D3142),
-            height: 1.2,
+          const SizedBox(height: 8),
+          Text(
+            label,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 12,
+              color: Color(0xFF2D3142),
+              height: 1.2,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
