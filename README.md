@@ -91,4 +91,4 @@ Contributions are welcome! If you have any ideas, suggestions, or bug reports, p
 
 ---
 
-Made with ❤️ by **nxvinn29**
+Made with ❤️ by **nxvinn29** © 2025
