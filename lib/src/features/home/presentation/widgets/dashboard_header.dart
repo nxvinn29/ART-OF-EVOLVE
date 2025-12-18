@@ -90,7 +90,7 @@ class DashboardHeader extends ConsumerWidget {
                   SizedBox(width: 12),
                   Expanded(
                     child: Text(
-                      "Release what you cannot control.",
+                      'Release what you cannot control.',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w500,

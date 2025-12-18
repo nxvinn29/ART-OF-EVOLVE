@@ -110,7 +110,9 @@ class GoalsScreen extends ConsumerWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        'Target: ${DateFormat.yMMMd().format(goal.targetDate)}\n${daysLeft > 0 ? '$daysLeft days left' : 'Due'}',
+                        subtitle: Text(
+                          'Target: ${DateFormat.yMMMd().format(goal.targetDate)}\n${daysLeft > 0 ? '$daysLeft days left' : 'Due'}',
+                        ),
                         isThreeLine: true,
                       ),
                     ),
