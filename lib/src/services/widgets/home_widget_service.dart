@@ -18,7 +18,7 @@ class HomeWidgetService {
             'com.example.artofevolve.ArtOfEvolveWidget', // Replace with actual class path
       );
     } catch (e) {
-      debugPrint("Error updating widget: $e");
+      debugPrint('Error updating widget: $e');
     }
   }
 }
