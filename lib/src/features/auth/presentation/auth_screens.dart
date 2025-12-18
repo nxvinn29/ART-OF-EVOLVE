@@ -72,7 +72,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Text(
-                  "Welcome Back!",
+                  'Welcome Back!',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 28,
@@ -82,7 +82,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  "Sign in to continue",
+                  'Sign in to continue',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 16, color: Colors.grey),
                 ),
@@ -140,7 +140,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                           if (context.mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                content: Text("Password reset email sent!"),
+                                content: Text('Password reset email sent!'),
                               ),
                             );
                           }
@@ -155,14 +155,14 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text(
-                              "Please enter your email first to reset.",
+                              'Please enter your email first to reset.',
                             ),
                           ),
                         );
                       }
                     },
                     child: const Text(
-                      "Forgot Password?",
+                      'Forgot Password?',
                       style: TextStyle(color: Colors.grey),
                     ),
                   ),
@@ -187,7 +187,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                             strokeWidth: 2,
                           ),
                         )
-                      : const Text("Sign In"),
+                      : const Text('Sign In'),
                 ),
               ],
             ),
@@ -266,7 +266,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Text(
-                  "Join the Journey",
+                  'Join the Journey',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 28,
@@ -276,7 +276,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  "Create an account to start evolving",
+                  'Create an account to start evolving',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 16, color: Colors.grey),
                 ),
@@ -339,7 +339,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                             strokeWidth: 2,
                           ),
                         )
-                      : const Text("Create Account"),
+                      : const Text('Create Account'),
                 ),
               ],
             ),

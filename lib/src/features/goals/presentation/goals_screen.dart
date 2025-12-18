@@ -38,7 +38,7 @@ class GoalsScreen extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    "Daily Inspiration",
+                    'Daily Inspiration',
                     style: TextStyle(
                       color: Colors.white70,
                       fontWeight: FontWeight.bold,
@@ -110,9 +110,7 @@ class GoalsScreen extends ConsumerWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        subtitle: Text(
-                          'Target: ${DateFormat.yMMMd().format(goal.targetDate)}\n${daysLeft > 0 ? "$daysLeft days left" : "Due"}',
-                        ),
+                        'Target: ${DateFormat.yMMMd().format(goal.targetDate)}\n${daysLeft > 0 ? '$daysLeft days left' : 'Due'}',
                         isThreeLine: true,
                       ),
                     ),

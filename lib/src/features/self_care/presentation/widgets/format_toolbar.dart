@@ -29,16 +29,16 @@ class FormatToolbar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildToolItem(context, Icons.text_fields, "Text", onTextTap),
+          _buildToolItem(context, Icons.text_fields, 'Text', onTextTap),
           _buildToolItem(
             context,
             Icons.check_box_outlined,
-            "List",
+            'List',
             onChecklistTap,
           ),
-          _buildToolItem(context, Icons.mic_none, "Voice", onVoiceTap),
-          _buildToolItem(context, Icons.brush_outlined, "Draw", onDrawTap),
-          _buildToolItem(context, Icons.image_outlined, "Image", onImageTap),
+          _buildToolItem(context, Icons.mic_none, 'Voice', onVoiceTap),
+          _buildToolItem(context, Icons.brush_outlined, 'Draw', onDrawTap),
+          _buildToolItem(context, Icons.image_outlined, 'Image', onImageTap),
         ],
       ),
     );
