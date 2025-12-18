@@ -93,7 +93,7 @@ class AccountScreen extends ConsumerWidget {
                 ),
               ),
               const Text(
-                "Keep evolving!",
+                'Keep evolving!',
                 style: TextStyle(fontSize: 14, color: Colors.grey),
               ),
               const SizedBox(height: 20),
@@ -121,7 +121,7 @@ class AccountScreen extends ConsumerWidget {
                   child: Column(
                     children: [
                       const Text(
-                        "Join the Community",
+                        'Join the Community',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -130,7 +130,7 @@ class AccountScreen extends ConsumerWidget {
                       ),
                       const SizedBox(height: 8),
                       const Text(
-                        "Sign in to save your progress and sync across devices.",
+                        'Sign in to save your progress and sync across devices.',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 14,
@@ -161,7 +161,7 @@ class AccountScreen extends ConsumerWidget {
                                   borderRadius: BorderRadius.circular(16),
                                 ),
                               ),
-                              child: const Text("Sign In"),
+                              child: const Text('Sign In'),
                             ),
                           ),
                           const SizedBox(width: 16),
@@ -187,7 +187,7 @@ class AccountScreen extends ConsumerWidget {
                                   borderRadius: BorderRadius.circular(16),
                                 ),
                               ),
-                              child: const Text("Create Account"),
+                              child: const Text('Create Account'),
                             ),
                           ),
                         ],
@@ -211,7 +211,7 @@ class AccountScreen extends ConsumerWidget {
                         borderRadius: BorderRadius.circular(16),
                       ),
                     ),
-                    child: const Text("Sign Out"),
+                    child: const Text('Sign Out'),
                   ),
                 ),
 
@@ -221,7 +221,7 @@ class AccountScreen extends ConsumerWidget {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Journal",
+                  'Journal',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -233,7 +233,7 @@ class AccountScreen extends ConsumerWidget {
               _buildSettingsGroup(context, [
                 _SettingsItem(
                   icon: Icons.delete_outline,
-                  title: "Trash",
+                  title: 'Trash',
                   color: const Color(0xFFFFCDD2), // Pink
                   onTap: () {
                     Navigator.of(context).push(
@@ -250,7 +250,7 @@ class AccountScreen extends ConsumerWidget {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Calendar options",
+                  'Calendar options',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -262,12 +262,12 @@ class AccountScreen extends ConsumerWidget {
               _buildSettingsGroup(context, [
                 _SettingsItem(
                   icon: Icons.person_outline,
-                  title: "Your Calendar",
+                  title: 'Your Calendar',
                   color: const Color(0xFFE1BEE7), // Light Purple
                 ),
                 _SettingsItem(
                   icon: Icons.access_time,
-                  title: "24 Hour Time",
+                  title: '24 Hour Time',
                   color: const Color(0xFFB2EBF2), // Light Cyan
                   trailing: Switch(
                     value: settings.is24HourTime,
@@ -279,19 +279,19 @@ class AccountScreen extends ConsumerWidget {
                 ),
                 _SettingsItem(
                   icon: Icons.calendar_today_outlined,
-                  title: "Calendar Display",
+                  title: 'Calendar Display',
                   value: settings.dateFormat,
                   color: const Color(0xFFFFCC80), // Light Orange
                 ),
                 _SettingsItem(
                   icon: Icons.flag_outlined,
-                  title: "Start Day",
+                  title: 'Start Day',
                   value: settings.startOfWeek,
                   color: const Color(0xFFC5E1A5), // Light Green
                 ),
                 _SettingsItem(
                   icon: Icons.wb_sunny_outlined,
-                  title: "Temperature",
+                  title: 'Temperature',
                   value: settings.temperatureUnit,
                   color: const Color(0xFFFFF59D), // Light Yellow
                   onTap: () {
