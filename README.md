@@ -85,9 +85,29 @@
 
 ---
 
+## 📂 Project Structure
+
+```text
+lib/
+├── main.dart             # Entry point
+├── src/
+│   ├── app.dart          # Root widget & Routing
+│   ├── core/             # Shared utilities & theme
+│   ├── features/         # Feature-based organization
+│   │   ├── auth/         # Login & Sign up
+│   │   ├── goals/        # Goal tracking
+│   │   ├── habits/       # Habit tracking & consistency
+│   │   ├── home/         # Dashboard & Widgets
+│   │   └── self_care/    # Journal, Meditation, etc.
+│   └── services/         # Firebase, Notifications, Hive
+└── test/                 # Unit & Widget tests
+```
+
+---
+
 ## 🤝 Contributing
 
-Contributions are welcome! If you have any ideas, suggestions, or bug reports, please open an issue or submit a pull request.
+Contributions are welcome! Please check out our [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ---
 
