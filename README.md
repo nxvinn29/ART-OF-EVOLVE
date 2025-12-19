@@ -103,7 +103,7 @@ lib/
 └── test/                 # Unit & Widget tests
 ```
 
----
+--
 
 ## 🤝 Contributing
 
