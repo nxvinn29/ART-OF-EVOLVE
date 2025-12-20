@@ -3,6 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'auth_controller.dart';
 
+/// A screen that allows users to sign in to their account.
+///
+/// This screen includes fields for email and password, a sign-in button,
+/// and a forgot password option. It uses [AuthController] to manage
+/// the authentication state.
 class SignInScreen extends ConsumerStatefulWidget {
   const SignInScreen({super.key});
 
@@ -147,7 +152,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         } catch (e) {
                           if (context.mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text("Error: $e")),
+                              SnackBar(content: Text('Error: $e')),
                             );
                           }
                         }
@@ -198,6 +203,10 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
   }
 }
 
+/// A screen that allows new users to create an account.
+///
+/// This screen includes fields for email and password. Upon successful
+/// registration, the user is automatically signed in and redirected.
 class SignUpScreen extends ConsumerStatefulWidget {
   const SignUpScreen({super.key});
 
