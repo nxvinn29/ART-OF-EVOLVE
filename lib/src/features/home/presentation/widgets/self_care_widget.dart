@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../../self_care/presentation/self_care_screen.dart';
 
+/// A dashboard widget that provides quick access to self-care activities.
+///
+/// It displays a grid of items such as meditation, gratitude journaling,
+/// and focus tools, encouraging the user to take a break and care for themselves.
 class SelfCareWidget extends StatelessWidget {
   const SelfCareWidget({super.key});
 
@@ -16,7 +20,7 @@ class SelfCareWidget extends StatelessWidget {
       child: Column(
         children: [
           const Text(
-            "SELF-CARE",
+            'SELF-CARE',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -26,7 +30,7 @@ class SelfCareWidget extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           const Text(
-            "FOR WHEN YOU DON'T HAVE\nTIME TO SPARE",
+            'FOR WHEN YOU DON\'T HAVE\nTIME TO SPARE',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 14,
@@ -46,12 +50,12 @@ class SelfCareWidget extends StatelessWidget {
               _buildCareItem(
                 context,
                 Icons.sentiment_very_satisfied,
-                "do something\nfun-for you!",
+                'do something\nfun-for you!',
                 const Color(0xFFFFCC80),
                 onTap: () {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
-                      content: Text("You deserve some fun! Go for it!"),
+                      content: Text('You deserve some fun! Go for it!'),
                     ),
                   );
                 },
@@ -59,21 +63,21 @@ class SelfCareWidget extends StatelessWidget {
               _buildCareItem(
                 context,
                 Icons.phonelink_lock,
-                "take a break\nfrom your devices",
+                'take a break\nfrom your devices',
                 const Color(0xFF90CAF9),
                 onTap: () => _navigateToSelfCare(context, 1), // Focus
               ),
               _buildCareItem(
                 context,
                 Icons.edit,
-                "write down\nwhat you're\ngrateful for",
+                'write down\nwhat you\'re\ngrateful for',
                 const Color(0xFFFFF59D),
                 onTap: () => _navigateToSelfCare(context, 2), // Gratitude
               ),
               _buildCareItem(
                 context,
                 Icons.music_note,
-                "listen to\nsongs that\nuplift you",
+                'listen to\nsongs that\nuplift you',
                 const Color(0xFFFFAB91),
                 onTap: () =>
                     _navigateToSelfCare(context, 3), // Meditation (has music)
@@ -81,19 +85,19 @@ class SelfCareWidget extends StatelessWidget {
               _buildCareItem(
                 context,
                 Icons.spa,
-                "meditate\neven for just\n5 minutes",
+                'meditate\neven for just\n5 minutes',
                 const Color(0xFF80DEEA),
                 onTap: () => _navigateToSelfCare(context, 3), // Meditation
               ),
               _buildCareItem(
                 context,
                 Icons.image,
-                "spend time in nature\n(or look at\nlandscape photos!)",
+                'spend time in nature\n(or look at\nlandscape photos!)',
                 const Color(0xFFB39DDB),
                 onTap: () {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
-                      content: Text("Take a deep breath and look outside!"),
+                      content: Text('Take a deep breath and look outside!'),
                     ),
                   );
                 },
