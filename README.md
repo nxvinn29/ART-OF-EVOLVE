@@ -75,13 +75,32 @@
     flutter run
     ```
 
+## 🛠️ Development
+
+### Analysis & Testing
+Run static analysis to ensure code quality:
+```bash
+flutter analyze
+```
+
+Run unit and widget tests:
+```bash
+flutter test
+```
+
+### Formatting
+Keep the code clean:
+```bash
+flutter format .
+```
+
 ---
 
 ## 📸 Screenshots
 
 | Dashboard | Journal | Focus Timer |
 |:---:|:---:|:---:|
-| *Add screenshot link here* | *Add screenshot link here* | *Add screenshot link here* |
+| ![Dashboard](https://via.placeholder.com/200x400/E3F2FD/2D3142?text=Dashboard) | ![Journal](https://via.placeholder.com/200x400/F3E5F5/2D3142?text=Journal) | ![Focus Timer](https://via.placeholder.com/200x400/E0F7FA/2D3142?text=Focus+Timer) |
 
 ---
 
