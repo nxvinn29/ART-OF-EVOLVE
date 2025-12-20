@@ -4,6 +4,11 @@ import 'package:go_router/go_router.dart';
 import 'onboarding_controller.dart';
 import 'user_provider.dart';
 
+/// A multi-page onboarding screen that collects user information and goals.
+///
+/// This screen guides the user through a series of questions to personalize
+/// their experience, including name, habits, and energy levels. It uses
+/// [OnboardingController] to save the collected data.
 class OnboardingScreen extends ConsumerStatefulWidget {
   const OnboardingScreen({super.key});
 
@@ -95,13 +100,13 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                       // Page 0: Intro / Name
                       _buildQuestionPage(
                         question:
-                            "Let's start your journey.\nWhat should we call you?",
+                            'Let\'s start your journey.\nWhat should we call you?',
                         child: _buildNameInput(),
                       ),
                       // Page 1: Why habits?
                       _buildQuestionPage(
                         question:
-                            "Why are you embarking on this journey to build healthy habits?",
+                            'Why are you embarking on this journey to build healthy habits?',
                         child: _buildOptionsList(
                           options: [
                             'To feel better about myself',
@@ -119,7 +124,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                       // Page 2: Energy Levels
                       _buildQuestionPage(
                         question:
-                            "Throughout your day, how are your energy levels?",
+                            'Throughout your day, how are your energy levels?',
                         child: _buildOptionsList(
                           options: [
                             'High - energized throughout the day',
@@ -136,7 +141,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                       // Page 3: Troubles
                       _buildQuestionPage(
                         question:
-                            "Which of the habits below most troubles you?",
+                            'Which of the habits below most troubles you?',
                         child: _buildOptionsList(
                           options: [
                             'Social Media',
@@ -154,7 +159,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                       // Page 4: Main Goal (Final)
                       _buildQuestionPage(
                         question:
-                            "What single change would improve your life right now?",
+                            'What single change would improve your life right now?',
                         child: _buildOptionsList(
                           options: [
                             'More energy',
