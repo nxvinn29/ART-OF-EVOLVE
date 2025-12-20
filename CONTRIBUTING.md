@@ -31,4 +31,4 @@ Thank you for your interest in contributing to Art of Evolve! We welcome all kin
 
 ## Community
 
-Join our community to discuss features and get help!
+Join our community to discuss features and get help! [Visit our Discord](https://discord.gg/artofevolve)
