@@ -16,6 +16,7 @@ class HiveService {
   static const String settingsBoxName = 'user_settings';
   static const String userStatsBoxName = 'user_stats';
 
+  /// Initializes Hive and registers adapters.
   static Future<void> init() async {
     await Hive.initFlutter();
 
