@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-We currently support the latest major version of the application.
+We currently support the latest major version of the application. Please ensure all dependencies are up to date to avoid known vulnerabilities.
 
 | Version | Supported          |
 | ------- | ------------------ |
