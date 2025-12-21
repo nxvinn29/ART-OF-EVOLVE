@@ -1,5 +1,7 @@
-// The entry point of the Art of Evolve application.
-// Initializes Firebase, Hive, Notifications, and runs the app.
+/// The entry point for the Art of Evolve application.
+///
+/// This file initializes the Flutter binding, sets up Firebase,
+/// initializes Hive storage, and runs the root [ArtOfEvolveApp].
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'src/app.dart';
