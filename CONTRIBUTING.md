@@ -4,6 +4,16 @@ Thank you for your interest in contributing to Art of Evolve! We welcome all kin
 
 ## How to Contribute
 
+### Reporting Bugs
+
+If you find a bug, please report it! Open a new issue and include:
+- A clear description of the bug
+- Steps to reproduce
+- Expected vs actual behavior
+- Screenshots (if applicable)
+
+### Making Changes
+
 1.  **Fork the Repository**: Create a personal fork of the project on GitHub.
 2.  **Clone the Fork**: Clone your fork to your local machine.
 3.  **Create a Branch**: Create a new branch for your changes.
