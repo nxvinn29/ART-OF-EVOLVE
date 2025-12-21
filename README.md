@@ -5,6 +5,7 @@
 [![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
 [![Riverpod](https://img.shields.io/badge/State-Riverpod-purple?style=for-the-badge)](https://riverpod.dev/)
 [![Hive](https://img.shields.io/badge/Storage-Hive-orange?style=for-the-badge)](https://docs.hivedb.dev/)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)](https://github.com/nxvinn29/ART-OF-EVOLVE/graphs/commit-activity)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 **Art of Evolve** is a holistic self-improvement application built with Flutter. It combines habit tracking, task management, journaling, and focus tools into a single, beautiful "Soft Pastel" aesthetic interface. Gamify your life, track your growth, and evolve into your best self.  
