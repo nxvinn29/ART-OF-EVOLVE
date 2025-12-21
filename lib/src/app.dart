@@ -8,6 +8,10 @@ import 'features/onboarding/presentation/user_provider.dart';
 import 'core/theme/app_theme.dart';
 import 'features/gamification/presentation/widgets/gamification_overlay.dart';
 
+/// The root widget of the application.
+///
+/// Configures the [MaterialApp] with the custom theme, routing via [GoRouter],
+/// and global providers.
 class ArtOfEvolveApp extends ConsumerWidget {
   const ArtOfEvolveApp({super.key});
 
