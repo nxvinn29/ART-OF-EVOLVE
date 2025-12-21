@@ -1,3 +1,4 @@
+/// A service that provides motivational quotes.
 class QuoteService {
   static final List<String> _quotes = [
     'The only way to do great work is to love what you do. – Steve Jobs',
@@ -10,6 +11,7 @@ class QuoteService {
     'Success is not final, failure is not fatal: It is the courage to continue that counts. – Winston Churchill',
   ];
 
+  /// Returns a random quote from the collection.
   static String getRandomQuote() {
     return (_quotes..shuffle()).first;
   }
