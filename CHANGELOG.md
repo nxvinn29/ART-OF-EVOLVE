@@ -1,5 +1,15 @@
 # Changelog
 
+## [Unreleased] - 2025-12-21
+
+### Maintenance
+- Updated `analysis_options.yaml` with stricter lint rules.
+- Enhanced `README.md` with maintenance badge.
+- Added "Reporting Bugs" section to `CONTRIBUTING.md`.
+- Added documentation to core services and widgets.
+- Added unit tests for `QuoteService`.
+
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
