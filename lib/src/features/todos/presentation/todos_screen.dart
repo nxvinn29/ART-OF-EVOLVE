@@ -4,6 +4,9 @@ import 'todos_controller.dart';
 import 'package:intl/intl.dart';
 import '../../../core/presentation/animated_checkbox.dart';
 
+/// A screen for managing daily tasks and todo items.
+///
+/// Allows users to create, check off, and delete tasks.
 class TodosScreen extends ConsumerWidget {
   const TodosScreen({super.key});
 
