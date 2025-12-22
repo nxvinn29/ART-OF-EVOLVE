@@ -32,16 +32,18 @@ class _AddTodoDialogState extends ConsumerState<AddTodoDialog> {
             autofocus: true,
           ),
           const SizedBox(height: 16),
-          DropdownButtonFormField<String>(
-            value: selectedCategory,
-            items: [
-              'Personal',
-              'Work',
-              'Fitness',
-              'Learning',
-            ].map((c) => DropdownMenuItem(value: c, child: Text(c))).toList(),
-            onChanged: (val) => setState(() => selectedCategory = val!),
+          InputDecorator(
             decoration: const InputDecoration(labelText: 'Category'),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
+                value: selectedCategory,
+                isDense: true,
+                items: ['Personal', 'Work', 'Fitness', 'Learning']
+                    .map((c) => DropdownMenuItem(value: c, child: Text(c)))
+                    .toList(),
+                onChanged: (val) => setState(() => selectedCategory = val!),
+              ),
+            ),
           ),
         ],
       ),
