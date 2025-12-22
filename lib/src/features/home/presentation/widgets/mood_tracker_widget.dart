@@ -59,20 +59,35 @@ class _MoodTrackerWidgetState extends State<MoodTrackerWidget> {
               final isSelected = _selectedMoodIndex == index;
               return GestureDetector(
                 onTap: () => setState(() => _selectedMoodIndex = index),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: isSelected
-                        ? mood['color']
-                        : mood['color'].withValues(alpha: 0.3),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    mood['icon'],
-                    color: isSelected ? Colors.white : Colors.black54,
-                    size: 28,
-                  ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: isSelected
+                            ? mood['color']
+                            : mood['color'].withValues(alpha: 0.3),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        mood['icon'],
+                        color: isSelected ? Colors.white : Colors.black54,
+                        size: 28,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      mood['label'],
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: isSelected ? mood['color'] : Colors.grey,
+                        fontWeight: isSelected
+                            ? FontWeight.bold
+                            : FontWeight.normal,
+                      ),
+                    ),
+                  ],
                 ),
               );
             }),
