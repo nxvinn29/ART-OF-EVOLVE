@@ -15,6 +15,12 @@ class AppTheme {
   static const Color accentPink = Color(0xFFFF9AA2); // Soft Pink
   static const Color accentGreen = Color(0xFFB5EAD7); // Soft Mint
 
+  static const List<Color> accountGradient = [
+    Color(0xFFE0F7FA), // Very light Cyan
+    Color(0xFFF3E5F5), // Very light Purple
+    Color(0xFFFFF3E0), // Very light Orange
+  ];
+
   static const Color textPrimary = Color(0xFF2D3142); // Dark Blue-Grey
   static const Color textSecondary = Color(0xFF9C9EB9); // Light Grey-Blue
 

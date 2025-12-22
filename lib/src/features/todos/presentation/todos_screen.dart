@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'todos_controller.dart';
 import 'package:intl/intl.dart';
 import '../../../core/presentation/animated_checkbox.dart';
+import 'widgets/add_todo_dialog.dart';
 
 /// A screen for managing daily tasks and todo items.
 ///
@@ -18,7 +19,28 @@ class TodosScreen extends ConsumerWidget {
       body: todosAsync.when(
         data: (todos) {
           if (todos.isEmpty) {
-            return const Center(child: Text('No tasks yet. Stay productive!'));
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.checklist, size: 64, color: Colors.grey[300]),
+                  const SizedBox(height: 16),
+                  Text(
+                    'No tasks yet',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Stay productive!',
+                    style: TextStyle(color: Colors.grey[400]),
+                  ),
+                ],
+              ),
+            );
           }
           return ListView.builder(
             itemCount: todos.length,
@@ -96,62 +118,10 @@ class TodosScreen extends ConsumerWidget {
         error: (err, stack) => Center(child: Text('Error: $err')),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _showAddTodoDialog(context, ref),
+        onPressed: () =>
+            showDialog(context: context, builder: (_) => const AddTodoDialog()),
         label: const Text('Add Task'),
         icon: const Icon(Icons.add_task),
-      ),
-    );
-  }
-
-  void _showAddTodoDialog(BuildContext context, WidgetRef ref) {
-    final titleController = TextEditingController();
-    String selectedCategory = 'Personal';
-
-    showDialog(
-      context: context,
-      builder: (ctx) => StatefulBuilder(
-        builder: (context, setState) => AlertDialog(
-          title: const Text('New Task'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: titleController,
-                decoration: const InputDecoration(labelText: 'Task Name'),
-                autofocus: true,
-              ),
-              const SizedBox(height: 16),
-              DropdownButtonFormField<String>(
-                initialValue: selectedCategory,
-                items: ['Personal', 'Work', 'Fitness', 'Learning']
-                    .map((c) => DropdownMenuItem(value: c, child: Text(c)))
-                    .toList(),
-                onChanged: (val) => setState(() => selectedCategory = val!),
-                decoration: const InputDecoration(labelText: 'Category'),
-              ),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(ctx),
-              child: const Text('Cancel'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                if (titleController.text.isNotEmpty) {
-                  ref
-                      .read(todosProvider.notifier)
-                      .addTodo(
-                        titleController.text,
-                        category: selectedCategory,
-                      );
-                  Navigator.pop(ctx);
-                }
-              },
-              child: const Text('Add'),
-            ),
-          ],
-        ),
       ),
     );
   }

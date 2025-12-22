@@ -2,12 +2,19 @@
 
 ## [Unreleased] - 2025-12-21
 
+### Refactor
+- Refactored `AccountScreen` into modular widgets.
+- Refactored `TodosScreen` for better code organization and UI polishes.
+- Centralized UI constants in `AppTheme`.
+
+### Testing
+- Added unit tests for `GoalRepository`.
+- Added `mockito` for improved test coverage.
+
 ### Maintenance
-- Updated `analysis_options.yaml` with stricter lint rules.
-- Enhanced `README.md` with maintenance badge.
-- Added "Reporting Bugs" section to `CONTRIBUTING.md`.
-- Added documentation to core services and widgets.
-- Added unit tests for `QuoteService`.
+- Updated `analysis_options.yaml`.
+- Enhanced `README.md`.
+- Added documentation to core services.
 
 
 All notable changes to this project will be documented in this file.
