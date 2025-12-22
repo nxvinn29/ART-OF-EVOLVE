@@ -39,6 +39,14 @@ If you find a bug, please report it! Open a new issue and include:
 - Ensure all public APIs have documentation comments.
 - Follow the official [Dart Style Guide](https://dart.dev/guides/language/analysis-options).
 
+## Project Structure
+
+This project follows a feature-first architecture:
+
+- `lib/src/core`: Core utilities, theme, and constants.
+- `lib/src/features`: Feature-based modules (e.g., `auth`, `home`, `self_care`).
+- `test`: Unit and widget tests mirroring the `lib` structure.
+
 ## Community
 
 Join our community to discuss features and get help! [Visit our Discord](https://discord.gg/artofevolve)
