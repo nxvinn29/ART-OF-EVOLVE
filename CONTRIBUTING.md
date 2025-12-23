@@ -38,6 +38,22 @@ If you find a bug, please report it! Open a new issue and include:
 - Use single quotes for strings where possible.
 - Ensure all public APIs have documentation comments.
 - Follow the official [Dart Style Guide](https://dart.dev/guides/language/analysis-options).
+- Use `const` constructors wherever possible.
+
+## Commit Message Convention
+
+We follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
+
+- `feat`: A new feature
+- `fix`: A bug fix
+- `docs`: Documentation only changes
+- `style`: Changes that do not affect the meaning of the code (white-space, formatting, etc)
+- `refactor`: A code change that neither fixes a bug nor adds a feature
+- `perf`: A code change that improves performance
+- `test`: Adding missing tests or correcting existing tests
+- `chore`: Changes to the build process or auxiliary tools and libraries such as documentation generation
+
+Example: `feat: add new habit tracker widget`
 
 ## Project Structure
 
