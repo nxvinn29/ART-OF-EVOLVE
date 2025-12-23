@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 
+/// A toolbar widget that displays various formatting options.
+///
+/// This widget provides buttons for:
+/// * Inputting Text
+/// * Creating Checklists
+/// * Voice Recording
+/// * Drawing
+/// * Adding Images
 class FormatToolbar extends StatelessWidget {
   final VoidCallback onTextTap;
   final VoidCallback onChecklistTap;
@@ -29,27 +37,43 @@ class FormatToolbar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildToolItem(context, Icons.text_fields, 'Text', onTextTap),
-          _buildToolItem(
-            context,
-            Icons.check_box_outlined,
-            'List',
-            onChecklistTap,
+          ToolbarItem(icon: Icons.text_fields, label: 'Text', onTap: onTextTap),
+          ToolbarItem(
+            icon: Icons.check_box_outlined,
+            label: 'List',
+            onTap: onChecklistTap,
           ),
-          _buildToolItem(context, Icons.mic_none, 'Voice', onVoiceTap),
-          _buildToolItem(context, Icons.brush_outlined, 'Draw', onDrawTap),
-          _buildToolItem(context, Icons.image_outlined, 'Image', onImageTap),
+          ToolbarItem(icon: Icons.mic_none, label: 'Voice', onTap: onVoiceTap),
+          ToolbarItem(
+            icon: Icons.brush_outlined,
+            label: 'Draw',
+            onTap: onDrawTap,
+          ),
+          ToolbarItem(
+            icon: Icons.image_outlined,
+            label: 'Image',
+            onTap: onImageTap,
+          ),
         ],
       ),
     );
   }
+}
 
-  Widget _buildToolItem(
-    BuildContext context,
-    IconData icon,
-    String label,
-    VoidCallback onTap,
-  ) {
+class ToolbarItem extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+
+  const ToolbarItem({
+    super.key,
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Tooltip(
       message: label,
       child: InkWell(
