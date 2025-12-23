@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_theme.dart';
 
+/// A widget that allows users to select and track their current mood.
+///
+/// Displays a list of moods with associated colors and icons.
 class MoodTrackerWidget extends StatefulWidget {
   const MoodTrackerWidget({super.key});
 
