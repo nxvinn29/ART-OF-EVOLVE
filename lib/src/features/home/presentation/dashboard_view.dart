@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/theme/app_theme.dart';
 import '../../habits/presentation/habits_list.dart';
 import 'widgets/dashboard_header.dart';
 import 'widgets/mood_tracker_widget.dart';
@@ -6,6 +7,10 @@ import 'widgets/water_tracker_widget.dart';
 import 'widgets/mini_todo_list_widget.dart';
 import 'widgets/self_care_widget.dart'; // Added SelfCareWidget import
 
+/// The main dashboard view of the application.
+///
+/// Displays the [MoodTrackerWidget], [WaterTrackerWidget], [MiniTodoListWidget],
+/// [SelfCareWidget], and [HabitsList].
 class DashboardView extends StatelessWidget {
   const DashboardView({super.key});
 
@@ -17,11 +22,7 @@ class DashboardView extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [
-            Color(0xFFE0F7FA), // Very light Cyan
-            Color(0xFFF3E5F5), // Very light Purple
-            Color(0xFFFFF3E0), // Very light Orange
-          ],
+          colors: AppTheme.accountGradient,
         ),
       ),
       child: Scaffold(
