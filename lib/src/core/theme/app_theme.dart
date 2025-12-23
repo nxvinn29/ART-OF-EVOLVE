@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   // Pastel Palette
-  // Pastel Palette
   static const Color background = Color(0xFFF4F6FD); // Soft Blue-White
   static const Color surface = Colors.white;
 
