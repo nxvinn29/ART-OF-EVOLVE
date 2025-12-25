@@ -25,5 +25,7 @@ linter:
     prefer_single_quotes: true
     always_declare_return_types: true
     avoid_empty_else: true
+    omit_local_variable_types: true
+    prefer_final_locals: true
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
