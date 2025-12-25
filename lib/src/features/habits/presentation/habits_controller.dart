@@ -6,6 +6,7 @@ import '../data/habits_repository.dart';
 import '../../../services/notifications/notification_service.dart';
 import '../../gamification/presentation/gamification_controller.dart';
 
+/// Provider for the [HabitsController].
 final habitsProvider =
     StateNotifierProvider<HabitsController, AsyncValue<List<Habit>>>((ref) {
       final repository = ref.watch(habitsRepositoryProvider);
@@ -14,6 +15,11 @@ final habitsProvider =
       return HabitsController(repository, notificationService, ref);
     });
 
+/// Controller for managing habits.
+///
+/// This controller handles creating, updating (completion status), and deleting habits.
+/// It also integrates with [NotificationService] for reminders and
+/// [GamificationController] to award XP and unlock badges.
 class HabitsController extends StateNotifier<AsyncValue<List<Habit>>> {
   final IHabitsRepository _repository;
   final INotificationService _notificationService;
@@ -24,6 +30,9 @@ class HabitsController extends StateNotifier<AsyncValue<List<Habit>>> {
     loadHabits();
   }
 
+  /// Loads all habits from the repository.
+  ///
+  /// Updates the state to [AsyncData] with the list of habits, or [AsyncError] on failure.
   Future<void> loadHabits() async {
     try {
       final habits = await _repository.getHabits();
@@ -33,6 +42,10 @@ class HabitsController extends StateNotifier<AsyncValue<List<Habit>>> {
     }
   }
 
+  /// Adds a new habit with the given [title] and optional details.
+  ///
+  /// If a [reminderTime] is provided, a daily notification is scheduled.
+  /// Triggers a reload of habits after saving.
   Future<void> addHabit(
     String title, {
     String description = '',
@@ -80,6 +93,13 @@ class HabitsController extends StateNotifier<AsyncValue<List<Habit>>> {
     }
   }
 
+  /// Toggles the completion status of a habit for a specific [date].
+  ///
+  /// If the habit is marked as completed:
+  /// - It adds the date to the completion list.
+  /// - It awards XP and checks for badges via the [GamificationController].
+  ///
+  /// If un-completed, it creates a new [Habit] instance with the updated date list and saves it.
   Future<void> toggleHabitCompletion(String habitId, DateTime date) async {
     try {
       final habits = await _repository.getHabits();
@@ -137,6 +157,9 @@ class HabitsController extends StateNotifier<AsyncValue<List<Habit>>> {
     }
   }
 
+  /// Deletes the habit with the specified [id].
+  ///
+  /// After deletion, reloads the habits list.
   Future<void> deleteHabit(String id) async {
     await _repository.deleteHabit(id);
     await loadHabits();
