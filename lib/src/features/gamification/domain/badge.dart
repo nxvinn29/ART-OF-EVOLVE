@@ -1,10 +1,23 @@
+/// Represents an achievement badge in the gamification system.
+///
+/// Badges are earned by completing specific tasks or reaching streaks.
 class Badge {
+  /// Unique identifier for the badge (e.g. 'first_step').
   final String id;
+
+  /// Display name of the badge.
   final String name;
+
+  /// Description of how to earn the badge.
   final String description;
+
+  /// Path to the asset image for this badge.
   final String assetPath;
+
+  /// Experience points awarded when this badge is unlocked.
   final int xpReward;
 
+  /// Creates a new [Badge] instance.
   const Badge({
     required this.id,
     required this.name,
