@@ -1,3 +1,5 @@
+import 'package:art_of_evolve/src/core/constants/app_constants.dart';
+import 'package:art_of_evolve/src/features/self_care/presentation/widgets/toolbar_item.dart';
 import 'package:flutter/material.dart';
 
 /// A toolbar widget that displays various formatting options.
@@ -37,55 +39,32 @@ class FormatToolbar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          ToolbarItem(icon: Icons.text_fields, label: 'Text', onTap: onTextTap),
+          ToolbarItem(
+            icon: Icons.text_fields,
+            label: AppConstants.toolbarText,
+            onTap: onTextTap,
+          ),
           ToolbarItem(
             icon: Icons.check_box_outlined,
-            label: 'List',
+            label: AppConstants.toolbarList,
             onTap: onChecklistTap,
           ),
-          ToolbarItem(icon: Icons.mic_none, label: 'Voice', onTap: onVoiceTap),
+          ToolbarItem(
+            icon: Icons.mic_none,
+            label: AppConstants.toolbarVoice,
+            onTap: onVoiceTap,
+          ),
           ToolbarItem(
             icon: Icons.brush_outlined,
-            label: 'Draw',
+            label: AppConstants.toolbarDraw,
             onTap: onDrawTap,
           ),
           ToolbarItem(
             icon: Icons.image_outlined,
-            label: 'Image',
+            label: AppConstants.toolbarImage,
             onTap: onImageTap,
           ),
         ],
-      ),
-    );
-  }
-}
-
-class ToolbarItem extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final VoidCallback onTap;
-
-  const ToolbarItem({
-    super.key,
-    required this.icon,
-    required this.label,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Tooltip(
-      message: label,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(8),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [Icon(icon, color: Theme.of(context).primaryColor)],
-          ),
-        ),
       ),
     );
   }
