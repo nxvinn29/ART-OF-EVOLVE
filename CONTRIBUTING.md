@@ -1,72 +1,41 @@
 # Contributing to Art of Evolve
 
-Thank you for your interest in contributing to Art of Evolve! We welcome all kinds of contributions, from bug fixes to new features.
+Thank you for your interest in contributing to Art of Evolve! We welcome contributions from everyone.
 
-## How to Contribute
+## Getting Started
 
-### Reporting Bugs
+1.  **Fork the repository** on GitHub.
+2.  **Clone your fork** locally: `git clone https://github.com/your-username/ART-OF-EVOLVE.git`
+3.  **Create a new branch** for your feature or bug fix: `git checkout -b feature/amazing-feature`
 
-If you find a bug, please report it! Open a new issue and include:
-- A clear description of the bug
-- Steps to reproduce
-- Expected vs actual behavior
-- Screenshots (if applicable)
+## Development Process
 
-### Making Changes
+1.  **Code Style**: We follow the standard Dart/Flutter style guide. Please ensure your code is formatted using `dart format .`.
+2.  **Linting**: Run `flutter analyze` to check for any lint errors before committing.
+3.  **Testing**: Write unit or widget tests for new features where appropriate. Run tests using `flutter test`.
 
-1.  **Fork the Repository**: Create a personal fork of the project on GitHub.
-2.  **Clone the Fork**: Clone your fork to your local machine.
-3.  **Create a Branch**: Create a new branch for your changes.
-    ```bash
-    git checkout -b feature/my-new-feature
-    ```
-4.  **Make Changes**: Implement your changes and ensure the code follows our style guidelines.
-5.  **Run Tests**: Ensure all tests pass before submitting. We value high test coverage!
-    ```bash
-    # Run all tests
-    flutter test
+## Commit Guidelines
 
-    # Run tests with coverage
-    flutter test --coverage
-    ```
-6.  **Run Analysis**: Ensure there are no lint issues. We recommend fixing all warnings.
-    ```bash
-    flutter analyze
-    ```
-7.  **Commit Changes**: Commit your changes with a descriptive message.
-8.  **Push to GitHub**: Push your changes to your fork.
-9.  **Submit a Pull Request**: Submit a pull request to the main repository.
+We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification.
 
-## Coding Style
+*   `feat`: A new feature
+*   `fix`: A bug fix
+*   `docs`: Documentation only changes
+*   `style`: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+*   `refactor`: A code change that neither fixes a bug nor adds a feature
+*   `perf`: A code change that improves performance
+*   `test`: Adding missing tests or correcting existing tests
+*   `chore`: Changes to the build process or auxiliary tools and libraries such as documentation generation
 
-- Use single quotes for strings where possible.
-- Ensure all public APIs have documentation comments.
-- Follow the official [Dart Style Guide](https://dart.dev/guides/language/analysis-options).
-- Use `const` constructors wherever possible.
+**Example:** `feat: add new goal tracking widget`
 
-## Commit Message Convention
+## Pull Request Process
 
-We follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
+1.  Ensure your branch is up to date with the main repository.
+2.  Push your branch to GitHub: `git push origin feature/amazing-feature`
+3.  Open a Pull Request against the `main` branch.
+4.  Provide a clear description of your changes and why they are necessary.
 
-- `feat`: A new feature
-- `fix`: A bug fix
-- `docs`: Documentation only changes
-- `style`: Changes that do not affect the meaning of the code (white-space, formatting, etc)
-- `refactor`: A code change that neither fixes a bug nor adds a feature
-- `perf`: A code change that improves performance
-- `test`: Adding missing tests or correcting existing tests
-- `chore`: Changes to the build process or auxiliary tools and libraries such as documentation generation
+## Code of Conduct
 
-Example: `feat: add new habit tracker widget`
-
-## Project Structure
-
-This project follows a feature-first architecture:
-
-- `lib/src/core`: Core utilities, theme, and constants.
-- `lib/src/features`: Feature-based modules (e.g., `auth`, `home`, `self_care`).
-- `test`: Unit and widget tests mirroring the `lib` structure.
-
-## Community
-
-Join our community to discuss features and get help! [Visit our Discord](https://discord.gg/artofevolve)
+Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms.
