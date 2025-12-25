@@ -20,7 +20,7 @@ class ArtOfEvolveApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final userProfile = ref.watch(userProvider);
 
-    final GoRouter router = GoRouter(
+    final router = GoRouter(
       initialLocation: '/',
       redirect: (context, state) {
         final isOnboarding = state.matchedLocation == '/onboarding';
