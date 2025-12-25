@@ -1,4 +1,9 @@
-/// A service that provides motivational quotes.
+import 'dart:math';
+
+/// A service that provides motivational quotes to inspire users.
+///
+/// This service maintains a curated list of quotes and provides a method
+/// to retrieve a random one.
 class QuoteService {
   static final List<String> _quotes = [
     'The only way to do great work is to love what you do. – Steve Jobs',
@@ -12,7 +17,11 @@ class QuoteService {
   ];
 
   /// Returns a random quote from the collection.
+  ///
+  /// The quote is returned as a single string containing both the quote text
+  /// and the author.
   static String getRandomQuote() {
-    return (_quotes..shuffle()).first;
+    final random = Random();
+    return _quotes[random.nextInt(_quotes.length)];
   }
 }
