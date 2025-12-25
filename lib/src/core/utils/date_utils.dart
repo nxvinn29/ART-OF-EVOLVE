@@ -12,4 +12,8 @@ class AppDateUtils {
   static String formatDateTime(DateTime date) {
     return DateFormat('MMM d, yyyy h:mm a').format(date);
   }
+
+  static bool isSameDay(DateTime a, DateTime b) {
+    return a.year == b.year && a.month == b.month && a.day == b.day;
+  }
 }
