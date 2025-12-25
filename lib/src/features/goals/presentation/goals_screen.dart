@@ -138,7 +138,7 @@ class GoalsScreen extends ConsumerWidget {
 
   void _showAddGoalDialog(BuildContext context, WidgetRef ref) {
     final titleController = TextEditingController();
-    DateTime selectedDate = DateTime.now().add(const Duration(days: 30));
+    var selectedDate = DateTime.now().add(const Duration(days: 30));
 
     showDialog(
       context: context,

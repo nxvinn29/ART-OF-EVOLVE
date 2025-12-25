@@ -121,7 +121,7 @@ class MiniTodoListWidget extends ConsumerWidget {
 
   Widget _buildRichTodoItem(dynamic todo, int index, WidgetRef ref) {
     // Vibrant highlighter colors
-    final List<Color> highlighterColors = [
+    final highlighterColors = [
       const Color(0xFFFF80AB).withValues(alpha: 0.3), // Pink
       const Color(0xFF80D8FF).withValues(alpha: 0.3), // Blue
       const Color(0xFFFFEA00).withValues(alpha: 0.3), // Yellow

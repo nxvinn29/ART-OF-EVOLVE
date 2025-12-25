@@ -135,14 +135,14 @@ class _FocusTimerScreenState extends ConsumerState<FocusTimerScreen> {
   }
 
   String _formatTime(int seconds) {
-    final int m = seconds ~/ 60;
-    final int s = seconds % 60;
+    final m = seconds ~/ 60;
+    final s = seconds % 60;
     return '${m.toString().padLeft(2, '0')}:${s.toString().padLeft(2, '0')}';
   }
 
   @override
   Widget build(BuildContext context) {
-    final double progress = 1.0 - (_remainingTime / _totalDuration);
+    final progress = 1.0 - (_remainingTime / _totalDuration);
 
     return Padding(
       padding: const EdgeInsets.all(24.0),

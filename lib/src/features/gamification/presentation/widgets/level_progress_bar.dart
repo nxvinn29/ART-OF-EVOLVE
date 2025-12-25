@@ -10,8 +10,8 @@ class LevelProgressBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final stats = ref.watch(gamificationControllerProvider);
-    final int xpRequired = stats.level * 100;
-    final double progress = (stats.currentXp / xpRequired).clamp(0.0, 1.0);
+    final xpRequired = stats.level * 100;
+    final progress = (stats.currentXp / xpRequired).clamp(0.0, 1.0);
 
     final textColor = isDarkBackground ? Colors.white : const Color(0xFF2D3142);
     final subTextColor = isDarkBackground ? Colors.white70 : Colors.grey[600];

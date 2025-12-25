@@ -27,7 +27,7 @@ class Habit extends HiveObject {
   final DateTime createdAt;
 
   @HiveField(7)
-  final bool isDaily; 
+  final bool isDaily;
 
   @HiveField(8)
   final DateTime? reminderTime; // Store as DateTime, ignore date part, use time only
@@ -42,19 +42,20 @@ class Habit extends HiveObject {
     DateTime? createdAt,
     this.isDaily = true,
     this.reminderTime,
-  })  : id = id ?? const Uuid().v4(),
-        completedDates = completedDates ?? [],
-        createdAt = createdAt ?? DateTime.now();
+  }) : id = id ?? const Uuid().v4(),
+       completedDates = completedDates ?? [],
+       createdAt = createdAt ?? DateTime.now();
 
   bool isCompletedOn(DateTime date) {
-    return completedDates.any((d) =>
-        d.year == date.year && d.month == date.month && d.day == date.day);
+    return completedDates.any(
+      (d) => d.year == date.year && d.month == date.month && d.day == date.day,
+    );
   }
 
   int get currentStreak {
-    int streak = 0;
-    DateTime date = DateTime.now();
-    
+    var streak = 0;
+    var date = DateTime.now();
+
     // If not completed today, check if the streak is still alive from yesterday
     if (!isCompletedOn(date)) {
       date = date.subtract(const Duration(days: 1));

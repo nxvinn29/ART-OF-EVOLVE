@@ -86,7 +86,7 @@ class HabitsController extends StateNotifier<AsyncValue<List<Habit>>> {
       final habit = habits.firstWhere((h) => h.id == habitId);
 
       final isCompleted = habit.isCompletedOn(date);
-      List<DateTime> newDates = List.from(habit.completedDates);
+      final newDates = List<DateTime>.from(habit.completedDates);
 
       if (isCompleted) {
         newDates.removeWhere(

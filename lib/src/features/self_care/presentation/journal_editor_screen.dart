@@ -117,7 +117,7 @@ class _JournalEditorScreenState extends ConsumerState<JournalEditorScreen> {
     }).toList();
 
     // Create legacy content summary
-    String legacyContent = '';
+    var legacyContent = '';
     if (savedBlocks.isNotEmpty && savedBlocks.first['type'] == 'text') {
       legacyContent = savedBlocks.first['data'];
     } else {
@@ -198,45 +198,43 @@ class _JournalEditorScreenState extends ConsumerState<JournalEditorScreen> {
           ],
         );
       case 'checklist':
-        final List<Widget> children =
-            (block['data'] as List<Map<String, dynamic>>)
-                .asMap()
-                .entries
-                .map<Widget>((entry) {
-                  final itemIndex = entry.key;
-                  final item = entry.value;
-                  return Row(
-                    children: [
-                      Checkbox(
-                        value: item['checked'] ?? false,
-                        onChanged: (val) {
-                          setState(() {
-                            item['checked'] = val;
-                          });
-                        },
+        final children = (block['data'] as List<Map<String, dynamic>>)
+            .asMap()
+            .entries
+            .map<Widget>((entry) {
+              final itemIndex = entry.key;
+              final item = entry.value;
+              return Row(
+                children: [
+                  Checkbox(
+                    value: item['checked'] ?? false,
+                    onChanged: (val) {
+                      setState(() {
+                        item['checked'] = val;
+                      });
+                    },
+                  ),
+                  Expanded(
+                    child: TextField(
+                      controller: item['controller'] as TextEditingController,
+                      decoration: const InputDecoration(
+                        hintText: 'List item',
+                        border: InputBorder.none,
                       ),
-                      Expanded(
-                        child: TextField(
-                          controller:
-                              item['controller'] as TextEditingController,
-                          decoration: const InputDecoration(
-                            hintText: 'List item',
-                            border: InputBorder.none,
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.close, size: 16),
-                        onPressed: () {
-                          setState(() {
-                            (block['data'] as List).removeAt(itemIndex);
-                          });
-                        },
-                      ),
-                    ],
-                  );
-                })
-                .toList();
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.close, size: 16),
+                    onPressed: () {
+                      setState(() {
+                        (block['data'] as List).removeAt(itemIndex);
+                      });
+                    },
+                  ),
+                ],
+              );
+            })
+            .toList();
 
         children.add(
           TextButton.icon(

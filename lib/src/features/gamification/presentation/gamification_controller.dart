@@ -28,18 +28,17 @@ class GamificationController extends StateNotifier<UserStats> {
   }
 
   Future<void> addXp(int amount) async {
-    int newXp = state.currentXp + amount;
-    int newLevel = state.level;
+    var newXp = state.currentXp + amount;
+    var newLevel = state.level;
 
     // Simple Leveling Logic: Level * 100 XP required for next level
     // e.g. Level 1 -> 100 XP to Level 2
     // Level 2 -> 200 XP to Level 3 (Cumulative)
-    int xpRequired = state.level * 100;
+    final xpRequired = state.level * 100;
 
     if (newXp >= xpRequired) {
       newXp -= xpRequired;
       newLevel++;
-
     }
 
     state = state.copyWith(currentXp: newXp, level: newLevel);
@@ -59,8 +58,8 @@ class GamificationController extends StateNotifier<UserStats> {
     }
 
     // Check Badges
-    List<String> newBadges = List.from(state.unlockedBadgeIds);
-    bool badgeUnlocked = false;
+    final newBadges = List<String>.from(state.unlockedBadgeIds);
+    var badgeUnlocked = false;
 
     // First Step Badge
     if (state.totalHabitsCompleted >= 1 &&
@@ -73,7 +72,6 @@ class GamificationController extends StateNotifier<UserStats> {
     if (badgeUnlocked) {
       state = state.copyWith(unlockedBadgeIds: newBadges);
       await _saveStats();
-    
     }
   }
 

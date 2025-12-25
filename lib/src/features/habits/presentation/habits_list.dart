@@ -47,7 +47,7 @@ class HabitsList extends ConsumerWidget {
             final isCompletedToday = habit.isCompletedOn(DateTime.now());
 
             // Vibrant "Rich Widget" colors
-            final List<Color> pastelColors = [
+            final pastelColors = [
               const Color(0xFF64FFDA), // Bright Mint
               const Color(0xFFFFAB91), // Vibrant Peach
               const Color(0xFF8C9EFF), // Bright Periwinkle
