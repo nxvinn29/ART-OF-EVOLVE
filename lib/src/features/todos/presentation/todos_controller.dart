@@ -3,62 +3,14 @@ import '../domain/todo.dart';
 import '../data/todo_repository.dart';
 import '../../../core/data/repository_interfaces.dart';
 
-// Provider for ACTIVE todos (filtering out deleted items)
+/// Provider for the [TodosController] containing ALL todos (including deleted ones).
 final todosProvider =
     StateNotifierProvider<TodosController, AsyncValue<List<Todo>>>((ref) {
       final repository = ref.watch(todoRepositoryProvider);
       return TodosController(repository);
     });
 
-// Provider for DELETED todos
-final deletedTodosProvider = Provider<AsyncValue<List<Todo>>>((ref) {
-  final todosState = ref.watch(todosProvider);
-  return todosState.whenData((todos) {
-    // We need to access the REST of the items that were filtered out?
-    // Actually, distinct providers usually load data separately or the main controller holds ALL and we filter view-side.
-    // However, to avoid breaking existing UI which expects 'todosProvider' to be the main list,
-    // let's update 'TodosController' to hold ALL todos but expose methods/getters.
-    // OR, better pattern: Controller holds ALL items, and we have `activeTodosProvider` and `deletedTodosProvider`.
-    // But refactoring everything might be risky.
-
-    // Alternative: Let TodosController manage "all" todos in state, and logic in UI filters.
-    // But Hive loads everything.
-
-    // Let's rely on the controller state containing ALL todos (including deleted) because
-    // it simplifies restoring. We will filter in the UI or create derived providers.
-
-    // Wait, if I change `todosProvider` to return ALL, the Dashboard might show deleted items unless I update it.
-    // Let's filter in the `todosProvider`? No, `StateNotifier` state is what it is.
-
-    // STRATEGY:
-    // `todosProvider` (StateNotifier) holds everything.
-    // `activeTodosProvider` filters for !isDeleted.
-    // `deletedTodosProvider` filters for isDeleted.
-    // Existing UI uses `todosProvider`. I should update existing UI to use `activeTodosProvider`.
-    // BUT that requires editing multiple files.
-
-    // ALTERNATIVE STRATEGY:
-    // `todosProvider` (StateNotifier) holds everything.
-    // Modify `TodosController` methods to be aware.
-    // But `Dashboard` etc use `todosProvider`.
-
-    // Let's stick to: `todosProvider` holds everything.
-    // I will modify `loadTodos` to NOT filter, so it loads everything.
-    // Then I create a Derived Provider `activeTodosProvider`.
-    // AND I must update `Home/Dashboard/Habits`? No, just where Todos are used.
-    // `MiniTodoListWidget` uses `todosProvider`. I should update it to filter or use derived provider.
-
-    // To minimize breakage on existing code:
-    // I will keep `todosProvider` as the MAIN controller but I will add a `deletedTodosProvider`
-    // that fetches from repository separately? No that's inefficient.
-
-    // Let's go with: `todosProvider` returns ALL.
-    // I will update `MiniTodoListWidget` to filter `!isDeleted`.
-    // `TrashScreen` will filter `isDeleted`.
-    return todos.where((t) => t.isDeleted).toList();
-  });
-});
-
+/// Provider for active (non-deleted) todos.
 final activeTodosProvider = Provider<AsyncValue<List<Todo>>>((ref) {
   final todosState = ref.watch(todosProvider);
   return todosState.whenData(
@@ -66,6 +18,18 @@ final activeTodosProvider = Provider<AsyncValue<List<Todo>>>((ref) {
   );
 });
 
+/// Provider for soft-deleted (trash) todos.
+final deletedTodosProvider = Provider<AsyncValue<List<Todo>>>((ref) {
+  final todosState = ref.watch(todosProvider);
+  return todosState.whenData(
+    (todos) => todos.where((t) => t.isDeleted).toList(),
+  );
+});
+
+/// Controller for managing [Todo] items.
+///
+/// This controller handles basic CRUD operations as well as soft-deletion and restoration.
+/// It uses [ITodosRepository] for persistence.
 class TodosController extends StateNotifier<AsyncValue<List<Todo>>> {
   final ITodosRepository _repository;
 
@@ -73,12 +37,14 @@ class TodosController extends StateNotifier<AsyncValue<List<Todo>>> {
     loadTodos();
   }
 
+  /// Loads all todos from the repository.
+  ///
+  /// Todos are sorted: uncompleted first, then by creation date.
+  /// Updates the state to [AsyncData] or [AsyncError].
   Future<void> loadTodos() async {
     try {
       final todos = await _repository.getTodos();
-      // Sort: Active first, then by date?
-      // Actually standard sort: Unchecked first.
-
+      // Sort: Unchecked first, then by date descending (newest first for same status)
       todos.sort((a, b) {
         if (a.isCompleted == b.isCompleted) {
           return b.createdAt.compareTo(a.createdAt);
@@ -91,6 +57,9 @@ class TodosController extends StateNotifier<AsyncValue<List<Todo>>> {
     }
   }
 
+  /// Adds a new todo with the specified [title] and [category].
+  ///
+  /// Triggers a reload of the list.
   Future<void> addTodo(String title, {String category = 'General'}) async {
     try {
       final todo = Todo(title: title, category: category);
@@ -101,6 +70,7 @@ class TodosController extends StateNotifier<AsyncValue<List<Todo>>> {
     }
   }
 
+  /// Toggles the completion status of the todo with the given [id].
   Future<void> toggleTodo(String id) async {
     try {
       final todos = state.value!;
@@ -113,7 +83,10 @@ class TodosController extends StateNotifier<AsyncValue<List<Todo>>> {
     }
   }
 
-  // Soft Delete
+  /// Soft deletes the todo with the given [id].
+  ///
+  /// The todo is marked as deleted and given a `deletedAt` timestamp.
+  /// It is NOT removed from the database, just hidden from the active list.
   Future<void> deleteTodo(String id) async {
     try {
       final todos = state.value!;
@@ -129,7 +102,9 @@ class TodosController extends StateNotifier<AsyncValue<List<Todo>>> {
     }
   }
 
-  // Restore
+  /// Restores a soft-deleted todo.
+  ///
+  /// Clears the `isDeleted` flag and `deletedAt` timestamp.
   Future<void> restoreTodo(String id) async {
     try {
       final todos = state.value!;
@@ -142,7 +117,9 @@ class TodosController extends StateNotifier<AsyncValue<List<Todo>>> {
     }
   }
 
-  // Permanent Delete
+  /// Permanently removes the todo from the repository.
+  ///
+  /// This action cannot be undone.
   Future<void> deletePermanently(String id) async {
     try {
       await _repository.deleteTodo(id);
