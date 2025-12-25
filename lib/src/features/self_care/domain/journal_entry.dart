@@ -3,41 +3,62 @@ import 'package:uuid/uuid.dart';
 
 part 'journal_entry.g.dart';
 
+/// Represents a user's journal entry.
+///
+/// A [JournalEntry] captures thoughts, feelings, and memories.
+/// It supports rich content features like mood tracking, tags, prompts,
+/// drawing indicators, and audio indicators. It is persisted using Hive with [typeId: 4].
 @HiveType(typeId: 4)
 class JournalEntry extends HiveObject {
+  /// Unique identifier for the journal entry.
   @HiveField(0)
   final String id;
 
+  /// The title of the entry.
   @HiveField(1)
   final String title;
 
+  /// The main text content of the entry.
   @HiveField(2)
   final String content;
 
+  /// The date and time when the entry was created.
   @HiveField(3)
   final DateTime date;
 
+  /// The mood associated with the entry (e.g., 'Happy', 'Sad').
   @HiveField(4)
-  final String mood; // Optional tag
+  final String mood;
 
+  /// A list of tags to categorize the entry.
   @HiveField(5)
   final List<String> tags;
 
+  /// The prompt that inspired this entry, if any.
   @HiveField(6)
   final String? prompt;
 
+  /// A list of content blocks for rich text or mixed media support.
+  /// Each block is a map containing type and data.
   @HiveField(7, defaultValue: [])
   final List<Map<String, dynamic>> contentBlocks;
 
+  /// Indicates if the entry includes a drawing.
   @HiveField(8, defaultValue: false)
   final bool hasDrawing;
 
+  /// Indicates if the entry includes an audio recording.
   @HiveField(9, defaultValue: false)
   final bool hasAudio;
 
+  /// Optional reminder time associated with this entry.
   @HiveField(10)
   final DateTime? reminderTime;
 
+  /// Creates a [JournalEntry].
+  ///
+  /// If [id] is not provided, a UUID v4 is generated.
+  /// If [date] is not provided, the current time is used.
   JournalEntry({
     String? id,
     this.title = '',
@@ -53,6 +74,7 @@ class JournalEntry extends HiveObject {
   }) : id = id ?? const Uuid().v4(),
        date = date ?? DateTime.now();
 
+  /// Creates a copy of this [JournalEntry] with the given fields replaced by the new values.
   JournalEntry copyWith({
     String? title,
     String? content,
