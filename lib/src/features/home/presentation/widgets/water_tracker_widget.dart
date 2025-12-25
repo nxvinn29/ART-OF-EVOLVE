@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_theme.dart';
 
-// Simple provider for water intake to persist across screen rebuilds (but not app restarts for now)
+/// Provider to track daily water intake.
+///
+/// Current logic resets on app restart. Ideally should persist daily.
 final waterIntakeProvider = StateProvider<int>((ref) => 0);
 
+/// A widget to track and manage daily water consumption.
+///
+/// Displays current intake vs target (8 glasses) and buttons to increment/decrement.
 class WaterTrackerWidget extends ConsumerWidget {
   const WaterTrackerWidget({super.key});
 
@@ -65,7 +70,7 @@ class WaterTrackerWidget extends ConsumerWidget {
           ),
           Row(
             children: [
-              _buildButton(
+              _ControlIcon(
                 icon: Icons.remove,
                 onTap: () {
                   if (intake > 0) {
@@ -74,12 +79,11 @@ class WaterTrackerWidget extends ConsumerWidget {
                 },
               ),
               const SizedBox(width: 8),
-              _buildButton(
+              _ControlIcon(
                 icon: Icons.add,
                 onTap: () {
-                  if (intake < 8) {
-                    ref.read(waterIntakeProvider.notifier).state++;
-                  }
+                  // Allow going beyond 8? Sure, why not.
+                  ref.read(waterIntakeProvider.notifier).state++;
                 },
               ),
             ],
@@ -88,8 +92,16 @@ class WaterTrackerWidget extends ConsumerWidget {
       ),
     );
   }
+}
 
-  Widget _buildButton({required IconData icon, required VoidCallback onTap}) {
+class _ControlIcon extends StatelessWidget {
+  final IconData icon;
+  final VoidCallback onTap;
+
+  const _ControlIcon({required this.icon, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
