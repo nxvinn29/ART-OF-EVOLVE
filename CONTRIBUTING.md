@@ -21,11 +21,15 @@ If you find a bug, please report it! Open a new issue and include:
     git checkout -b feature/my-new-feature
     ```
 4.  **Make Changes**: Implement your changes and ensure the code follows our style guidelines.
-5.  **Run Tests**: Ensure all tests pass before submitting.
+5.  **Run Tests**: Ensure all tests pass before submitting. We value high test coverage!
     ```bash
+    # Run all tests
     flutter test
+
+    # Run tests with coverage
+    flutter test --coverage
     ```
-6.  **Run Analysis**: Ensure there are no lint issues.
+6.  **Run Analysis**: Ensure there are no lint issues. We recommend fixing all warnings.
     ```bash
     flutter analyze
     ```
