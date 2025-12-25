@@ -4,6 +4,7 @@ import '../data/journal_repository.dart';
 import '../../../core/data/repository_interfaces.dart';
 import '../../../services/notifications/notification_service.dart';
 
+/// Provider for the [JournalController].
 final journalControllerProvider =
     StateNotifierProvider<JournalController, AsyncValue<List<JournalEntry>>>((
       ref,
@@ -12,6 +13,10 @@ final journalControllerProvider =
       return JournalController(repository);
     });
 
+/// Controller for managing journal entries.
+///
+/// This controller handles loading, creating, and deleting journal entries via the [IJournalRepository].
+/// It also handles scheduling and canceling notifications for journal reminders.
 class JournalController extends StateNotifier<AsyncValue<List<JournalEntry>>> {
   final IJournalRepository _repository;
 
@@ -19,6 +24,10 @@ class JournalController extends StateNotifier<AsyncValue<List<JournalEntry>>> {
     loadEntries();
   }
 
+  /// Loads all journal entries from the repository.
+  ///
+  /// Entries are sorted by [date] in descending order (newest first).
+  /// Updates the state to [AsyncData] with the list of entries, or [AsyncError] on failure.
   Future<void> loadEntries() async {
     try {
       final entries = await _repository.getEntries();
@@ -30,6 +39,10 @@ class JournalController extends StateNotifier<AsyncValue<List<JournalEntry>>> {
     }
   }
 
+  /// Adds a new journal entry with the given details.
+  ///
+  /// If [reminderTime] is provided, a notification is scheduled.
+  /// Triggers a reload of entries after saving.
   Future<void> addEntry(
     String title,
     String content,
@@ -70,6 +83,9 @@ class JournalController extends StateNotifier<AsyncValue<List<JournalEntry>>> {
     }
   }
 
+  /// Deletes the journal entry with the specified [id].
+  ///
+  /// cancels any associated reminder and reloads the entries list.
   Future<void> deleteEntry(String id) async {
     try {
       await NotificationService().cancelReminder(id.hashCode);
