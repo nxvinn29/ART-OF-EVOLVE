@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../todos/presentation/todos_controller.dart';
+import '../../../todos/domain/todo.dart';
 
+/// A widget that displays a concise list of active to-do items on the dashboard.
+///
+/// Shows up to 4 pending tasks with a skeuomorphic "highlighter" visual style
+/// on a grid paper background. Allows for completing or deleting tasks.
 class MiniTodoListWidget extends ConsumerWidget {
   const MiniTodoListWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Watch active items only
     final todosAsync = ref.watch(activeTodosProvider);
 
     return Container(
@@ -42,32 +48,7 @@ class MiniTodoListWidget extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'To-Do List',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w800,
-                        color: AppTheme.textPrimary,
-                        letterSpacing: -0.5,
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(6),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withValues(alpha: 0.05),
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.settings,
-                        size: 16,
-                        color: AppTheme.textPrimary,
-                      ),
-                    ),
-                  ],
-                ),
+                _buildHeader(),
                 const SizedBox(height: 16),
                 Expanded(
                   child: todosAsync.when(
@@ -119,7 +100,36 @@ class MiniTodoListWidget extends ConsumerWidget {
     );
   }
 
-  Widget _buildRichTodoItem(dynamic todo, int index, WidgetRef ref) {
+  Widget _buildHeader() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        const Text(
+          'To-Do List',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w800,
+            color: AppTheme.textPrimary,
+            letterSpacing: -0.5,
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+            color: Colors.black.withValues(alpha: 0.05),
+            shape: BoxShape.circle,
+          ),
+          child: const Icon(
+            Icons.settings,
+            size: 16,
+            color: AppTheme.textPrimary,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildRichTodoItem(Todo todo, int index, WidgetRef ref) {
     // Vibrant highlighter colors
     final highlighterColors = [
       const Color(0xFFFF80AB).withValues(alpha: 0.3), // Pink
@@ -135,12 +145,17 @@ class MiniTodoListWidget extends ConsumerWidget {
       child: Row(
         children: [
           // Custom Checkbox
-          Container(
-            width: 18,
-            height: 18,
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.black45, width: 2),
-              borderRadius: BorderRadius.circular(5),
+          InkWell(
+            onTap: () {
+              ref.read(todosProvider.notifier).toggleTodo(todo.id);
+            },
+            child: Container(
+              width: 18,
+              height: 18,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black45, width: 2),
+                borderRadius: BorderRadius.circular(5),
+              ),
             ),
           ),
           const SizedBox(width: 12),
@@ -193,6 +208,7 @@ class MiniTodoListWidget extends ConsumerWidget {
   }
 }
 
+/// Custom painter to draw a grid paper background pattern.
 class GridPaperPainter extends CustomPainter {
   final Color color;
   final double spacing;
