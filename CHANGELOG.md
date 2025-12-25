@@ -1,5 +1,25 @@
 # Changelog
 
+## [Unreleased]
+
+## [1.0.1+2] - 2025-12-25
+
+### Added
+- Added `test/README.md` and `assets/images/README.md` documentation.
+- Added `STRUCTURE.md` for architecture overview.
+- Added `AppConstants` for shared strings and storage keys.
+- Added `AppException` and `Logger` utilities.
+- Added properties documentation to `Badge` and `UserStats` models.
+- Added unit tests for `Badge` and `UserStats`.
+- Added `ValidationUtils` and enhanced `DateUtils`.
+
+### Changed
+- Refactored `FormatToolbar` to use `AppConstants` and extracted `ToolbarItem`.
+- Updated `pubspec.yaml` dependencies and version.
+- Enhanced `README.md` with better badges and description.
+- Updated `CONTRIBUTING.md` with testing coverage instructions.
+- Stricter lint rules in `analysis_options.yaml`.
+
 ## [Unreleased] - 2025-12-21
 
 ### Refactor
