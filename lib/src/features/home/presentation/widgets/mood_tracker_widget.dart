@@ -3,7 +3,9 @@ import '../../../../core/theme/app_theme.dart';
 
 /// A widget that allows users to select and track their current mood.
 ///
-/// Displays a list of moods with associated colors and icons.
+/// Displays a horizontal list of mood options (Happy, Calm, Sad, Angry).
+/// Each mood has a specific color and icon. Selection is visually highlighted
+/// with an animation.
 class MoodTrackerWidget extends StatefulWidget {
   const MoodTrackerWidget({super.key});
 
@@ -12,6 +14,7 @@ class MoodTrackerWidget extends StatefulWidget {
 }
 
 class _MoodTrackerWidgetState extends State<MoodTrackerWidget> {
+  // Index of the currently selected mood. -1 indicates no selection.
   int _selectedMoodIndex = -1;
 
   final List<Map<String, dynamic>> _moods = [
@@ -58,42 +61,46 @@ class _MoodTrackerWidgetState extends State<MoodTrackerWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: List.generate(_moods.length, (index) {
-              final mood = _moods[index];
-              final isSelected = _selectedMoodIndex == index;
-              return GestureDetector(
-                onTap: () => setState(() => _selectedMoodIndex = index),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: isSelected
-                            ? mood['color']
-                            : mood['color'].withValues(alpha: 0.3),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        mood['icon'],
-                        color: isSelected ? Colors.white : Colors.black54,
-                        size: 28,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      mood['label'],
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: isSelected ? mood['color'] : Colors.grey,
-                        fontWeight: isSelected
-                            ? FontWeight.bold
-                            : FontWeight.normal,
-                      ),
-                    ),
-                  ],
-                ),
-              );
+              return _buildMoodItem(index);
             }),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Builds an individual mood item.
+  Widget _buildMoodItem(int index) {
+    final mood = _moods[index];
+    final isSelected = _selectedMoodIndex == index;
+
+    return GestureDetector(
+      onTap: () => setState(() => _selectedMoodIndex = index),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: isSelected
+                  ? mood['color']
+                  : (mood['color'] as Color).withValues(alpha: 0.3),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              mood['icon'],
+              color: isSelected ? Colors.white : Colors.black54,
+              size: 28,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            mood['label'],
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: isSelected ? mood['color'] : Colors.grey,
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+            ),
           ),
         ],
       ),
