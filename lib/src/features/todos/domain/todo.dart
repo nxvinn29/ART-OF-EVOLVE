@@ -3,29 +3,45 @@ import 'package:uuid/uuid.dart';
 
 part 'todo.g.dart';
 
+/// Represents a simple task or to-do item.
+///
+/// A [Todo] has a title, completion status, and category.
+/// It also supports soft deletion tracking.
+/// Persisted using Hive with [typeId: 1].
 @HiveType(typeId: 1)
 class Todo extends HiveObject {
+  /// Unique identifier for the todo.
   @HiveField(0)
   final String id;
 
+  /// The description of the task to be done.
   @HiveField(1)
   final String title;
 
+  /// Whether the task has been completed.
   @HiveField(2)
   final bool isCompleted;
 
+  /// The date and time when the todo was created.
   @HiveField(3)
   final DateTime createdAt;
 
+  /// The category to which the todo belongs (e.g., "Work", "Personal").
   @HiveField(4)
-  final String category; // e.g., "Work", "Personal"
+  final String category;
 
-  @HiveField(5) // New field
+  /// Whether the todo has been soft-deleted.
+  @HiveField(5)
   final bool isDeleted;
 
-  @HiveField(6) // New field
+  /// The date and time when the todo was soft-deleted, if applicable.
+  @HiveField(6)
   final DateTime? deletedAt;
 
+  /// Creates a [Todo].
+  ///
+  /// If [id] is not provided, a UUID v4 is generated.
+  /// If [createdAt] is not provided, the current time is used.
   Todo({
     String? id,
     required this.title,
@@ -37,6 +53,7 @@ class Todo extends HiveObject {
   }) : id = id ?? const Uuid().v4(),
        createdAt = createdAt ?? DateTime.now();
 
+  /// Creates a copy of this [Todo] with the given fields replaced by the new values.
   Todo copyWith({
     String? id,
     String? title,
