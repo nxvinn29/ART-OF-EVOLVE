@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+## [1.0.1+3] - 2025-12-27
+
+### Added
+- Issue reporting templates and improved contributing guidelines.
+- Maintenance badge in README.
+- Documentation for `LevelProgressBar`, `SignInScreen`, `SignUpScreen`, and `JournalEditorScreen`.
+- Widget test for `LevelProgressBar`.
+- `unnecessary_this` lint rule.
+
 ## [1.0.1+2] - 2025-12-25
 
 ### Added
