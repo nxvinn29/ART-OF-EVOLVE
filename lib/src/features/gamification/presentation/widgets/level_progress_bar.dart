@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../gamification_controller.dart';
+
 const _kDarkTextColor = Colors.white;
 const _kLightTextColor = Color(0xFF2D3142);
 const _kDarkSubTextColor = Colors.white70;
