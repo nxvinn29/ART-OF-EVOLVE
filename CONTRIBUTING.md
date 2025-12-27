@@ -39,3 +39,14 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/) speci
 ## Code of Conduct
 
 Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms.
+
+## Issue Reporting
+
+*   Use the search tool to ensure the issue hasn't been reported.
+*   Use the provided templates for Bug Reports and Feature Requests.
+*   Detailed steps to reproduce bugs are critical.
+
+## Code Review Process
+
+*   All PRs require approval from at least one maintainer.
+*   We value constructive feedback and kindness.
