@@ -93,6 +93,10 @@ class _JournalEditorScreenState extends ConsumerState<JournalEditorScreen> {
     );
   }
 
+  /// Captures the current journal state and saves it via the controller.
+  ///
+  /// This extracts text, checklist items, and legacy content summaries
+  /// before passing the data to the [JournalController].
   void _saveEntry() {
     final title = _titleController.text;
     // Prepare blocks for saving (extract text from controllers)
