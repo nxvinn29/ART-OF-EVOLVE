@@ -2,13 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../gamification_controller.dart';
 
+/// A widget that displays the user's current level and XP progress.
+///
+/// This widget renders a linear progress indicator wrapped in a [ClipRRect],
+/// along with text displaying the current level and XP stats.
 class LevelProgressBar extends ConsumerWidget {
+  /// Whether to use a dark background color scheme.
+  ///
+  /// If true, text and background colors are adjusted for visibility on dark surfaces.
   final bool isDarkBackground;
 
   const LevelProgressBar({super.key, this.isDarkBackground = false});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Watch the gamification state to update UI on changes
     final stats = ref.watch(gamificationControllerProvider);
     final xpRequired = stats.level * 100;
     final progress = (stats.currentXp / xpRequired).clamp(0.0, 1.0);
