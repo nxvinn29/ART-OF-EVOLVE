@@ -1,6 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../gamification_controller.dart';
+const _kDarkTextColor = Colors.white;
+const _kLightTextColor = Color(0xFF2D3142);
+const _kDarkSubTextColor = Colors.white70;
+final _kLightSubTextColor = Colors.grey[600];
+const _kDarkTrackColor = Colors.black12;
+final _kLightTrackColor = Colors.grey[200];
+const _kProgressColor = Color(0xFFFF8A65); // Pastel Orange
 
 /// A widget that displays the user's current level and XP progress.
 ///
@@ -21,9 +25,11 @@ class LevelProgressBar extends ConsumerWidget {
     final xpRequired = stats.level * 100;
     final progress = (stats.currentXp / xpRequired).clamp(0.0, 1.0);
 
-    final textColor = isDarkBackground ? Colors.white : const Color(0xFF2D3142);
-    final subTextColor = isDarkBackground ? Colors.white70 : Colors.grey[600];
-    final trackColor = isDarkBackground ? Colors.black12 : Colors.grey[200];
+    final textColor = isDarkBackground ? _kDarkTextColor : _kLightTextColor;
+    final subTextColor = isDarkBackground
+        ? _kDarkSubTextColor
+        : _kLightSubTextColor;
+    final trackColor = isDarkBackground ? _kDarkTrackColor : _kLightTrackColor;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,9 +53,7 @@ class LevelProgressBar extends ConsumerWidget {
           child: LinearProgressIndicator(
             value: progress,
             backgroundColor: trackColor,
-            valueColor: const AlwaysStoppedAnimation<Color>(
-              Color(0xFFFF8A65),
-            ), // Pastel Orange
+            valueColor: const AlwaysStoppedAnimation<Color>(_kProgressColor),
             minHeight: 8,
           ),
         ),
