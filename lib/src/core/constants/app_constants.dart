@@ -19,4 +19,14 @@ class AppConstants {
   static const String toolbarVoice = 'Voice';
   static const String toolbarDraw = 'Draw';
   static const String toolbarImage = 'Image';
+
+  // Validation Messages
+  static const String invalidEmail = 'Please enter a valid email address';
+  static const String invalidPassword =
+      'Password must be at least 6 characters';
+  static const String fieldRequired = 'This field is required';
+
+  // Hero Tags
+  static const String heroFab = 'hero-fab';
+  static const String heroLogo = 'hero-logo';
 }
