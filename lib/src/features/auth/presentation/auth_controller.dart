@@ -10,9 +10,14 @@ final authProvider = StreamProvider<User?>((ref) {
 
 /// Controller for managing authentication-related operations.
 ///
-/// This controller handles signing in, signing up, signing out, and password resets
-/// using [FirebaseAuth]. It manages the state as an [AsyncValue] to reflect
-/// loading, success, and error states.
+/// This StateNotifier handles the entire authentication lifecycle including:
+/// - Signing in via [signIn]
+/// - Signing up via [signUp]
+/// - Signing out via [signOut]
+/// - Password resets via [sendPasswordResetEmail]
+///
+/// State management is handled through [AsyncValue] to seamlessly provide
+/// loading, error, and success states to the UI.
 class AuthController extends StateNotifier<AsyncValue<void>> {
   AuthController() : super(const AsyncData(null));
 
