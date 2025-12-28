@@ -12,6 +12,7 @@ Thank you for your interest in contributing to Art of Evolve! We welcome contrib
 
 1.  **Code Style**: We follow the standard Dart/Flutter style guide. Please ensure your code is formatted using `dart format .`.
 2.  **Linting**: Run `flutter analyze` to check for any lint errors before committing.
+3.  **Documentation**: Ensure all public classes and methods have KDoc-style documentation (`///`).
 3.  **Testing**: Write unit or widget tests for new features where appropriate. Run tests using `flutter test`.
 
 ## Commit Guidelines
