@@ -8,7 +8,7 @@ import 'package:art_of_evolve/src/features/gamification/domain/user_stats.dart';
 // Mock Controller
 class MockGamificationController extends StateNotifier<UserStats>
     implements GamificationController {
-  MockGamificationController(UserStats state) : super(state);
+  MockGamificationController(super.state);
 
   @override
   Future<void> addXp(int amount) async {}
@@ -61,7 +61,7 @@ void main() {
     final progressFinder = find.byType(LinearProgressIndicator);
     expect(progressFinder, findsOneWidget);
 
-    final LinearProgressIndicator indicator = tester.widget(progressFinder);
+    final indicator = tester.widget<LinearProgressIndicator>(progressFinder);
     expect(indicator.value, 0.5); // 250 / 500 = 0.5
   });
 }
