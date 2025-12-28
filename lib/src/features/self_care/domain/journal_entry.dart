@@ -44,10 +44,16 @@ class JournalEntry extends HiveObject {
   final List<Map<String, dynamic>> contentBlocks;
 
   /// Indicates if the entry includes a drawing.
+  ///
+  /// Used to render a specific drawing widget or icon in the list view.
+  /// Defaults to `false`.
   @HiveField(8, defaultValue: false)
   final bool hasDrawing;
 
   /// Indicates if the entry includes an audio recording.
+  ///
+  /// Used to show audio playback controls.
+  /// Defaults to `false`.
   @HiveField(9, defaultValue: false)
   final bool hasAudio;
 
