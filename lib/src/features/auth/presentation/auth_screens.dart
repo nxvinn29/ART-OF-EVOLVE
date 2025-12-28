@@ -5,9 +5,13 @@ import 'auth_controller.dart';
 
 /// A screen that allows users to sign in to their account.
 ///
-/// This screen includes fields for email and password, a sign-in button,
-/// and a forgot password option. It uses [AuthController] to manage
-/// the authentication state and provides feedback via [SnackBar].
+/// Features:
+/// - Email/Password validation using [Form].
+/// - Interactive [TextFormField] inputs with decoration.
+/// - Integration with [AuthController] for performing the sign-in action.
+/// - Navigation handling upon successful login.
+/// - Error handling with feedback via [SnackBar].
+/// - Forgot password functionality via existing email input.
 class SignInScreen extends ConsumerStatefulWidget {
   const SignInScreen({super.key});
 
@@ -205,9 +209,11 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
 
 /// A screen that allows new users to create an account.
 ///
-/// This screen includes fields for email and password. Upon successful
-/// registration, the user is automatically signed in and redirected.
-/// It verifies input using a [Form] and displays errors via [SnackBar].
+/// Features:
+/// - Input validation for email and password.
+/// - User registration via [AuthController.signUp].
+/// - Automatic sign-in and navigation upon successful creation.
+/// - Visual feedback for loading and error states.
 class SignUpScreen extends ConsumerStatefulWidget {
   const SignUpScreen({super.key});
 
