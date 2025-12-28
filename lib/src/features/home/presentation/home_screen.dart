@@ -12,9 +12,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _currentIndex = 0;
+  int _currentTabIndex = 0;
 
-  final List<Widget> _screens = [
+  final List<Widget> _pages = [
     const DashboardView(),
     const TodosScreen(),
     const GoalsScreen(),
@@ -25,16 +25,16 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:
-          _currentIndex ==
+          _currentTabIndex ==
               3 // Self Care has its own appbar logic in the tab controller
           ? null
           : AppBar(title: const Text('My Daily Journey'), centerTitle: true),
-      body: IndexedStack(index: _currentIndex, children: _screens),
+      body: IndexedStack(index: _currentTabIndex, children: _pages),
       bottomNavigationBar: NavigationBar(
-        selectedIndex: _currentIndex,
+        selectedIndex: _currentTabIndex,
         onDestinationSelected: (index) {
           setState(() {
-            _currentIndex = index;
+            _currentTabIndex = index;
           });
         },
         destinations: const [
