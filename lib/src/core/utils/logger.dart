@@ -25,4 +25,11 @@ class Logger {
   static void info(String message) {
     developer.log(message, name: 'Info');
   }
+
+  /// Logs a warning [message].
+  ///
+  /// The log name is set to 'Warning'.
+  static void warning(String message) {
+    developer.log(message, name: 'Warning');
+  }
 }
