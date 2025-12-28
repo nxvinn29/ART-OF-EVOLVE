@@ -22,10 +22,15 @@ class Goal extends HiveObject {
   final String description;
 
   /// The date by which the user aims to achieve this goal.
+  ///
+  /// This serves as the deadline for the goal progress tracking.
   @HiveField(3)
   final DateTime targetDate;
 
   /// Whether the goal has been achieved.
+  ///
+  /// Defaults to `false` when a goal is first created.
+  /// Set to `true` when the user marks the goal as completed.
   @HiveField(4)
   final bool isAchieved;
 
