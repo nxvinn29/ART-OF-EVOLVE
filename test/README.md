@@ -16,6 +16,4 @@ flutter test
 
 Run with coverage:
 ```bash  
-flutter test --coverage
-```
-`
+flutter test --coverag
