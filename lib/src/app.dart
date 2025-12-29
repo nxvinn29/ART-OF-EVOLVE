@@ -7,6 +7,7 @@ import 'features/onboarding/presentation/onboarding_screen.dart';
 import 'features/account/presentation/account_screen.dart';
 import 'features/onboarding/presentation/user_provider.dart';
 import 'core/theme/app_theme.dart';
+import 'core/theme/theme_controller.dart';
 import 'features/gamification/presentation/widgets/gamification_overlay.dart';
 
 /// The root widget of the application.
@@ -51,11 +52,13 @@ class ArtOfEvolveApp extends ConsumerWidget {
       ],
     );
 
+    final themeMode = ref.watch(themeModeProvider);
+
     return MaterialApp.router(
       title: AppConstants.appName,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
+      themeMode: themeMode,
       routerConfig: router,
       debugShowCheckedModeBanner: false,
       builder: (context, child) {

@@ -9,6 +9,8 @@ import '../../settings/presentation/settings_controller.dart';
 import '../../gamification/presentation/widgets/badge_showcase_widget.dart';
 import 'widgets/profile_header.dart';
 import 'widgets/auth_section.dart';
+import '../../settings/presentation/widgets/theme_toggle_widget.dart';
+import '../../statistics/presentation/statistics_screen.dart';
 
 class AccountScreen extends ConsumerWidget {
   const AccountScreen({super.key});
@@ -67,7 +69,30 @@ class AccountScreen extends ConsumerWidget {
 
               const SizedBox(height: 30),
 
-              // 3. Settings Sections
+              // 3. Theme Settings
+              const ThemeToggleWidget(),
+
+              const SizedBox(height: 20),
+
+              // 4. Statistics
+              _buildSettingsGroup(context, [
+                _SettingsItem(
+                  icon: Icons.bar_chart_rounded,
+                  title: 'Statistics & Insights',
+                  color: const Color(0xFFB2DFDB), // Light Teal
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const StatisticsScreen(),
+                      ),
+                    );
+                  },
+                ),
+              ]),
+
+              const SizedBox(height: 30),
+
+              // 5. Settings Sections
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
