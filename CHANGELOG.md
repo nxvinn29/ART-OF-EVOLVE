@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.4] - 2025-12-30
+
+### Added
+- **Comprehensive Unit Tests**: Added extensive test coverage for core models
+  - `Habit` model tests (13 test cases) covering creation, streak calculations, and completion tracking
+  - `Badge` model tests (16 test cases) validating badge properties and predefined badges
+  - `UserStats` model tests (16 test cases) for XP progression, level advancement, and badge unlocking
+- **Widget Tests**: Enhanced UI component testing
+  - `BadgeShowcaseWidget` tests (10 test cases) for badge display and layout validation
+- **Documentation Improvements**:
+  - Added comprehensive KDoc documentation to `HabitsRepository` with usage examples
+  - Documented CRUD operations, reactive streams, and data persistence patterns
+
+### Enhanced
+- Improved test coverage across gamification and habits features
+- Better code documentation for repository layer
+- Enhanced developer experience with detailed inline documentation
+
+
+
 ## [1.0.3] - 2025-12-29
 
 ### Added
