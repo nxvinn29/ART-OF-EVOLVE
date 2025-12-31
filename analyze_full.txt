@@ -1,0 +1,55 @@
+﻿Analyzing ART-OF-EVOLVE...                                      
+
+   info - Unnecessary type annotation on a local variable - integration_test\theme_switching_flow_test.dart:169:16 - omit_local_variable_types
+   info - Statements in an if should be enclosed in a block - lib\src\services\storage\hive_service.dart:43:7 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\services\storage\hive_service.dart:45:7 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\services\storage\hive_service.dart:47:7 - curly_braces_in_flow_control_structures
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:11:28 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:17:39 - deprecated_member_use
+   info - Use 'const' for final variables initialized to a constant value - test\unit\habit_test.dart:28:7 - prefer_const_declarations
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:34:29 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:52:30 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:64:28 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:87:30 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:106:29 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:128:28 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:143:29 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:158:30 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:172:28 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:184:29 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:195:28 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:205:34 - deprecated_member_use
+   info - Use 'const' with the constructor to improve performance - test\widgets\goals_screen_test.dart:29:9 - prefer_const_constructors
+  error - Target of URI doesn't exist: 'package:art_of_evolve/src/features/self_care/presentation/journal_screen.dart' - test\widgets\journal_screen_test.dart:4:8 - uri_does_not_exist
+  error - Invalid constant value - test\widgets\journal_screen_test.dart:12:54 - invalid_constant
+  error - The function 'JournalScreen' isn't defined - test\widgets\journal_screen_test.dart:12:54 - undefined_function
+  error - Undefined name 'JournalScreen' - test\widgets\journal_screen_test.dart:18:26 - undefined_identifier
+  error - Invalid constant value - test\widgets\journal_screen_test.dart:23:54 - invalid_constant
+  error - The function 'JournalScreen' isn't defined - test\widgets\journal_screen_test.dart:23:54 - undefined_function
+  error - Invalid constant value - test\widgets\journal_screen_test.dart:40:54 - invalid_constant
+  error - The function 'JournalScreen' isn't defined - test\widgets\journal_screen_test.dart:40:54 - undefined_function
+  error - Target of URI doesn't exist: 'package:art_of_evolve/src/features/settings/presentation/settings_screen.dart' - test\widgets\settings_screen_test.dart:4:8 - uri_does_not_exist
+  error - Invalid constant value - test\widgets\settings_screen_test.dart:12:54 - invalid_constant
+  error - The function 'SettingsScreen' isn't defined - test\widgets\settings_screen_test.dart:12:54 - undefined_function
+  error - Undefined name 'SettingsScreen' - test\widgets\settings_screen_test.dart:18:26 - undefined_identifier
+  error - Invalid constant value - test\widgets\settings_screen_test.dart:25:54 - invalid_constant
+  error - The function 'SettingsScreen' isn't defined - test\widgets\settings_screen_test.dart:25:54 - undefined_function
+  error - Invalid constant value - test\widgets\settings_screen_test.dart:36:54 - invalid_constant
+  error - The function 'SettingsScreen' isn't defined - test\widgets\settings_screen_test.dart:36:54 - undefined_function
+
+flutter : 36 issues found. 
+(ran in 2.7s)
+At line:1 char:1
++ flutter analyze 2>&1 | 
+Out-File -FilePath 
+d:\ART-OF-EVOLVE\analyze_fu 
+...
++ ~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          
+    : NotSpecified: (36 is  
+  sues found. (ran in 2.7   
+ s):String) [], RemoteEx    
+ception
+    + FullyQualifiedErrorId 
+    : NativeCommandError
+ 

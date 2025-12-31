@@ -36,16 +36,27 @@ class HiveService {
   }
 
   static void _registerAdapters() {
-    if (!Hive.isAdapterRegistered(1)) Hive.registerAdapter(HabitAdapter());
-    if (!Hive.isAdapterRegistered(2)) Hive.registerAdapter(TodoAdapter());
-    if (!Hive.isAdapterRegistered(3)) Hive.registerAdapter(GoalAdapter());
-    if (!Hive.isAdapterRegistered(0))
+    if (!Hive.isAdapterRegistered(1)) {
+      Hive.registerAdapter(HabitAdapter());
+    }
+    if (!Hive.isAdapterRegistered(2)) {
+      Hive.registerAdapter(TodoAdapter());
+    }
+    if (!Hive.isAdapterRegistered(3)) {
+      Hive.registerAdapter(GoalAdapter());
+    }
+    if (!Hive.isAdapterRegistered(0)) {
       Hive.registerAdapter(UserProfileAdapter());
-    if (!Hive.isAdapterRegistered(4))
+    }
+    if (!Hive.isAdapterRegistered(4)) {
       Hive.registerAdapter(JournalEntryAdapter());
-    if (!Hive.isAdapterRegistered(5))
+    }
+    if (!Hive.isAdapterRegistered(5)) {
       Hive.registerAdapter(UserSettingsAdapter());
-    if (!Hive.isAdapterRegistered(6)) Hive.registerAdapter(UserStatsAdapter());
+    }
+    if (!Hive.isAdapterRegistered(6)) {
+      Hive.registerAdapter(UserStatsAdapter());
+    }
   }
 
   static Future<void> _openBoxes() async {

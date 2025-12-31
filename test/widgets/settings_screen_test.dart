@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:art_of_evolve/src/features/settings/presentation/settings_screen.dart';
+import 'package:art_of_evolve/src/features/account/presentation/account_screen.dart';
 
 void main() {
-  group('SettingsScreen Widget Tests', () {
-    testWidgets('settings screen renders correctly', (
+  group('AccountScreen Widget Tests', () {
+    testWidgets('account screen renders correctly', (
       WidgetTester tester,
     ) async {
       await tester.pumpWidget(
-        const ProviderScope(child: MaterialApp(home: SettingsScreen())),
+        const ProviderScope(child: MaterialApp(home: AccountScreen())),
       );
 
       await tester.pumpAndSettle();
 
       // Verify the screen renders
-      expect(find.byType(SettingsScreen), findsOneWidget);
+      expect(find.byType(AccountScreen), findsOneWidget);
     });
 
-    testWidgets('settings screen has proper layout', (
+    testWidgets('account screen has proper layout', (
       WidgetTester tester,
     ) async {
       await tester.pumpWidget(
-        const ProviderScope(child: MaterialApp(home: SettingsScreen())),
+        const ProviderScope(child: MaterialApp(home: AccountScreen())),
       );
 
       await tester.pumpAndSettle();
@@ -31,17 +31,17 @@ void main() {
       expect(find.byType(Scaffold), findsOneWidget);
     });
 
-    testWidgets('settings options are displayed', (WidgetTester tester) async {
+    testWidgets('account options are displayed', (WidgetTester tester) async {
       await tester.pumpWidget(
-        const ProviderScope(child: MaterialApp(home: SettingsScreen())),
+        const ProviderScope(child: MaterialApp(home: AccountScreen())),
       );
 
       await tester.pumpAndSettle();
 
-      // Check for list tiles or settings widgets
+      // Check for list tiles or account widgets
       expect(
         find.byType(ListTile).evaluate().isNotEmpty ||
-            find.byType(SwitchListTile).evaluate().isNotEmpty,
+            find.byType(Card).evaluate().isNotEmpty,
         isTrue,
       );
     });

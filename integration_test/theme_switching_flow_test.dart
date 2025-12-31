@@ -166,7 +166,7 @@ void main() {
         // Toggle theme multiple times
         final darkModeSwitch = find.byKey(const Key('dark_mode_switch'));
         if (darkModeSwitch.evaluate().isNotEmpty) {
-          for (int i = 0; i < 3; i++) {
+          for (var i = 0; i < 3; i++) {
             await tester.tap(darkModeSwitch);
             await tester.pump();
             await tester.pump(const Duration(milliseconds: 100));

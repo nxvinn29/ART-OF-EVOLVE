@@ -8,13 +8,13 @@ void main() {
       final habit = Habit(
         title: 'Morning Exercise',
         description: 'Exercise for 30 minutes',
-        color: Colors.blue.value,
+        color: Colors.blue,
         iconCodePoint: Icons.fitness_center.codePoint,
       );
 
       expect(habit.title, 'Morning Exercise');
       expect(habit.description, 'Exercise for 30 minutes');
-      expect(habit.color, Colors.blue.value);
+      expect(habit.color, Colors.blue);
       expect(habit.iconCodePoint, Icons.fitness_center.codePoint);
       expect(habit.id, isNotNull);
       expect(habit.id, isNotEmpty);
@@ -25,13 +25,13 @@ void main() {
     });
 
     test('should create Habit with custom id and createdAt', () {
-      final customId = 'custom-habit-id';
+      const customId = 'custom-habit-id';
       final customDate = DateTime(2025, 1, 1);
 
       final habit = Habit(
         id: customId,
         title: 'Reading',
-        color: Colors.green.value,
+        color: Colors.green,
         iconCodePoint: Icons.book.codePoint,
         createdAt: customDate,
       );
@@ -49,7 +49,7 @@ void main() {
 
       final habit = Habit(
         title: 'Meditation',
-        color: Colors.purple.value,
+        color: Colors.purple,
         iconCodePoint: Icons.self_improvement.codePoint,
         completedDates: completedDates,
       );
@@ -61,7 +61,7 @@ void main() {
     test('should correctly check if habit is completed on a specific date', () {
       final habit = Habit(
         title: 'Water Intake',
-        color: Colors.cyan.value,
+        color: Colors.cyan,
         iconCodePoint: Icons.water_drop.codePoint,
         completedDates: [
           DateTime(2025, 12, 28, 10, 30), // Time should be ignored
@@ -84,7 +84,7 @@ void main() {
 
       final habit = Habit(
         title: 'Journaling',
-        color: Colors.orange.value,
+        color: Colors.orange,
         iconCodePoint: Icons.edit.codePoint,
         completedDates: [twoDaysAgo, yesterday, today],
       );
@@ -103,7 +103,7 @@ void main() {
 
         final habit = Habit(
           title: 'Running',
-          color: Colors.red.value,
+          color: Colors.red,
           iconCodePoint: Icons.directions_run.codePoint,
           completedDates: [
             threeDaysAgo,
@@ -125,7 +125,7 @@ void main() {
 
       final habit = Habit(
         title: 'Yoga',
-        color: Colors.pink.value,
+        color: Colors.pink,
         iconCodePoint: Icons.spa.codePoint,
         completedDates: [
           fourDaysAgo,
@@ -140,7 +140,7 @@ void main() {
     test('should return zero streak for new habit with no completions', () {
       final habit = Habit(
         title: 'New Habit',
-        color: Colors.amber.value,
+        color: Colors.amber,
         iconCodePoint: Icons.star.codePoint,
       );
 
@@ -155,7 +155,7 @@ void main() {
 
       final habit = Habit(
         title: 'Study',
-        color: Colors.indigo.value,
+        color: Colors.indigo,
         iconCodePoint: Icons.school.codePoint,
         completedDates: [fiveDaysAgo, yesterday, today],
       );
@@ -169,7 +169,7 @@ void main() {
 
       final habit = Habit(
         title: 'Morning Routine',
-        color: Colors.teal.value,
+        color: Colors.teal,
         iconCodePoint: Icons.alarm.codePoint,
         reminderTime: reminderTime,
       );
@@ -181,7 +181,7 @@ void main() {
     test('should create non-daily habit', () {
       final habit = Habit(
         title: 'Weekly Review',
-        color: Colors.brown.value,
+        color: Colors.brown,
         iconCodePoint: Icons.calendar_today.codePoint,
         isDaily: false,
       );
@@ -192,7 +192,7 @@ void main() {
     test('should handle empty description', () {
       final habit = Habit(
         title: 'Simple Habit',
-        color: Colors.grey.value,
+        color: Colors.grey,
         iconCodePoint: Icons.check.codePoint,
       );
 
@@ -202,7 +202,7 @@ void main() {
     test('should maintain streak across month boundaries', () {
       final habit = Habit(
         title: 'Cross Month Habit',
-        color: Colors.deepPurple.value,
+        color: Colors.deepPurple,
         iconCodePoint: Icons.trending_up.codePoint,
         completedDates: [
           DateTime(2025, 11, 29),

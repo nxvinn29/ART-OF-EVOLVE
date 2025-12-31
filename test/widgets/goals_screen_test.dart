@@ -26,7 +26,7 @@ void main() {
       WidgetTester tester,
     ) async {
       await tester.pumpWidget(
-        ProviderScope(child: const MaterialApp(home: GoalsScreen())),
+        const ProviderScope(child: MaterialApp(home: GoalsScreen())),
       );
 
       await tester.pumpAndSettle();
