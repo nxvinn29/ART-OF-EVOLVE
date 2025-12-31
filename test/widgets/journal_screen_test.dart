@@ -119,10 +119,8 @@ class TestJournalController
   TestJournalController(AsyncValue<List<JournalEntry>> initialState)
     : super(initialState);
 
-  @override
   Future<void> loadEntries() async {}
 
-  @override
   Future<void> addEntry(
     String title,
     String content,
@@ -135,6 +133,5 @@ class TestJournalController
     DateTime? reminderTime,
   }) async {}
 
-  @override
   Future<void> deleteEntry(String id) async {}
 }

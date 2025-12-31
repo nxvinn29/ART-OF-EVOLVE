@@ -131,7 +131,7 @@ void main() {
           await tester.pumpAndSettle();
 
           // Verify history is displayed
-          expect(find.byType(ListView), findsOneOrMoreWidgets);
+          expect(find.byType(ListView), findsWidgets);
         }
       }
     });

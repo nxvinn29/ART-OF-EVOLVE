@@ -1,0 +1,108 @@
+﻿Analyzing ART-OF-EVOLVE...                                      
+
+   info - The imported package 'integration_test' isn't a dependency of the importing package - integration_test\achievement_unlocking_flow_test.dart:3:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:integration_test/integration_test.dart' - integration_test\achievement_unlocking_flow_test.dart:3:8 - uri_does_not_exist
+  error - Undefined name 'IntegrationTestWidgetsFlutterBinding' - integration_test\achievement_unlocking_flow_test.dart:11:3 - undefined_identifier
+   info - The imported package 'integration_test' isn't a dependency of the importing package - integration_test\habit_creation_flow_test.dart:3:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:integration_test/integration_test.dart' - integration_test\habit_creation_flow_test.dart:3:8 - uri_does_not_exist
+  error - Undefined name 'IntegrationTestWidgetsFlutterBinding' - integration_test\habit_creation_flow_test.dart:11:3 - undefined_identifier
+  error - Undefined name 'findsOneOrMoreWidgets' - integration_test\habit_creation_flow_test.dart:50:49 - undefined_identifier
+  error - Undefined name 'findsOneOrMoreWidgets' - integration_test\habit_creation_flow_test.dart:75:13 - undefined_identifier
+  error - Undefined name 'findsOneOrMoreWidgets' - integration_test\habit_creation_flow_test.dart:98:42 - undefined_identifier
+   info - The imported package 'integration_test' isn't a dependency of the importing package - integration_test\journal_creation_flow_test.dart:3:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:integration_test/integration_test.dart' - integration_test\journal_creation_flow_test.dart:3:8 - uri_does_not_exist
+  error - Undefined name 'IntegrationTestWidgetsFlutterBinding' - integration_test\journal_creation_flow_test.dart:11:3 - undefined_identifier
+  error - Undefined name 'findsOneOrMoreWidgets' - integration_test\journal_creation_flow_test.dart:60:51 - undefined_identifier
+  error - Undefined name 'findsOneOrMoreWidgets' - integration_test\journal_creation_flow_test.dart:96:44 - undefined_identifier
+   info - The imported package 'integration_test' isn't a dependency of the importing package - integration_test\mood_tracking_flow_test.dart:3:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:integration_test/integration_test.dart' - integration_test\mood_tracking_flow_test.dart:3:8 - uri_does_not_exist
+  error - Undefined name 'IntegrationTestWidgetsFlutterBinding' - integration_test\mood_tracking_flow_test.dart:11:3 - undefined_identifier
+  error - Undefined name 'findsOneOrMoreWidgets' - integration_test\mood_tracking_flow_test.dart:134:41 - undefined_identifier
+   info - The imported package 'integration_test' isn't a dependency of the importing package - integration_test\theme_switching_flow_test.dart:3:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:integration_test/integration_test.dart' - integration_test\theme_switching_flow_test.dart:3:8 - uri_does_not_exist
+  error - Undefined name 'IntegrationTestWidgetsFlutterBinding' - integration_test\theme_switching_flow_test.dart:11:3 - undefined_identifier
+   info - Unnecessary type annotation on a local variable - integration_test\theme_switching_flow_test.dart:169:16 - omit_local_variable_types
+   info - Statements in an if should be enclosed in a block - lib\src\services\storage\hive_service.dart:43:7 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\services\storage\hive_service.dart:45:7 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\services\storage\hive_service.dart:47:7 - curly_braces_in_flow_control_structures
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:11:28 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:17:39 - deprecated_member_use
+   info - Use 'const' for final variables initialized to a constant value - test\unit\habit_test.dart:28:7 - prefer_const_declarations
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:34:29 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:52:30 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:64:28 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:87:30 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:106:29 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:128:28 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:143:29 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:158:30 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:172:28 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:184:29 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:195:28 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - test\unit\habit_test.dart:205:34 - deprecated_member_use
+   info - The imported package 'hive_test' isn't a dependency of the importing package - test\unit\settings_controller_test.dart:2:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:hive_test/hive_test.dart' - test\unit\settings_controller_test.dart:2:8 - uri_does_not_exist
+  error - The function 'setUpTestHive' isn't defined - test\unit\settings_controller_test.dart:9:13 - undefined_function
+  error - The function 'tearDownTestHive' isn't defined - test\unit\settings_controller_test.dart:13:13 - undefined_function
+  error - The returned type 'TestGoalsController' isn't returnable from a 'GoalsController' function, as required by the closure's context - test\widgets\goals_screen_test.dart:17:22 - return_of_invalid_type_from_closure
+  error - The returned type 'TestGoalsController' isn't returnable from a 'GoalsController' function, as required by the closure's context - test\widgets\goals_screen_test.dart:34:22 - return_of_invalid_type_from_closure
+  error - The returned type 'TestGoalsController' isn't returnable from a 'GoalsController' function, as required by the closure's context - test\widgets\goals_screen_test.dart:64:22 - return_of_invalid_type_from_closure
+  error - The returned type 'TestGoalsController' isn't returnable from a 'GoalsController' function, as required by the closure's context - test\widgets\goals_screen_test.dart:82:22 - return_of_invalid_type_from_closure
+  error - The returned type 'TestGoalsController' isn't returnable from a 'GoalsController' function, as required by the closure's context - test\widgets\goals_screen_test.dart:101:22 - return_of_invalid_type_from_closure
+  error - The returned type 'TestGoalsController' isn't returnable from a 'GoalsController' function, as required by the closure's context - test\widgets\goals_screen_test.dart:126:22 - return_of_invalid_type_from_closure
+   info - Parameter 'initialState' could be a super parameter - test\widgets\goals_screen_test.dart:146:3 - use_super_parameters
+warning - The method doesn't override an inherited method - test\widgets\goals_screen_test.dart:150:16 - override_on_non_overriding_member
+warning - The method doesn't override an inherited method - test\widgets\goals_screen_test.dart:153:16 - override_on_non_overriding_member
+warning - The method doesn't override an inherited method - test\widgets\goals_screen_test.dart:160:16 - override_on_non_overriding_member
+warning - The method doesn't override an inherited method - test\widgets\goals_screen_test.dart:163:16 - override_on_non_overriding_member
+  error - Target of URI doesn't exist: 'package:art_of_evolve/src/features/self_care/presentation/journal_screen.dart' - test\widgets\journal_screen_test.dart:4:8 - uri_does_not_exist
+  error - The returned type 'TestJournalController' isn't returnable from a 'JournalController' function, as required by the closure's context - test\widgets\journal_screen_test.dart:17:22 - return_of_invalid_type_from_closure
+  error - Invalid constant value - test\widgets\journal_screen_test.dart:20:42 - invalid_constant
+  error - The function 'JournalScreen' isn't defined - test\widgets\journal_screen_test.dart:20:42 - undefined_function
+  error - The returned type 'TestJournalController' isn't returnable from a 'JournalController' function, as required by the closure's context - test\widgets\journal_screen_test.dart:34:22 - return_of_invalid_type_from_closure
+  error - Invalid constant value - test\widgets\journal_screen_test.dart:37:42 - invalid_constant
+  error - The function 'JournalScreen' isn't defined - test\widgets\journal_screen_test.dart:37:42 - undefined_function
+  error - The returned type 'TestJournalController' isn't returnable from a 'JournalController' function, as required by the closure's context - test\widgets\journal_screen_test.dart:66:22 - return_of_invalid_type_from_closure
+  error - Invalid constant value - test\widgets\journal_screen_test.dart:69:42 - invalid_constant
+  error - The function 'JournalScreen' isn't defined - test\widgets\journal_screen_test.dart:69:42 - undefined_function
+  error - The returned type 'TestJournalController' isn't returnable from a 'JournalController' function, as required by the closure's context - test\widgets\journal_screen_test.dart:84:22 - return_of_invalid_type_from_closure
+  error - Invalid constant value - test\widgets\journal_screen_test.dart:87:42 - invalid_constant
+  error - The function 'JournalScreen' isn't defined - test\widgets\journal_screen_test.dart:87:42 - undefined_function
+  error - The returned type 'TestJournalController' isn't returnable from a 'JournalController' function, as required by the closure's context - test\widgets\journal_screen_test.dart:101:22 - return_of_invalid_type_from_closure
+  error - Invalid constant value - test\widgets\journal_screen_test.dart:106:42 - invalid_constant
+  error - The function 'JournalScreen' isn't defined - test\widgets\journal_screen_test.dart:106:42 - undefined_function
+   info - Parameter 'initialState' could be a super parameter - test\widgets\journal_screen_test.dart:119:3 - use_super_parameters
+warning - The method doesn't override an inherited method - test\widgets\journal_screen_test.dart:123:16 - override_on_non_overriding_member
+warning - The method doesn't override an inherited method - test\widgets\journal_screen_test.dart:126:16 - override_on_non_overriding_member
+warning - The method doesn't override an inherited method - test\widgets\journal_screen_test.dart:139:16 - override_on_non_overriding_member
+  error - Target of URI doesn't exist: 'package:art_of_evolve/src/features/settings/presentation/settings_screen.dart' - test\widgets\settings_screen_test.dart:4:8 - uri_does_not_exist
+  error - The returned type 'TestSettingsController' isn't returnable from a 'SettingsController' function, as required by the closure's context - test\widgets\settings_screen_test.dart:15:22 - return_of_invalid_type_from_closure
+  error - Invalid constant value - test\widgets\settings_screen_test.dart:18:42 - invalid_constant
+  error - The function 'SettingsScreen' isn't defined - test\widgets\settings_screen_test.dart:18:42 - undefined_function
+  error - The returned type 'TestSettingsController' isn't returnable from a 'SettingsController' function, as required by the closure's context - test\widgets\settings_screen_test.dart:32:62 - return_of_invalid_type_from_closure
+  error - Invalid constant value - test\widgets\settings_screen_test.dart:33:42 - invalid_constant
+  error - The function 'SettingsScreen' isn't defined - test\widgets\settings_screen_test.dart:33:42 - undefined_function
+  error - The returned type 'TestSettingsController' isn't returnable from a 'SettingsController' function, as required by the closure's context - test\widgets\settings_screen_test.dart:53:22 - return_of_invalid_type_from_closure
+  error - Invalid constant value - test\widgets\settings_screen_test.dart:56:42 - invalid_constant
+  error - The function 'SettingsScreen' isn't defined - test\widgets\settings_screen_test.dart:56:42 - undefined_function
+warning - The method doesn't override an inherited method - test\widgets\settings_screen_test.dart:71:16 - override_on_non_overriding_member
+warning - The method doesn't override an inherited method - test\widgets\settings_screen_test.dart:76:16 - override_on_non_overriding_member
+warning - The method doesn't override an inherited method - test\widgets\settings_screen_test.dart:81:16 - override_on_non_overriding_member
+warning - The method doesn't override an inherited method - test\widgets\settings_screen_test.dart:86:16 - override_on_non_overriding_member
+
+flutter : 89 issues found. 
+(ran in 2.7s)
+At line:1 char:1
++ flutter analyze 2>&1 | 
+Out-File -FilePath 
+analyze_errors.txt -Encodin 
+...
++ ~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          
+    : NotSpecified: (89 is  
+  sues found. (ran in 2.7   
+ s):String) [], RemoteEx    
+ception
+    + FullyQualifiedErrorId 
+    : NativeCommandError
+ 

@@ -57,7 +57,7 @@ void main() {
         }
 
         // Verify journal entry was created
-        expect(find.text('My Reflections Today'), findsOneOrMoreWidgets);
+        expect(find.text('My Reflections Today'), findsWidgets);
       }
     });
 
@@ -93,7 +93,7 @@ void main() {
             await tester.pumpAndSettle();
 
             // Verify tag was added
-            expect(find.text('gratitude'), findsOneOrMoreWidgets);
+            expect(find.text('gratitude'), findsWidgets);
           }
         }
       }

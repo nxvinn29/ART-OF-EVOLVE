@@ -67,22 +67,18 @@ void main() {
 class TestSettingsController extends StateNotifier<UserSettings> {
   TestSettingsController() : super(UserSettings());
 
-  @override
   Future<void> toggle24HourTime() async {
     state = state.copyWith(is24HourTime: !state.is24HourTime);
   }
 
-  @override
   Future<void> setTemperatureUnit(String unit) async {
     state = state.copyWith(temperatureUnit: unit);
   }
 
-  @override
   Future<void> setStartOfWeek(String day) async {
     state = state.copyWith(startOfWeek: day);
   }
 
-  @override
   Future<void> setDateFormat(String format) async {
     state = state.copyWith(dateFormat: format);
   }

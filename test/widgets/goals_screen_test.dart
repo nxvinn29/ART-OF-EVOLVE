@@ -146,19 +146,15 @@ class TestGoalsController extends StateNotifier<AsyncValue<List<Goal>>> {
   TestGoalsController(AsyncValue<List<Goal>> initialState)
     : super(initialState);
 
-  @override
   Future<void> loadGoals() async {}
 
-  @override
   Future<void> addGoal(
     String title,
     DateTime targetDate, {
     String description = '',
   }) async {}
 
-  @override
   Future<void> toggleGoal(String id) async {}
 
-  @override
   Future<void> deleteGoal(String id) async {}
 }

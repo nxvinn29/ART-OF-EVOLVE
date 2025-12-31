@@ -47,7 +47,7 @@ void main() {
         }
 
         // Verify habit was created
-        expect(find.text('Morning Meditation'), findsOneOrMoreWidgets);
+        expect(find.text('Morning Meditation'), findsWidgets);
       }
     });
 
@@ -72,7 +72,7 @@ void main() {
           // Verify validation error is shown
           expect(
             find.textContaining('required', findRichText: true),
-            findsOneOrMoreWidgets,
+            findsWidgets,
           );
         }
       }
@@ -95,7 +95,7 @@ void main() {
           await tester.pumpAndSettle();
 
           // Verify we're back to the main screen
-          expect(find.byIcon(Icons.add), findsOneOrMoreWidgets);
+          expect(find.byIcon(Icons.add), findsWidgets);
         }
       }
     });
