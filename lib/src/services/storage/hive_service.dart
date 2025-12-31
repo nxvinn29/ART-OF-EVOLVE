@@ -36,16 +36,16 @@ class HiveService {
   }
 
   static void _registerAdapters() {
-    if (!Hive.isAdapterRegistered(1)) {
+    if (!Hive.isAdapterRegistered(0)) {
       Hive.registerAdapter(HabitAdapter());
     }
-    if (!Hive.isAdapterRegistered(2)) {
+    if (!Hive.isAdapterRegistered(1)) {
       Hive.registerAdapter(TodoAdapter());
     }
-    if (!Hive.isAdapterRegistered(3)) {
+    if (!Hive.isAdapterRegistered(2)) {
       Hive.registerAdapter(GoalAdapter());
     }
-    if (!Hive.isAdapterRegistered(0)) {
+    if (!Hive.isAdapterRegistered(3)) {
       Hive.registerAdapter(UserProfileAdapter());
     }
     if (!Hive.isAdapterRegistered(4)) {
