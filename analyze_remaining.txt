@@ -1,0 +1,32 @@
+﻿Analyzing ART-OF-EVOLVE...                                      
+
+  error - The argument type 'MaterialColor' can't be assigned to the parameter type 'int'.  - test\unit\habit_test.dart:11:16 - argument_type_not_assignable
+  error - The argument type 'MaterialColor' can't be assigned to the parameter type 'int'.  - test\unit\habit_test.dart:34:16 - argument_type_not_assignable
+  error - The argument type 'MaterialColor' can't be assigned to the parameter type 'int'.  - test\unit\habit_test.dart:52:16 - argument_type_not_assignable
+  error - The argument type 'MaterialColor' can't be assigned to the parameter type 'int'.  - test\unit\habit_test.dart:64:16 - argument_type_not_assignable
+  error - The argument type 'MaterialColor' can't be assigned to the parameter type 'int'.  - test\unit\habit_test.dart:87:16 - argument_type_not_assignable
+  error - The argument type 'MaterialColor' can't be assigned to the parameter type 'int'.  - test\unit\habit_test.dart:106:18 - argument_type_not_assignable
+  error - The argument type 'MaterialColor' can't be assigned to the parameter type 'int'.  - test\unit\habit_test.dart:128:16 - argument_type_not_assignable
+  error - The argument type 'MaterialColor' can't be assigned to the parameter type 'int'.  - test\unit\habit_test.dart:143:16 - argument_type_not_assignable
+  error - The argument type 'MaterialColor' can't be assigned to the parameter type 'int'.  - test\unit\habit_test.dart:158:16 - argument_type_not_assignable
+  error - The argument type 'MaterialColor' can't be assigned to the parameter type 'int'.  - test\unit\habit_test.dart:172:16 - argument_type_not_assignable
+  error - The argument type 'MaterialColor' can't be assigned to the parameter type 'int'.  - test\unit\habit_test.dart:184:16 - argument_type_not_assignable
+  error - The argument type 'MaterialColor' can't be assigned to the parameter type 'int'.  - test\unit\habit_test.dart:195:16 - argument_type_not_assignable
+  error - The argument type 'MaterialColor' can't be assigned to the parameter type 'int'.  - test\unit\habit_test.dart:205:16 - argument_type_not_assignable
+
+flutter : 13 issues found. 
+(ran in 2.7s)
+At line:1 char:1
++ flutter analyze 2>&1 | 
+Out-File -FilePath 
+d:\ART-OF-EVOLVE\analyze_re 
+...
++ ~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          
+    : NotSpecified: (13 is  
+  sues found. (ran in 2.7   
+ s):String) [], RemoteEx    
+ception
+    + FullyQualifiedErrorId 
+    : NativeCommandError
+ 

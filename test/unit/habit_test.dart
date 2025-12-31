@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:art_of_evolve/src/features/habits/domain/habit.dart';
 
+// ignore_for_file: deprecated_member_use
+
 void main() {
   group('Habit Model Tests', () {
     test('should create a valid Habit instance with required fields', () {
       final habit = Habit(
         title: 'Morning Exercise',
         description: 'Exercise for 30 minutes',
-        color: Colors.blue,
+        color: Colors.blue.value,
         iconCodePoint: Icons.fitness_center.codePoint,
       );
 
@@ -31,7 +33,7 @@ void main() {
       final habit = Habit(
         id: customId,
         title: 'Reading',
-        color: Colors.green,
+        color: Colors.green.value,
         iconCodePoint: Icons.book.codePoint,
         createdAt: customDate,
       );
@@ -49,7 +51,7 @@ void main() {
 
       final habit = Habit(
         title: 'Meditation',
-        color: Colors.purple,
+        color: Colors.purple.value,
         iconCodePoint: Icons.self_improvement.codePoint,
         completedDates: completedDates,
       );
@@ -61,7 +63,7 @@ void main() {
     test('should correctly check if habit is completed on a specific date', () {
       final habit = Habit(
         title: 'Water Intake',
-        color: Colors.cyan,
+        color: Colors.cyan.value,
         iconCodePoint: Icons.water_drop.codePoint,
         completedDates: [
           DateTime(2025, 12, 28, 10, 30), // Time should be ignored
@@ -84,7 +86,7 @@ void main() {
 
       final habit = Habit(
         title: 'Journaling',
-        color: Colors.orange,
+        color: Colors.orange.value,
         iconCodePoint: Icons.edit.codePoint,
         completedDates: [twoDaysAgo, yesterday, today],
       );
@@ -103,7 +105,7 @@ void main() {
 
         final habit = Habit(
           title: 'Running',
-          color: Colors.red,
+          color: Colors.red.value,
           iconCodePoint: Icons.directions_run.codePoint,
           completedDates: [
             threeDaysAgo,
@@ -125,7 +127,7 @@ void main() {
 
       final habit = Habit(
         title: 'Yoga',
-        color: Colors.pink,
+        color: Colors.pink.value,
         iconCodePoint: Icons.spa.codePoint,
         completedDates: [
           fourDaysAgo,
@@ -140,7 +142,7 @@ void main() {
     test('should return zero streak for new habit with no completions', () {
       final habit = Habit(
         title: 'New Habit',
-        color: Colors.amber,
+        color: Colors.amber.value,
         iconCodePoint: Icons.star.codePoint,
       );
 
@@ -155,7 +157,7 @@ void main() {
 
       final habit = Habit(
         title: 'Study',
-        color: Colors.indigo,
+        color: Colors.indigo.value,
         iconCodePoint: Icons.school.codePoint,
         completedDates: [fiveDaysAgo, yesterday, today],
       );
@@ -169,7 +171,7 @@ void main() {
 
       final habit = Habit(
         title: 'Morning Routine',
-        color: Colors.teal,
+        color: Colors.teal.value,
         iconCodePoint: Icons.alarm.codePoint,
         reminderTime: reminderTime,
       );
@@ -181,7 +183,7 @@ void main() {
     test('should create non-daily habit', () {
       final habit = Habit(
         title: 'Weekly Review',
-        color: Colors.brown,
+        color: Colors.brown.value,
         iconCodePoint: Icons.calendar_today.codePoint,
         isDaily: false,
       );
@@ -192,7 +194,7 @@ void main() {
     test('should handle empty description', () {
       final habit = Habit(
         title: 'Simple Habit',
-        color: Colors.grey,
+        color: Colors.grey.value,
         iconCodePoint: Icons.check.codePoint,
       );
 
@@ -202,7 +204,7 @@ void main() {
     test('should maintain streak across month boundaries', () {
       final habit = Habit(
         title: 'Cross Month Habit',
-        color: Colors.deepPurple,
+        color: Colors.deepPurple.value,
         iconCodePoint: Icons.trending_up.codePoint,
         completedDates: [
           DateTime(2025, 11, 29),
