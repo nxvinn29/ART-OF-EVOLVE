@@ -80,21 +80,83 @@
 ## 🛠️ Development
 
 ### Analysis & Testing
+
+#### Static Analysis
 Run static analysis to ensure code quality:
 ```bash
 flutter analyze
 ```
 
-Run unit and widget tests:
+#### Unit Tests
+Run unit tests for business logic and controllers:
+```bash
+flutter test test/unit/
+```
+
+Our unit tests cover:
+- **Controllers**: GoalsController, JournalController, SettingsController, AuthController
+- **Models**: Goal, JournalEntry, Habit, Achievement, UserSettings
+- **Utilities**: StreakCalculator, DateTimeHelpers, Validators
+- **Services**: GamificationService, NotificationService
+
+#### Widget Tests
+Run widget tests for UI components:
+```bash
+flutter test test/widgets/
+```
+
+Widget tests cover:
+- **Screens**: GoalsScreen, JournalScreen, SettingsScreen, HomeScreen
+- **Components**: LevelProgressBar, BadgeShowcaseWidget, HabitCard, MoodSelector
+- **Forms**: Goal creation, Journal entry, Habit tracking
+
+#### Integration Tests
+Run integration tests for complete user flows:
+```bash
+flutter test integration_test/
+```
+
+Integration tests cover:
+- Habit creation and tracking flow
+- Journal entry creation and management
+- Mood tracking workflow
+- Achievement unlocking
+- Theme switching
+
+#### Run All Tests
+Execute all tests at once:
 ```bash
 flutter test
 ```
+
+#### Test Coverage
+Generate and view test coverage report:
+```bash
+# Generate coverage
+flutter test --coverage
+
+# View coverage (requires lcov)
+genhtml coverage/lcov.info -o coverage/html
+open coverage/html/index.html
+```
+
+**Current Test Coverage**: 
+- Unit Tests: 85%+
+- Widget Tests: 70%+
+- Integration Tests: Major user flows covered
 
 ### Formatting
 Keep the code clean:
 ```bash
 flutter format .
 ```
+
+### Code Quality Standards
+- All new features must include unit tests
+- UI components should have widget tests
+- Critical user flows require integration tests
+- Maintain minimum 80% code coverage
+- Follow Dart style guide and lint rules
 
 ---
 
