@@ -2,6 +2,43 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.5.0] - 2025-12-31
+
+### Added
+- **Integration Tests**: Comprehensive end-to-end testing for critical user flows
+  - Habit creation and tracking flow tests
+  - Journal entry creation and management tests
+  - Mood tracking workflow tests
+  - Achievement unlocking flow tests
+  - Theme switching flow tests
+- **Enhanced Unit Tests**: Extended test coverage for controllers
+  - `GoalsController` tests (13 test cases) covering CRUD operations and state management
+  - `JournalController` tests (12 test cases) for entry management and sorting
+  - `SettingsController` tests (8 test cases) for preferences and persistence
+- **Widget Tests**: UI component testing
+  - `GoalsScreen` tests (6 test cases) for various UI states
+  - `JournalScreen` tests (5 test cases) for entry display
+  - `SettingsScreen` tests (3 test cases) for settings UI
+- **Documentation Enhancements**:
+  - Comprehensive KDoc for `GoalsRepository` with usage examples and error handling
+  - `TESTING_GUIDE.md` with templates, best practices, and troubleshooting
+  - `CODE_QUALITY.md` with standards, style guide, and review checklist
+  - `API_DOCUMENTATION.md` with complete API reference for all repositories and controllers
+  - Enhanced README with detailed testing guide and coverage information
+
+### Enhanced
+- Improved test coverage to 85%+ for unit tests
+- Better documentation across all major components
+- Comprehensive testing infrastructure
+- Developer experience with detailed guides and standards
+
+### Documentation
+- Added testing templates and examples
+- Documented all public APIs with KDoc
+- Created comprehensive developer guides
+- Updated README with testing and coverage info
+
+
 ## [1.0.4] - 2025-12-30
 
 ### Added
