@@ -1,143 +1,227 @@
-# 🧪 Tests
+# Testing Strategy - Art of Evolve
 
-This directory contains unit and widget tests for the **Art of Evolve** application.
+## Overview
+This document outlines the comprehensive testing strategy for the Art of Evolve application, including unit tests, widget tests, and integration tests.
 
-## 📂 Structure
+## Test Structure
 
-- `unit/`: Unit tests for models, utilities, and business logic
-  - `habit_test.dart`: Tests for Habit model and streak calculations
-  - `badge_test.dart`: Tests for Badge model and predefined badges
-  - `user_stats_test.dart`: Tests for UserStats and XP progression
-  - `journal_entry_test.dart`: Tests for JournalEntry model
-  - `datetime_helpers_test.dart`: Tests for date/time utility functions
-- `widgets/`: Widget tests for UI components
-  - `badge_showcase_widget_test.dart`: Tests for badge display widget
-  - `level_progress_bar_test.dart`: Tests for level progress indicator
-  - `auth_screens_test.dart`: Tests for authentication screens
-  - `home_screen_test.dart`: Tests for home screen
-  - `common_widgets_test.dart`: Tests for reusable widgets
-- `features/`: Feature-specific integration tests
-- `helpers/`: Mocks, fakes, and test utilities
-- `core/`: Tests for core functionality and services
+### Directory Organization
+```
+test/
+├── unit/              # Unit tests for models and business logic
+├── widgets/           # Widget tests for UI components
+├── integration_test/  # End-to-end integration tests
+├── helpers/           # Test utilities and mocks
+└── README.md          # This file
+```
 
-## 🚀 Running Tests
+## Testing Levels
 
-Run all tests:
+### 1. Unit Tests (`test/unit/`)
+Unit tests focus on testing individual components in isolation.
+
+**Coverage Areas:**
+- **Models**: Goal, Todo, Habit, JournalEntry
+- **Services**: NotificationService, FirebaseAuthService, DataSyncService
+- **Utilities**: Date helpers, streak calculators, validators
+- **Business Logic**: XP calculations, level progression, achievement unlocking
+
+**Best Practices:**
+- Test one thing at a time
+- Use descriptive test names
+- Cover edge cases and error conditions
+- Mock external dependencies
+- Aim for high code coverage (>80%)
+
+**Example:**
+```dart
+test('creates goal with all required fields', () {
+  final goal = Goal(
+    title: 'Learn Flutter',
+    targetDate: DateTime(2026, 12, 31),
+  );
+  
+  expect(goal.title, 'Learn Flutter');
+  expect(goal.isAchieved, false);
+});
+```
+
+### 2. Widget Tests (`test/widgets/`)
+Widget tests verify UI components render correctly and handle user interactions.
+
+**Coverage Areas:**
+- **Screens**: HomeScreen, GoalsScreen, HabitsScreen, SettingsScreen
+- **Components**: GoalCard, HabitCard, TodoListWidget, StatisticsChart
+- **Common Widgets**: Buttons, dialogs, progress bars
+
+**Best Practices:**
+- Test widget rendering
+- Verify user interactions (taps, swipes, input)
+- Test different widget states (loading, error, empty)
+- Use `pumpWidget` and `pumpAndSettle` appropriately
+- Test accessibility features
+
+**Example:**
+```dart
+testWidgets('displays goal title', (WidgetTester tester) async {
+  await tester.pumpWidget(
+    MaterialApp(
+      home: GoalCard(goal: testGoal),
+    ),
+  );
+  
+  expect(find.text('Learn Flutter'), findsOneWidget);
+});
+```
+
+### 3. Integration Tests (`integration_test/`)
+Integration tests verify complete user flows and feature interactions.
+
+**Coverage Areas:**
+- **User Flows**: Onboarding, authentication, habit tracking
+- **Feature Integration**: Goal achievement, statistics visualization
+- **Cross-Feature**: Navigation, data persistence, state management
+
+**Best Practices:**
+- Test realistic user scenarios
+- Verify data persistence
+- Test navigation flows
+- Handle asynchronous operations
+- Test on real devices when possible
+
+**Example:**
+```dart
+testWidgets('complete onboarding flow', (WidgetTester tester) async {
+  await app.main();
+  await tester.pumpAndSettle();
+  
+  // Enter name
+  await tester.enterText(find.byType(TextField), 'Test User');
+  await tester.tap(find.text('Next'));
+  await tester.pumpAndSettle();
+  
+  // Verify navigation
+  expect(find.text('Welcome'), findsNothing);
+});
+```
+
+## Running Tests
+
+### Run All Tests
 ```bash
 flutter test
 ```
 
-Run specific test file:
+### Run Specific Test File
 ```bash
-flutter test test/unit/habit_test.dart
+flutter test test/unit/goal_model_test.dart
 ```
 
-Run tests with coverage:
+### Run Widget Tests Only
+```bash
+flutter test test/widgets/
+```
+
+### Run Integration Tests
+```bash
+flutter test integration_test/
+```
+
+### Run with Coverage
 ```bash
 flutter test --coverage
+genhtml coverage/lcov.info -o coverage/html
 ```
 
-Run tests in watch mode (auto-rerun on changes):
-```bash
-flutter test --watch
-```
+## Test Utilities
 
-## 📊 Test Coverage
+### Mocks and Fakes
+Located in `test/helpers/`, these provide mock implementations for:
+- Repository interfaces
+- External services
+- Platform-specific APIs
 
-Current test coverage includes:
-- **Models**: Habit, Badge, UserStats, JournalEntry
-- **Widgets**: BadgeShowcaseWidget, LevelProgressBar, Auth screens
-- **Utilities**: DateTimeHelpers for date/time operations
-
-### Coverage Goals
-- Maintain >80% code coverage for critical business logic
-- All domain models should have comprehensive unit tests
-- All custom widgets should have widget tests
-- Integration tests for key user flows
-
-## 🎯 Writing Tests
-
-### Unit Tests
-Unit tests should:
-- Test a single unit of functionality in isolation
-- Use descriptive test names that explain what is being tested
-- Follow the Arrange-Act-Assert pattern
-- Cover edge cases and error conditions
-
-Example:
+### Test Data
+Use consistent test data across tests:
 ```dart
-test('should calculate current streak correctly when completed today', () {
-  // Arrange
-  final habit = Habit(
-    title: 'Test',
-    completedDates: [today, yesterday, twoDaysAgo],
-  );
+final testGoal = Goal(
+  title: 'Test Goal',
+  targetDate: DateTime(2026, 12, 31),
+);
+```
 
-  // Act
-  final streak = habit.currentStreak;
+## Continuous Integration
 
-  // Assert
-  expect(streak, 3);
+### GitHub Actions
+Tests run automatically on:
+- Pull requests
+- Pushes to main branch
+- Scheduled daily runs
+
+### Quality Gates
+- All tests must pass
+- Code coverage must be >75%
+- No new lint warnings
+
+## Best Practices Summary
+
+1. **Write Tests First**: Consider TDD for new features
+2. **Keep Tests Fast**: Unit tests should run in milliseconds
+3. **Isolate Tests**: Each test should be independent
+4. **Use Descriptive Names**: Test names should explain what they test
+5. **Test Edge Cases**: Don't just test the happy path
+6. **Mock External Dependencies**: Keep tests deterministic
+7. **Maintain Tests**: Update tests when code changes
+8. **Review Coverage**: Regularly check and improve coverage
+
+## Common Patterns
+
+### Testing Async Code
+```dart
+test('loads data asynchronously', () async {
+  final result = await repository.fetchData();
+  expect(result, isNotEmpty);
 });
 ```
 
-### Widget Tests
-Widget tests should:
-- Test widget rendering and user interactions
-- Use `ProviderScope` for Riverpod widgets
-- Test both visual appearance and behavior
-- Verify accessibility features
-
-Example:
+### Testing Streams
 ```dart
-testWidgets('should display level and XP information', (tester) async {
-  await tester.pumpWidget(
-    ProviderScope(
-      child: MaterialApp(home: LevelProgressBar()),
-    ),
+test('emits state changes', () {
+  expectLater(
+    controller.stream,
+    emitsInOrder([State.loading, State.loaded]),
   );
-
-  expect(find.text('Level 1'), findsOneWidget);
 });
 ```
 
-## 🔧 Test Utilities
-
-### DateTimeHelpers
-Utility functions for date/time operations in tests:
-- `formatDate()`: Format dates for display
-- `isSameDay()`: Compare dates ignoring time
-- `daysBetween()`: Calculate days between dates
-- `getPastDays()`: Generate list of past dates
-
-### Mock Controllers
-Mock implementations of controllers for testing:
-- `MockGamificationController`: For testing gamification features
-- Use Riverpod's `overrideWith` for dependency injection
-
-## 📝 Best Practices
-
-1. **Keep tests isolated**: Each test should be independent
-2. **Use descriptive names**: Test names should clearly describe what is being tested
-3. **Test behavior, not implementation**: Focus on what the code does, not how
-4. **Cover edge cases**: Test boundary conditions and error scenarios
-5. **Keep tests fast**: Unit tests should run quickly
-6. **Maintain tests**: Update tests when code changes
-
-## 🐛 Debugging Tests
-
-Run tests with verbose output:
-```bash
-flutter test --reporter expanded
+### Testing Errors
+```dart
+test('throws exception on invalid input', () {
+  expect(
+    () => service.process(null),
+    throwsA(isA<ArgumentError>()),
+  );
+});
 ```
 
-Run a single test:
-```bash
-flutter test test/unit/habit_test.dart --name "should calculate current streak"
-```
+## Resources
 
-## 📚 Resources
+- [Flutter Testing Documentation](https://flutter.dev/docs/testing)
+- [Widget Testing Guide](https://flutter.dev/docs/cookbook/testing/widget/introduction)
+- [Integration Testing Guide](https://flutter.dev/docs/testing/integration-tests)
+- [Mockito Documentation](https://pub.dev/packages/mockito)
 
-- [Flutter Testing Documentation](https://docs.flutter.dev/testing)
-- [Effective Dart: Testing](https://dart.dev/guides/language/effective-dart/testing)
-- [Riverpod Testing Guide](https://riverpod.dev/docs/cookbooks/testing)
+## Contributing
+
+When adding new features:
+1. Write tests for new code
+2. Update existing tests if behavior changes
+3. Ensure all tests pass before submitting PR
+4. Add test documentation for complex scenarios
+
+## Maintenance
+
+- Review and update tests quarterly
+- Remove obsolete tests
+- Refactor duplicate test code
+- Keep test dependencies up to date
