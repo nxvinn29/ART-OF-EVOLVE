@@ -2,7 +2,7 @@ name: art_of_evolve
 description: "Art of Evolve: A holistic self-improvement application built with Flutter, focusing on goals, habits, and self-care."
 publish_to: "none"
 
-version: 1.5.0+1
+version: 1.6.0+1
 
 environment:
   sdk: ^3.9.2
