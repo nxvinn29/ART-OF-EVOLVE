@@ -14,7 +14,7 @@ void main() {
     testWidgets('Create a new habit with all details', (
       WidgetTester tester,
     ) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to habits section (assuming there's a navigation method)
@@ -80,7 +80,7 @@ void main() {
     testWidgets('Mark habit as complete for today', (
       WidgetTester tester,
     ) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to habits
@@ -97,7 +97,7 @@ void main() {
         final checkbox = find.byType(Checkbox).first;
         if (checkbox.evaluate().isNotEmpty) {
           // Get initial state
-          final Checkbox checkboxWidget = tester.widget(checkbox) as Checkbox;
+          final checkboxWidget = tester.widget(checkbox) as Checkbox;
           final wasChecked = checkboxWidget.value ?? false;
 
           // Tap to toggle completion
@@ -105,7 +105,7 @@ void main() {
           await tester.pumpAndSettle();
 
           // Verify state changed
-          final Checkbox updatedCheckbox = tester.widget(checkbox) as Checkbox;
+          final updatedCheckbox = tester.widget(checkbox) as Checkbox;
           expect(updatedCheckbox.value, !wasChecked);
         }
       }
@@ -114,7 +114,7 @@ void main() {
     testWidgets('View habit details and statistics', (
       WidgetTester tester,
     ) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to habits
@@ -140,7 +140,7 @@ void main() {
     });
 
     testWidgets('Delete a habit', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to habits
@@ -183,7 +183,7 @@ void main() {
     testWidgets('Track habit streak over multiple days', (
       WidgetTester tester,
     ) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to habits
@@ -225,7 +225,7 @@ void main() {
     });
 
     testWidgets('Edit existing habit', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to habits

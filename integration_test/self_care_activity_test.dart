@@ -12,7 +12,7 @@ void main() {
 
   group('Self-Care Activity Integration Tests', () {
     testWidgets('Navigate to self-care section', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Look for self-care navigation option
@@ -27,7 +27,7 @@ void main() {
     });
 
     testWidgets('Create a new journal entry', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to self-care
@@ -71,7 +71,7 @@ void main() {
     });
 
     testWidgets('Use focus timer', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to self-care
@@ -107,7 +107,7 @@ void main() {
     });
 
     testWidgets('View journal history', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to self-care
@@ -139,7 +139,7 @@ void main() {
     });
 
     testWidgets('Edit existing journal entry', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to self-care and journal
@@ -189,7 +189,7 @@ void main() {
     });
 
     testWidgets('Delete journal entry', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to journal
@@ -245,7 +245,7 @@ void main() {
     });
 
     testWidgets('Complete focus timer session', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to focus timer

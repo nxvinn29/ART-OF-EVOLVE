@@ -9,11 +9,11 @@ void main() {
   group('TodoListWidget Tests', () {
     testWidgets('displays list of todos', (WidgetTester tester) async {
       await tester.pumpWidget(
-        const ProviderScope(
+        ProviderScope(
           child: MaterialApp(
             home: Scaffold(
               body: ListView(
-                children: [
+                children: const [
                   ListTile(title: Text('Todo 1')),
                   ListTile(title: Text('Todo 2')),
                 ],
@@ -50,7 +50,7 @@ void main() {
     });
 
     testWidgets('toggles todo completion', (WidgetTester tester) async {
-      bool isCompleted = false;
+      var isCompleted = false;
 
       await tester.pumpWidget(
         ProviderScope(

@@ -103,7 +103,7 @@ void main() {
     });
 
     testWidgets('responds to tap', (WidgetTester tester) async {
-      bool tapped = false;
+      var tapped = false;
 
       await tester.pumpWidget(
         ProviderScope(

@@ -88,7 +88,7 @@ void main() {
     });
 
     testWidgets('toggles completion state', (WidgetTester tester) async {
-      bool isCompleted = false;
+      var isCompleted = false;
 
       await tester.pumpWidget(
         ProviderScope(

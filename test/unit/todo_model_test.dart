@@ -19,7 +19,7 @@ void main() {
     });
 
     test('creates todo with custom id', () {
-      final customId = 'custom-todo-123';
+      const customId = 'custom-todo-123';
       final todo = Todo(id: customId, title: 'Custom Todo');
 
       expect(todo.id, customId);

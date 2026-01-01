@@ -12,7 +12,7 @@ void main() {
 
   group('Statistics and Progress Visualization Integration Tests', () {
     testWidgets('Navigate to statistics screen', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Look for statistics navigation option
@@ -36,7 +36,7 @@ void main() {
     testWidgets('View XP overview and level progress', (
       WidgetTester tester,
     ) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to statistics
@@ -68,7 +68,7 @@ void main() {
     testWidgets('View habit completion statistics', (
       WidgetTester tester,
     ) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to statistics
@@ -92,7 +92,7 @@ void main() {
     });
 
     testWidgets('View weekly progress chart', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to statistics
@@ -124,7 +124,7 @@ void main() {
     });
 
     testWidgets('View achievement badges', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to statistics
@@ -155,7 +155,7 @@ void main() {
     });
 
     testWidgets('View streak analytics', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to statistics
@@ -181,7 +181,7 @@ void main() {
     testWidgets('Filter statistics by time period', (
       WidgetTester tester,
     ) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to statistics
@@ -194,7 +194,6 @@ void main() {
       // Look for time period filters
       final weekFilter = find.text('Week');
       final monthFilter = find.text('Month');
-      final yearFilter = find.text('Year');
 
       if (weekFilter.evaluate().isNotEmpty) {
         await tester.tap(weekFilter.first);
@@ -214,7 +213,7 @@ void main() {
     });
 
     testWidgets('View goal completion rate', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to statistics
@@ -245,7 +244,7 @@ void main() {
     });
 
     testWidgets('Refresh statistics data', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to statistics
@@ -276,7 +275,7 @@ void main() {
     testWidgets('View detailed analytics for specific habit', (
       WidgetTester tester,
     ) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to statistics

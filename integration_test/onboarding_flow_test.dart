@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:art_of_evolve/main.dart' as app;
-import 'package:art_of_evolve/src/features/onboarding/presentation/onboarding_controller.dart';
 
 /// Integration test for the complete onboarding flow.
 ///
@@ -17,7 +15,7 @@ void main() {
       WidgetTester tester,
     ) async {
       // Start the app
-      await app.main();
+      app.main();
       await tester.pumpAndSettle();
 
       // Verify we're on the onboarding screen
@@ -68,7 +66,7 @@ void main() {
     testWidgets('Cannot proceed without entering name', (
       WidgetTester tester,
     ) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle();
 
       // Try to tap next without entering name
@@ -85,7 +83,7 @@ void main() {
     testWidgets('Can navigate back through onboarding pages', (
       WidgetTester tester,
     ) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle();
 
       // Enter name and proceed
@@ -114,7 +112,7 @@ void main() {
     testWidgets('Onboarding data is saved correctly', (
       WidgetTester tester,
     ) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle();
 
       // Complete the onboarding flow

@@ -23,7 +23,7 @@ void main() {
     });
 
     test('creates goal with custom id', () {
-      final customId = 'custom-goal-id-123';
+      const customId = 'custom-goal-id-123';
       final goal = Goal(
         id: customId,
         title: 'Custom Goal',

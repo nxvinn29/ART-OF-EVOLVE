@@ -9,11 +9,11 @@ void main() {
   group('TodosScreen Widget Tests', () {
     testWidgets('renders todos screen', (WidgetTester tester) async {
       await tester.pumpWidget(
-        const ProviderScope(
+        ProviderScope(
           child: MaterialApp(
             home: Scaffold(
-              appBar: AppBar(title: Text('Todos')),
-              body: Center(child: Text('Your Todos')),
+              appBar: AppBar(title: const Text('Todos')),
+              body: const Center(child: Text('Your Todos')),
             ),
           ),
         ),

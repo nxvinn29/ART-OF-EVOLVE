@@ -12,7 +12,7 @@ void main() {
 
   group('Authentication Flow Integration Tests', () {
     testWidgets('Navigate to sign up screen', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Look for sign up button or link
@@ -27,7 +27,7 @@ void main() {
     });
 
     testWidgets('Sign up with valid credentials', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to sign up
@@ -72,7 +72,7 @@ void main() {
     testWidgets('Sign up with invalid email shows error', (
       WidgetTester tester,
     ) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to sign up
@@ -109,7 +109,7 @@ void main() {
     });
 
     testWidgets('Navigate to login screen', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Look for login button or link
@@ -124,7 +124,7 @@ void main() {
     });
 
     testWidgets('Login with valid credentials', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to login
@@ -159,7 +159,7 @@ void main() {
     testWidgets('Login with incorrect password shows error', (
       WidgetTester tester,
     ) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to login
@@ -196,7 +196,7 @@ void main() {
     });
 
     testWidgets('Toggle password visibility', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to login
@@ -226,7 +226,7 @@ void main() {
     });
 
     testWidgets('Forgot password flow', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to login
@@ -265,7 +265,7 @@ void main() {
     testWidgets('Switch between login and sign up', (
       WidgetTester tester,
     ) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Start on login screen

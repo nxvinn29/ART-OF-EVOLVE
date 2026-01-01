@@ -14,7 +14,7 @@ void main() {
     testWidgets('Create a new goal with target date', (
       WidgetTester tester,
     ) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to goals section
@@ -77,7 +77,7 @@ void main() {
     });
 
     testWidgets('Mark goal as achieved', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to goals
@@ -113,7 +113,7 @@ void main() {
     });
 
     testWidgets('View goal progress and details', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to goals
@@ -145,7 +145,7 @@ void main() {
     });
 
     testWidgets('Edit existing goal', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to goals
@@ -186,7 +186,7 @@ void main() {
     });
 
     testWidgets('Delete a goal', (WidgetTester tester) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to goals
@@ -236,7 +236,7 @@ void main() {
     testWidgets('Filter goals by status (active/achieved)', (
       WidgetTester tester,
     ) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to goals
@@ -276,7 +276,7 @@ void main() {
     testWidgets('Create goal with validation errors', (
       WidgetTester tester,
     ) async {
-      await app.main();
+      app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Navigate to goals
