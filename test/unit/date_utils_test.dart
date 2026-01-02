@@ -1,0 +1,197 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:art_of_evolve/src/core/utils/date_utils.dart';
+
+/// Unit tests for [AppDateUtils].
+///
+/// Tests date formatting, time formatting, and date comparison utilities.
+void main() {
+  group('AppDateUtils Tests', () {
+    group('formatDate', () {
+      test('formats date correctly in MMM d, yyyy format', () {
+        final date = DateTime(2026, 1, 2);
+        expect(AppDateUtils.formatDate(date), 'Jan 2, 2026');
+      });
+
+      test('formats different months correctly', () {
+        expect(AppDateUtils.formatDate(DateTime(2026, 3, 15)), 'Mar 15, 2026');
+        expect(AppDateUtils.formatDate(DateTime(2026, 6, 30)), 'Jun 30, 2026');
+        expect(AppDateUtils.formatDate(DateTime(2026, 12, 25)), 'Dec 25, 2026');
+      });
+
+      test('handles single digit days', () {
+        final date = DateTime(2026, 5, 5);
+        expect(AppDateUtils.formatDate(date), 'May 5, 2026');
+      });
+
+      test('handles double digit days', () {
+        final date = DateTime(2026, 5, 15);
+        expect(AppDateUtils.formatDate(date), 'May 15, 2026');
+      });
+
+      test('handles different years', () {
+        expect(AppDateUtils.formatDate(DateTime(2025, 1, 1)), 'Jan 1, 2025');
+        expect(AppDateUtils.formatDate(DateTime(2027, 1, 1)), 'Jan 1, 2027');
+      });
+
+      test('ignores time component', () {
+        final date1 = DateTime(2026, 1, 2, 10, 30);
+        final date2 = DateTime(2026, 1, 2, 23, 59);
+        expect(AppDateUtils.formatDate(date1), 'Jan 2, 2026');
+        expect(AppDateUtils.formatDate(date2), 'Jan 2, 2026');
+      });
+    });
+
+    group('formatTime', () {
+      test('formats time correctly in h:mm a format', () {
+        final time = DateTime(2026, 1, 2, 14, 30);
+        expect(AppDateUtils.formatTime(time), '2:30 PM');
+      });
+
+      test('formats morning time correctly', () {
+        final time = DateTime(2026, 1, 2, 9, 15);
+        expect(AppDateUtils.formatTime(time), '9:15 AM');
+      });
+
+      test('formats afternoon time correctly', () {
+        final time = DateTime(2026, 1, 2, 15, 45);
+        expect(AppDateUtils.formatTime(time), '3:45 PM');
+      });
+
+      test('formats midnight correctly', () {
+        final time = DateTime(2026, 1, 2, 0, 0);
+        expect(AppDateUtils.formatTime(time), '12:00 AM');
+      });
+
+      test('formats noon correctly', () {
+        final time = DateTime(2026, 1, 2, 12, 0);
+        expect(AppDateUtils.formatTime(time), '12:00 PM');
+      });
+
+      test('formats single digit minutes with leading zero', () {
+        final time = DateTime(2026, 1, 2, 10, 5);
+        expect(AppDateUtils.formatTime(time), '10:05 AM');
+      });
+
+      test('ignores date component', () {
+        final time1 = DateTime(2026, 1, 1, 10, 30);
+        final time2 = DateTime(2025, 12, 31, 10, 30);
+        expect(AppDateUtils.formatTime(time1), '10:30 AM');
+        expect(AppDateUtils.formatTime(time2), '10:30 AM');
+      });
+    });
+
+    group('formatDateTime', () {
+      test('formats date and time correctly', () {
+        final dateTime = DateTime(2026, 1, 2, 14, 30);
+        expect(AppDateUtils.formatDateTime(dateTime), 'Jan 2, 2026 2:30 PM');
+      });
+
+      test('formats morning datetime correctly', () {
+        final dateTime = DateTime(2026, 3, 15, 9, 15);
+        expect(AppDateUtils.formatDateTime(dateTime), 'Mar 15, 2026 9:15 AM');
+      });
+
+      test('formats evening datetime correctly', () {
+        final dateTime = DateTime(2026, 12, 25, 18, 45);
+        expect(AppDateUtils.formatDateTime(dateTime), 'Dec 25, 2026 6:45 PM');
+      });
+
+      test('formats midnight datetime correctly', () {
+        final dateTime = DateTime(2026, 1, 1, 0, 0);
+        expect(AppDateUtils.formatDateTime(dateTime), 'Jan 1, 2026 12:00 AM');
+      });
+
+      test('formats noon datetime correctly', () {
+        final dateTime = DateTime(2026, 6, 15, 12, 0);
+        expect(AppDateUtils.formatDateTime(dateTime), 'Jun 15, 2026 12:00 PM');
+      });
+    });
+
+    group('isSameDay', () {
+      test('returns true for same date', () {
+        final date1 = DateTime(2026, 1, 2);
+        final date2 = DateTime(2026, 1, 2);
+        expect(AppDateUtils.isSameDay(date1, date2), true);
+      });
+
+      test('returns true for same date with different times', () {
+        final date1 = DateTime(2026, 1, 2, 10, 30);
+        final date2 = DateTime(2026, 1, 2, 23, 59);
+        expect(AppDateUtils.isSameDay(date1, date2), true);
+      });
+
+      test('returns false for different days', () {
+        final date1 = DateTime(2026, 1, 2);
+        final date2 = DateTime(2026, 1, 3);
+        expect(AppDateUtils.isSameDay(date1, date2), false);
+      });
+
+      test('returns false for different months', () {
+        final date1 = DateTime(2026, 1, 15);
+        final date2 = DateTime(2026, 2, 15);
+        expect(AppDateUtils.isSameDay(date1, date2), false);
+      });
+
+      test('returns false for different years', () {
+        final date1 = DateTime(2025, 1, 2);
+        final date2 = DateTime(2026, 1, 2);
+        expect(AppDateUtils.isSameDay(date1, date2), false);
+      });
+
+      test('handles edge case of last day of month', () {
+        final date1 = DateTime(2026, 1, 31);
+        final date2 = DateTime(2026, 2, 1);
+        expect(AppDateUtils.isSameDay(date1, date2), false);
+      });
+
+      test('handles edge case of last day of year', () {
+        final date1 = DateTime(2025, 12, 31);
+        final date2 = DateTime(2026, 1, 1);
+        expect(AppDateUtils.isSameDay(date1, date2), false);
+      });
+
+      test('handles leap year dates', () {
+        final date1 = DateTime(2024, 2, 29);
+        final date2 = DateTime(2024, 2, 29, 23, 59);
+        expect(AppDateUtils.isSameDay(date1, date2), true);
+      });
+
+      test('compares dates with milliseconds', () {
+        final date1 = DateTime(2026, 1, 2, 10, 30, 45, 123);
+        final date2 = DateTime(2026, 1, 2, 15, 45, 30, 456);
+        expect(AppDateUtils.isSameDay(date1, date2), true);
+      });
+    });
+
+    group('Integration Tests', () {
+      test('formats and compares current date', () {
+        final now = DateTime.now();
+        final formatted = AppDateUtils.formatDate(now);
+        expect(formatted, isNotEmpty);
+        expect(AppDateUtils.isSameDay(now, DateTime.now()), true);
+      });
+
+      test('formats complete datetime information', () {
+        final dateTime = DateTime(2026, 6, 15, 14, 30);
+
+        final date = AppDateUtils.formatDate(dateTime);
+        final time = AppDateUtils.formatTime(dateTime);
+        final combined = AppDateUtils.formatDateTime(dateTime);
+
+        expect(date, 'Jun 15, 2026');
+        expect(time, '2:30 PM');
+        expect(combined, 'Jun 15, 2026 2:30 PM');
+      });
+
+      test('handles date comparison across different formats', () {
+        final date1 = DateTime(2026, 1, 2, 10, 30);
+        final date2 = DateTime(2026, 1, 2, 22, 45);
+        final date3 = DateTime(2026, 1, 3, 10, 30);
+
+        expect(AppDateUtils.isSameDay(date1, date2), true);
+        expect(AppDateUtils.isSameDay(date1, date3), false);
+        expect(AppDateUtils.formatDate(date1), AppDateUtils.formatDate(date2));
+      });
+    });
+  });
+}
