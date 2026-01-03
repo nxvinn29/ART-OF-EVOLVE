@@ -12,14 +12,16 @@ class ThemeModeNotifier extends StateNotifier<ThemeMode> {
   static const String _themeBoxName = 'theme_settings';
   static const String _themeModeKey = 'theme_mode';
 
-  ThemeModeNotifier() : super(ThemeMode.system) {
+  final Box? _box;
+
+  ThemeModeNotifier({Box? box}) : _box = box, super(ThemeMode.system) {
     _loadThemeMode();
   }
 
   /// Load the saved theme mode from Hive
   Future<void> _loadThemeMode() async {
     try {
-      final box = await Hive.openBox(_themeBoxName);
+      final box = _box ?? await Hive.openBox(_themeBoxName);
       final savedMode =
           box.get(_themeModeKey, defaultValue: 'system') as String;
       state = _stringToThemeMode(savedMode);
@@ -32,7 +34,7 @@ class ThemeModeNotifier extends StateNotifier<ThemeMode> {
   /// Save the theme mode to Hive
   Future<void> _saveThemeMode(ThemeMode mode) async {
     try {
-      final box = await Hive.openBox(_themeBoxName);
+      final box = _box ?? await Hive.openBox(_themeBoxName);
       await box.put(_themeModeKey, _themeModeToString(mode));
     } catch (e) {
       // Silently fail if save doesn't work
