@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.6.0] - 2026-01-03
+### Added
+- **Performance Monitoring**: Integrated `PerformanceObserver` for Riverpod state tracking.
+- **Documentation**:
+  - `ROADMAP.md` describing 2026 milestones.
+  - `DEPLOYMENT.md` guide for release processes.
+  - `API_RESPONSE_MODELS.md` detailing backend schemas.
+  - `CODE_OF_CONDUCT.md` for community guidelines.
+- **Testing Infrastructure**:
+  - Comprehensive unit test suite for services and controllers (`PushNotificationService`, `AuthController`, `ThemeController`, `QuoteService`, `AppException`).
+  - Widget test suite for home and settings widgets (`WaterTrackerWidget`, `SelfCareWidget`, `ThemeToggleWidget`).
+- **CI/CD**: Added GitHub Actions workflow (`ci.yml`) and `PULL_REQUEST_TEMPLATE.md`.
+
+### Enhanced
+- Standardized code style with `.editorconfig` and `.gitattributes`.
+- Improved API documentation in `API_DOCUMENTATION.md`.
+
 ## [1.5.0] - 2025-12-31
 
 ### Added
