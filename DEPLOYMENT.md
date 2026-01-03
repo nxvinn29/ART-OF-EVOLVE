@@ -86,17 +86,7 @@ flutter build web --release
 
 Deploy the contents of `build/web` to your hosting provider (Firebase Hosting, Vercel, Netlify, etc.).
 
-## CI/CD Pipeline
 
-We use GitHub Actions for automated building and testing.
-
-- **Triggers**: Pushes to `main` and `develop`.
-- **Jobs**:
-    - Static Analysis (`flutter analyze`)
-    - Unit Tests (`flutter test`)
-    - Build Verification
-
-See `.github/workflows/ci.yml` for configuration details.
 
 ## Release Checklist
 
