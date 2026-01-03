@@ -17,6 +17,8 @@ import 'src/app.dart';
 import 'src/services/notifications/notification_service.dart';
 import 'src/services/storage/hive_service.dart';
 
+import 'src/core/monitoring/performance_observer.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -25,5 +27,10 @@ void main() async {
   await HiveService.init();
   await NotificationService.initStatic();
 
-  runApp(const ProviderScope(child: ArtOfEvolveApp()));
+  runApp(
+    ProviderScope(
+      observers: [PerformanceObserver()],
+      child: const ArtOfEvolveApp(),
+    ),
+  );
 }
