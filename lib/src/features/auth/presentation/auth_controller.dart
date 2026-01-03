@@ -19,33 +19,24 @@ final authProvider = StreamProvider<User?>((ref) {
 /// State management is handled through [AsyncValue] to seamlessly provide
 /// loading, error, and success states to the UI.
 class AuthController extends StateNotifier<AsyncValue<void>> {
-  AuthController() : super(const AsyncData(null));
+  final FirebaseAuth _auth;
 
-  /// Signs in a user with the provided [email] and [password].
-  ///
-  /// Updates the state to [AsyncLoading] during the process, and then to
-  /// [AsyncData] on success or [AsyncError] on failure.
+  AuthController(this._auth) : super(const AsyncData(null));
+
   Future<void> signIn(String email, String password) async {
     state = const AsyncLoading();
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
       state = const AsyncData(null);
     } catch (e, st) {
       state = AsyncError(e, st);
     }
   }
 
-  /// Creates a new user account with the provided [email] and [password].
-  ///
-  /// Updates the state to [AsyncLoading] during the process, and then to
-  /// [AsyncData] on success or [AsyncError] on failure.
   Future<void> signUp(String email, String password) async {
     state = const AsyncLoading();
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -55,24 +46,17 @@ class AuthController extends StateNotifier<AsyncValue<void>> {
     }
   }
 
-  /// Signs out the current user.
-  ///
-  /// Updates the state to [AsyncLoading] during the process.
   Future<void> signOut() async {
     state = const AsyncLoading();
-    // Wrap in guard or try/catch, though guard is safer for async value
-    state = await AsyncValue.guard(() => FirebaseAuth.instance.signOut());
+    state = await AsyncValue.guard(() => _auth.signOut());
   }
 
-  /// Sends a password reset email to the provided [email] address.
   Future<void> sendPasswordResetEmail(String email) async {
-    // No state loading needed for this usually, but can double check
-    await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    await _auth.sendPasswordResetEmail(email: email);
   }
 }
 
-/// Provider for the [AuthController].
 final authControllerProvider =
     StateNotifierProvider<AuthController, AsyncValue<void>>((ref) {
-      return AuthController();
+      return AuthController(FirebaseAuth.instance);
     });
