@@ -29,17 +29,21 @@ abstract class INotificationService {
 }
 
 class NotificationService implements INotificationService {
-  static final FlutterLocalNotificationsPlugin _notifications =
-      FlutterLocalNotificationsPlugin();
+  final FlutterLocalNotificationsPlugin _notifications;
 
-  // Singleton pattern for static access if needed, but we used instance in controller
-  static final NotificationService _instance = NotificationService._internal();
+  // Singleton pattern
+  static final NotificationService _instance = NotificationService._internal(
+    FlutterLocalNotificationsPlugin(),
+  );
 
   factory NotificationService() {
     return _instance;
   }
 
-  NotificationService._internal();
+  // Visible for testing
+  NotificationService.test(this._notifications);
+
+  NotificationService._internal(this._notifications);
 
   // Static helper for main.dart if we want to keep static init style,
   // but main.dart was updated to use static init.

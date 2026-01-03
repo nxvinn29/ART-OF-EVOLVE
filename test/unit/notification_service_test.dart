@@ -1,61 +1,95 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+import 'package:art_of_evolve/src/services/notifications/notification_service.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
-/// Unit tests for NotificationService.
-///
-/// Tests notification scheduling, cancellation, and permission handling.
-/// Note: This is a mock test structure since the actual NotificationService
-/// implementation may vary. Adjust imports and mocks as needed.
+// Generate mocks for the plugin
+@GenerateNiceMocks([MockSpec<FlutterLocalNotificationsPlugin>()])
+import 'notification_service_test.mocks.dart';
+
 void main() {
-  group('NotificationService Tests', () {
-    test('schedules notification successfully', () {
-      // This test would verify that notifications are scheduled correctly
-      // with the proper title, body, and time
-      expect(true, true); // Placeholder
+  late NotificationService notificationService;
+  late MockFlutterLocalNotificationsPlugin mockPlugin;
+
+  setUp(() {
+    mockPlugin = MockFlutterLocalNotificationsPlugin();
+    notificationService = NotificationService.test(mockPlugin);
+    tz.initializeTimeZones();
+  });
+
+  group('NotificationService', () {
+    test('init initializes the plugin', () async {
+      when(mockPlugin.initialize(any)).thenAnswer((_) async => true);
+
+      await notificationService.init();
+
+      verify(mockPlugin.initialize(any)).called(1);
     });
 
-    test('cancels scheduled notification', () {
-      // Test cancellation of a scheduled notification
-      expect(true, true); // Placeholder
+    test('scheduleReminder schedules a notification', () async {
+      final date = DateTime(2026, 1, 1, 10, 0);
+
+      await notificationService.scheduleReminder(
+        id: 1,
+        title: 'Title',
+        body: 'Body',
+        scheduledDate: date,
+      );
+
+      verify(
+        mockPlugin.zonedSchedule(
+          1,
+          'Title',
+          'Body',
+          any,
+          any,
+          androidScheduleMode: anyNamed('androidScheduleMode'),
+          uiLocalNotificationDateInterpretation: anyNamed(
+            'uiLocalNotificationDateInterpretation',
+          ),
+          matchDateTimeComponents: anyNamed('matchDateTimeComponents'),
+        ),
+      ).called(1);
     });
 
-    test('requests notification permissions', () {
-      // Test permission request flow
-      expect(true, true); // Placeholder
+    test('cancelNotification cancels the notification', () async {
+      await notificationService.cancelNotification(1);
+
+      verify(mockPlugin.cancel(1)).called(1);
     });
 
-    test('handles permission denial gracefully', () {
-      // Test behavior when permissions are denied
-      expect(true, true); // Placeholder
-    });
+    test(
+      'scheduleDailyNotification schedules for future time if passed time already passed',
+      () async {
+        // Mock current time using timezone logic if needed, but for unit test
+        // we check if it calls zonedSchedule with correct components
 
-    test('schedules daily reminder at specific time', () {
-      // Test scheduling recurring daily notifications
-      expect(true, true); // Placeholder
-    });
+        await notificationService.scheduleDailyNotification(
+          id: 2,
+          title: 'Daily',
+          body: 'Body',
+          time: const TimeOfDay(hour: 8, minute: 0),
+        );
 
-    test('cancels all notifications', () {
-      // Test canceling all scheduled notifications
-      expect(true, true); // Placeholder
-    });
-
-    test('gets list of pending notifications', () {
-      // Test retrieving pending notifications
-      expect(true, true); // Placeholder
-    });
-
-    test('notification payload is correctly formatted', () {
-      // Test notification payload structure
-      expect(true, true); // Placeholder
-    });
-
-    test('handles notification tap action', () {
-      // Test notification tap handling
-      expect(true, true); // Placeholder
-    });
-
-    test('schedules notification with custom sound', () {
-      // Test custom notification sound
-      expect(true, true); // Placeholder
-    });
+        verify(
+          mockPlugin.zonedSchedule(
+            2,
+            'Daily',
+            'Body',
+            any,
+            any,
+            androidScheduleMode: anyNamed('androidScheduleMode'),
+            uiLocalNotificationDateInterpretation: anyNamed(
+              'uiLocalNotificationDateInterpretation',
+            ),
+            matchDateTimeComponents: DateTimeComponents.time,
+          ),
+        ).called(1);
+      },
+    );
   });
 }
