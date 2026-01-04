@@ -106,7 +106,7 @@ flutter test test/widgets/
 ```
 
 Widget tests cover:
-- **Screens**: GoalsScreen, JournalScreen, SettingsScreen, HomeScreen
+- **Screens**: GoalsScreen, JournalScreen, SettingsScreen, HomeScreen, AccountScreen, StatisticsScreen
 - **Components**: LevelProgressBar, BadgeShowcaseWidget, HabitCard, MoodSelector
 - **Forms**: Goal creation, Journal entry, Habit tracking
 

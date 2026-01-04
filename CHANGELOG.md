@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.6.0+2] - 2026-01-04
+
+### Added
+- **Widget Tests**: Added tests for `AccountScreen` and `StatisticsScreen`.
+- **Documentation**: Added KDoc for `SelfCareWidget`, `WaterTrackerWidget`, `AccountScreen`, and `DrawingCanvasWidget`.
+- **Refactoring**: Improved `DrawingCanvasWidget` testability.
+
 ## [1.6.0] - 2026-01-03
 ### Added
 - **Performance Monitoring**: Integrated `PerformanceObserver` for Riverpod state tracking.

@@ -12,6 +12,10 @@ import 'widgets/auth_section.dart';
 import '../../settings/presentation/widgets/theme_toggle_widget.dart';
 import '../../statistics/presentation/statistics_screen.dart';
 
+/// A screen that displays user account information and settings.
+///
+/// Shows profile header, badge showcase, auth status, theme options,
+/// statistics access, and general app settings like calendar configurations.
 class AccountScreen extends ConsumerWidget {
   const AccountScreen({super.key});
 

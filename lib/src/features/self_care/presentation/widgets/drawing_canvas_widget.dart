@@ -3,21 +3,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_drawing_board/flutter_drawing_board.dart';
 import 'package:path_provider/path_provider.dart';
 
+/// A widget that provides a drawing canvas for users to express creativity.
+///
+/// Features include a basic drawing board with painting tools.
+/// Can be injected with a [DrawingController] for testing purposes.
 class DrawingCanvasWidget extends StatefulWidget {
   final Function(String imagePath) onSave;
+  final DrawingController? controller;
 
-  const DrawingCanvasWidget({super.key, required this.onSave});
+  const DrawingCanvasWidget({super.key, required this.onSave, this.controller});
 
   @override
   State<DrawingCanvasWidget> createState() => _DrawingCanvasWidgetState();
 }
 
 class _DrawingCanvasWidgetState extends State<DrawingCanvasWidget> {
-  final DrawingController _drawingController = DrawingController();
+  late final DrawingController _drawingController;
+
+  @override
+  void initState() {
+    super.initState();
+    _drawingController = widget.controller ?? DrawingController();
+  }
 
   @override
   void dispose() {
-    _drawingController.dispose();
+    // Only dispose if we created it
+    if (widget.controller == null) {
+      _drawingController.dispose();
+    }
     super.dispose();
   }
 

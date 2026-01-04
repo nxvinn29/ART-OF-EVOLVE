@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../../self_care/presentation/self_care_screen.dart';
 
-/// A dashboard widget that provides quick access to self-care activities.
+/// A dashboard widget that displays a grid of self-care activity cards.
 ///
-/// It displays a grid of items such as meditation, gratitude journaling,
-/// and focus tools, encouraging the user to take a break and care for themselves.
+/// Activities include fun tasks, digital detox requests, gratitude journaling,
+/// music listening, meditation, and nature appreciation.
+/// Tapping an item navigates to the specific [SelfCareScreen] tab or shows a SnackBar.
 class SelfCareWidget extends StatelessWidget {
   const SelfCareWidget({super.key});
 

@@ -7,9 +7,10 @@ import '../../../../core/theme/app_theme.dart';
 /// Current logic resets on app restart. Ideally should persist daily.
 final waterIntakeProvider = StateProvider<int>((ref) => 0);
 
-/// A widget to track and manage daily water consumption.
+/// A widget for tracking daily water intake.
 ///
-/// Displays current intake vs target (8 glasses) and buttons to increment/decrement.
+/// Visualizes the current intake against a target of 8 glasses.
+/// Allows incrementing and decrementing the count via [waterIntakeProvider].
 class WaterTrackerWidget extends ConsumerWidget {
   const WaterTrackerWidget({super.key});
 
