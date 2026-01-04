@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../services/quote_service.dart';
-import 'goals_controller.dart';
+import '../presentation/goals_controller.dart';
 
+/// Screen for displaying and managing user [Goal]s.
+///
+/// This screen lists all current goals, allows users to add new goals
+/// via a floating action button, and provides navigation to goal details.
+/// It uses [goalsProvider] to fetch data and handles loading/error states.
 class GoalsScreen extends ConsumerWidget {
   const GoalsScreen({super.key});
 

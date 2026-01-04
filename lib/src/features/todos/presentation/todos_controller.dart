@@ -29,6 +29,14 @@ final deletedTodosProvider = Provider<AsyncValue<List<Todo>>>((ref) {
 /// Controller for managing [Todo] items.
 ///
 /// This controller handles basic CRUD operations as well as soft-deletion and restoration.
+/// Capabilities include:
+/// - Loading todos with sorting (uncompleted first).
+/// - Adding new todos.
+/// - Toggling completion status.
+/// - Soft deleting (move to trash).
+/// - Restoring from trash.
+/// - Permanent deletion.
+///
 /// It uses [ITodosRepository] for persistence.
 class TodosController extends StateNotifier<AsyncValue<List<Todo>>> {
   final ITodosRepository _repository;

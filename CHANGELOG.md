@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.6.0+3] - 2026-01-04
+### Added
+- **Unit Tests**: Added `TodosController` tests.
+- **Widget Tests**: Enhanced `GoalsScreen` tests with interaction scenarios.
+- **Documentation**: Added KDoc for `GoalsScreen` and `TodosController`.
+
 ## [1.6.0+2] - 2026-01-04
 
 ### Added
