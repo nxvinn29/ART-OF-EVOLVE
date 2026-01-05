@@ -3,6 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'habits_controller.dart';
 import '../../../core/presentation/animated_checkbox.dart';
 
+/// A widget that displays a list of habits.
+///
+/// It supports both a vertical list view and a horizontal list view (e.g. for dashboard).
+/// Users can toggle habit completion and see their streak.
 class HabitsList extends ConsumerWidget {
   final bool isEmbedded;
   final bool isHorizontal;
@@ -214,6 +218,9 @@ class HabitsList extends ConsumerWidget {
     );
   }
 
+  /// Shows a dialog to add a new habit.
+  ///
+  /// Allows entering a habit name and optionally picking a reminder time.
   void _showAddHabitDialog(BuildContext context, WidgetRef ref) {
     final titleController = TextEditingController();
     TimeOfDay? selectedTime;
