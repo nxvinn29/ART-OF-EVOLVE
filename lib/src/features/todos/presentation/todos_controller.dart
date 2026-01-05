@@ -38,6 +38,15 @@ final deletedTodosProvider = Provider<AsyncValue<List<Todo>>>((ref) {
 /// - Permanent deletion.
 ///
 /// It uses [ITodosRepository] for persistence.
+/// Controller for managing [Todo] items.
+///
+/// Operations:
+/// - `loadTodos`: Fetches and sorts todos.
+/// - `addTodo`: Creates a new todo.
+/// - `toggleTodo`: Switches completion status.
+/// - `deleteTodo`: Soft deletes a todo (moves to trash).
+/// - `restoreTodo`: Restores from trash.
+/// - `deletePermanently`: Removing from storage.
 class TodosController extends StateNotifier<AsyncValue<List<Todo>>> {
   final ITodosRepository _repository;
 
