@@ -59,7 +59,7 @@ void main() {
       await tester.pumpWidget(createWidgetUnderTest());
 
       // Tap 9 times
-      for (int i = 0; i < 9; i++) {
+      for (var i = 0; i < 9; i++) {
         await tester.tap(find.byIcon(Icons.add));
       }
       await tester.pump();

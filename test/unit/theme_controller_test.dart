@@ -25,14 +25,14 @@ void main() {
     test('initial state loads from box', () async {
       // Allow async init to complete
       await Future.delayed(Duration.zero);
-      expect(themeNotifier.debugState, ThemeMode.light);
+      expect(themeNotifier.state, ThemeMode.light);
       verify(mockBox.get('theme_mode', defaultValue: 'system')).called(1);
     });
 
     test('setThemeMode updates state and saves to box', () async {
       await themeNotifier.setThemeMode(ThemeMode.dark);
 
-      expect(themeNotifier.debugState, ThemeMode.dark);
+      expect(themeNotifier.state, ThemeMode.dark);
       verify(mockBox.put('theme_mode', 'dark')).called(1);
     });
 
@@ -40,14 +40,14 @@ void main() {
       await themeNotifier.setThemeMode(ThemeMode.light);
       await themeNotifier.toggleTheme();
 
-      expect(themeNotifier.debugState, ThemeMode.dark);
+      expect(themeNotifier.state, ThemeMode.dark);
     });
 
     test('toggleTheme switches from dark to light', () async {
       await themeNotifier.setThemeMode(ThemeMode.dark);
       await themeNotifier.toggleTheme();
 
-      expect(themeNotifier.debugState, ThemeMode.light);
+      expect(themeNotifier.state, ThemeMode.light);
     });
 
     test('handles error during load gracefully', () async {
@@ -59,7 +59,7 @@ void main() {
       final notifier = ThemeModeNotifier(box: errorBox);
       await Future.delayed(Duration.zero);
 
-      expect(notifier.debugState, ThemeMode.system);
+      expect(notifier.state, ThemeMode.system);
     });
 
     test('handles error during save gracefully', () async {
@@ -69,7 +69,7 @@ void main() {
 
       // State should update even if save fails, or depend on implementation
       // Current impl updates state first then saves
-      expect(themeNotifier.debugState, ThemeMode.dark);
+      expect(themeNotifier.state, ThemeMode.dark);
     });
   });
 }

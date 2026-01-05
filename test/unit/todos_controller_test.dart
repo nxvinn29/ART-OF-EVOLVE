@@ -57,8 +57,8 @@ void main() {
       // Trigger load
       await controller.loadTodos();
 
-      expect(controller.debugState, isA<AsyncData>());
-      expect(controller.debugState.value, [todo]);
+      expect(controller.state, isA<AsyncData>());
+      expect(controller.state.value, [todo]);
     });
 
     test('addTodo saves to repository and reloads', () async {
@@ -73,7 +73,7 @@ void main() {
 
       verify(mockRepository.saveTodo(argThat(isA<Todo>()))).called(1);
       verify(mockRepository.getTodos()).called(2); // Init + Reload
-      expect(controller.debugState.value!.first.title, 'New Todo');
+      expect(controller.state.value!.first.title, 'New Todo');
     });
 
     test('toggleTodo updates completion status', () async {

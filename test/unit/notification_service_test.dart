@@ -5,7 +5,6 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:art_of_evolve/src/services/notifications/notification_service.dart';
 import 'package:timezone/data/latest.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
 
 // Generate mocks for the plugin
 @GenerateNiceMocks([MockSpec<FlutterLocalNotificationsPlugin>()])

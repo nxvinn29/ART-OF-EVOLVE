@@ -19,7 +19,7 @@ void main() {
 
   group('AuthController', () {
     test('initial state is AsyncData(null)', () {
-      expect(authController.debugState, const AsyncData<void>(null));
+      expect(authController.state, const AsyncData<void>(null));
     });
 
     group('signIn', () {
@@ -42,7 +42,7 @@ void main() {
             password: 'password',
           ),
         ).called(1);
-        expect(authController.debugState, const AsyncData<void>(null));
+        expect(authController.state, const AsyncData<void>(null));
       });
 
       test('sets state to AsyncError on failure', () async {
@@ -59,7 +59,7 @@ void main() {
         await authController.signIn('test@example.com', 'password');
 
         // Assert
-        expect(authController.debugState, isA<AsyncError>());
+        expect(authController.state, isA<AsyncError>());
       });
     });
 
@@ -83,7 +83,7 @@ void main() {
             password: 'password',
           ),
         ).called(1);
-        expect(authController.debugState, const AsyncData<void>(null));
+        expect(authController.state, const AsyncData<void>(null));
       });
 
       test('sets state to AsyncError on failure', () async {
@@ -100,7 +100,7 @@ void main() {
         await authController.signUp('new@example.com', 'password');
 
         // Assert
-        expect(authController.debugState, isA<AsyncError>());
+        expect(authController.state, isA<AsyncError>());
       });
     });
 
@@ -111,7 +111,7 @@ void main() {
 
         // Assert
         verify(mockAuth.signOut()).called(1);
-        expect(authController.debugState, const AsyncData<void>(null));
+        expect(authController.state, const AsyncData<void>(null));
       });
     });
 

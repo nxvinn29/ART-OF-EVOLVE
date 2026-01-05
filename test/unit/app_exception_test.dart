@@ -12,7 +12,7 @@ void main() {
     });
 
     test('DatabaseException handles details', () {
-      final exception = DatabaseException(
+      const exception = DatabaseException(
         'Read error',
         details: {'table': 'users'},
       );
