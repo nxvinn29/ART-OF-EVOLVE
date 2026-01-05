@@ -20,6 +20,15 @@ final habitsProvider =
 /// This controller handles creating, updating (completion status), and deleting habits.
 /// It also integrates with [NotificationService] for reminders and
 /// [GamificationController] to award XP and unlock badges.
+/// Controller for managing habits.
+///
+/// This controller handles:
+/// - Loading habits from [IHabitsRepository].
+/// - Creating new habits with optional reminders.
+/// - Toggling completion status for a given date.
+/// - Deleting habits.
+/// - Integrating with [NotificationService] for reminders.
+/// - Integrating with [GamificationController] for XP awards.
 class HabitsController extends StateNotifier<AsyncValue<List<Habit>>> {
   final IHabitsRepository _repository;
   final INotificationService _notificationService;
