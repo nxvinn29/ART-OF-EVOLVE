@@ -3,6 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../todos/presentation/todos_controller.dart';
 
+/// A screen that displays soft-deleted todos.
+///
+/// Allows the user to restore deleted todos or permanently delete them.
+/// Uses [deletedTodosProvider] to fetch the data.
 class TrashScreen extends ConsumerWidget {
   const TrashScreen({super.key});
 
