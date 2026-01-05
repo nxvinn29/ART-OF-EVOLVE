@@ -7,6 +7,14 @@ import '../../habits/presentation/habits_controller.dart';
 import '../../habits/domain/habit.dart';
 
 /// Statistics and insights screen showing user progress and analytics
+/// Statistics and insights screen showing user progress and analytics.
+///
+/// Displays:
+/// - XP and Level overview with progress bar.
+/// - Habits completion summary (Total, Today, Rate).
+/// - Unlocked achievements/badges.
+/// - Weekly progress chart (simulated).
+/// - Streak statistics (Longest, Active).
 class StatisticsScreen extends ConsumerWidget {
   const StatisticsScreen({super.key});
 
