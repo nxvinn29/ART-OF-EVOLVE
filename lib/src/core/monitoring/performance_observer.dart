@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 /// - State updates
 /// - Errors in providers
 class PerformanceObserver extends ProviderObserver {
+  /// Called when a provider is initialized.
   @override
   void didAddProvider(
     ProviderBase<Object?> provider,
@@ -19,6 +20,7 @@ class PerformanceObserver extends ProviderObserver {
     }
   }
 
+  /// Called when a provider's value changes.
   @override
   void didUpdateProvider(
     ProviderBase<Object?> provider,
@@ -33,6 +35,7 @@ class PerformanceObserver extends ProviderObserver {
     }
   }
 
+  /// Called when a provider is disposed.
   @override
   void didDisposeProvider(
     ProviderBase<Object?> provider,
