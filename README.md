@@ -94,7 +94,7 @@ flutter test test/unit/
 ```
 
 Our unit tests cover:
-- **Controllers**: GoalsController, JournalController, SettingsController, AuthController
+- **Controllers**: GoalsController, JournalController, SettingsController, AuthController, GamificationController, OnboardingController
 - **Models**: Goal, JournalEntry, Habit, Achievement, UserSettings
 - **Utilities**: StreakCalculator, DateTimeHelpers, Validators
 - **Services**: GamificationService, NotificationService
