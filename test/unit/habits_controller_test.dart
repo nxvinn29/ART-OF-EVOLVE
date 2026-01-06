@@ -59,7 +59,7 @@ void main() {
         when(mockRepository.saveHabit(any)).thenAnswer((_) async => {});
         when(mockRepository.getHabits()).thenAnswer((_) async => []);
 
-        final time = const TimeOfDay(hour: 8, minute: 0);
+        const time = TimeOfDay(hour: 8, minute: 0);
         await controller.addHabit('New Habit', reminderTime: time);
 
         verify(mockRepository.saveHabit(any)).called(1);
