@@ -94,4 +94,9 @@ class Habit extends HiveObject {
     }
     return streak;
   }
+
+  @override
+  String toString() {
+    return 'Habit(id: $id, title: $title, isDaily: $isDaily, completedDates: ${completedDates.length})';
+  }
 }
