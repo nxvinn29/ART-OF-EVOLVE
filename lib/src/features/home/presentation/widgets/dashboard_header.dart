@@ -9,7 +9,10 @@ import '../../../gamification/presentation/widgets/level_progress_bar.dart';
 ///
 /// Displays the user's greeting, name, profile shortcut, gamification progress,
 /// and a daily intention or quote.
+///
+/// Integrates with [UserProvider] to fetch user details.
 class DashboardHeader extends ConsumerWidget {
+  /// Creates a [DashboardHeader].
   const DashboardHeader({super.key});
 
   @override
