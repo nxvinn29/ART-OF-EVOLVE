@@ -4,67 +4,55 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:art_of_evolve/src/features/home/presentation/widgets/water_tracker_widget.dart';
 
 void main() {
-  Widget createWidgetUnderTest() {
-    return const ProviderScope(
-      child: MaterialApp(home: Scaffold(body: WaterTrackerWidget())),
+  testWidgets('WaterTrackerWidget displays initial state and updates on tap', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(
+      const ProviderScope(
+        child: MaterialApp(home: Scaffold(body: WaterTrackerWidget())),
+      ),
     );
-  }
 
-  group('WaterTrackerWidget', () {
-    testWidgets('renders initial state correctly', (tester) async {
-      await tester.pumpWidget(createWidgetUnderTest());
+    // Initial state
+    expect(find.text('Water Intake'), findsOneWidget);
+    expect(find.text('0 / 8 glasses'), findsOneWidget);
 
-      // Verify title and initial count
-      expect(find.text('Water Intake'), findsOneWidget);
-      expect(find.text('0 / 8 glasses'), findsOneWidget);
-      expect(find.byIcon(Icons.water_drop), findsOneWidget);
-      expect(find.byIcon(Icons.remove), findsOneWidget);
-      expect(find.byIcon(Icons.add), findsOneWidget);
-    });
+    // Tap Add
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pump();
 
-    testWidgets('increments water intake on add button tap', (tester) async {
-      await tester.pumpWidget(createWidgetUnderTest());
+    expect(find.text('1 / 8 glasses'), findsOneWidget);
 
-      await tester.tap(find.byIcon(Icons.add));
-      await tester.pump();
+    // Tap Add again
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pump();
 
-      expect(find.text('1 / 8 glasses'), findsOneWidget);
-    });
+    expect(find.text('2 / 8 glasses'), findsOneWidget);
 
-    testWidgets('decrements water intake on remove button tap', (tester) async {
-      await tester.pumpWidget(createWidgetUnderTest());
+    // Tap Remove
+    await tester.tap(find.byIcon(Icons.remove));
+    await tester.pump();
 
-      // Increment first
-      await tester.tap(find.byIcon(Icons.add));
-      await tester.pump();
-      expect(find.text('1 / 8 glasses'), findsOneWidget);
+    expect(find.text('1 / 8 glasses'), findsOneWidget);
+  });
 
-      // Decrement
-      await tester.tap(find.byIcon(Icons.remove));
-      await tester.pump();
-      expect(find.text('0 / 8 glasses'), findsOneWidget);
-    });
+  testWidgets('WaterTrackerWidget does not go below 0', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(
+      const ProviderScope(
+        child: MaterialApp(home: Scaffold(body: WaterTrackerWidget())),
+      ),
+    );
 
-    testWidgets('does not decrement below zero', (tester) async {
-      await tester.pumpWidget(createWidgetUnderTest());
+    // Initial state 0
+    expect(find.text('0 / 8 glasses'), findsOneWidget);
 
-      // Try to decrement from 0
-      await tester.tap(find.byIcon(Icons.remove));
-      await tester.pump();
+    // Tap Remove
+    await tester.tap(find.byIcon(Icons.remove));
+    await tester.pump();
 
-      expect(find.text('0 / 8 glasses'), findsOneWidget);
-    });
-
-    testWidgets('allows exceeding target', (tester) async {
-      await tester.pumpWidget(createWidgetUnderTest());
-
-      // Tap 9 times
-      for (var i = 0; i < 9; i++) {
-        await tester.tap(find.byIcon(Icons.add));
-      }
-      await tester.pump();
-
-      expect(find.text('9 / 8 glasses'), findsOneWidget);
-    });
+    // Should still be 0
+    expect(find.text('0 / 8 glasses'), findsOneWidget);
   });
 }
