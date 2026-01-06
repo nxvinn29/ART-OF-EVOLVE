@@ -68,4 +68,9 @@ class Goal extends HiveObject {
       createdAt: createdAt,
     );
   }
+
+  @override
+  String toString() {
+    return 'Goal(id: $id, title: $title, targetDate: $targetDate, isAchieved: $isAchieved)';
+  }
 }
