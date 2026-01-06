@@ -3,6 +3,9 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
+/// Interface for notification services.
+///
+/// Defines contract for scheduling, canceling, and managing local notifications.
 abstract class INotificationService {
   Future<void> init();
   Future<void> requestPermissions();
@@ -83,6 +86,7 @@ class NotificationService implements INotificationService {
         ?.requestPermissions(alert: true, badge: true, sound: true);
   }
 
+  /// Schedules a reminder at a specific [scheduledDate].
   @override
   Future<void> scheduleReminder({
     required int id,
@@ -111,6 +115,7 @@ class NotificationService implements INotificationService {
     );
   }
 
+  /// Schedules a daily notification at a specific [time].
   @override
   Future<void> scheduleDailyNotification({
     required int id,
