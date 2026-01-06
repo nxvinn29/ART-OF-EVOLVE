@@ -10,6 +10,11 @@ import '../../todos/presentation/todos_controller.dart';
 class TrashScreen extends ConsumerWidget {
   const TrashScreen({super.key});
 
+  /// Builds the UI for the trash screen.
+  ///
+  /// Displays a list of deleted todos.
+  /// If the list is empty, shows a placeholder.
+  /// Each list item has options to restore or permanently delete the todo.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // We need a way to get *deleted* todos.
