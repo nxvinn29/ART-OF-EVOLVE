@@ -17,7 +17,6 @@ final journalControllerProvider =
 ///
 /// This controller handles loading, creating, and deleting journal entries via the [IJournalRepository].
 /// It also handles scheduling and canceling notifications for journal reminders.
-/// Controller for managing journal entries.
 ///
 /// Responsibilities:
 /// - CRUD operations for [JournalEntry].
@@ -46,6 +45,16 @@ class JournalController extends StateNotifier<AsyncValue<List<JournalEntry>>> {
   }
 
   /// Adds a new journal entry with the given details.
+  ///
+  /// - [title]: The title of the entry.
+  /// - [content]: The main content of the entry.
+  /// - [mood]: The mood associated with the entry.
+  /// - [tags]: Optional list of tags.
+  /// - [prompt]: Optional prompt that inspired the entry.
+  /// - [contentBlocks]: structured content blocks.
+  /// - [hasDrawing]: whether the entry has a drawing.
+  /// - [hasAudio]: whether the entry has an audio recording.
+  /// - [reminderTime]: Optional time to schedule a reminder.
   ///
   /// If [reminderTime] is provided, a notification is scheduled.
   /// Triggers a reload of entries after saving.
