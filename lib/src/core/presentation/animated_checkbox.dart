@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 
+/// A custom checkbox widget with animation.
+///
+/// Animates the scale and opacity of the check icon when the value changes.
+/// Supports custom [activeColor] and [checkColor].
 class AnimatedCheckbox extends StatefulWidget {
   final bool value;
   final ValueChanged<bool> onChanged;
   final Color activeColor;
   final Color checkColor;
 
+  /// Creates an [AnimatedCheckbox].
+  ///
+  /// - [value]: The current checked state.
+  /// - [onChanged]: Callback when the checkbox is tapped.
+  /// - [activeColor]: Color of the checkbox when checked.
+  /// - [checkColor]: Color of the check icon.
   const AnimatedCheckbox({
     super.key,
     required this.value,
@@ -18,7 +28,8 @@ class AnimatedCheckbox extends StatefulWidget {
   State<AnimatedCheckbox> createState() => _AnimatedCheckboxState();
 }
 
-class _AnimatedCheckboxState extends State<AnimatedCheckbox> with SingleTickerProviderStateMixin {
+class _AnimatedCheckboxState extends State<AnimatedCheckbox>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
   late Animation<double> _opacityAnimation;
@@ -30,12 +41,14 @@ class _AnimatedCheckboxState extends State<AnimatedCheckbox> with SingleTickerPr
       vsync: this,
       duration: const Duration(milliseconds: 300),
     );
-    _scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOutBack),
-    );
-    _opacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeIn),
-    );
+    _scaleAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutBack));
+    _opacityAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeIn));
 
     if (widget.value) {
       _controller.value = 1.0;
@@ -79,11 +92,7 @@ class _AnimatedCheckboxState extends State<AnimatedCheckbox> with SingleTickerPr
           scale: _scaleAnimation,
           child: FadeTransition(
             opacity: _opacityAnimation,
-            child: Icon(
-              Icons.check,
-              size: 20,
-              color: widget.checkColor,
-            ),
+            child: Icon(Icons.check, size: 20, color: widget.checkColor),
           ),
         ),
       ),
