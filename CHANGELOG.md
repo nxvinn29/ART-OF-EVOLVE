@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.6.0+4] - 2026-01-06
+### Added
+- **Unit Tests**: Added `GamificationController` and `OnboardingController` tests.
+- **Widget Tests**: Added `SelfCareWidget`, `WaterTrackerWidget`, `MiniTodoListWidget`, `ProfileHeader` tests.
+- **Utilities**: Enhanced `ValidationUtils` with password strength and sanitization.
+
+### Enhanced
+- **Documentation**: Added KDoc for `JournalController`, `TrashScreen`, `NotificationService`, `DashboardHeader`.
+- **Models**: Added `toString()` overrides for `Goal` and `Habit` for better debugging.
+
 ## [1.6.0+3] - 2026-01-04
 ### Added
 - **Unit Tests**: Added `TodosController` tests.
