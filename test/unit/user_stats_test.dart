@@ -221,5 +221,19 @@ void main() {
       expect(stats.currentStreak, 5);
       expect(stats.unlockedBadgeIds, contains('first_step'));
     });
+
+    test('should handle large integer values', () {
+      final stats = UserStats(
+        currentXp: 999999999,
+        level: 999,
+        totalHabitsCompleted: 1000000,
+        currentStreak: 5000,
+      );
+
+      expect(stats.currentXp, 999999999);
+      expect(stats.level, 999);
+      expect(stats.totalHabitsCompleted, 1000000);
+      expect(stats.currentStreak, 5000);
+    });
   });
 }
