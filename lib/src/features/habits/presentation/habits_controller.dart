@@ -34,6 +34,12 @@ class HabitsController extends StateNotifier<AsyncValue<List<Habit>>> {
   final INotificationService _notificationService;
   final Ref _ref;
 
+  /// Creates a [HabitsController].
+  ///
+  /// Requires:
+  /// - [_repository]: Data source for habits.
+  /// - [_notificationService]: Service for scheduling reminders.
+  /// - [_ref]: Riverpod ref for interacting with other providers (e.g., Gamification).
   HabitsController(this._repository, this._notificationService, this._ref)
     : super(const AsyncLoading()) {
     loadHabits();
