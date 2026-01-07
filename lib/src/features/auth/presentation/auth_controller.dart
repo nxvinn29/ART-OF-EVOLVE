@@ -23,6 +23,11 @@ class AuthController extends StateNotifier<AsyncValue<void>> {
 
   AuthController(this._auth) : super(const AsyncData(null));
 
+  /// Signs in a user with [email] and [password].
+  ///
+  /// Updates state to [AsyncLoading] during the process.
+  /// On success, sets state to [AsyncData(null)].
+  /// On failure, sets state to [AsyncError].
   Future<void> signIn(String email, String password) async {
     state = const AsyncLoading();
     try {
@@ -33,6 +38,11 @@ class AuthController extends StateNotifier<AsyncValue<void>> {
     }
   }
 
+  /// Registers a new user with [email] and [password].
+  ///
+  /// Updates state to [AsyncLoading] during the process.
+  /// On success, sets state to [AsyncData(null)] and the user is automatically signed in.
+  /// On failure, sets state to [AsyncError].
   Future<void> signUp(String email, String password) async {
     state = const AsyncLoading();
     try {
@@ -46,11 +56,15 @@ class AuthController extends StateNotifier<AsyncValue<void>> {
     }
   }
 
+  /// Signs the current user out.
+  ///
+  /// Wraps the signOut operation in [AsyncValue.guard] to handle potential errors.
   Future<void> signOut() async {
     state = const AsyncLoading();
     state = await AsyncValue.guard(() => _auth.signOut());
   }
 
+  /// Sends a password reset email to the provided [email] address.
   Future<void> sendPasswordResetEmail(String email) async {
     await _auth.sendPasswordResetEmail(email: email);
   }
