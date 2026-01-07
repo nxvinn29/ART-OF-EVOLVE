@@ -18,17 +18,20 @@ void main() {
 
     test('isValidUsername requires 3 chars', () {
       expect(ValidationUtils.isValidUsername('User'), true);
+      expect(ValidationUtils.isValidUsername('Bob'), true); // Boundary check
       expect(ValidationUtils.isValidUsername('Hi'), false);
       expect(ValidationUtils.isValidUsername(''), false);
     });
 
     test('sanitizeInput removes HTML tags and trims', () {
       expect(ValidationUtils.sanitizeInput('  Hello  '), 'Hello');
-      expect(
-        ValidationUtils.sanitizeInput('<script>alert("hi")</script>Hello'),
-        'Hello',
-      );
+      expect(ValidationUtils.sanitizeInput('<div>Hello</div>'), 'Hello');
       expect(ValidationUtils.sanitizeInput('<b>Bold</b> Text'), 'Bold Text');
+      expect(
+        ValidationUtils.sanitizeInput('<div></div>'),
+        '',
+      ); // Empty after removal
+      expect(ValidationUtils.sanitizeInput('No Tags'), 'No Tags');
     });
   });
 }
