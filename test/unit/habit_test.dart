@@ -16,7 +16,7 @@ void main() {
 
       expect(habit.title, 'Morning Exercise');
       expect(habit.description, 'Exercise for 30 minutes');
-      expect(habit.color, Colors.blue);
+      expect(habit.color, Colors.blue.value);
       expect(habit.iconCodePoint, Icons.fitness_center.codePoint);
       expect(habit.id, isNotNull);
       expect(habit.id, isNotEmpty);
@@ -218,6 +218,18 @@ void main() {
       // This test assumes we're checking from Dec 2, 2025
       // The streak should be 4 consecutive days
       expect(habit.completedDates.length, 4);
+    });
+
+    test('toString should return correct format', () {
+      final habit = Habit(
+        title: 'Test Habit',
+        color: Colors.black.value,
+        iconCodePoint: Icons.abc.codePoint,
+      );
+      expect(
+        habit.toString(),
+        contains('Habit(id: ${habit.id}, title: Test Habit, isDaily: true'),
+      );
     });
   });
 }
