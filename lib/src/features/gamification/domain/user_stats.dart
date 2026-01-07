@@ -4,6 +4,7 @@ part 'user_stats.g.dart';
 
 @HiveType(typeId: 6)
 /// Represents the user's progress and gamification stats.
+@HiveType(typeId: 6)
 class UserStats extends HiveObject {
   @HiveField(0)
   /// Current accumulated experience points.
@@ -25,6 +26,14 @@ class UserStats extends HiveObject {
   /// List of IDs of unlocked badges.
   final List<String> unlockedBadgeIds;
 
+  /// Creates a [UserStats] instance.
+  ///
+  /// Defaults to:
+  /// - [currentXp]: 0
+  /// - [level]: 1
+  /// - [totalHabitsCompleted]: 0
+  /// - [currentStreak]: 0
+  /// - [unlockedBadgeIds]: Empty list
   UserStats({
     this.currentXp = 0,
     this.level = 1,
@@ -33,6 +42,7 @@ class UserStats extends HiveObject {
     this.unlockedBadgeIds = const [],
   });
 
+  /// Creates a copy of this [UserStats] with the given fields replaced with the new values.
   UserStats copyWith({
     int? currentXp,
     int? level,
