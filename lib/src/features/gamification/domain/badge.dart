@@ -35,6 +35,8 @@ class Badge {
       assetPath: 'assets/images/badges/first_step.png',
       xpReward: 50,
     ),
+
+    /// Awarded for reaching a 3-day streak.
     Badge(
       id: 'streak_3',
       name: 'On Fire',
@@ -42,6 +44,8 @@ class Badge {
       assetPath: 'assets/images/badges/fire.png',
       xpReward: 100,
     ),
+
+    /// Awarded for reaching a 7-day streak.
     Badge(
       id: 'streak_7',
       name: 'Unstoppable',
@@ -49,6 +53,8 @@ class Badge {
       assetPath: 'assets/images/badges/star.png',
       xpReward: 250,
     ),
+
+    /// Awarded for completing a habit before 8 AM.
     Badge(
       id: 'early_bird',
       name: 'Early Bird',
