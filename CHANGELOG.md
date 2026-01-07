@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.6.0+5] - 2026-01-07
+### Added
+- **Widget Tests**: Added `AnimatedCheckbox` tests.
+- **Unit Tests**: Enhanced coverage for `ValidationUtils`, `Habit`, `Badge`, and `UserStats`.
+
+### Enhanced
+- **Documentation**: Comprehensive KDoc added to:
+  - `ValidationUtils`
+  - `HabitsController`
+  - `PushNotificationService`
+  - `Habit`, `Badge`, `UserStats` models
+  - `AnimatedCheckbox`
+  - `AuthController`
+
 ## [1.6.0+4] - 2026-01-06
 ### Added
 - **Unit Tests**: Added `GamificationController` and `OnboardingController` tests.
