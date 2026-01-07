@@ -76,6 +76,8 @@ class Habit extends HiveObject {
   /// Calculates the current streak of consecutive days the habit has been completed.
   ///
   /// The streak counts backwards from today (or yesterday if not completed today).
+  ///
+  /// Returns 0 if the habit was not completed today or yesterday.
   int get currentStreak {
     var streak = 0;
     var date = DateTime.now();
