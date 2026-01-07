@@ -157,5 +157,17 @@ void main() {
       expect(timeBadges.length, 1);
       expect(timeBadges.first.id, 'early_bird');
     });
+
+    test('should have badges with high XP rewards', () {
+      final highXpBadges = Badge.allBadges.where((b) => b.xpReward >= 200);
+      expect(highXpBadges, isNotEmpty);
+      expect(highXpBadges.first.name, 'Unstoppable');
+    });
+
+    test('should not have duplicate names', () {
+      final names = Badge.allBadges.map((b) => b.name).toList();
+      final uniqueNames = names.toSet();
+      expect(names.length, uniqueNames.length);
+    });
   });
 }
