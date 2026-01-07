@@ -10,9 +10,22 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   }
 }
 
+/// Service for handling Push Notifications using Firebase Messaging.
+///
+/// Handles:
+/// - Requesting permissions.
+/// - Background message handling.
+/// - Foreground message listening.
+/// - Token retrieval.
 class PushNotificationService {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
+  /// Initializes the service.
+  ///
+  /// Requests notification permissions (alert, badge, sound).
+  /// Sets up background and foreground message listeners.
+  ///
+  /// Logs permission status and messages in debug mode.
   Future<void> init() async {
     // Request permission for iOS
     final settings = await _firebaseMessaging.requestPermission(
@@ -57,6 +70,10 @@ class PushNotificationService {
     });
   }
 
+  /// Retrieves the Firebase Cloud Messaging (FCM) token for this device.
+  ///
+  /// Takes no arguments.
+  /// Returns a [Future] that resolves to the token string, or null if retrieval fails.
   Future<String?> getToken() async {
     return await _firebaseMessaging.getToken();
   }
