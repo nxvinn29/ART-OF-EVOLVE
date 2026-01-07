@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 ///
 /// Animates the scale and opacity of the check icon when the value changes.
 /// Supports custom [activeColor] and [checkColor].
+///
+/// Typically used in list tiles for habits or tasks.
 class AnimatedCheckbox extends StatefulWidget {
   final bool value;
   final ValueChanged<bool> onChanged;
