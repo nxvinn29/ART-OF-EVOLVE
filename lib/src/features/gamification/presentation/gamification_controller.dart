@@ -10,8 +10,8 @@ final gamificationControllerProvider =
 
 /// Controller for managing gamification logic, such as XP, levels, and badges.
 ///
-/// This controller persists user statistics using [HiveService] and handles
-/// logic for leveling up and unlocking badges based on user activity.
+/// This controller persists user statistics using [HiveService.userStatsBox] and handles
+/// logic for leveling up (every 100 * level XP) and unlocking badges based on user activity.
 class GamificationController extends StateNotifier<UserStats> {
   GamificationController() : super(UserStats()) {
     _loadStats();
