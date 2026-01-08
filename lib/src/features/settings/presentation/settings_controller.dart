@@ -32,6 +32,7 @@ class SettingsController extends StateNotifier<UserSettings> {
     state = settings;
   }
 
+  /// Toggles the 24-hour time format setting.
   Future<void> toggle24HourTime() async {
     final newSettings = state.copyWith(is24HourTime: !state.is24HourTime);
     await _saveSettings(newSettings);
