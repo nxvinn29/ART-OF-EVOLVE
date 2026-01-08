@@ -19,6 +19,13 @@ import 'src/services/storage/hive_service.dart';
 
 import 'src/core/monitoring/performance_observer.dart';
 
+/// The entry point of the application.
+///
+/// Initializes:
+/// - Flutter bindings.
+/// - Firebase.
+/// - Hive (local storage).
+/// - Notification services.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
