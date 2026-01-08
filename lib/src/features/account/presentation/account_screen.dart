@@ -14,10 +14,6 @@ import '../../statistics/presentation/statistics_screen.dart';
 
 /// A screen that displays user account information and settings.
 ///
-/// Shows profile header, badge showcase, auth status, theme options,
-/// statistics access, and general app settings like calendar configurations.
-/// A screen that displays user account information and settings.
-///
 /// Features:
 /// - Profile header with user name.
 /// - Badge showcase widget.
