@@ -33,6 +33,14 @@ class StatisticsScreen extends ConsumerWidget {
     );
   }
 
+  /// Builds the main content of the statistics screen.
+  ///
+  /// Combines [userStats] and [habits] to display various cards:
+  /// - XP Overview
+  /// - Habits Summary
+  /// - Achievements
+  /// - Weekly Progress
+  /// - Streaks
   Widget _buildContent(
     BuildContext context,
     UserStats userStats,
