@@ -213,6 +213,10 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     );
   }
 
+  /// Completes the onboarding process.
+  ///
+  /// This method validates the input and then calls the [OnboardingController]
+  /// to save the user's profile data.
   void _completeOnboarding() {
     if (_nameController.text.isEmpty) {
       // Should rely on validation before getting here, but safe fallback
