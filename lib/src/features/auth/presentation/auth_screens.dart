@@ -31,6 +31,10 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     super.dispose();
   }
 
+  /// Validates the form and initiates the sign-in process.
+  ///
+  /// If the form is valid, it calls [AuthController.signIn] with the
+  /// provided email and password.
   Future<void> _submit() async {
     if (_formKey.currentState!.validate()) {
       await ref
