@@ -5,8 +5,14 @@ import '../../../core/presentation/animated_checkbox.dart';
 
 /// A widget that displays a list of habits.
 ///
-/// It supports both a vertical list view and a horizontal list view (e.g. for dashboard).
-/// Users can toggle habit completion and see their streak.
+/// It supports both a vertical list view for the main screen and a horizontal
+/// list view for the dashboard.
+///
+/// Features:
+/// - Toggling habit completion.
+/// - Displaying current streak.
+/// - Adaptive layout based on [isHorizontal].
+/// - Embedding support via [isEmbedded].
 class HabitsList extends ConsumerWidget {
   final bool isEmbedded;
   final bool isHorizontal;
