@@ -141,6 +141,9 @@ class GoalsScreen extends ConsumerWidget {
     );
   }
 
+  /// Displays a dialog for adding a new goal.
+  ///
+  /// The dialog allows users to input a goal title and select a target achievement date.
   void _showAddGoalDialog(BuildContext context, WidgetRef ref) {
     final titleController = TextEditingController();
     var selectedDate = DateTime.now().add(const Duration(days: 30));
