@@ -14,6 +14,15 @@ import 'widgets/self_care_widget.dart'; // Added SelfCareWidget import
 class DashboardView extends StatelessWidget {
   const DashboardView({super.key});
 
+  /// Builds the dashboard view.
+  ///
+  /// Includes a gradient background and a scrollable column of widgets:
+  /// - [DashboardHeader] in a [SafeArea].
+  /// - [MoodTrackerWidget] (overlapping).
+  /// - [WaterTrackerWidget].
+  /// - [MiniTodoListWidget].
+  /// - [SelfCareWidget].
+  /// - [HabitsList] horizontal scroll.
   @override
   Widget build(BuildContext context) {
     return Container(
