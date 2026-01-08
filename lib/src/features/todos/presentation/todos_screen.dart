@@ -7,7 +7,11 @@ import 'widgets/add_todo_dialog.dart';
 
 /// A screen for managing daily tasks and todo items.
 ///
-/// Allows users to create, check off, and delete tasks.
+/// Features:
+/// - List of tasks with checkbox to complete.
+/// - Swipe to delete functionality.
+/// - Filtering/Empty state handling.
+/// - Floating action button to add new tasks.
 class TodosScreen extends ConsumerWidget {
   const TodosScreen({super.key});
 
