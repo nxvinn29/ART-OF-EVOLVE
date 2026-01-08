@@ -4,6 +4,15 @@ import '../../todos/presentation/todos_screen.dart';
 import '../../goals/presentation/goals_screen.dart';
 import '../../self_care/presentation/self_care_screen.dart';
 
+/// The main screen of the application.
+///
+/// It uses a [NavigationBar] to switch between:
+/// - Dashboard (Home)
+/// - To-Dos
+/// - Goals
+/// - Self Care
+///
+/// This screen maintains the state of the selected tab.
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
