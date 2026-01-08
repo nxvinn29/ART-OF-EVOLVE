@@ -7,6 +7,16 @@ import 'widgets/drawing_canvas_widget.dart';
 import 'widgets/format_toolbar.dart';
 import 'widgets/voice_recorder_widget.dart';
 
+/// A rich text editor for creating journal entries.
+///
+/// Supports various content blocks:
+/// - Text (with multiple paragraphs)
+/// - Images
+/// - Drawings
+/// - Voice notes
+/// - Checklists
+///
+/// Users can assign moods and tags to their entries.
 class JournalEditorScreen extends ConsumerStatefulWidget {
   const JournalEditorScreen({super.key});
 
@@ -55,6 +65,10 @@ class _JournalEditorScreenState extends ConsumerState<JournalEditorScreen> {
     super.dispose();
   }
 
+  /// Adds a new content block to the editor.
+  ///
+  /// [type] can be 'text', 'image', 'drawing', 'voice', or 'checklist'.
+  /// [data] holds the initial content for that block.
   void _addBlock(String type, dynamic data) {
     setState(() {
       _blocks.add({'type': type, 'data': data});
