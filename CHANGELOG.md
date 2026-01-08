@@ -2,7 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.6.0+5] - 2026-01-07
+
+## [1.6.0+6] - 2026-01-08
+### Added
+- **Widget Tests**: Added `AuthSection`, `SelfCareScreen`, `FocusTimerScreen`, and `GamificationOverlay` tests.
+- **Utilities**: Added `StringExtensions` and corresponding unit tests.
+
+### Enhanced
+- **Documentation**: Comprehensive KDoc added to:
+  - `AccountScreen`, `AuthScreen`, `GamificationController`, `GoalsScreen`, `HabitsList`
+  - `HomeScreen`, `OnboardingScreen`, `JournalEditorScreen`, `SettingsController`
+  - `StatisticsScreen`, `TodosScreen`, `DashboardView`
 ### Added
 - **Widget Tests**: Added `AnimatedCheckbox` tests.
 - **Unit Tests**: Enhanced coverage for `ValidationUtils`, `Habit`, `Badge`, and `UserStats`.
