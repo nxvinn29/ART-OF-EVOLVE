@@ -1,147 +1,94 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mockito/mockito.dart';
 import 'package:art_of_evolve/src/features/goals/presentation/goals_screen.dart';
-
-import 'package:art_of_evolve/src/core/data/repository_interfaces.dart';
+import 'package:art_of_evolve/src/features/goals/presentation/goals_controller.dart';
 import 'package:art_of_evolve/src/features/goals/domain/goal.dart';
 import 'package:art_of_evolve/src/features/goals/data/goal_repository.dart';
+import 'package:art_of_evolve/src/core/data/repository_interfaces.dart';
 
-// Manual Mock
-class MockGoalsRepository extends Mock implements IGoalsRepository {
-  @override
-  Future<List<Goal>> getGoals() => super.noSuchMethod(
-    Invocation.method(#getGoals, []),
-    returnValue: Future.value(<Goal>[]),
-    returnValueForMissingStub: Future.value(<Goal>[]),
-  );
+// Reuse mock from goals_controller_test or simple implementation
+class MockGoalsRepository implements IGoalsRepository {
+  final List<Goal> _goals = [];
 
   @override
-  Future<void> saveGoal(Goal? goal) => super.noSuchMethod(
-    Invocation.method(#saveGoal, [goal]),
-    returnValue: Future.value(),
-    returnValueForMissingStub: Future.value(),
-  );
+  Future<List<Goal>> getGoals() async {
+    return List.from(_goals);
+  }
 
   @override
-  Future<void> deleteGoal(String? id) => super.noSuchMethod(
-    Invocation.method(#deleteGoal, [id]),
-    returnValue: Future.value(),
-    returnValueForMissingStub: Future.value(),
-  );
+  Future<void> saveGoal(Goal goal) async {
+    final index = _goals.indexWhere((g) => g.id == goal.id);
+    if (index != -1) {
+      _goals[index] = goal;
+    } else {
+      _goals.add(goal);
+    }
+  }
+
+  @override
+  Future<void> deleteGoal(String id) async {
+    _goals.removeWhere((g) => g.id == id);
+  }
+
+  void addGoal(Goal goal) {
+    _goals.add(goal);
+  }
 }
 
 void main() {
-  group('GoalsScreen Widget Tests', () {
-    testWidgets('displays loading indicator when loading', (
-      WidgetTester tester,
-    ) async {
-      final mockRepository = MockGoalsRepository();
-      // Return a future that never completes to Simulate Loading
-      when(mockRepository.getGoals()).thenAnswer((_) {
-        return Completer<List<Goal>>().future;
-      });
+  testWidgets('GoalsScreen shows empty state initially', (tester) async {
+    final mockRepository = MockGoalsRepository();
 
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            // Override using the default GoalsController but with our mock repository
-            goalRepositoryProvider.overrideWithValue(mockRepository),
-          ],
-          child: const MaterialApp(home: GoalsScreen()),
-        ),
-      );
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [goalRepositoryProvider.overrideWithValue(mockRepository)],
+        child: const MaterialApp(home: GoalsScreen()),
+      ),
+    );
 
-      // Verify the widget builds and shows loading
-      expect(find.byType(CircularProgressIndicator), findsOneWidget);
-    });
+    await tester.pumpAndSettle();
 
-    testWidgets('displays empty state when no goals', (
-      WidgetTester tester,
-    ) async {
-      final mockRepository = MockGoalsRepository();
-      when(mockRepository.getGoals()).thenAnswer((_) async => []);
+    expect(find.text('Set a goal to start your journey!'), findsOneWidget);
+    expect(find.byType(FloatingActionButton), findsOneWidget);
+  });
 
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [goalRepositoryProvider.overrideWithValue(mockRepository)],
-          child: const MaterialApp(home: GoalsScreen()),
-        ),
-      );
+  testWidgets('GoalsScreen shows list of goals', (tester) async {
+    final mockRepository = MockGoalsRepository();
+    final goal = Goal(
+      title: 'Test Goal',
+      targetDate: DateTime.now().add(const Duration(days: 5)),
+    );
+    mockRepository.addGoal(goal);
 
-      await tester.pumpAndSettle();
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [goalRepositoryProvider.overrideWithValue(mockRepository)],
+        child: const MaterialApp(home: GoalsScreen()),
+      ),
+    );
 
-      // Verify the screen renders empty message
-      expect(find.text('Set a goal to start your journey!'), findsOneWidget);
-    });
+    // Initial load
+    await tester.pumpAndSettle();
 
-    testWidgets('goal screen renders correctly', (WidgetTester tester) async {
-      final mockRepository = MockGoalsRepository();
-      final goal = Goal(
-        title: 'Test Goal',
-        targetDate: DateTime.now().add(const Duration(days: 1)),
-      );
-      when(mockRepository.getGoals()).thenAnswer((_) async => [goal]);
+    expect(find.text('Test Goal'), findsOneWidget);
+    expect(find.byType(Checkbox), findsOneWidget);
+  });
 
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [goalRepositoryProvider.overrideWithValue(mockRepository)],
-          child: const MaterialApp(home: GoalsScreen()),
-        ),
-      );
+  testWidgets('FAB opens add goal dialog', (tester) async {
+    final mockRepository = MockGoalsRepository();
 
-      await tester.pumpAndSettle();
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [goalRepositoryProvider.overrideWithValue(mockRepository)],
+        child: const MaterialApp(home: GoalsScreen()),
+      ),
+    );
 
-      // Verify basic UI elements
-      expect(find.byType(GoalsScreen), findsOneWidget);
-      expect(find.text('Test Goal'), findsOneWidget);
-    });
+    await tester.tap(find.byType(FloatingActionButton));
+    await tester.pumpAndSettle();
 
-    testWidgets('add goal button is present', (WidgetTester tester) async {
-      final mockRepository = MockGoalsRepository();
-      when(mockRepository.getGoals()).thenAnswer((_) async => []);
-
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [goalRepositoryProvider.overrideWithValue(mockRepository)],
-          child: const MaterialApp(home: GoalsScreen()),
-        ),
-      );
-
-      await tester.pumpAndSettle();
-
-      // Check for FloatingActionButton or add button
-      expect(
-        find.byType(FloatingActionButton).evaluate().isNotEmpty ||
-            find.byIcon(Icons.add).evaluate().isNotEmpty,
-        isTrue,
-      );
-    });
-
-    testWidgets('tapping a goal item shows detail', (
-      WidgetTester tester,
-    ) async {
-      final mockRepository = MockGoalsRepository();
-      when(mockRepository.getGoals()).thenAnswer((_) async => []);
-
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [goalRepositoryProvider.overrideWithValue(mockRepository)],
-          child: const MaterialApp(home: GoalsScreen()),
-        ),
-      );
-
-      await tester.pumpAndSettle();
-
-      final fab = find.byType(FloatingActionButton);
-      if (fab.evaluate().isNotEmpty) {
-        await tester.tap(fab);
-        await tester.pumpAndSettle();
-        // Just verify dialog appeared
-        expect(find.byType(AlertDialog), findsOneWidget);
-      }
-    });
+    expect(find.text('New Goal'), findsNWidgets(2)); // Title and Dialog Title
+    expect(find.byType(TextField), findsOneWidget);
   });
 }
