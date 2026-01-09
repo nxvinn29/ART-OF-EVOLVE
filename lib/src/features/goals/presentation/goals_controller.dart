@@ -17,6 +17,9 @@ final goalsProvider =
 class GoalsController extends StateNotifier<AsyncValue<List<Goal>>> {
   final IGoalsRepository _repository;
 
+  /// Creates a new instance of [GoalsController].
+  ///
+  /// [repository] The repository to use for data operations.
   GoalsController(this._repository) : super(const AsyncLoading()) {
     loadGoals();
   }
@@ -36,7 +39,11 @@ class GoalsController extends StateNotifier<AsyncValue<List<Goal>>> {
     }
   }
 
-  /// Adds a new goal with the given [title], [targetDate], and optional [description].
+  /// Adds a new goal.
+  ///
+  /// [title] The title of the goal.
+  /// [targetDate] The date by which the goal should be achieved.
+  /// [description] Optional description of the goal.
   ///
   /// After adding, reloads the goals list.
   Future<void> addGoal(
@@ -57,7 +64,9 @@ class GoalsController extends StateNotifier<AsyncValue<List<Goal>>> {
     }
   }
 
-  /// Toggles the 'achieved' status of the goal with the specified [id].
+  /// Toggles the 'achieved' status of a goal.
+  ///
+  /// [id] The unique identifier of the goal to toggle.
   ///
   /// Finds the goal, flips its status, saves it, and reloads the list.
   Future<void> toggleGoal(String id) async {
@@ -72,7 +81,9 @@ class GoalsController extends StateNotifier<AsyncValue<List<Goal>>> {
     }
   }
 
-  /// Deletes the goal with the specified [id].
+  /// Deletes a goal.
+  ///
+  /// [id] The unique identifier of the goal to delete.
   ///
   /// After deleting, reloads the goals list.
   Future<void> deleteGoal(String id) async {
