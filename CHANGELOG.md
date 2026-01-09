@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.6.0+7] - 2026-01-09
+### Added
+- **Unit Tests**: Added `GoalRepository` tests and enhanced `Goal` model tests.
+- **Widget Tests**: Added `GoalsScreen` and `StatisticsScreen` tests.
+
+### Enhanced
+- **Documentation**: Added KDoc for `GoalsController`, `GoalRepository`, `Goal`, `StatisticsScreen`.
+- **Bug Fixes**: Fixed race condition in `GoalsController.loadGoals`.
+
 ## [1.6.0+6] - 2026-01-08
 ### Added
 - **Widget Tests**: Added `AuthSection`, `SelfCareScreen`, `FocusTimerScreen`, and `GamificationOverlay` tests.
