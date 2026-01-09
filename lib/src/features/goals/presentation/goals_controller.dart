@@ -33,9 +33,13 @@ class GoalsController extends StateNotifier<AsyncValue<List<Goal>>> {
       final goals = await _repository.getGoals();
       // Sort by target date?
       goals.sort((a, b) => a.targetDate.compareTo(b.targetDate));
-      state = AsyncData(goals);
+      if (mounted) {
+        state = AsyncData(goals);
+      }
     } catch (e, st) {
-      state = AsyncError(e, st);
+      if (mounted) {
+        state = AsyncError(e, st);
+      }
     }
   }
 

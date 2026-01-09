@@ -141,6 +141,24 @@ void main() {
       );
     });
 
+    test('addGoal maintains sort order', () async {
+      // Add a goal with a late date
+      await controller.addGoal('Late Goal', DateTime(2025, 12, 31));
+
+      // Add a goal with an early date
+      await controller.addGoal('Early Goal', DateTime(2025, 1, 1));
+
+      controller.state.when(
+        data: (goals) {
+          expect(goals.length, 2);
+          expect(goals[0].title, 'Early Goal');
+          expect(goals[1].title, 'Late Goal');
+        },
+        loading: () => fail('Should not be loading'),
+        error: (_, __) => fail('Should not have error'),
+      );
+    });
+
     test('addGoal handles errors', () async {
       mockRepository.shouldThrowError = true;
 
