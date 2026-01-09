@@ -231,5 +231,23 @@ void main() {
       expect(step3.targetDate, original.targetDate);
       expect(step3.id, original.id);
     });
+
+    test('toString returns correct string representation', () {
+      final targetDate = DateTime(2025, 12, 31);
+      final goal = Goal(
+        id: 'test-id',
+        title: 'Test Goal',
+        targetDate: targetDate,
+        isAchieved: true,
+      );
+
+      final str = goal.toString();
+
+      expect(str, contains('Goal'));
+      expect(str, contains('test-id'));
+      expect(str, contains('Test Goal'));
+      expect(str, contains(targetDate.toString()));
+      expect(str, contains('true'));
+    });
   });
 }
