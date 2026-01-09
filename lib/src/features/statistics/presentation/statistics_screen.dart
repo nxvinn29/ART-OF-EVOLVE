@@ -6,7 +6,6 @@ import '../../gamification/domain/user_stats.dart';
 import '../../habits/presentation/habits_controller.dart';
 import '../../habits/domain/habit.dart';
 
-/// Statistics and insights screen showing user progress and analytics
 /// Statistics and insights screen showing user progress and analytics.
 ///
 /// Displays:
@@ -16,6 +15,7 @@ import '../../habits/domain/habit.dart';
 /// - Weekly progress chart (simulated).
 /// - Streak statistics (Longest, Active).
 class StatisticsScreen extends ConsumerWidget {
+  /// Creates a new [StatisticsScreen].
   const StatisticsScreen({super.key});
 
   @override
@@ -35,12 +35,8 @@ class StatisticsScreen extends ConsumerWidget {
 
   /// Builds the main content of the statistics screen.
   ///
-  /// Combines [userStats] and [habits] to display various cards:
-  /// - XP Overview
-  /// - Habits Summary
-  /// - Achievements
-  /// - Weekly Progress
-  /// - Streaks
+  /// [userStats] Current user statistics (XP, level, badges).
+  /// [habits] List of user habits for calculation.
   Widget _buildContent(
     BuildContext context,
     UserStats userStats,
