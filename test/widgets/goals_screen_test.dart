@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:art_of_evolve/src/features/goals/presentation/goals_screen.dart';
-import 'package:art_of_evolve/src/features/goals/presentation/goals_controller.dart';
+
 import 'package:art_of_evolve/src/features/goals/domain/goal.dart';
 import 'package:art_of_evolve/src/features/goals/data/goal_repository.dart';
 import 'package:art_of_evolve/src/core/data/repository_interfaces.dart';

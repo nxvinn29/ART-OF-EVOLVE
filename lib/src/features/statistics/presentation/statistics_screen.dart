@@ -307,7 +307,7 @@ class StatisticsScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 16),
             SizedBox(
-              height: 120,
+              height: 150,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.end,
