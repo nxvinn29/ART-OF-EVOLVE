@@ -38,10 +38,14 @@ class Goal extends HiveObject {
   @HiveField(5)
   final DateTime createdAt;
 
-  /// Creates a [Goal].
+  /// Creates a new [Goal] instance.
   ///
-  /// If [id] is not provided, a UUID v4 is generated.
-  /// If [createdAt] is not provided, the current time is used.
+  /// [id] Optional unique identifier. If null, a UUID v4 is generated.
+  /// [title] The obligatory title of the goal.
+  /// [description] Optional description, defaults to empty string.
+  /// [targetDate] The deadline for achieving the goal.
+  /// [isAchieved] Status of the goal, defaults to false.
+  /// [createdAt] Creation timestamp, defaults to [DateTime.now].
   Goal({
     String? id,
     required this.title,
@@ -52,7 +56,14 @@ class Goal extends HiveObject {
   }) : id = id ?? const Uuid().v4(),
        createdAt = createdAt ?? DateTime.now();
 
-  /// Creates a copy of this [Goal] with the given fields replaced by the new values.
+  /// Creates a copy of this goal with customized properties.
+  ///
+  /// [title] New title for the goal.
+  /// [description] New description for the goal.
+  /// [targetDate] New target date for the goal.
+  /// [isAchieved] New achievement status.
+  ///
+  /// Returns a new [Goal] instance with the updated fields, preserving other original values.
   Goal copyWith({
     String? title,
     String? description,
