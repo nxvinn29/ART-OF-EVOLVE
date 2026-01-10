@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.6.0+8] - 2026-01-10
+### Added
+- **Documentation**: Added KDoc for `MoodTrackerWidget`, `GamificationOverlay`, and `DrawingCanvasWidget`.
+- **Widget Tests**: Enhanced `GamificationOverlay` tests to verify badge unlocks and XP gain feedback.
+
 ## [1.6.0+7] - 2026-01-09
 ### Added
 - **Unit Tests**: Added `GoalRepository` tests and enhanced `Goal` model tests.
