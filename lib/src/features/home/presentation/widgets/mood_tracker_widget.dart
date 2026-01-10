@@ -6,7 +6,13 @@ import '../../../../core/theme/app_theme.dart';
 /// Displays a horizontal list of mood options (Happy, Calm, Sad, Angry).
 /// Each mood has a specific color and icon. Selection is visually highlighted
 /// with an animation.
+/// A widget that allows users to select and track their current mood.
+///
+/// Displays a horizontal list of mood options (Happy, Calm, Sad, Angry).
+/// Each mood has a specific color and icon. Selection is visually highlighted
+/// with an animation.
 class MoodTrackerWidget extends StatefulWidget {
+  /// Creates a [MoodTrackerWidget].
   const MoodTrackerWidget({super.key});
 
   @override
@@ -14,9 +20,10 @@ class MoodTrackerWidget extends StatefulWidget {
 }
 
 class _MoodTrackerWidgetState extends State<MoodTrackerWidget> {
-  // Index of the currently selected mood. -1 indicates no selection.
+  /// Index of the currently selected mood. -1 indicates no selection.
   int _selectedMoodIndex = -1;
 
+  /// List of mood data, each containing label, color, and icon.
   final List<Map<String, dynamic>> _moods = [
     {
       'label': 'Happy',
