@@ -50,4 +50,66 @@ void main() {
     // SnackBar should appear
     expect(find.text('Level Up! You are now level 2!'), findsOneWidget);
   });
+
+  testWidgets('GamificationOverlay shows snackbar on badge unlock', (
+    WidgetTester tester,
+  ) async {
+    final mockController = MockGamificationController();
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          gamificationControllerProvider.overrideWith((ref) => mockController),
+        ],
+        child: const MaterialApp(
+          home: Scaffold(body: GamificationOverlay(child: Text('Content'))),
+        ),
+      ),
+    );
+
+    // Initial state
+    expect(find.text('Content'), findsOneWidget);
+
+    // Trigger Badge Unlock
+    mockController.setStats(
+      UserStats(
+        unlockedBadgeIds: ['badge_1'], // New badge added
+      ),
+    );
+    await tester.pump();
+
+    // SnackBar should appear
+    expect(find.text('Badge Unlocked: badge_1! Keep it up!'), findsOneWidget);
+  });
+
+  testWidgets('GamificationOverlay shows snackbar on XP gain', (
+    WidgetTester tester,
+  ) async {
+    final mockController = MockGamificationController();
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          gamificationControllerProvider.overrideWith((ref) => mockController),
+        ],
+        child: const MaterialApp(
+          home: Scaffold(body: GamificationOverlay(child: Text('Content'))),
+        ),
+      ),
+    );
+
+    // Initial state
+    expect(find.text('Content'), findsOneWidget);
+
+    // Trigger XP Gain
+    mockController.setStats(
+      UserStats(
+        currentXp: 50, // Increase XP from default 0
+      ),
+    );
+    await tester.pump();
+
+    // SnackBar should appear
+    expect(find.text('+50 XP! Great job!'), findsOneWidget);
+  });
 }
