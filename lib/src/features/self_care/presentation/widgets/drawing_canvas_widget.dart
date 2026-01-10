@@ -7,10 +7,17 @@ import 'package:path_provider/path_provider.dart';
 ///
 /// Features include a basic drawing board with painting tools.
 /// Can be injected with a [DrawingController] for testing purposes.
+/// Users can save their drawings to the device's application documents directory.
 class DrawingCanvasWidget extends StatefulWidget {
+  /// Callback function triggered when the drawing is saved.
+  /// Returns the path of the saved image file.
   final Function(String imagePath) onSave;
+
+  /// Optional controller to manage the drawing state.
+  /// Useful for testing or external control.
   final DrawingController? controller;
 
+  /// Creates a [DrawingCanvasWidget].
   const DrawingCanvasWidget({super.key, required this.onSave, this.controller});
 
   @override
