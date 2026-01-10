@@ -4,9 +4,16 @@ import 'package:confetti/confetti.dart';
 import '../gamification_controller.dart';
 import 'dart:math';
 
+/// A widget that provides gamification feedback effects like confetti.
+///
+/// This overlay listens to the [gamificationControllerProvider] to detect
+/// events such as level ups, badge unlocks, and XP gains, triggering
+/// visual feedback accordingly.
 class GamificationOverlay extends ConsumerStatefulWidget {
+  /// The underlying content widget to be wrapped by the overlay.
   final Widget child;
 
+  /// Creates a [GamificationOverlay].
   const GamificationOverlay({super.key, required this.child});
 
   @override
