@@ -3,6 +3,46 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:art_of_evolve/src/features/self_care/presentation/journal_controller.dart';
 import 'package:art_of_evolve/src/features/self_care/domain/journal_entry.dart';
 import 'package:art_of_evolve/src/core/data/repository_interfaces.dart';
+import 'package:art_of_evolve/src/services/notifications/notification_service.dart';
+import 'package:flutter/material.dart';
+
+class MockNotificationService implements INotificationService {
+  @override
+  Future<void> init() async {}
+
+  @override
+  Future<void> requestPermissions() async {}
+
+  @override
+  Future<void> scheduleReminder({
+    required int id,
+    required String title,
+    required String body,
+    required DateTime scheduledDate,
+  }) async {}
+
+  @override
+  Future<void> scheduleDailyNotification({
+    required int id,
+    required String title,
+    required String body,
+    required TimeOfDay time,
+  }) async {}
+
+  @override
+  Future<void> scheduleOneOffNotification({
+    required int id,
+    required String title,
+    required String body,
+    required Duration delay,
+  }) async {}
+
+  @override
+  Future<void> cancelNotification(int id) async {}
+
+  @override
+  Future<void> cancelReminder(int id) async {}
+}
 
 /// Mock implementation of [IJournalRepository] for testing.
 class MockJournalRepository implements IJournalRepository {
@@ -47,11 +87,13 @@ class MockJournalRepository implements IJournalRepository {
 void main() {
   group('JournalController', () {
     late MockJournalRepository mockRepository;
+    late MockNotificationService mockNotificationService;
     late JournalController controller;
 
     setUp(() {
       mockRepository = MockJournalRepository();
-      controller = JournalController(mockRepository);
+      mockNotificationService = MockNotificationService();
+      controller = JournalController(mockRepository, mockNotificationService);
     });
 
     tearDown(() {
@@ -60,7 +102,10 @@ void main() {
     });
 
     test('initial state is AsyncLoading', () {
-      final newController = JournalController(mockRepository);
+      final newController = JournalController(
+        mockRepository,
+        mockNotificationService,
+      );
       expect(newController, isNotNull);
       newController.dispose();
     });

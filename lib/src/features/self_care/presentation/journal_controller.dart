@@ -10,7 +10,7 @@ final journalControllerProvider =
       ref,
     ) {
       final repository = ref.watch(journalRepositoryProvider);
-      return JournalController(repository);
+      return JournalController(repository, NotificationService());
     });
 
 /// Controller for managing journal entries.
@@ -24,8 +24,10 @@ final journalControllerProvider =
 /// - Sorting entries by date.
 class JournalController extends StateNotifier<AsyncValue<List<JournalEntry>>> {
   final IJournalRepository _repository;
+  final INotificationService _notificationService;
 
-  JournalController(this._repository) : super(const AsyncLoading()) {
+  JournalController(this._repository, this._notificationService)
+    : super(const AsyncLoading()) {
     loadEntries();
   }
 
@@ -38,9 +40,13 @@ class JournalController extends StateNotifier<AsyncValue<List<JournalEntry>>> {
       final entries = await _repository.getEntries();
       // Sort by date descending
       entries.sort((a, b) => b.date.compareTo(a.date));
-      state = AsyncData(entries);
+      if (mounted) {
+        state = AsyncData(entries);
+      }
     } catch (e, st) {
-      state = AsyncError(e, st);
+      if (mounted) {
+        state = AsyncError(e, st);
+      }
     }
   }
 
@@ -84,7 +90,7 @@ class JournalController extends StateNotifier<AsyncValue<List<JournalEntry>>> {
       await _repository.saveEntry(entry);
 
       if (reminderTime != null) {
-        await NotificationService().scheduleReminder(
+        await _notificationService.scheduleReminder(
           id: entry.id.hashCode,
           title: 'Journal Reminder',
           body: title.isNotEmpty ? title : 'Time to write in your journal!',
@@ -103,7 +109,7 @@ class JournalController extends StateNotifier<AsyncValue<List<JournalEntry>>> {
   /// cancels any associated reminder and reloads the entries list.
   Future<void> deleteEntry(String id) async {
     try {
-      await NotificationService().cancelReminder(id.hashCode);
+      await _notificationService.cancelReminder(id.hashCode);
       await _repository.deleteEntry(id);
       await loadEntries();
     } catch (e, st) {
