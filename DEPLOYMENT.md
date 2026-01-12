@@ -85,6 +85,10 @@ flutter build web --release
 ### 2. Deploy
 
 Deploy the contents of `build/web` to your hosting provider (Firebase Hosting, Vercel, Netlify, etc.).
+For Firebase:
+```bash
+firebase deploy
+```
 
 
 
