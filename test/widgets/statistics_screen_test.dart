@@ -9,7 +9,7 @@ import 'package:art_of_evolve/src/features/habits/domain/habit.dart';
 
 class MockGamificationController extends StateNotifier<UserStats>
     implements GamificationController {
-  MockGamificationController(UserStats initial) : super(initial);
+  MockGamificationController(super.initial);
 
   @override
   Future<void> addXp(int amount) async {}
@@ -23,7 +23,7 @@ class MockGamificationController extends StateNotifier<UserStats>
 
 class MockHabitsController extends StateNotifier<AsyncValue<List<Habit>>>
     implements HabitsController {
-  MockHabitsController(AsyncValue<List<Habit>> initial) : super(initial);
+  MockHabitsController(super.initial);
 
   @override
   Future<void> addHabit(
