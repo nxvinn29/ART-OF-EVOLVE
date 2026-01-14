@@ -28,9 +28,11 @@ abstract class IJournalRepository {
   Future<List<JournalEntry>> getEntries();
   Future<void> saveEntry(JournalEntry entry);
   Future<void> deleteEntry(String id);
+  Stream<List<JournalEntry>> watchEntries();
 }
 
 abstract class IUserRepository {
   Future<UserProfile?> getUserProfile();
   Future<void> saveUserProfile(UserProfile profile);
+  Stream<UserProfile?> watchUserProfile();
 }

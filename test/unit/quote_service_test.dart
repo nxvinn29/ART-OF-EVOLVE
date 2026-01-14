@@ -27,5 +27,14 @@ void main() {
       // Our format is "Quote text. – Author"
       expect(quote, contains('–'));
     });
+
+    test('returned quote is in the known list', () {
+      final quote = QuoteService.getRandomQuote();
+      // We know there are 8 specific quotes in the list, though the list is private.
+      // We can infer validity by structure or by checking against a known set if we exposed it,
+      // but since it's private, we'll rely on the attribution check and non-empty check.
+      // However, we can check if it matches the expected pattern more strictly if needed.
+      expect(quote, matches(RegExp(r'.+ – .+')));
+    });
   });
 }

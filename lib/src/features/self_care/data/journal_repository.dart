@@ -123,4 +123,29 @@ class JournalRepository implements IJournalRepository {
   Future<void> deleteEntry(String id) async {
     await _box.delete(id);
   }
+
+  /// Watches for changes to journal entries in real-time.
+  ///
+  /// Returns a [Stream] that emits the list of journal entries whenever
+  /// the Hive box is updated (entry added, modified, or deleted).
+  ///
+  /// This enables parts of the app (like UI) to reactively update without
+  /// manual polling.
+  ///
+  /// ## Returns
+  /// A stream emitting lists of [JournalEntry] objects.
+  @override
+  Stream<List<JournalEntry>> watchEntries() {
+    return _box
+        .watch()
+        .map((event) => _box.values.toList())
+        .startWith(_box.values.toList());
+  }
+}
+
+extension StreamStartWith<T> on Stream<T> {
+  Stream<T> startWith(T value) async* {
+    yield value;
+    yield* this;
+  }
 }

@@ -163,6 +163,40 @@ void main() {
       });
     });
 
+    group('getStartOfWeek', () {
+      test('returns Monday for any day of the week', () {
+        // Jan 1, 2024 is a Monday
+        final monday = DateTime(2024, 1, 1);
+        expect(AppDateUtils.getStartOfWeek(monday), DateTime(2024, 1, 1));
+
+        final tuesday = DateTime(2024, 1, 2);
+        expect(AppDateUtils.getStartOfWeek(tuesday), DateTime(2024, 1, 1));
+
+        final sunday = DateTime(2024, 1, 7);
+        expect(AppDateUtils.getStartOfWeek(sunday), DateTime(2024, 1, 1));
+      });
+
+      test('returns previous year date if week starts in previous year', () {
+        // Jan 1, 2025 is a Wednesday. Week starts Dec 30, 2024 (Monday)
+        final wednesday = DateTime(2025, 1, 1);
+        expect(AppDateUtils.getStartOfWeek(wednesday), DateTime(2024, 12, 30));
+      });
+    });
+
+    group('isSameWeek', () {
+      test('returns true for dates in same week', () {
+        final monday = DateTime(2024, 1, 1);
+        final sunday = DateTime(2024, 1, 7);
+        expect(AppDateUtils.isSameWeek(monday, sunday), true);
+      });
+
+      test('returns false for dates in different weeks', () {
+        final sunday = DateTime(2024, 1, 7);
+        final nextMonday = DateTime(2024, 1, 8);
+        expect(AppDateUtils.isSameWeek(sunday, nextMonday), false);
+      });
+    });
+
     group('Integration Tests', () {
       test('formats and compares current date', () {
         final now = DateTime.now();

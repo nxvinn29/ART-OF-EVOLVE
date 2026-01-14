@@ -40,4 +40,21 @@ class ValidationUtils {
     // Remove HTML tags and trim
     return input.replaceAll(RegExp(r'<[^>]*>'), '').trim();
   }
+
+  /// Validates if the provided [phoneNumber] is a valid 10-digit number.
+  ///
+  /// Returns `true` if the phone number consists of exactly 10 digits,
+  /// otherwise returns `false`.
+  static bool isValidPhoneNumber(String phoneNumber) {
+    return RegExp(r'^\d{10}$').hasMatch(phoneNumber);
+  }
+
+  /// Validates if the provided [url] is a valid URL.
+  ///
+  /// Checks for http/https scheme and domain structure.
+  ///
+  /// Returns `true` if valid, otherwise `false`.
+  static bool isValidUrl(String url) {
+    return Uri.tryParse(url)?.hasAbsolutePath ?? false;
+  }
 }

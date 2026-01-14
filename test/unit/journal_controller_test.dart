@@ -78,6 +78,11 @@ class MockJournalRepository implements IJournalRepository {
     _entries.removeWhere((e) => e.id == id);
   }
 
+  @override
+  Stream<List<JournalEntry>> watchEntries() {
+    return Stream.value(_entries);
+  }
+
   void reset() {
     _entries.clear();
     shouldThrowError = false;

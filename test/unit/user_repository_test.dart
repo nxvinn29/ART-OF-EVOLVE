@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
 import 'package:art_of_evolve/src/features/onboarding/data/user_repository.dart';
@@ -6,6 +7,7 @@ import 'package:art_of_evolve/src/features/onboarding/domain/user_profile.dart';
 // Manual mock for Hive Box since Mockito can't mock the [] operator properly
 class MockBox<T> extends Fake implements Box<T> {
   final Map<dynamic, T> _data = {};
+  final _controller = StreamController<BoxEvent>.broadcast();
 
   @override
   T? get(dynamic key, {T? defaultValue}) {
@@ -15,15 +17,22 @@ class MockBox<T> extends Fake implements Box<T> {
   @override
   Future<void> put(dynamic key, T value) async {
     _data[key] = value;
+    _controller.add(BoxEvent(key, value, false));
   }
 
   @override
   Future<void> delete(dynamic key) async {
     _data.remove(key);
+    _controller.add(BoxEvent(key, null, true));
   }
 
   @override
   Iterable<T> get values => _data.values;
+
+  @override
+  Stream<BoxEvent> watch({dynamic key}) {
+    return _controller.stream.where((event) => key == null || event.key == key);
+  }
 }
 
 void main() {
@@ -197,6 +206,25 @@ void main() {
       expect(result?.name, 'User 4');
       expect(result?.mood, 'Mood 4');
       expect(result?.primaryGoal, 'Goal 4');
+    });
+
+    test('watchUserProfile emits updates when profile changes', () async {
+      // Arrange
+      final profile1 = UserProfile(name: 'User 1', wakeTime: DateTime(2024));
+      final profile2 = UserProfile(name: 'User 2', wakeTime: DateTime(2024));
+
+      // Act & Assert
+      expectLater(
+        repository.watchUserProfile(),
+        emitsInOrder([
+          isNull, // Initial state
+          isNotNull, // After save profile1
+          isNotNull, // After save profile2
+        ]),
+      );
+
+      await repository.saveUserProfile(profile1);
+      await repository.saveUserProfile(profile2);
     });
   });
 }

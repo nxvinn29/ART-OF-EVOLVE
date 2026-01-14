@@ -33,5 +33,29 @@ void main() {
       ); // Empty after removal
       expect(ValidationUtils.sanitizeInput('No Tags'), 'No Tags');
     });
+
+    test('isValidPhoneNumber validates 10-digit numbers', () {
+      expect(ValidationUtils.isValidPhoneNumber('1234567890'), true);
+      expect(ValidationUtils.isValidPhoneNumber('9876543210'), true);
+      expect(ValidationUtils.isValidPhoneNumber('123'), false); // Too short
+      expect(
+        ValidationUtils.isValidPhoneNumber('12345678901'),
+        false,
+      ); // Too long
+      expect(
+        ValidationUtils.isValidPhoneNumber('abcdefghij'),
+        false,
+      ); // Non-digit
+    });
+
+    test('isValidUrl validates URLs correctly', () {
+      expect(ValidationUtils.isValidUrl('https://example.com'), true);
+      expect(ValidationUtils.isValidUrl('http://test.org/path'), true);
+      expect(
+        ValidationUtils.isValidUrl('example.com'),
+        false,
+      ); // missing scheme
+      expect(ValidationUtils.isValidUrl(''), false);
+    });
   });
 }

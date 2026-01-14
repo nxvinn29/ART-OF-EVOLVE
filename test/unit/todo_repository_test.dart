@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
 import 'package:art_of_evolve/src/features/todos/data/todo_repository.dart';
@@ -6,18 +7,30 @@ import 'package:art_of_evolve/src/features/todos/domain/todo.dart';
 // Manual mock for Hive Box
 class MockBox<T> extends Fake implements Box<T> {
   final Map<dynamic, T> _data = {};
+  final _controller = StreamController<BoxEvent>.broadcast();
 
   @override
   T? get(dynamic key, {T? defaultValue}) => _data[key] ?? defaultValue;
 
   @override
-  Future<void> put(dynamic key, T value) async => _data[key] = value;
+  Future<void> put(dynamic key, T value) async {
+    _data[key] = value;
+    _controller.add(BoxEvent(key, value, false));
+  }
 
   @override
-  Future<void> delete(dynamic key) async => _data.remove(key);
+  Future<void> delete(dynamic key) async {
+    _data.remove(key);
+    _controller.add(BoxEvent(key, null, true));
+  }
 
   @override
   Iterable<T> get values => _data.values;
+
+  @override
+  Stream<BoxEvent> watch({dynamic key}) {
+    return _controller.stream;
+  }
 }
 
 void main() {
@@ -199,6 +212,28 @@ void main() {
         result.map((t) => t.title),
         containsAll(['Todo 0', 'Todo 2', 'Todo 4']),
       );
+    });
+
+    test('watchTodos emits updates when todos are changed', () async {
+      // Arrange
+      final todo1 = Todo(title: 'Watch Me 1', category: 'Test');
+      final todo2 = Todo(title: 'Watch Me 2', category: 'Test');
+
+      // Act & Assert
+      // The stream sends the current state immediately (which is empty)
+      expectLater(
+        repository.watchTodos(),
+        emitsInOrder([
+          isEmpty, // Initial state
+          hasLength(1), // After save todo1
+          hasLength(2), // After save todo2
+          hasLength(1), // After delete todo1
+        ]),
+      );
+
+      await repository.saveTodo(todo1);
+      await repository.saveTodo(todo2);
+      await repository.deleteTodo(todo1.id);
     });
   });
 }

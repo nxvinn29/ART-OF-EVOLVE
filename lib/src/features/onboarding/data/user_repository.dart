@@ -158,4 +158,25 @@ class UserRepository {
       await saveUserProfile(updated);
     }
   }
+
+  /// Watches for changes to the user profile in real-time.
+  ///
+  /// Returns a [Stream] that emits the current user profile whenever
+  /// it is updated in the Hive box.
+  ///
+  /// ## Returns:
+  /// A stream emitting [UserProfile] objects (or null).
+  Stream<UserProfile?> watchUserProfile() {
+    return _box
+        .watch(key: _profileKey)
+        .map((event) => event.value as UserProfile?)
+        .startWith(getUserProfile());
+  }
+}
+
+extension StreamStartWith<T> on Stream<T> {
+  Stream<T> startWith(T value) async* {
+    yield value;
+    yield* this;
+  }
 }

@@ -70,6 +70,8 @@ class TodoRepository implements ITodosRepository {
   /// any todo is added, modified, or deleted. The stream starts by
   /// emitting the current state immediately.
   ///
+  /// This is useful for keeping the UI in sync with the database.
+  ///
   /// ## Returns:
   /// A stream of todo lists that updates on any change to the todos box.
   ///
@@ -82,7 +84,7 @@ class TodoRepository implements ITodosRepository {
   ///
   /// ## Performance:
   /// The stream emits the entire list on each change. For large datasets,
-  /// consider implementing incremental updates.
+  /// consider implementing incremental updates or pagination.
   @override
   Stream<List<Todo>> watchTodos() {
     return _box

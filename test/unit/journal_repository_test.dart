@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
 import 'package:art_of_evolve/src/features/self_care/data/journal_repository.dart';
@@ -6,18 +7,30 @@ import 'package:art_of_evolve/src/features/self_care/domain/journal_entry.dart';
 // Manual mock for Hive Box
 class MockBox<T> extends Fake implements Box<T> {
   final Map<dynamic, T> _data = {};
+  final _controller = StreamController<BoxEvent>.broadcast();
 
   @override
   T? get(dynamic key, {T? defaultValue}) => _data[key] ?? defaultValue;
 
   @override
-  Future<void> put(dynamic key, T value) async => _data[key] = value;
+  Future<void> put(dynamic key, T value) async {
+    _data[key] = value;
+    _controller.add(BoxEvent(key, value, false));
+  }
 
   @override
-  Future<void> delete(dynamic key) async => _data.remove(key);
+  Future<void> delete(dynamic key) async {
+    _data.remove(key);
+    _controller.add(BoxEvent(key, null, true));
+  }
 
   @override
   Iterable<T> get values => _data.values;
+
+  @override
+  Stream<BoxEvent> watch({dynamic key}) {
+    return _controller.stream;
+  }
 }
 
 void main() {
@@ -103,7 +116,7 @@ void main() {
         title: 'Updated Title',
         content: 'Updated content',
         mood: 'Happy',
-        createdAt: entry.createdAt,
+        date: entry.date,
       );
 
       // Act
@@ -169,14 +182,14 @@ void main() {
       expect(entries.first.id, originalId);
     });
 
-    test('saveEntry preserves createdAt timestamp', () async {
+    test('saveEntry preserves date timestamp', () async {
       // Arrange
-      final createdAt = DateTime(2024, 1, 15, 10, 30);
+      final date = DateTime(2024, 1, 15, 10, 30);
       final entry = JournalEntry(
         title: 'Timestamp Test',
         content: 'Testing timestamp',
         mood: 'Happy',
-        createdAt: createdAt,
+        date: date,
       );
 
       // Act
@@ -184,7 +197,7 @@ void main() {
       final entries = await repository.getEntries();
 
       // Assert
-      expect(entries.first.createdAt, createdAt);
+      expect(entries.first.date, date);
     });
 
     test('multiple delete operations work correctly', () async {
@@ -213,6 +226,30 @@ void main() {
         remaining.map((e) => e.title),
         containsAll(['Entry 1', 'Entry 3']),
       );
+    });
+
+    test('watchEntries emits updates when entries are changed', () async {
+      // Arrange
+      final entry1 = JournalEntry(
+        title: 'Watch Entry 1',
+        content: 'Content 1',
+        mood: 'Happy',
+      );
+      final entry2 = JournalEntry(
+        title: 'Watch Entry 2',
+        content: 'Content 2',
+        mood: 'Calm',
+      );
+
+      // Act & Assert
+      expectLater(
+        repository.watchEntries(),
+        emitsInOrder([isEmpty, hasLength(1), hasLength(2), hasLength(1)]),
+      );
+
+      await repository.saveEntry(entry1);
+      await repository.saveEntry(entry2);
+      await repository.deleteEntry(entry1.id);
     });
   });
 }

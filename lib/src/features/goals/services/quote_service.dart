@@ -19,7 +19,9 @@ class QuoteService {
   /// Returns a random quote from the collection.
   ///
   /// The quote is returned as a single string containing both the quote text
-  /// and the author.
+  /// and the author, separated by ' – '.
+  ///
+  /// Example format: "Quote text. – Author"
   static String getRandomQuote() {
     final random = Random();
     return _quotes[random.nextInt(_quotes.length)];

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.6.0+9] - 2026-01-14
+### Added
+- **New Features**: Added reactive `watchTodos`, `watchEntries`, and `watchUserProfile` methods to repositories for real-time UI updates.
+- **Utilities**: Added `isValidPhoneNumber`, `isValidUrl` to `ValidationUtils`, and `getStartOfWeek`, `isSameWeek` to `DateUtils` with comprehensive tests.
+- **Widget Tests**: Added `DashboardHeader` widget tests with provider mocking.
+- **Unit Tests**: Enhanced test coverage for `TodoRepository`, `JournalRepository`, `UserRepository`, `QuoteService`, and utilities.
+
+### Enhanced
+- **Documentation**: Added detailed KDoc to:
+  - `DashboardHeader`
+  - `QuoteService`
+  - `TodoRepository`
+  - `JournalRepository`
+  - `UserRepository`
+  - `ValidationUtils`
+  - `AppDateUtils`
+
 ## [1.6.0+8] - 2026-01-10
 ### Added
 - **Documentation**: Added KDoc for `MoodTrackerWidget`, `GamificationOverlay`, and `DrawingCanvasWidget`.
