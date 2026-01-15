@@ -6,6 +6,12 @@ part 'user_profile.g.dart';
 /// Represents the user's profile information.
 ///
 /// Stores personal details, preferences, and onboarding status.
+/// This class is immutable (except for Hive internal state) and uses value equality.
+///
+/// - Key fields:
+///   - [id]: Unique identifier.
+///   - [name]: Display name.
+///   - [wakeTime]: Scheduled wake-up time.
 /// Persisted using Hive with [typeId: 3].
 @HiveType(typeId: 3)
 class UserProfile extends HiveObject {
@@ -60,5 +66,33 @@ class UserProfile extends HiveObject {
       hasCompletedOnboarding:
           hasCompletedOnboarding ?? this.hasCompletedOnboarding,
     );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is UserProfile &&
+        other.id == id &&
+        other.name == name &&
+        other.wakeTime == wakeTime &&
+        other.mood == mood &&
+        other.primaryGoal == primaryGoal &&
+        other.hasCompletedOnboarding == hasCompletedOnboarding;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        name.hashCode ^
+        wakeTime.hashCode ^
+        mood.hashCode ^
+        primaryGoal.hashCode ^
+        hasCompletedOnboarding.hashCode;
+  }
+
+  @override
+  String toString() {
+    return 'UserProfile(id: $id, name: $name, wakeTime: $wakeTime, mood: $mood, primaryGoal: $primaryGoal, hasCompletedOnboarding: $hasCompletedOnboarding)';
   }
 }

@@ -16,6 +16,13 @@ class MockUserNotifier extends UserNotifier {
   }
 }
 
+class MockUserNotifierEmptyName extends UserNotifier {
+  @override
+  UserProfile? build() {
+    return UserProfile(name: '', wakeTime: DateTime.now());
+  }
+}
+
 class FakeGamificationController extends StateNotifier<UserStats>
     implements GamificationController {
   FakeGamificationController() : super(UserStats(level: 5, currentXp: 250));
@@ -95,6 +102,26 @@ void main() {
         }),
         findsOneWidget,
       );
+    });
+
+    testWidgets('shows "Friend" when name is empty', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            userProvider.overrideWith(MockUserNotifierEmptyName.new),
+            gamificationControllerProvider.overrideWith(
+              (ref) => FakeGamificationController(),
+            ),
+          ],
+          child: const MaterialApp(home: Scaffold(body: DashboardHeader())),
+        ),
+      );
+
+      // Verify name defaults to Friend
+      expect(find.text('Friend'), findsOneWidget);
+      expect(find.text('F'), findsOneWidget); // Avatar initial
     });
   });
 }

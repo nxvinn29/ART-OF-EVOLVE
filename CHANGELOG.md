@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.6.0+10] - 2026-01-15
+### Added
+- **Utilities**: Extended `StringExtensions` with `toTitleCase` and `initials` methods.
+- **Unit Tests**: Added tests for `PerformanceObserver`, `UserProfile`, and `StringExtensions`.
+- **Refactoring**: Enhanced `DashboardHeader` to handle empty user names gracefully.
+
+### Enhanced
+- **Monitoring**: Refactored `PerformanceObserver` to use `Logger` and support dependency injection.
+- **Models**: Improved `UserProfile` domain model with value equality, `hashCode`, and `toString` overrides.
+
 ## [1.6.0+9] - 2026-01-14
 ### Added
 - **New Features**: Added reactive `watchTodos`, `watchEntries`, and `watchUserProfile` methods to repositories for real-time UI updates.

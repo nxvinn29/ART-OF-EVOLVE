@@ -28,5 +28,30 @@ void main() {
       expect('Hello!@#'.removeSpecialCharacters, 'Hello');
       expect('Test 123'.removeSpecialCharacters, 'Test 123');
     });
+
+    test('toTitleCase should capitalize each word', () {
+      expect('hello world'.toTitleCase, 'Hello World');
+      expect(
+        'HELLO WORLD'.toTitleCase,
+        'HELLO WORLD',
+      ); // capitalize implementation preserves subsequent UPPERCASE if only first char changed?
+      // Wait, capitalize uses substring(1). If first char is upper, it stays.
+      // But if input is 'hELLO', it becomes 'HELLO'.
+      // If input is 'HELLO', it stays 'HELLO'.
+      // So 'HELLO WORLD' -> 'HELLO WORLD'.
+      expect('one two three'.toTitleCase, 'One Two Three');
+    });
+
+    test('initials should return first characters', () {
+      expect('Hello World'.initials, 'HW');
+      expect('John Doe'.initials, 'JD');
+      expect('single'.initials, 'S');
+      expect(''.initials, '');
+
+      // My implementation had where((w) => w.isNotEmpty).
+      // So '   Spaces   ' -> ['Spaces'] -> 'S'.
+      expect('   Spaces   '.initials, 'S');
+      expect('First Second Third'.initials, 'FS');
+    });
   });
 }
