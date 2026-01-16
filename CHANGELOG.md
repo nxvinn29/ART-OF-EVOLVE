@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.6.0+11] - 2026-01-16
+### Added
+- **Unit Tests**: Added `HiveService` tests and enhanced `StringExtensions` tests.
+- **Widget Tests**: Added tests for `AddTodoDialog`, `DashboardView`, `OnboardingScreen`, `VoiceRecorderWidget`, and `JournalEditorScreen`.
+- **Utilities**: Added `wordCount`, `isNumeric`, and `reverse` to `StringExtensions`.
+
+### Enhanced
+- **Documentation**: Added KDoc for `HiveService` and `AddTodoDialog`.
+
 ## [1.6.0+10] - 2026-01-15
 ### Added
 - **Utilities**: Extended `StringExtensions` with `toTitleCase` and `initials` methods.
