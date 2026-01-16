@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../todos_controller.dart';
 
+/// A dialog widget for adding a new todo item.
+///
+/// This dialog allows the user to enter a task name and select a category.
+/// It interacts with the [TodosController] to add the new task.
 class AddTodoDialog extends ConsumerStatefulWidget {
   const AddTodoDialog({super.key});
 
@@ -10,7 +14,10 @@ class AddTodoDialog extends ConsumerStatefulWidget {
 }
 
 class _AddTodoDialogState extends ConsumerState<AddTodoDialog> {
+  /// Controller for the task name input field.
   final titleController = TextEditingController();
+
+  /// The currently selected category for the task.
   String selectedCategory = 'Personal';
 
   @override
