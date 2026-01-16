@@ -46,4 +46,21 @@ extension StringExtensions on String {
     if (words.length == 1) return words.first[0].toUpperCase();
     return '${words[0][0]}${words[1][0]}'.toUpperCase();
   }
+
+  /// Returns the number of words in the string.
+  int get wordCount {
+    if (isEmpty) return 0;
+    return split(RegExp(r'\s+')).where((w) => w.isNotEmpty).length;
+  }
+
+  /// Checks if the string is numeric.
+  bool get isNumeric {
+    if (isEmpty) return false;
+    return double.tryParse(this) != null;
+  }
+
+  /// Reverses the string.
+  String get reverse {
+    return split('').reversed.join('');
+  }
 }

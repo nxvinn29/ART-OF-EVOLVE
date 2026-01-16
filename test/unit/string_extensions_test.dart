@@ -53,5 +53,26 @@ void main() {
       expect('   Spaces   '.initials, 'S');
       expect('First Second Third'.initials, 'FS');
     });
+
+    test('wordCount should return correct number of words', () {
+      expect('Hello World'.wordCount, 2);
+      expect('One   Two'.wordCount, 2);
+      expect(''.wordCount, 0);
+      expect('   '.wordCount, 0);
+    });
+
+    test('isNumeric should detect numbers', () {
+      expect('123'.isNumeric, true);
+      expect('12.34'.isNumeric, true);
+      expect('-5'.isNumeric, true);
+      expect('abc'.isNumeric, false);
+      expect('12a'.isNumeric, false);
+    });
+
+    test('reverse should reverse string', () {
+      expect('abc'.reverse, 'cba');
+      expect('Hello'.reverse, 'olleH');
+      expect(''.reverse, '');
+    });
   });
 }
