@@ -74,5 +74,26 @@ void main() {
       expect('Hello'.reverse, 'olleH');
       expect(''.reverse, '');
     });
+
+    test('truncate should strictly cut string with optional suffix', () {
+      expect('Hello World'.truncate(5), 'Hello');
+      expect('Hello World'.truncate(5, suffix: '...'), 'Hello...');
+      expect('Hello'.truncate(10), 'Hello');
+      expect(''.truncate(5), '');
+    });
+
+    test('toKebabCase should convert to kebab-case', () {
+      expect('Hello World'.toKebabCase, 'hello-world');
+      expect('helloWorld'.toKebabCase, 'hello-world');
+      expect('Hello_World'.toKebabCase, 'hello-world');
+      expect('  Hello  World  '.toKebabCase, 'hello-world');
+    });
+
+    test('toSnakeCase should convert to snake_case', () {
+      expect('Hello World'.toSnakeCase, 'hello_world');
+      expect('helloWorld'.toSnakeCase, 'hello_world');
+      expect('Hello-World'.toSnakeCase, 'hello_world');
+      expect('  Hello  World  '.toSnakeCase, 'hello_world');
+    });
   });
 }

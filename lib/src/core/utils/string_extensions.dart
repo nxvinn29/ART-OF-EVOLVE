@@ -63,4 +63,44 @@ extension StringExtensions on String {
   String get reverse {
     return split('').reversed.join('');
   }
+
+  /// Truncates the string to [maxLength] characters.
+  ///
+  /// Optionally appends [suffix] if truncated. Default is empty string.
+  String truncate(int maxLength, {String suffix = ''}) {
+    if (length <= maxLength) return this;
+    return '${substring(0, maxLength)}$suffix';
+  }
+
+  /// Converts the string to kebab-case.
+  ///
+  /// Example: "Hello World" -> "hello-world"
+  String get toKebabCase {
+    var result = replaceAllMapped(RegExp(r'[A-Z]'), (Match m) {
+      return (m.start > 0 ? '-' : '') + m[0]!;
+    });
+    return result
+        .replaceAll(RegExp(r'\s+'), '-')
+        .replaceAll(RegExp(r'[^a-zA-Z0-9\-]'), '')
+        .replaceAll(RegExp(r'-+'), '-')
+        .replaceAll(RegExp(r'^-+|-+$'), '')
+        .toLowerCase();
+  }
+
+  /// Converts the string to snake_case.
+  ///
+  /// Example: "Hello World" -> "hello_world"
+  String get toSnakeCase {
+    var result = replaceAllMapped(RegExp(r'[A-Z]'), (Match m) {
+      return (m.start > 0 ? '_' : '') + m[0]!;
+    });
+    return result
+        .replaceAll(RegExp(r'\s+'), '_')
+        .replaceAll(RegExp(r'[^a-zA-Z0-9_]'), '')
+        .replaceAll(RegExp(r'_+'), '_')
+        .replaceAll(RegExp(r'^_+|_+$'), '')
+        .toLowerCase();
+  }
+
+  // End of StringExtensions
 }
