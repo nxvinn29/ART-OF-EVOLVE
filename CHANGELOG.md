@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.6.0+12] - 2026-01-19
+### Added
+- **Utilities**: Added `truncate`, `toKebabCase`, `toSnakeCase` to `StringExtensions` with tests.
+- **Utilities**: Added `isFuture`, `isPast`, `isLeapYear` to `AppDateUtils` with tests.
+- **Utilities**: Added `isValidName`, `isValidZipCode` to `ValidationUtils` with tests.
+- **Widget Tests**: Added tests for `ToolbarItem` and `FormatToolbar`.
+
+### Enhanced
+- **Documentation**: Added KDoc for `ToolbarItem`, `OnboardingController`, `NotificationService`.
+
 ## [1.6.0+11] - 2026-01-16
 ### Added
 - **Unit Tests**: Added `HiveService` tests and enhanced `StringExtensions` tests.
