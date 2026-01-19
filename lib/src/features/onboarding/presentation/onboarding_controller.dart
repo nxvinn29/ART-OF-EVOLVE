@@ -9,11 +9,21 @@ final onboardingControllerProvider =
       return OnboardingController(repository);
     });
 
+/// Controller for the onboarding flow.
+///
+/// Manages state transitions and user data persistence during the onboarding process.
 class OnboardingController extends StateNotifier<AsyncValue<void>> {
   final UserRepository _repository;
 
+  /// Creates a new [OnboardingController].
+  ///
+  /// Requires a [UserRepository] to save profile data.
   OnboardingController(this._repository) : super(const AsyncData(null));
 
+  /// Completes the onboarding process by saving the user profile.
+  ///
+  /// Takes the user's [name], preferred [wakeTime], current [mood], and [primaryGoal].
+  /// Sets [UserProfile.hasCompletedOnboarding] to true.
   Future<void> completeOnboarding({
     required String name,
     required TimeOfDay wakeTime,
