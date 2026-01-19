@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 
+/// A toolbar item widget with an icon and label.
+///
+/// Used in [FormatToolbar] to represent a single action or tool.
 class ToolbarItem extends StatelessWidget {
+  /// The icon to display.
   final IconData icon;
+
+  /// The label for the tooltip.
   final String label;
+
+  /// Callback when the item is tapped.
   final VoidCallback onTap;
 
   const ToolbarItem({
