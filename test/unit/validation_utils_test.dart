@@ -57,5 +57,21 @@ void main() {
       ); // missing scheme
       expect(ValidationUtils.isValidUrl(''), false);
     });
+
+    test('isValidName validates names correctly', () {
+      expect(ValidationUtils.isValidName('John Doe'), true);
+      expect(ValidationUtils.isValidName('Alice'), true);
+      expect(ValidationUtils.isValidName('Jo'), true);
+      expect(ValidationUtils.isValidName('A'), false); // Too short
+      expect(ValidationUtils.isValidName('123'), false); // Numbers
+    });
+
+    test('isValidZipCode validates US zip codes', () {
+      expect(ValidationUtils.isValidZipCode('12345'), true);
+      expect(ValidationUtils.isValidZipCode('90210'), true);
+      expect(ValidationUtils.isValidZipCode('1234'), false); // Too short
+      expect(ValidationUtils.isValidZipCode('123456'), false); // Too long
+      expect(ValidationUtils.isValidZipCode('abcde'), false); // Non-digit
+    });
   });
 }

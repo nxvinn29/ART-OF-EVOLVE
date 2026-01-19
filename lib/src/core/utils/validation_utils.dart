@@ -55,6 +55,17 @@ class ValidationUtils {
   ///
   /// Returns `true` if valid, otherwise `false`.
   static bool isValidUrl(String url) {
-    return Uri.tryParse(url)?.hasAbsolutePath ?? false;
+    final uri = Uri.tryParse(url);
+    return uri != null && uri.isAbsolute && uri.host.isNotEmpty;
+  }
+
+  /// Validates if the [name] is valid (only letters and spaces, min length 2).
+  static bool isValidName(String name) {
+    return RegExp(r'^[a-zA-Z\s]{2,}$').hasMatch(name);
+  }
+
+  /// Validates if the [zipCode] is a valid 5-digit US zip code.
+  static bool isValidZipCode(String zipCode) {
+    return RegExp(r'^\d{5}$').hasMatch(zipCode);
   }
 }
