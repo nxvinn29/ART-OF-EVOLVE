@@ -197,6 +197,42 @@ void main() {
       });
     });
 
+    group('isFuture', () {
+      test('returns true for future date', () {
+        final future = DateTime.now().add(const Duration(days: 1));
+        expect(AppDateUtils.isFuture(future), true);
+      });
+
+      test('returns false for past date', () {
+        final past = DateTime.now().subtract(const Duration(days: 1));
+        expect(AppDateUtils.isFuture(past), false);
+      });
+    });
+
+    group('isPast', () {
+      test('returns true for past date', () {
+        final past = DateTime.now().subtract(const Duration(days: 1));
+        expect(AppDateUtils.isPast(past), true);
+      });
+
+      test('returns false for future date', () {
+        final future = DateTime.now().add(const Duration(days: 1));
+        expect(AppDateUtils.isPast(future), false);
+      });
+    });
+
+    group('isLeapYear', () {
+      test('returns true for leap years', () {
+        expect(AppDateUtils.isLeapYear(2024), true);
+        expect(AppDateUtils.isLeapYear(2000), true);
+      });
+
+      test('returns false for non-leap years', () {
+        expect(AppDateUtils.isLeapYear(2023), false);
+        expect(AppDateUtils.isLeapYear(1900), false);
+      });
+    });
+
     group('Integration Tests', () {
       test('formats and compares current date', () {
         final now = DateTime.now();

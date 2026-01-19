@@ -38,4 +38,19 @@ class AppDateUtils {
   static bool isSameWeek(DateTime a, DateTime b) {
     return isSameDay(getStartOfWeek(a), getStartOfWeek(b));
   }
+
+  /// Checks if the [date] is in the future.
+  static bool isFuture(DateTime date) {
+    return date.isAfter(DateTime.now());
+  }
+
+  /// Checks if the [date] is in the past.
+  static bool isPast(DateTime date) {
+    return date.isBefore(DateTime.now());
+  }
+
+  /// Checks if the [year] is a leap year.
+  static bool isLeapYear(int year) {
+    return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+  }
 }
