@@ -31,6 +31,9 @@ abstract class INotificationService {
   Future<void> cancelReminder(int id);
 }
 
+/// Implementation of [INotificationService] using `flutter_local_notifications`.
+///
+/// Handles initialization, permission requests, and scheduling of various notification types.
 class NotificationService implements INotificationService {
   final FlutterLocalNotificationsPlugin _notifications;
 
@@ -39,6 +42,7 @@ class NotificationService implements INotificationService {
     FlutterLocalNotificationsPlugin(),
   );
 
+  /// Returns the singleton instance of [NotificationService].
   factory NotificationService() {
     return _instance;
   }
@@ -58,6 +62,9 @@ class NotificationService implements INotificationService {
   }
 
   @override
+  /// Initializes the notification service.
+  ///
+  /// Sets up time zones and platform-specific settings for Android and iOS.
   Future<void> init() async {
     tz.initializeTimeZones();
     const androidSettings = AndroidInitializationSettings(
@@ -73,6 +80,9 @@ class NotificationService implements INotificationService {
   }
 
   @override
+  /// Requests notification permissions from the user.
+  ///
+  /// Handles both Android 13+ and iOS permission requests.
   Future<void> requestPermissions() async {
     await _notifications
         .resolvePlatformSpecificImplementation<
@@ -87,6 +97,9 @@ class NotificationService implements INotificationService {
   }
 
   /// Schedules a reminder at a specific [scheduledDate].
+  ///
+  /// Uses [id] to identify the notification, allowing it to be canceled later.
+  /// [title] and [body] define the notification content.
   @override
   Future<void> scheduleReminder({
     required int id,
@@ -116,6 +129,9 @@ class NotificationService implements INotificationService {
   }
 
   /// Schedules a daily notification at a specific [time].
+  ///
+  /// If [time] has already passed for today, the notification is scheduled for tomorrow.
+  /// Repeats daily at the same time.
   @override
   Future<void> scheduleDailyNotification({
     required int id,
@@ -160,9 +176,13 @@ class NotificationService implements INotificationService {
   }
 
   @override
+  /// Cancels a notification with the given [id].
   Future<void> cancelNotification(int id) => cancelReminder(id);
 
   @override
+  /// Schedules a one-time notification after a specified [delay].
+  ///
+  /// Useful for timers or delayed alerts.
   Future<void> scheduleOneOffNotification({
     required int id,
     required String title,
@@ -191,6 +211,7 @@ class NotificationService implements INotificationService {
   }
 
   @override
+  /// Cancels the reminder with the specified [id].
   Future<void> cancelReminder(int id) async {
     await _notifications.cancel(id);
   }
