@@ -22,7 +22,7 @@ class DashboardHeader extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider);
-    String name = user?.name ?? 'Friend';
+    var name = user?.name ?? 'Friend';
     if (name.trim().isEmpty) name = 'Friend';
 
     return Container(

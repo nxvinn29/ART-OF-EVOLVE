@@ -7,11 +7,11 @@ void main() {
   testWidgets('FormatToolbar renders all items and handles callbacks', (
     tester,
   ) async {
-    int textTaps = 0;
-    int checkTaps = 0;
-    int voiceTaps = 0;
-    int drawTaps = 0;
-    int imageTaps = 0;
+    var textTaps = 0;
+    var checkTaps = 0;
+    var voiceTaps = 0;
+    var drawTaps = 0;
+    var imageTaps = 0;
 
     await tester.pumpWidget(
       MaterialApp(

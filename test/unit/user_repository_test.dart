@@ -190,7 +190,7 @@ void main() {
 
     test('multiple save operations maintain data integrity', () async {
       // Arrange & Act
-      for (int i = 0; i < 5; i++) {
+      for (var i = 0; i < 5; i++) {
         final profile = UserProfile(
           name: 'User $i',
           wakeTime: DateTime(2024, 1, 1, 7 + i, 0),

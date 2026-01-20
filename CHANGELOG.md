@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.6.0+13] - 2026-01-20
+### Fixed
+- **Code Quality**: Resolved remaining lint errors (`omit_local_variable_types`, `prefer_final_locals`) across `test` and `lib` directories.
+- **Refactoring**: strict typing in `StringExtensions`, `DashboardHeader`, and various widget tests.
+
 ## [1.6.0+12] - 2026-01-19
 ### Added
 - **Utilities**: Added `truncate`, `toKebabCase`, `toSnakeCase` to `StringExtensions` with tests.

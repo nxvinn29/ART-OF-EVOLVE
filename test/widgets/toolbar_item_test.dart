@@ -4,7 +4,7 @@ import 'package:art_of_evolve/src/features/self_care/presentation/widgets/toolba
 
 void main() {
   testWidgets('ToolbarItem renders correctly and handles taps', (tester) async {
-    bool tapped = false;
+    var tapped = false;
 
     await tester.pumpWidget(
       MaterialApp(

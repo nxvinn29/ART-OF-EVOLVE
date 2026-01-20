@@ -76,7 +76,7 @@ extension StringExtensions on String {
   ///
   /// Example: "Hello World" -> "hello-world"
   String get toKebabCase {
-    var result = replaceAllMapped(RegExp(r'[A-Z]'), (Match m) {
+    final result = replaceAllMapped(RegExp(r'[A-Z]'), (Match m) {
       return (m.start > 0 ? '-' : '') + m[0]!;
     });
     return result
@@ -91,7 +91,7 @@ extension StringExtensions on String {
   ///
   /// Example: "Hello World" -> "hello_world"
   String get toSnakeCase {
-    var result = replaceAllMapped(RegExp(r'[A-Z]'), (Match m) {
+    final result = replaceAllMapped(RegExp(r'[A-Z]'), (Match m) {
       return (m.start > 0 ? '_' : '') + m[0]!;
     });
     return result
