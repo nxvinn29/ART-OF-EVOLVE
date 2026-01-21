@@ -68,4 +68,15 @@ class ValidationUtils {
   static bool isValidZipCode(String zipCode) {
     return RegExp(r'^\d{5}$').hasMatch(zipCode);
   }
+
+  /// Validates if the [color] is a valid hex color string.
+  ///
+  /// Supports both 3-digit and 6-digit hex codes, optionally starting with '#'.
+  /// Use 6/8 digit hex codes for consistent parsing if needed, but this checks general format.
+  /// Pattern: ^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$
+  static bool isValidHexColor(String color) {
+    return RegExp(
+      r'^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$',
+    ).hasMatch(color);
+  }
 }

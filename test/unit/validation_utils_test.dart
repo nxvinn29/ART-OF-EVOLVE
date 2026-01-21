@@ -73,5 +73,14 @@ void main() {
       expect(ValidationUtils.isValidZipCode('123456'), false); // Too long
       expect(ValidationUtils.isValidZipCode('abcde'), false); // Non-digit
     });
+
+    test('isValidHexColor validates hex color strings', () {
+      expect(ValidationUtils.isValidHexColor('#FFFFFF'), true);
+      expect(ValidationUtils.isValidHexColor('#000'), true);
+      expect(ValidationUtils.isValidHexColor('FFFFFF'), true);
+      expect(ValidationUtils.isValidHexColor('#12345678'), true); // Alpha
+      expect(ValidationUtils.isValidHexColor('#ZZZ'), false); // Invalid chars
+      expect(ValidationUtils.isValidHexColor('#12'), false); // Too short
+    });
   });
 }

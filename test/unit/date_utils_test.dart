@@ -233,6 +233,53 @@ void main() {
       });
     });
 
+    group('daysBetween', () {
+      test('calculates correct difference within same month', () {
+        final d1 = DateTime(2026, 1, 1);
+        final d2 = DateTime(2026, 1, 5);
+        expect(AppDateUtils.daysBetween(d1, d2), 4);
+      });
+
+      test('calculates correct difference across months', () {
+        final d1 = DateTime(2026, 1, 31);
+        final d2 = DateTime(2026, 2, 2);
+        expect(AppDateUtils.daysBetween(d1, d2), 2);
+      });
+
+      test('returns absolute value', () {
+        final d1 = DateTime(2026, 1, 5);
+        final d2 = DateTime(2026, 1, 1);
+        expect(AppDateUtils.daysBetween(d1, d2), 4);
+      });
+    });
+
+    group('addDays', () {
+      test('adds days correctly', () {
+        final date = DateTime(2026, 1, 1);
+        final result = AppDateUtils.addDays(date, 5);
+        expect(result.day, 6);
+        expect(result.month, 1);
+      });
+
+      test('adds days across months', () {
+        final date = DateTime(2026, 1, 31);
+        final result = AppDateUtils.addDays(date, 5);
+        expect(result.day, 5);
+        expect(result.month, 2);
+      });
+    });
+
+    group('isToday', () {
+      test('returns true for today', () {
+        expect(AppDateUtils.isToday(DateTime.now()), true);
+      });
+
+      test('returns false for tomorrow', () {
+        final tomorrow = DateTime.now().add(const Duration(days: 1));
+        expect(AppDateUtils.isToday(tomorrow), false);
+      });
+    });
+
     group('Integration Tests', () {
       test('formats and compares current date', () {
         final now = DateTime.now();

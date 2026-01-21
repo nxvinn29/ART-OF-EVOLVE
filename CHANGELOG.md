@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.6.0+14] - 2026-01-21
+### Added
+- **Utilities**: Added `daysBetween`, `addDays`, `isToday` to `AppDateUtils` with tests.
+- **Utilities**: Added `isValidHexColor` to `ValidationUtils` with tests.
+- **Unit Tests**: Created `UserSettings` tests and enhanced utils tests.
+
+### Enhanced
+- **Documentation**: Added KDoc for `UserSettings`.
+
 ## [1.6.0+13] - 2026-01-20
 ### Fixed
 - **Code Quality**: Resolved remaining lint errors (`omit_local_variable_types`, `prefer_final_locals`) across `test` and `lib` directories.

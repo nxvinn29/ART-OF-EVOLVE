@@ -53,4 +53,23 @@ class AppDateUtils {
   static bool isLeapYear(int year) {
     return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
   }
+
+  /// Returns the number of days between [a] and [b].
+  ///
+  /// The result is absolute (always positive).
+  static int daysBetween(DateTime a, DateTime b) {
+    final from = DateTime(a.year, a.month, a.day);
+    final to = DateTime(b.year, b.month, b.day);
+    return (to.difference(from).inHours / 24).round().abs();
+  }
+
+  /// Adds [days] to the given [date].
+  static DateTime addDays(DateTime date, int days) {
+    return date.add(Duration(days: days));
+  }
+
+  /// Checks if the [date] represents today.
+  static bool isToday(DateTime date) {
+    return isSameDay(date, DateTime.now());
+  }
 }
