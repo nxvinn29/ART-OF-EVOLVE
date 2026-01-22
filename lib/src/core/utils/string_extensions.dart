@@ -102,5 +102,29 @@ extension StringExtensions on String {
         .toLowerCase();
   }
 
+  /// Converts the string to camelCase.
+  ///
+  /// Example: "hello world" -> "helloWorld"
+  /// Example: "hello_world" -> "helloWorld"
+  String get toCamelCase {
+    if (isEmpty) return this;
+    final words = split(
+      RegExp(r'[\s_-]+'),
+    ).where((w) => w.isNotEmpty).map((w) => w.toLowerCase()).toList();
+    if (words.isEmpty) return this;
+
+    final buffer = StringBuffer(words[0]);
+    for (var i = 1; i < words.length; i++) {
+      buffer.write(words[i].capitalize);
+    }
+    return buffer.toString();
+  }
+
+  /// Checks if the string contains only alphanumeric characters.
+  bool get isAlphanumeric {
+    if (isEmpty) return false;
+    return RegExp(r'^[a-zA-Z0-9]+$').hasMatch(this);
+  }
+
   // End of StringExtensions
 }

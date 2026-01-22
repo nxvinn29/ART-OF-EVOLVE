@@ -235,5 +235,34 @@ void main() {
       expect(stats.totalHabitsCompleted, 1000000);
       expect(stats.currentStreak, 5000);
     });
+
+    test('should handle very large list of unlocked badges', () {
+      final largeBadgeList = List.generate(1000, (i) => 'badge_$i');
+      final stats = UserStats(unlockedBadgeIds: largeBadgeList);
+
+      expect(stats.unlockedBadgeIds.length, 1000);
+      expect(stats.unlockedBadgeIds.first, 'badge_0');
+      expect(stats.unlockedBadgeIds.last, 'badge_999');
+    });
+
+    test('should handle extreme integer values for XP', () {
+      // 2^63 - 1 is the max for a 64-bit signed integer (Dart's int)
+      const maxInt = 9223372036854775807;
+      final stats = UserStats(currentXp: maxInt);
+
+      expect(stats.currentXp, maxInt);
+
+      final updated = stats.copyWith(currentXp: maxInt - 1);
+      expect(updated.currentXp, maxInt - 1);
+    });
+
+    test('should correctly handle duplicate badge IDs', () {
+      // The model takes a List<String>, which allows duplicates.
+      // This test documents that behavior.
+      final stats = UserStats(unlockedBadgeIds: ['badge_1', 'badge_1']);
+      expect(stats.unlockedBadgeIds.length, 2);
+      expect(stats.unlockedBadgeIds[0], 'badge_1');
+      expect(stats.unlockedBadgeIds[1], 'badge_1');
+    });
   });
 }

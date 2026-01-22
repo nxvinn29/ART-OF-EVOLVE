@@ -280,6 +280,50 @@ void main() {
       });
     });
 
+    group('getDaysInMonth', () {
+      test('returns 31 for January', () {
+        expect(AppDateUtils.getDaysInMonth(2026, 1), 31);
+      });
+
+      test('returns 28 for February in non-leap year', () {
+        expect(AppDateUtils.getDaysInMonth(2026, 2), 28);
+      });
+
+      test('returns 29 for February in leap year', () {
+        expect(AppDateUtils.getDaysInMonth(2024, 2), 29);
+      });
+
+      test('returns 30 for April', () {
+        expect(AppDateUtils.getDaysInMonth(2026, 4), 30);
+      });
+
+      test('returns 31 for December', () {
+        expect(AppDateUtils.getDaysInMonth(2026, 12), 31);
+      });
+    });
+
+    group('isLastDayOfMonth', () {
+      test('returns true for Jan 31', () {
+        expect(AppDateUtils.isLastDayOfMonth(DateTime(2026, 1, 31)), true);
+      });
+
+      test('returns true for Feb 28 in non-leap year', () {
+        expect(AppDateUtils.isLastDayOfMonth(DateTime(2026, 2, 28)), true);
+      });
+
+      test('returns true for Feb 29 in leap year', () {
+        expect(AppDateUtils.isLastDayOfMonth(DateTime(2024, 2, 29)), true);
+      });
+
+      test('returns false for Jan 30', () {
+        expect(AppDateUtils.isLastDayOfMonth(DateTime(2026, 1, 30)), false);
+      });
+
+      test('returns false for Feb 1', () {
+        expect(AppDateUtils.isLastDayOfMonth(DateTime(2026, 2, 1)), false);
+      });
+    });
+
     group('Integration Tests', () {
       test('formats and compares current date', () {
         final now = DateTime.now();

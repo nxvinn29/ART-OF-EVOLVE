@@ -43,6 +43,8 @@ class UserStats extends HiveObject {
   });
 
   /// Creates a copy of this [UserStats] with the given fields replaced with the new values.
+  ///
+  /// This is useful for immutable state updates where only a few fields change.
   UserStats copyWith({
     int? currentXp,
     int? level,

@@ -95,5 +95,23 @@ void main() {
       expect('Hello-World'.toSnakeCase, 'hello_world');
       expect('  Hello  World  '.toSnakeCase, 'hello_world');
     });
+
+    test('toCamelCase should convert to camelCase', () {
+      expect('hello world'.toCamelCase, 'helloWorld');
+      expect('Hello World'.toCamelCase, 'helloWorld');
+      expect('hello_world'.toCamelCase, 'helloWorld');
+      expect('hello-world'.toCamelCase, 'helloWorld');
+      expect('  Multiple   Spaces  '.toCamelCase, 'multipleSpaces');
+      expect(''.toCamelCase, '');
+    });
+
+    test('isAlphanumeric should detect alphanumeric strings', () {
+      expect('abc123'.isAlphanumeric, true);
+      expect('ABC'.isAlphanumeric, true);
+      expect('123'.isAlphanumeric, true);
+      expect('a b c'.isAlphanumeric, false);
+      expect('test!'.isAlphanumeric, false);
+      expect(''.isAlphanumeric, false);
+    });
   });
 }

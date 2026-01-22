@@ -1,4 +1,14 @@
 # Changelog
+ 
+ ## [1.6.0+15] - 2026-01-22
+ ### Added
+ - **Utilities**: Added `getDaysInMonth` and `isLastDayOfMonth` to `AppDateUtils` with tests.
+ - **Utilities**: Added `toCamelCase` and `isAlphanumeric` to `StringExtensions` with tests.
+ - **Unit Tests**: Added edge case tests for `UserStats` model.
+ 
+ ### Enhanced
+ - **Documentation**: Added comprehensive KDoc for `Badge` and `UserStats` domain models.
+ 
 
 All notable changes to this project will be documented in this file.
 

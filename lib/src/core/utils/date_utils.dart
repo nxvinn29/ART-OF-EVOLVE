@@ -72,4 +72,19 @@ class AppDateUtils {
   static bool isToday(DateTime date) {
     return isSameDay(date, DateTime.now());
   }
+
+  /// Returns the number of days in the given [month] of the [year].
+  static int getDaysInMonth(int year, int month) {
+    if (month == DateTime.february) {
+      return isLeapYear(year) ? 29 : 28;
+    }
+    const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    return daysInMonth[month - 1];
+  }
+
+  /// Checks if the given [date] is the last day of its month.
+  static bool isLastDayOfMonth(DateTime date) {
+    final daysInCurrentMonth = getDaysInMonth(date.year, date.month);
+    return date.day == daysInCurrentMonth;
+  }
 }

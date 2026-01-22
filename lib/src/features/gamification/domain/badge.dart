@@ -14,10 +14,12 @@ class Badge {
   /// Path to the asset image for this badge.
   final String assetPath;
 
-  /// Experience points awarded when this badge is unlocked.
+  /// The experience points awarded to the user when this badge is first unlocked.
   final int xpReward;
 
   /// Creates a new [Badge] instance.
+  ///
+  /// All parameters are required to define a unique achievement.
   const Badge({
     required this.id,
     required this.name,
@@ -26,7 +28,7 @@ class Badge {
     required this.xpReward,
   });
 
-  // Pre-defined Badges
+  /// A static list of all pre-defined [Badge]s available in the application.
   static const List<Badge> allBadges = [
     Badge(
       id: 'first_step',
