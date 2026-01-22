@@ -1,4 +1,14 @@
 # Changelog
+
+## [1.6.0+16] - 2026-01-23
+### Added
+- **Repositories**: Added `clearUserProfile` to `UserRepository` with comprehensive unit tests.
+- **Utilities**: Added `isValidBio` and `isValidAge` to `ValidationUtils` with comprehensive unit tests.
+
+### Enhanced
+- **Documentation**: Added detailed KDoc documentation for `OnboardingController`.
+- **UI Components**: Enhanced `WaterTrackerWidget` with a reactive "Goal Reached! 💧" success indicator and updated widget tests.
+- **Project Structure**: Updated `task.md` and `CHANGELOG.md` to reflect daily progress.
  
  ## [1.6.0+15] - 2026-01-22
  ### Added

@@ -55,4 +55,32 @@ void main() {
     // Should still be 0
     expect(find.text('0 / 8 glasses'), findsOneWidget);
   });
+
+  testWidgets('WaterTrackerWidget displays Goal Reached when intake >= 8', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(
+      const ProviderScope(
+        child: MaterialApp(home: Scaffold(body: WaterTrackerWidget())),
+      ),
+    );
+
+    // Initial state 0
+    expect(find.text('0 / 8 glasses'), findsOneWidget);
+
+    // Increment to 8
+    for (var i = 0; i < 8; i++) {
+      await tester.tap(find.byIcon(Icons.add));
+      await tester.pump();
+    }
+
+    // Verify Goal Reached message
+    expect(find.text('Goal Reached! 💧'), findsOneWidget);
+    expect(find.text('8 / 8 glasses'), findsNothing);
+
+    // Increment to 9 - should still show Goal Reached
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pump();
+    expect(find.text('Goal Reached! 💧'), findsOneWidget);
+  });
 }

@@ -159,6 +159,20 @@ class UserRepository {
     }
   }
 
+  /// Deletes the current user's profile from storage.
+  ///
+  /// This operation:
+  /// 1. Removes the data associated with [_profileKey] from the Box.
+  /// 2. Effectively resets the application state regarding the user.
+  ///
+  /// ## Example:
+  /// ```dart
+  /// await repository.clearUserProfile();
+  /// ```
+  Future<void> clearUserProfile() async {
+    await _box.delete(_profileKey);
+  }
+
   /// Watches for changes to the user profile in real-time.
   ///
   /// Returns a [Stream] that emits the current user profile whenever

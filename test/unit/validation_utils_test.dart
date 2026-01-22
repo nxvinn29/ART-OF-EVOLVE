@@ -82,5 +82,25 @@ void main() {
       expect(ValidationUtils.isValidHexColor('#ZZZ'), false); // Invalid chars
       expect(ValidationUtils.isValidHexColor('#12'), false); // Too short
     });
+
+    test('isValidBio validates length correctly', () {
+      expect(ValidationUtils.isValidBio('Short bio'), true);
+      expect(
+        ValidationUtils.isValidBio('A' * 150),
+        true,
+      ); // Boundary check: 150 chars
+      expect(
+        ValidationUtils.isValidBio('A' * 151),
+        false,
+      ); // Boundary check: 151 chars
+    });
+
+    test('isValidAge validates range correctly', () {
+      expect(ValidationUtils.isValidAge(25), true);
+      expect(ValidationUtils.isValidAge(13), true); // Lower boundary
+      expect(ValidationUtils.isValidAge(120), true); // Upper boundary
+      expect(ValidationUtils.isValidAge(12), false); // Too young
+      expect(ValidationUtils.isValidAge(121), false); // Too old
+    });
   });
 }

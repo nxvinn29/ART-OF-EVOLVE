@@ -22,8 +22,17 @@ class OnboardingController extends StateNotifier<AsyncValue<void>> {
 
   /// Completes the onboarding process by saving the user profile.
   ///
-  /// Takes the user's [name], preferred [wakeTime], current [mood], and [primaryGoal].
-  /// Sets [UserProfile.hasCompletedOnboarding] to true.
+  /// This method:
+  /// 1. Sets the state to [AsyncLoading].
+  /// 2. Creates a [UserProfile] entity from the provided data.
+  /// 3. Persists the profile using the [_repository].
+  /// 4. Updates the state to [AsyncData] on success or [AsyncError] on failure.
+  ///
+  /// Parameters:
+  /// - [name]: The user's full name or nickname.
+  /// - [wakeTime]: The user's preferred daily wake-up time.
+  /// - [mood]: The user's current mood or emotional state.
+  /// - [primaryGoal]: The main objective the user wants to achieve.
   Future<void> completeOnboarding({
     required String name,
     required TimeOfDay wakeTime,

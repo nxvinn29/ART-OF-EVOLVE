@@ -170,6 +170,22 @@ void main() {
       expect(updated?.hasCompletedOnboarding, false);
     });
 
+    test('clearUserProfile successfully deletes the profile', () async {
+      // Arrange
+      final profile = UserProfile(
+        name: 'To Be Deleted',
+        wakeTime: DateTime(2024),
+      );
+      await repository.saveUserProfile(profile);
+      expect(repository.getUserProfile(), isNotNull);
+
+      // Act
+      await repository.clearUserProfile();
+
+      // Assert
+      expect(repository.getUserProfile(), isNull);
+    });
+
     test('saveUserProfile preserves profile ID', () async {
       // Arrange
       final profile = UserProfile(

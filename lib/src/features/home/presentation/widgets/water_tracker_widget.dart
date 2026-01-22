@@ -59,13 +59,23 @@ class WaterTrackerWidget extends ConsumerWidget {
                     color: AppTheme.textPrimary,
                   ),
                 ),
-                Text(
-                  '$intake / 8 glasses',
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: AppTheme.textSecondary,
+                if (intake >= 8)
+                  const Text(
+                    'Goal Reached! 💧',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blueAccent,
+                    ),
+                  )
+                else
+                  Text(
+                    '$intake / 8 glasses',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: AppTheme.textSecondary,
+                    ),
                   ),
-                ),
               ],
             ),
           ),

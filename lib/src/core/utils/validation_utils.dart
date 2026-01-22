@@ -79,4 +79,14 @@ class ValidationUtils {
       r'^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$',
     ).hasMatch(color);
   }
+
+  /// Validates if the [bio] is within the character limit (max 150).
+  static bool isValidBio(String bio) {
+    return bio.length <= 150;
+  }
+
+  /// Validates if the [age] is within the acceptable range (13 to 120).
+  static bool isValidAge(int age) {
+    return age >= 13 && age <= 120;
+  }
 }
