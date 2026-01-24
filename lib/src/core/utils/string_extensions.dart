@@ -126,5 +126,33 @@ extension StringExtensions on String {
     return RegExp(r'^[a-zA-Z0-9]+$').hasMatch(this);
   }
 
+  /// Converts the string to PascalCase.
+  ///
+  /// Example: "hello world" -> "HelloWorld"
+  /// Example: "hello_world" -> "HelloWorld"
+  /// Example: "helloWorld" -> "HelloWorld"
+  String get toPascalCase {
+    if (isEmpty) return this;
+
+    // First, split by existing separators (space, underscore, hyphen)
+    final words = split(RegExp(r'[\s_-]+')).where((w) => w.isNotEmpty).toList();
+
+    if (words.length > 1) {
+      return words.map((w) => w.capitalize).join('');
+    }
+
+    // If no explicit separators, handle camelCase/PascalCase by adding spaces before capitals
+    final withSpaces = replaceAllMapped(
+      RegExp(r'([a-z0-9])([A-Z])'),
+      (Match m) => '${m[1]} ${m[2]}',
+    );
+
+    if (withSpaces == this) {
+      return capitalize;
+    }
+
+    return withSpaces.split(' ').map((w) => w.capitalize).join('');
+  }
+
   // End of StringExtensions
 }

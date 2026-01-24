@@ -7,16 +7,10 @@ void main() {
     testWidgets('renders accurately with initial value false', (
       WidgetTester tester,
     ) async {
-      var value = false;
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: AnimatedCheckbox(
-              value: value,
-              onChanged: (newValue) {
-                value = newValue;
-              },
-            ),
+            body: AnimatedCheckbox(value: false, onChanged: (_) {}),
           ),
         ),
       );

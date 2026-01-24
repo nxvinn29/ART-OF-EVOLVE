@@ -354,5 +354,38 @@ void main() {
         expect(AppDateUtils.formatDate(date1), AppDateUtils.formatDate(date2));
       });
     });
+    group('getRelativeTime', () {
+      test('returns "Just now" for seconds ago', () {
+        final now = DateTime.now();
+        final past = now.subtract(const Duration(seconds: 30));
+        expect(AppDateUtils.getRelativeTime(past), 'Just now');
+      });
+
+      test('returns minutes ago', () {
+        final now = DateTime.now();
+        final past = now.subtract(const Duration(minutes: 5));
+        expect(AppDateUtils.getRelativeTime(past), '5m ago');
+      });
+
+      test('returns hours ago', () {
+        final now = DateTime.now();
+        final past = now.subtract(const Duration(hours: 3));
+        expect(AppDateUtils.getRelativeTime(past), '3h ago');
+      });
+
+      test('returns days ago', () {
+        final now = DateTime.now();
+        final past = now.subtract(const Duration(days: 2));
+        expect(AppDateUtils.getRelativeTime(past), '2d ago');
+      });
+
+      test('returns formatted date for more than a week ago', () {
+        final past = DateTime(2024, 1, 1);
+        expect(
+          AppDateUtils.getRelativeTime(past),
+          AppDateUtils.formatDate(past),
+        );
+      });
+    });
   });
 }

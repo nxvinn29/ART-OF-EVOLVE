@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.6.0+17] - 2026-01-24
+### Added
+- **Utilities**: Added `toPascalCase` to `StringExtensions` with comprehensive unit tests.
+- **Utilities**: Added `getRelativeTime` to `AppDateUtils` with comprehensive unit tests for relative timestamps (e.g., "Just now", "5m ago").
+
+### Fixed
+- **Code Quality**: Resolved lint errors in `animated_checkbox_test.dart` including `prefer_const_constructors` and `prefer_const_declarations`.
+
+### Enhanced
+- **Documentation**: Verified and updated KDoc documentation for `TodoRepository`.
+- **Project Tracking**: Updated `CHANGELOG.md` to reflect daily progress.
+
 ## [1.6.0+16] - 2026-01-23
 ### Added
 - **Repositories**: Added `clearUserProfile` to `UserRepository` with comprehensive unit tests.

@@ -105,6 +105,17 @@ void main() {
       expect(''.toCamelCase, '');
     });
 
+    test(
+      'toPascalCase should capitalize each word and remove spaces/underscores',
+      () {
+        expect('hello world'.toPascalCase, equals('HelloWorld'));
+        expect('hello_world'.toPascalCase, equals('HelloWorld'));
+        expect('hello-world'.toPascalCase, equals('HelloWorld'));
+        expect('HelloWorld'.toPascalCase, equals('HelloWorld'));
+        expect(''.toPascalCase, equals(''));
+      },
+    );
+
     test('isAlphanumeric should detect alphanumeric strings', () {
       expect('abc123'.isAlphanumeric, true);
       expect('ABC'.isAlphanumeric, true);
