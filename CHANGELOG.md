@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.6.0+18] - 2026-01-25
+### Added
+- **Models**: Added `isCompletedYesterday` and `isCompletedOnDate` to `Habit` model with comprehensive unit tests.
+- **Utilities**: Added `isYesterday` and `getDatesInWeek` to `AppDateUtils` with comprehensive unit tests.
+- **Unit Tests**: Created `habit_model_test.dart` to verify habit logic and streak calculations.
+
+### Enhanced
+- **UI Components**: Refactored `MoodTrackerWidget` to include an `onMoodSelected` callback for better parent integration.
+- **Documentation**: Improved KDoc documentation for `Habit` model, `AppDateUtils`, and `MoodTrackerWidget`.
+- **Project Tracking**: Updated `CHANGELOG.md` and `task.md` to reflect latest contributions.
+
 ## [1.6.0+17] - 2026-01-24
 ### Added
 - **Utilities**: Added `toPascalCase` to `StringExtensions` with comprehensive unit tests.

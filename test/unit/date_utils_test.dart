@@ -280,6 +280,44 @@ void main() {
       });
     });
 
+    group('isYesterday', () {
+      test('returns true for yesterday', () {
+        final yesterday = DateTime.now().subtract(const Duration(days: 1));
+        expect(AppDateUtils.isYesterday(yesterday), true);
+      });
+
+      test('returns false for today', () {
+        expect(AppDateUtils.isYesterday(DateTime.now()), false);
+      });
+
+      test('returns false for tomorrow', () {
+        final tomorrow = DateTime.now().add(const Duration(days: 1));
+        expect(AppDateUtils.isYesterday(tomorrow), false);
+      });
+    });
+
+    group('getDatesInWeek', () {
+      test('returns 7 dates for a given week', () {
+        final date = DateTime(2026, 1, 25); // Sunday
+        final dates = AppDateUtils.getDatesInWeek(date);
+        expect(dates.length, 7);
+        // Jan 19 (Mon) to Jan 25 (Sun)
+        expect(
+          AppDateUtils.isSameDay(dates.first, DateTime(2026, 1, 19)),
+          true,
+        );
+        expect(AppDateUtils.isSameDay(dates.last, DateTime(2026, 1, 25)), true);
+      });
+
+      test('returned dates are consecutive', () {
+        final date = DateTime(2026, 1, 25);
+        final dates = AppDateUtils.getDatesInWeek(date);
+        for (var i = 0; i < 6; i++) {
+          expect(dates[i + 1].difference(dates[i]).inDays, 1);
+        }
+      });
+    });
+
     group('getDaysInMonth', () {
       test('returns 31 for January', () {
         expect(AppDateUtils.getDaysInMonth(2026, 1), 31);

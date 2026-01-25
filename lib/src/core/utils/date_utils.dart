@@ -73,6 +73,20 @@ class AppDateUtils {
     return isSameDay(date, DateTime.now());
   }
 
+  /// Checks if the [date] represents yesterday.
+  static bool isYesterday(DateTime date) {
+    final yesterday = DateTime.now().subtract(const Duration(days: 1));
+    return isSameDay(date, yesterday);
+  }
+
+  /// Returns a list of all dates in the week containing the given [date].
+  ///
+  /// The week is assumed to start on Monday.
+  static List<DateTime> getDatesInWeek(DateTime date) {
+    final startOfWeek = getStartOfWeek(date);
+    return List.generate(7, (i) => startOfWeek.add(Duration(days: i)));
+  }
+
   /// Returns the number of days in the given [month] of the [year].
   static int getDaysInMonth(int year, int month) {
     if (month == DateTime.february) {

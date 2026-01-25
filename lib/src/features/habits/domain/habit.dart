@@ -73,6 +73,15 @@ class Habit extends HiveObject {
     );
   }
 
+  /// Alias for [isCompletedOn] to improve readability in some contexts.
+  bool isCompletedOnDate(DateTime date) => isCompletedOn(date);
+
+  /// Checks if the habit was completed yesterday.
+  bool get isCompletedYesterday {
+    final yesterday = DateTime.now().subtract(const Duration(days: 1));
+    return isCompletedOn(yesterday);
+  }
+
   /// Calculates the current streak of consecutive days the habit has been completed.
   ///
   /// The streak counts backwards from today (or yesterday if not completed today).

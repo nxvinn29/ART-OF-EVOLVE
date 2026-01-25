@@ -12,8 +12,13 @@ import '../../../../core/theme/app_theme.dart';
 /// Each mood has a specific color and icon. Selection is visually highlighted
 /// with an animation.
 class MoodTrackerWidget extends StatefulWidget {
+  /// Callback when a mood is selected.
+  ///
+  /// The [moodLabel] corresponds to the 'label' of the selected mood.
+  final ValueChanged<String>? onMoodSelected;
+
   /// Creates a [MoodTrackerWidget].
-  const MoodTrackerWidget({super.key});
+  const MoodTrackerWidget({super.key, this.onMoodSelected});
 
   @override
   State<MoodTrackerWidget> createState() => _MoodTrackerWidgetState();
@@ -82,7 +87,10 @@ class _MoodTrackerWidgetState extends State<MoodTrackerWidget> {
     final isSelected = _selectedMoodIndex == index;
 
     return GestureDetector(
-      onTap: () => setState(() => _selectedMoodIndex = index),
+      onTap: () {
+        setState(() => _selectedMoodIndex = index);
+        widget.onMoodSelected?.call(mood['label'] as String);
+      },
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
