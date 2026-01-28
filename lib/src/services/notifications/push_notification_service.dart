@@ -18,7 +18,10 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 /// - Foreground message listening.
 /// - Token retrieval.
 class PushNotificationService {
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  final FirebaseMessaging _firebaseMessaging;
+
+  PushNotificationService({FirebaseMessaging? firebaseMessaging})
+    : _firebaseMessaging = firebaseMessaging ?? FirebaseMessaging.instance;
 
   /// Initializes the service.
   ///
