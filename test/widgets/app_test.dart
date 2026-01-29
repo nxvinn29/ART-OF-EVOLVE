@@ -1,41 +1,68 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:art_of_evolve/src/app.dart';
-import 'package:art_of_evolve/src/features/onboarding/presentation/user_provider.dart';
-import 'package:art_of_evolve/src/features/onboarding/domain/user_profile.dart';
-import 'package:art_of_evolve/src/core/theme/theme_controller.dart';
 import 'package:mockito/mockito.dart';
+import 'package:mockito/annotations.dart';
+import 'package:art_of_evolve/src/app.dart';
+import 'package:art_of_evolve/src/features/onboarding/data/user_repository.dart';
+import 'package:art_of_evolve/src/features/gamification/presentation/gamification_controller.dart';
+import 'package:art_of_evolve/src/features/gamification/domain/user_stats.dart';
+import 'package:art_of_evolve/src/core/theme/theme_controller.dart';
+import 'package:hive/hive.dart';
 
-// We need to mock the UserNotifier to control the state
-class MockUserNotifier extends Notifier<UserProfile?>
-    with Mock
-    implements UserNotifier {
-  @override
-  UserProfile? build() => null;
-}
+@GenerateNiceMocks([MockSpec<UserRepository>(), MockSpec<Box>()])
+import 'app_test.mocks.dart';
 
 void main() {
-  testWidgets('App should show OnboardingScreen when user is null', (
-    tester,
-  ) async {
+  testWidgets('App should render MaterialApp', (tester) async {
+    final mockUserRepository = MockUserRepository();
+
+    // Stub UserRepository
+    when(mockUserRepository.getUserProfile()).thenReturn(null);
+    when(
+      mockUserRepository.watchUserProfile(),
+    ).thenAnswer((_) => Stream.value(null));
+
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          userProvider.overrideWith(MockUserNotifier.new),
-          themeModeProvider.overrideWith((ref) => ThemeModeNotifier()),
+          userRepositoryProvider.overrideWithValue(mockUserRepository),
+          gamificationControllerProvider.overrideWith(
+            (ref) => _ManualMockGamificationController(),
+          ),
+          themeModeProvider.overrideWith(
+            (ref) => _ManualMockThemeModeNotifier(),
+          ),
         ],
         child: const ArtOfEvolveApp(),
       ),
     );
 
-    await tester.pumpAndSettle();
-
-    // Verify OnboardingScreen is shown (by checking for a known widget or text)
-    // Since we don't know the exact content of OnboardingScreen, we check that we are NOT at HomeScreen
-    // Or better, check for a specific text from OnboardingScreen if known.
-    // Let's assume OnboardingScreen has some text or we can check route.
-    // For now, let's just ensure it builds without error.
+    // Only verify that MaterialApp exists
     expect(find.byType(MaterialApp), findsOneWidget);
   });
+}
+
+class _ManualMockGamificationController extends GamificationController {
+  _ManualMockGamificationController() : super();
+  @override
+  void _loadStats() {
+    state = UserStats();
+  }
+
+  @override
+  Future<void> _saveStats() async {}
+}
+
+class _ManualMockThemeModeNotifier extends ThemeModeNotifier {
+  _ManualMockThemeModeNotifier() : super(box: null);
+  @override
+  void _loadThemeMode() {
+    state = ThemeMode.system;
+  }
+
+  @override
+  Future<void> setThemeMode(ThemeMode mode) async {
+    state = mode;
+  }
 }

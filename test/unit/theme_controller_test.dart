@@ -12,11 +12,12 @@ void main() {
   late MockBox mockBox;
   late ThemeModeNotifier notifier;
 
-  setUp(() {
+  setUp(() async {
     mockBox = MockBox();
     when(
       mockBox.get(any, defaultValue: anyNamed('defaultValue')),
     ).thenReturn('system');
+    when(mockBox.put(any, any)).thenAnswer((_) async {});
     notifier = ThemeModeNotifier(box: mockBox);
     await Future.delayed(Duration.zero);
   });

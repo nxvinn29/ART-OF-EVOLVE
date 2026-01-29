@@ -15,6 +15,8 @@ void main() {
   setUp(() {
     mockBox = MockBox<Habit>();
     when(mockBox.values).thenReturn([]);
+    when(mockBox.put(any, any)).thenAnswer((_) async {});
+    when(mockBox.delete(any)).thenAnswer((_) async {});
     repository = HabitsRepository(mockBox);
   });
 
