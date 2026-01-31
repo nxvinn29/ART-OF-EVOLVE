@@ -6,7 +6,6 @@ import 'package:mockito/annotations.dart';
 import 'package:art_of_evolve/src/app.dart';
 import 'package:art_of_evolve/src/features/onboarding/data/user_repository.dart';
 import 'package:art_of_evolve/src/features/gamification/presentation/gamification_controller.dart';
-import 'package:art_of_evolve/src/features/gamification/domain/user_stats.dart';
 import 'package:art_of_evolve/src/core/theme/theme_controller.dart';
 import 'package:hive/hive.dart';
 
@@ -15,6 +14,7 @@ import 'app_test.mocks.dart';
 
 void main() {
   testWidgets('App should render MaterialApp', (tester) async {
+    Hive.init('.');
     final mockUserRepository = MockUserRepository();
 
     // Stub UserRepository
@@ -45,21 +45,10 @@ void main() {
 
 class _ManualMockGamificationController extends GamificationController {
   _ManualMockGamificationController() : super();
-  @override
-  void _loadStats() {
-    state = UserStats();
-  }
-
-  @override
-  Future<void> _saveStats() async {}
 }
 
 class _ManualMockThemeModeNotifier extends ThemeModeNotifier {
   _ManualMockThemeModeNotifier() : super(box: null);
-  @override
-  void _loadThemeMode() {
-    state = ThemeMode.system;
-  }
 
   @override
   Future<void> setThemeMode(ThemeMode mode) async {

@@ -1,0 +1,23 @@
+﻿Analyzing ART-OF-EVOLVE...                                      
+
+  error - Expected an identifier - test\unit\string_extensions_test.dart:133:19 - missing_identifier
+
+flutter : 1 issue 
+found. (ran in 6.2s)
+At line:1 char:1
++ flutter analyze > a
+nalysis_results_2.txt
+ 2>&1
++ ~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+~~~~~
+    + CategoryInfo   
+           : NotSpe  
+  cified: (1 issue   
+  found. (ran in     
+6.2s):String) []    
+, RemoteExceptio    n
+    + FullyQualified 
+   ErrorId : Native  
+  CommandError
+ 

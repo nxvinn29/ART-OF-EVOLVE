@@ -20,7 +20,7 @@ void main() {
     test('isValidEmail should validate email formats', () {
       expect('test@example.com'.isValidEmail, true);
       expect('invalid-email'.isValidEmail, false);
-      expect('user@domain'.isValidEmail, false); // needs extension
+      expect('user@domain'.isValidEmail, false);
       expect('@domain.com'.isValidEmail, false);
     });
 
@@ -31,14 +31,7 @@ void main() {
 
     test('toTitleCase should capitalize each word', () {
       expect('hello world'.toTitleCase, 'Hello World');
-      expect(
-        'HELLO WORLD'.toTitleCase,
-        'HELLO WORLD',
-      ); // capitalize implementation preserves subsequent UPPERCASE if only first char changed?
-      // Wait, capitalize uses substring(1). If first char is upper, it stays.
-      // But if input is 'hELLO', it becomes 'HELLO'.
-      // If input is 'HELLO', it stays 'HELLO'.
-      // So 'HELLO WORLD' -> 'HELLO WORLD'.
+      expect('HELLO WORLD'.toTitleCase, 'HELLO WORLD');
       expect('one two three'.toTitleCase, 'One Two Three');
     });
 
@@ -47,9 +40,6 @@ void main() {
       expect('John Doe'.initials, 'JD');
       expect('single'.initials, 'S');
       expect(''.initials, '');
-
-      // My implementation had where((w) => w.isNotEmpty).
-      // So '   Spaces   ' -> ['Spaces'] -> 'S'.
       expect('   Spaces   '.initials, 'S');
       expect('First Second Third'.initials, 'FS');
     });
@@ -123,6 +113,14 @@ void main() {
       expect('a b c'.isAlphanumeric, false);
       expect('test!'.isAlphanumeric, false);
       expect(''.isAlphanumeric, false);
+    });
+
+    test('containsDigit should detect if string has numbers', () {
+      expect('abc1def'.containsDigit, true);
+      expect('123'.containsDigit, true);
+      expect('no digits here'.containsDigit, false);
+      expect(''.containsDigit, false);
+      expect('!@#$'.containsDigit, false);
     });
   });
 }

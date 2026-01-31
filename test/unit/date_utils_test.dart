@@ -425,5 +425,27 @@ void main() {
         );
       });
     });
+
+    group('isWeekend', () {
+      test('returns true for Saturday', () {
+        final saturday = DateTime(2026, 1, 31); // Saturday
+        expect(AppDateUtils.isWeekend(saturday), true);
+      });
+
+      test('returns true for Sunday', () {
+        final sunday = DateTime(2026, 2, 1); // Sunday
+        expect(AppDateUtils.isWeekend(sunday), true);
+      });
+
+      test('returns false for Monday', () {
+        final monday = DateTime(2026, 2, 2); // Monday
+        expect(AppDateUtils.isWeekend(monday), false);
+      });
+
+      test('returns false for Wednesday', () {
+        final wednesday = DateTime(2026, 2, 4); // Wednesday
+        expect(AppDateUtils.isWeekend(wednesday), false);
+      });
+    });
   });
 }

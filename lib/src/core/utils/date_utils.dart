@@ -121,4 +121,9 @@ class AppDateUtils {
       return formatDate(date);
     }
   }
+
+  /// Checks if the given [date] falls on a weekend (Saturday or Sunday).
+  static bool isWeekend(DateTime date) {
+    return date.weekday == DateTime.saturday || date.weekday == DateTime.sunday;
+  }
 }

@@ -1,0 +1,29 @@
+﻿Analyzing ART-OF-EVOLVE...                                      
+
+warning - The declaration '_loadStats' isn't referenced - test\widgets\app_test.dart:49:8 - unused_element
+warning - The method doesn't override an inherited method - test\widgets\app_test.dart:49:8 - override_on_non_overriding_member
+warning - The declaration '_saveStats' isn't referenced - test\widgets\app_test.dart:54:16 - unused_element
+warning - The method doesn't override an inherited method - test\widgets\app_test.dart:54:16 - override_on_non_overriding_member
+warning - The declaration '_loadThemeMode' isn't referenced - test\widgets\app_test.dart:60:8 - unused_element
+warning - The method doesn't override an inherited method - test\widgets\app_test.dart:60:8 - override_on_non_overriding_member
+
+flutter : 6 issues 
+found. (ran in 6.5s)
+At line:1 char:1
++ flutter analyze > 
+analysis_results.txt 
+2>&1
++ ~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+~~~
+    + CategoryInfo   
+           : NotSpe  
+  cified: (6 issue   
+ s found. (ran in    
+ 6.5s):String) [    
+], RemoteExcepti    
+on
+    + FullyQualified 
+   ErrorId : Native  
+  CommandError
+ 

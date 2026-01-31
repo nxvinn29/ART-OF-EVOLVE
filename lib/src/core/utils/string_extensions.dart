@@ -154,5 +154,8 @@ extension StringExtensions on String {
     return withSpaces.split(' ').map((w) => w.capitalize).join('');
   }
 
+  /// Checks if the string contains at least one numeric digit.
+  bool get containsDigit => RegExp(r'\d').hasMatch(this);
+
   // End of StringExtensions
 }
