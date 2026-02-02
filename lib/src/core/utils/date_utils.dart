@@ -54,6 +54,11 @@ class AppDateUtils {
     return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
   }
 
+  /// Checks if the [date] falls in a leap year.
+  static bool isLeap(DateTime date) {
+    return isLeapYear(date.year);
+  }
+
   /// Returns the number of days between [a] and [b].
   ///
   /// The result is absolute (always positive).
@@ -75,7 +80,8 @@ class AppDateUtils {
 
   /// Checks if the [date] represents yesterday.
   static bool isYesterday(DateTime date) {
-    final yesterday = DateTime.now().subtract(const Duration(days: 1));
+    final now = DateTime.now();
+    final yesterday = now.subtract(const Duration(days: 1));
     return isSameDay(date, yesterday);
   }
 

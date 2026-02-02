@@ -1,4 +1,14 @@
 # Changelog
+ 
+## [1.6.0+19] - 2026-02-02
+### Added
+- **Utilities**: Added `isLeap` (DateTime variant) to `AppDateUtils` with comprehensive unit tests.
+- **Utilities**: Added `isBlank` to `StringExtensions` with comprehensive unit tests for empty/whitespace strings.
+
+### Enhanced
+- **Documentation**: Added detailed KDoc documentation for `GoalRepository`, `HiveService`, and `goalRepositoryProvider`.
+- **Documentation**: Improved provider documentation and usage examples for persistence layer.
+- **Project Tracking**: Updated `CHANGELOG.md` and `task.md` to reflect daily progress.
 
 ## [1.6.0+18] - 2026-01-25
 ### Added

@@ -4,6 +4,10 @@ import '../domain/goal.dart';
 import '../../../services/storage/hive_service.dart';
 import '../../../core/data/repository_interfaces.dart';
 
+/// Provider for accessing the [IGoalsRepository] instance.
+///
+/// This provider creates a singleton instance of [GoalRepository]
+/// with the Hive goals box for data persistence.
 final goalRepositoryProvider = Provider<IGoalsRepository>((ref) {
   return GoalRepository(HiveService.goalsBox);
 });

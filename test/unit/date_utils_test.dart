@@ -199,24 +199,24 @@ void main() {
 
     group('isFuture', () {
       test('returns true for future date', () {
-        final future = DateTime.now().add(const Duration(days: 1));
+        final future = DateTime.now().add(const Duration(hours: 1));
         expect(AppDateUtils.isFuture(future), true);
       });
 
       test('returns false for past date', () {
-        final past = DateTime.now().subtract(const Duration(days: 1));
+        final past = DateTime.now().subtract(const Duration(hours: 1));
         expect(AppDateUtils.isFuture(past), false);
       });
     });
 
     group('isPast', () {
       test('returns true for past date', () {
-        final past = DateTime.now().subtract(const Duration(days: 1));
+        final past = DateTime.now().subtract(const Duration(hours: 1));
         expect(AppDateUtils.isPast(past), true);
       });
 
       test('returns false for future date', () {
-        final future = DateTime.now().add(const Duration(days: 1));
+        final future = DateTime.now().add(const Duration(hours: 1));
         expect(AppDateUtils.isPast(future), false);
       });
     });
@@ -230,6 +230,18 @@ void main() {
       test('returns false for non-leap years', () {
         expect(AppDateUtils.isLeapYear(2023), false);
         expect(AppDateUtils.isLeapYear(1900), false);
+      });
+    });
+
+    group('isLeap', () {
+      test('returns true for dates in leap years', () {
+        expect(AppDateUtils.isLeap(DateTime(2024, 1, 1)), true);
+        expect(AppDateUtils.isLeap(DateTime(2000, 12, 31)), true);
+      });
+
+      test('returns false for dates in non-leap years', () {
+        expect(AppDateUtils.isLeap(DateTime(2023, 5, 15)), false);
+        expect(AppDateUtils.isLeap(DateTime(2100, 1, 1)), false);
       });
     });
 

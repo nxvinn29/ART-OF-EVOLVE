@@ -157,5 +157,8 @@ extension StringExtensions on String {
   /// Checks if the string contains at least one numeric digit.
   bool get containsDigit => RegExp(r'\d').hasMatch(this);
 
+  /// Checks if the string is null, empty or consists only of whitespace.
+  bool get isBlank => trim().isEmpty;
+
   // End of StringExtensions
 }

@@ -11,14 +11,38 @@ import '../../features/gamification/domain/user_stats.dart';
 /// Service to handle local storage using Hive.
 ///
 /// This service is responsible for initializing Hive, registering adapters,
-/// and opening boxes for storing various data models.
+/// and opening boxes for storing various data models. It serves as the
+/// central point for Hive configuration and provides type-safe access
+/// to all data boxes used in the application.
+///
+/// ## Boxes Managed:
+/// - [habits]: User habits and tracking data
+/// - [todos]: Task management data
+/// - [goals]: Long-term user goals
+/// - [userProfile]: Basic user information and stats
+/// - [journal]: Personal journal and reflection entries
+/// - [settings]: Application-wide user preferences
+/// - [userStats]: Gamification and progress data
 class HiveService {
+  /// Box name for storing [Habit] objects.
   static const String habitsBoxName = 'habits';
+
+  /// Box name for storing [Todo] objects.
   static const String todosBoxName = 'todos';
+
+  /// Box name for storing [Goal] objects.
   static const String goalsBoxName = 'goals';
+
+  /// Box name for storing [UserProfile] objects.
   static const String userProfileBoxName = 'user_profile';
+
+  /// Box name for storing [JournalEntry] objects.
   static const String journalBoxName = 'journal';
+
+  /// Box name for storing [UserSettings] objects.
   static const String settingsBoxName = 'user_settings';
+
+  /// Box name for storing [UserStats] objects.
   static const String userStatsBoxName = 'user_stats';
 
   /// Initializes Hive and registers adapters.

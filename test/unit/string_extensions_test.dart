@@ -120,7 +120,15 @@ void main() {
       expect('123'.containsDigit, true);
       expect('no digits here'.containsDigit, false);
       expect(''.containsDigit, false);
-      expect('!@#$'.containsDigit, false);
+      expect('!@#\$'.containsDigit, false);
+    });
+
+    test('isBlank should detect empty or whitespace only strings', () {
+      expect(''.isBlank, true);
+      expect('   '.isBlank, true);
+      expect('\n\t'.isBlank, true);
+      expect('  a  '.isBlank, false);
+      expect('hello'.isBlank, false);
     });
   });
 }
