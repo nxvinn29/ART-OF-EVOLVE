@@ -108,6 +108,19 @@ class HabitsController extends StateNotifier<AsyncValue<List<Habit>>> {
     }
   }
 
+  /// Updates an existing [habit].
+  ///
+  /// Replaces the habit in the repository with the provided updated version.
+  /// Triggers a reload of habits after saving.
+  Future<void> updateHabit(Habit habit) async {
+    try {
+      await _repository.saveHabit(habit);
+      await loadHabits();
+    } catch (e, st) {
+      state = AsyncError(e, st);
+    }
+  }
+
   /// Toggles the completion status of a habit for a specific [date].
   ///
   /// If the habit is marked as completed:

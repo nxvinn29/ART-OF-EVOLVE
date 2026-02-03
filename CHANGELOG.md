@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.6.0+21] - 2026-02-03
+### Added
+- **Utilities**: Added `isSameMonth` and `isSameYear` to `AppDateUtils` with tests.
+- **Utilities**: Added `containsAny` to `StringExtensions` with tests.
+- **Exceptions**: Added `TimeoutException` to `AppException` with tests.
+- **Features**: Added `updateHabit` to `HabitsController`.
+
+### Enhanced
+- **Project Tracking**: Finalized daily contributions and updated `CHANGELOG.md`.
+
 ## [1.6.0+20] - 2026-02-03
 ### Added
 - **Utilities**: Added `isValidIPAddress` (IPv4) to `ValidationUtils` with comprehensive unit tests.

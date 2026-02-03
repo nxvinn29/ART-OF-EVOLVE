@@ -40,6 +40,9 @@ class MockHabitsController extends StateNotifier<AsyncValue<List<Habit>>>
 
   @override
   Future<void> toggleHabitCompletion(String habitId, DateTime date) async {}
+
+  @override
+  Future<void> updateHabit(Habit habit) async {}
 }
 
 void main() {

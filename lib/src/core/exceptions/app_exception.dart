@@ -29,3 +29,8 @@ class ValidationException extends AppException {
 class UnauthorizedException extends AppException {
   const UnauthorizedException(super.message, {super.code, super.details});
 }
+
+/// Exception thrown when an operation times out.
+class TimeoutException extends AppException {
+  const TimeoutException(super.message, {super.code, super.details});
+}

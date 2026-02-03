@@ -165,5 +165,12 @@ extension StringExtensions on String {
   /// Example: "Hello World".removeWhitespace -> "HelloWorld"
   String get removeWhitespace => replaceAll(RegExp(r'\s+'), '');
 
+  /// Checks if the string contains any of the provided [values].
+  ///
+  /// Returns `true` if any [values] are present in the string.
+  bool containsAny(List<String> values) {
+    return values.any((value) => contains(value));
+  }
+
   // End of StringExtensions
 }

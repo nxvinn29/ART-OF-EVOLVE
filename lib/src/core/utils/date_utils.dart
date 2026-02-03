@@ -39,6 +39,16 @@ class AppDateUtils {
     return isSameDay(getStartOfWeek(a), getStartOfWeek(b));
   }
 
+  /// Checks if two dates fall within the same month.
+  static bool isSameMonth(DateTime a, DateTime b) {
+    return a.year == b.year && a.month == b.month;
+  }
+
+  /// Checks if two dates fall within the same year.
+  static bool isSameYear(DateTime a, DateTime b) {
+    return a.year == b.year;
+  }
+
   /// Checks if the [date] is in the future.
   static bool isFuture(DateTime date) {
     return date.isAfter(DateTime.now());

@@ -197,6 +197,45 @@ void main() {
       });
     });
 
+    group('isSameMonth', () {
+      test('returns true for same month and year', () {
+        expect(
+          AppDateUtils.isSameMonth(DateTime(2026, 1, 2), DateTime(2026, 1, 31)),
+          true,
+        );
+      });
+
+      test('returns false for different month same year', () {
+        expect(
+          AppDateUtils.isSameMonth(DateTime(2026, 1, 2), DateTime(2026, 2, 2)),
+          false,
+        );
+      });
+
+      test('returns false for same month different year', () {
+        expect(
+          AppDateUtils.isSameMonth(DateTime(2025, 1, 2), DateTime(2026, 1, 2)),
+          false,
+        );
+      });
+    });
+
+    group('isSameYear', () {
+      test('returns true for same year', () {
+        expect(
+          AppDateUtils.isSameYear(DateTime(2026, 1, 2), DateTime(2026, 12, 31)),
+          true,
+        );
+      });
+
+      test('returns false for different years', () {
+        expect(
+          AppDateUtils.isSameYear(DateTime(2025, 1, 2), DateTime(2026, 1, 2)),
+          false,
+        );
+      });
+    });
+
     group('isFuture', () {
       test('returns true for future date', () {
         final future = DateTime.now().add(const Duration(hours: 1));

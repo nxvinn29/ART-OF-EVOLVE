@@ -51,5 +51,11 @@ void main() {
       expect(exception.code, 'AUTH_REQUIRED');
       expect(exception, isA<AppException>());
     });
+
+    test('TimeoutException stores message correctly', () {
+      const exception = TimeoutException('Operation timed out');
+      expect(exception.message, 'Operation timed out');
+      expect(exception, isA<AppException>());
+    });
   });
 }

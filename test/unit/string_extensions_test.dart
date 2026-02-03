@@ -137,5 +137,13 @@ void main() {
       expect('\t\n'.removeWhitespace, '');
       expect(''.removeWhitespace, '');
     });
+
+    test('containsAny should detect presence of any list item', () {
+      final text = 'Hello World';
+      expect(text.containsAny(['Hello', 'Foo']), true);
+      expect(text.containsAny(['Bar', 'World']), true);
+      expect(text.containsAny(['Foo', 'Bar']), false);
+      expect(''.containsAny(['A']), false);
+    });
   });
 }
