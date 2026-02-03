@@ -160,5 +160,10 @@ extension StringExtensions on String {
   /// Checks if the string is null, empty or consists only of whitespace.
   bool get isBlank => trim().isEmpty;
 
+  /// Removes all whitespace characters from the string.
+  ///
+  /// Example: "Hello World".removeWhitespace -> "HelloWorld"
+  String get removeWhitespace => replaceAll(RegExp(r'\s+'), '');
+
   // End of StringExtensions
 }

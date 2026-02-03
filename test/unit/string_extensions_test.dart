@@ -130,5 +130,12 @@ void main() {
       expect('  a  '.isBlank, false);
       expect('hello'.isBlank, false);
     });
+
+    test('removeWhitespace should strip all spaces, tabs, and newlines', () {
+      expect('Hello World'.removeWhitespace, 'HelloWorld');
+      expect(' a b c '.removeWhitespace, 'abc');
+      expect('\t\n'.removeWhitespace, '');
+      expect(''.removeWhitespace, '');
+    });
   });
 }

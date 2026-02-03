@@ -102,5 +102,20 @@ void main() {
       expect(ValidationUtils.isValidAge(12), false); // Too young
       expect(ValidationUtils.isValidAge(121), false); // Too old
     });
+
+    test('isValidIPAddress validates IPv4 format', () {
+      expect(ValidationUtils.isValidIPAddress('127.0.0.1'), true);
+      expect(ValidationUtils.isValidIPAddress('192.168.1.1'), true);
+      expect(ValidationUtils.isValidIPAddress('255.255.255.255'), true);
+      expect(
+        ValidationUtils.isValidIPAddress('256.0.0.1'),
+        false,
+      ); // Out of range
+      expect(
+        ValidationUtils.isValidIPAddress('1.2.3'),
+        false,
+      ); // Too few octets
+      expect(ValidationUtils.isValidIPAddress('a.b.c.d'), false); // Non-numeric
+    });
   });
 }

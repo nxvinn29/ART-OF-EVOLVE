@@ -1,5 +1,15 @@
 # Changelog
- 
+
+## [1.6.0+20] - 2026-02-03
+### Added
+- **Utilities**: Added `isValidIPAddress` (IPv4) to `ValidationUtils` with comprehensive unit tests.
+- **Utilities**: Added `removeWhitespace` to `StringExtensions` with comprehensive unit tests.
+- **Exceptions**: Added `UnauthorizedException` to `AppException` for better authentication error handling, including unit tests.
+
+### Enhanced
+- **Documentation**: Added detailed KDoc documentation for `QuoteService` with usage examples.
+- **Project Tracking**: Updated `CHANGELOG.md` and `task.md` to reflect second set of daily contributions.
+
 ## [1.6.0+19] - 2026-02-02
 ### Added
 - **Utilities**: Added `isLeap` (DateTime variant) to `AppDateUtils` with comprehensive unit tests.

@@ -16,12 +16,21 @@ class QuoteService {
     'Success is not final, failure is not fatal: It is the courage to continue that counts. – Winston Churchill',
   ];
 
-  /// Returns a random quote from the collection.
+  /// Returns a random motivational quote from the curated collection.
+  ///
+  /// The collection includes quotes from influential figures like Steve Jobs,
+  /// Theodore Roosevelt, and Eleanor Roosevelt.
   ///
   /// The quote is returned as a single string containing both the quote text
   /// and the author, separated by ' – '.
   ///
-  /// Example format: "Quote text. – Author"
+  /// ## Example
+  /// ```dart
+  /// final quote = QuoteService.getRandomQuote();
+  /// print(quote); // e.g., "The only way to do great work is to love what you do. – Steve Jobs"
+  /// ```
+  ///
+  /// Returns a [String] representing the random quote.
   static String getRandomQuote() {
     final random = Random();
     return _quotes[random.nextInt(_quotes.length)];

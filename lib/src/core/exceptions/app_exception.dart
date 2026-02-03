@@ -21,3 +21,11 @@ class DatabaseException extends AppException {
 class ValidationException extends AppException {
   const ValidationException(super.message, {super.code, super.details});
 }
+
+/// Exception thrown when a user is not authorized to perform an action.
+///
+/// This usually occurs when a user is not logged in or doesn't have the
+/// necessary permissions.
+class UnauthorizedException extends AppException {
+  const UnauthorizedException(super.message, {super.code, super.details});
+}

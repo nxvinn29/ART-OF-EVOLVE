@@ -40,5 +40,16 @@ void main() {
       expect(db, isA<AppException>());
       expect(net, isNot(isA<DatabaseException>()));
     });
+
+    test('UnauthorizedException stores details correctly', () {
+      const exception = UnauthorizedException(
+        'User not logged in',
+        code: 'AUTH_REQUIRED',
+      );
+
+      expect(exception.message, 'User not logged in');
+      expect(exception.code, 'AUTH_REQUIRED');
+      expect(exception, isA<AppException>());
+    });
   });
 }

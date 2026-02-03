@@ -89,4 +89,14 @@ class ValidationUtils {
   static bool isValidAge(int age) {
     return age >= 13 && age <= 120;
   }
+
+  /// Validates if the provided [ip] is a valid IPv4 address.
+  ///
+  /// Returns `true` if the IP address follows the x.x.x.x format with octets 0-255.
+  static bool isValidIPAddress(String ip) {
+    final ipRegex = RegExp(
+      r'^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$',
+    );
+    return ipRegex.hasMatch(ip);
+  }
 }
