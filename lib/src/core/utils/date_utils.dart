@@ -95,6 +95,13 @@ class AppDateUtils {
     return isSameDay(date, yesterday);
   }
 
+  /// Checks if the [date] represents tomorrow.
+  static bool isTomorrow(DateTime date) {
+    final now = DateTime.now();
+    final tomorrow = now.add(const Duration(days: 1));
+    return isSameDay(date, tomorrow);
+  }
+
   /// Returns a list of all dates in the week containing the given [date].
   ///
   /// The week is assumed to start on Monday.

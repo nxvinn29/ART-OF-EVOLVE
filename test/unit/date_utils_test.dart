@@ -331,6 +331,22 @@ void main() {
       });
     });
 
+    group('isTomorrow', () {
+      test('returns true for tomorrow', () {
+        final tomorrow = DateTime.now().add(const Duration(days: 1));
+        expect(AppDateUtils.isTomorrow(tomorrow), true);
+      });
+
+      test('returns false for today', () {
+        expect(AppDateUtils.isTomorrow(DateTime.now()), false);
+      });
+
+      test('returns false for yesterday', () {
+        final yesterday = DateTime.now().subtract(const Duration(days: 1));
+        expect(AppDateUtils.isTomorrow(yesterday), false);
+      });
+    });
+
     group('isYesterday', () {
       test('returns true for yesterday', () {
         final yesterday = DateTime.now().subtract(const Duration(days: 1));

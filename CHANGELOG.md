@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.6.0+22] - 2026-02-07
+### Added
+- **Utilities**: Added `isTomorrow` to `AppDateUtils` with tests.
+
 ## [1.6.0+21] - 2026-02-03
 ### Added
 - **Utilities**: Added `isSameMonth` and `isSameYear` to `AppDateUtils` with tests.
