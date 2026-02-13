@@ -19,9 +19,11 @@ void main() {
 
     test('isValidEmail should validate email formats', () {
       expect('test@example.com'.isValidEmail, true);
+      expect('test.user+alias@example.com'.isValidEmail, true);
       expect('invalid-email'.isValidEmail, false);
       expect('user@domain'.isValidEmail, false);
       expect('@domain.com'.isValidEmail, false);
+      expect('user@'.isValidEmail, false);
     });
 
     test('removeSpecialCharacters should clean string', () {
@@ -139,7 +141,7 @@ void main() {
     });
 
     test('containsAny should detect presence of any list item', () {
-      final text = 'Hello World';
+      const text = 'Hello World';
       expect(text.containsAny(['Hello', 'Foo']), true);
       expect(text.containsAny(['Bar', 'World']), true);
       expect(text.containsAny(['Foo', 'Bar']), false);

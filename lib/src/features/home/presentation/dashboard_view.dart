@@ -23,6 +23,9 @@ class DashboardView extends StatelessWidget {
   /// - [MiniTodoListWidget].
   /// - [SelfCareWidget].
   /// - [HabitsList] horizontal scroll.
+  /// Builds the dashboard view with a gradient background and a scrollable content.
+  ///
+  /// [context] is the build context.
   @override
   Widget build(BuildContext context) {
     return Container(

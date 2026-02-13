@@ -1,16 +1,4 @@
 ﻿Analyzing ART-OF-EVOLVE...                                      
 
-   info - Unnecessary use of double quotes - lib\src\features\auth\presentation\auth_screens.dart:150:54 - prefer_single_quotes
-   info - Unnecessary use of double quotes - lib\src\features\home\presentation\widgets\self_care_widget.dart:19:13 - prefer_single_quotes
-   info - Unnecessary use of double quotes - lib\src\features\home\presentation\widgets\self_care_widget.dart:49:17 - prefer_single_quotes
-   info - Unnecessary use of double quotes - lib\src\features\home\presentation\widgets\self_care_widget.dart:54:37 - prefer_single_quotes
-   info - Unnecessary use of double quotes - lib\src\features\home\presentation\widgets\self_care_widget.dart:62:17 - prefer_single_quotes
-   info - Unnecessary use of double quotes - lib\src\features\home\presentation\widgets\self_care_widget.dart:76:17 - prefer_single_quotes
-   info - Unnecessary use of double quotes - lib\src\features\home\presentation\widgets\self_care_widget.dart:84:17 - prefer_single_quotes
-   info - Unnecessary use of double quotes - lib\src\features\home\presentation\widgets\self_care_widget.dart:91:17 - prefer_single_quotes
-   info - Unnecessary use of double quotes - lib\src\features\home\presentation\widgets\self_care_widget.dart:96:37 - prefer_single_quotes
-   info - Unnecessary use of double quotes - lib\src\features\onboarding\presentation\onboarding_screen.dart:104:29 - prefer_single_quotes
-   info - Unnecessary use of double quotes - lib\src\features\onboarding\presentation\onboarding_screen.dart:122:29 - prefer_single_quotes
-   info - Unnecessary use of double quotes - lib\src\features\onboarding\presentation\onboarding_screen.dart:139:29 - prefer_single_quotes
-   info - Unnecessary use of double quotes - lib\src\features\onboarding\presentation\onboarding_screen.dart:157:29 - prefer_single_quotes
+   info - Use 'const' for final variables initialized to a constant value - test\unit\string_extensions_test.dart:144:7 - prefer_const_declarations
 

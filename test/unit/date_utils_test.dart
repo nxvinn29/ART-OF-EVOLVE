@@ -161,6 +161,12 @@ void main() {
         final date2 = DateTime(2026, 1, 2, 15, 45, 30, 456);
         expect(AppDateUtils.isSameDay(date1, date2), true);
       });
+
+      test('returns true for same day at start and end of day', () {
+        final startOfDay = DateTime(2026, 2, 13, 0, 0, 0);
+        final endOfDay = DateTime(2026, 2, 13, 23, 59, 59, 999);
+        expect(AppDateUtils.isSameDay(startOfDay, endOfDay), true);
+      });
     });
 
     group('getStartOfWeek', () {

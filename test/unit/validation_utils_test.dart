@@ -117,5 +117,37 @@ void main() {
       ); // Too few octets
       expect(ValidationUtils.isValidIPAddress('a.b.c.d'), false); // Non-numeric
     });
+
+    test('isValidIPAddressV6 validates IPv6 format', () {
+      expect(
+        ValidationUtils.isValidIPAddressV6(
+          '2001:0db8:85a3:0000:0000:8a2e:0370:7334',
+        ),
+        true,
+      );
+      expect(ValidationUtils.isValidIPAddressV6('::1'), true);
+      expect(ValidationUtils.isValidIPAddressV6('invalid-ipv6'), false);
+    });
+
+    test('isValidStrongPassword validates password strength', () {
+      expect(ValidationUtils.isValidStrongPassword('StrongPass123!'), true);
+      expect(ValidationUtils.isValidStrongPassword('weak'), false); // Too short
+      expect(
+        ValidationUtils.isValidStrongPassword('alllowercase1!'),
+        false,
+      ); // No uppercase
+      expect(
+        ValidationUtils.isValidStrongPassword('ALLUPPERCASE1!'),
+        false,
+      ); // No lowercase
+      expect(
+        ValidationUtils.isValidStrongPassword('NoNumbers!'),
+        false,
+      ); // No digits
+      expect(
+        ValidationUtils.isValidStrongPassword('NoSpecialChar1'),
+        false,
+      ); // No special chars
+    });
   });
 }
