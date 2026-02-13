@@ -108,10 +108,14 @@ class HabitsController extends StateNotifier<AsyncValue<List<Habit>>> {
     }
   }
 
-  /// Updates an existing [habit].
+  /// Updates an existing [habit] in the repository.
   ///
-  /// Replaces the habit in the repository with the provided updated version.
-  /// Triggers a reload of habits after saving.
+  /// This will overwrite any existing data for the habit with the same ID.
+  /// After a successful update, it triggers a full reload of the habits list
+  /// to ensure the UI reflects the changes.
+  ///
+  /// Throws an exception if the repository update fails, which is caught
+  /// and updates the state to [AsyncError].
   Future<void> updateHabit(Habit habit) async {
     try {
       await _repository.saveHabit(habit);
@@ -121,13 +125,15 @@ class HabitsController extends StateNotifier<AsyncValue<List<Habit>>> {
     }
   }
 
-  /// Toggles the completion status of a habit for a specific [date].
+  /// Toggles the completion status of a habit identified by [habitId] for a specific [date].
   ///
-  /// If the habit is marked as completed:
-  /// - It adds the date to the completion list.
-  /// - It awards XP and checks for badges via the [GamificationController].
-  ///
-  /// If un-completed, it creates a new [Habit] instance with the updated date list and saves it.
+  /// This method performs the following:
+  /// 1. Retrieves the current list of habits.
+  /// 2. Finds the target habit and toggles the presence of [date] in its `completedDates`.
+  /// 3. Saves the updated habit back to the repository.
+  /// 4. If the habit was just marked as completed, it awards 10 XP and checks
+  ///    for any newly unlocked badges via the [GamificationController].
+  /// 5. Triggers a reload of habits to update the state.
   Future<void> toggleHabitCompletion(String habitId, DateTime date) async {
     try {
       final habits = await _repository.getHabits();
@@ -185,9 +191,11 @@ class HabitsController extends StateNotifier<AsyncValue<List<Habit>>> {
     }
   }
 
-  /// Deletes the habit with the specified [id].
+  /// Deletes the habit with the specified [id] from the repository.
   ///
-  /// After deletion, reloads the habits list.
+  /// This action removes the habit and all its associated completion history.
+  /// It also implicitly cancels any scheduled notifications for this habit.
+  /// After deletion, the habits list is reloaded to update the UI state.
   Future<void> deleteHabit(String id) async {
     await _repository.deleteHabit(id);
     await loadHabits();
