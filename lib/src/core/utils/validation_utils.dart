@@ -126,4 +126,11 @@ class ValidationUtils {
     );
     return hasUppercase && hasLowercase && hasDigits && hasSpecialCharacters;
   }
+
+  /// Validates if the provided [mac] address is a valid MAC address.
+  ///
+  /// Supports both colon-separated and hyphen-separated formats (e.g., 00:00:00:00:00:00 or 00-00-00-00-00-00).
+  static bool isValidMACAddress(String mac) {
+    return RegExp(r'^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$').hasMatch(mac);
+  }
 }
