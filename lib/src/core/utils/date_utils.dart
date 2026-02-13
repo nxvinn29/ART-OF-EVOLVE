@@ -149,4 +149,9 @@ class AppDateUtils {
   static bool isWeekend(DateTime date) {
     return date.weekday == DateTime.saturday || date.weekday == DateTime.sunday;
   }
+
+  /// Checks if the given [date] falls on a weekday (Monday to Friday).
+  static bool isWeekday(DateTime date) {
+    return date.weekday >= DateTime.monday && date.weekday <= DateTime.friday;
+  }
 }
