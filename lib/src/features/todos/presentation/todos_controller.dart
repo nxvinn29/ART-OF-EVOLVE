@@ -76,7 +76,9 @@ class TodosController extends StateNotifier<AsyncValue<List<Todo>>> {
 
   /// Adds a new todo with the specified [title] and [category].
   ///
-  /// Triggers a reload of the list.
+  /// This creates a new [Todo] instance and persists it to the repository.
+  /// After adding the todo, the list is re-fetched and sorted.
+  /// Any errors during the process are caught and update the state to [AsyncError].
   Future<void> addTodo(String title, {String category = 'General'}) async {
     try {
       final todo = Todo(title: title, category: category);
@@ -88,6 +90,12 @@ class TodosController extends StateNotifier<AsyncValue<List<Todo>>> {
   }
 
   /// Toggles the completion status of the todo with the given [id].
+  ///
+  /// This method:
+  /// 1. Finds the current todo in the state.
+  /// 2. Creates a copy with the `isCompleted` status inverted.
+  /// 3. Saves the updated todo to the repository.
+  /// 4. Reloads the todos list to update the UI.
   Future<void> toggleTodo(String id) async {
     try {
       final todos = state.value!;
@@ -102,8 +110,10 @@ class TodosController extends StateNotifier<AsyncValue<List<Todo>>> {
 
   /// Soft deletes the todo with the given [id].
   ///
-  /// The todo is marked as deleted and given a `deletedAt` timestamp.
-  /// It is NOT removed from the database, just hidden from the active list.
+  /// The todo is marked as deleted by setting `isDeleted` to true and
+  /// providing a `deletedAt` timestamp.
+  /// It remains in the database but will be hidden from the active list
+  /// and appear in the "Trash" section of the app.
   Future<void> deleteTodo(String id) async {
     try {
       final todos = state.value!;
@@ -119,9 +129,10 @@ class TodosController extends StateNotifier<AsyncValue<List<Todo>>> {
     }
   }
 
-  /// Restores a soft-deleted todo.
+  /// Restores a soft-deleted todo identified by [id].
   ///
-  /// Clears the `isDeleted` flag and `deletedAt` timestamp.
+  /// Clears the `isDeleted` flag and sets `deletedAt` back to null.
+  /// The todo will move from the "Trash" section back to the active list.
   Future<void> restoreTodo(String id) async {
     try {
       final todos = state.value!;
