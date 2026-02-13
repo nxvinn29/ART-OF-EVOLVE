@@ -154,4 +154,9 @@ class AppDateUtils {
   static bool isWeekday(DateTime date) {
     return date.weekday >= DateTime.monday && date.weekday <= DateTime.friday;
   }
+
+  /// Returns the quarter of the year for the given [date] (1 to 4).
+  static int getQuarter(DateTime date) {
+    return (date.month - 1) ~/ 3 + 1;
+  }
 }
