@@ -133,4 +133,17 @@ class ValidationUtils {
   static bool isValidMACAddress(String mac) {
     return RegExp(r'^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$').hasMatch(mac);
   }
+
+  /// Validates if the provided [phone] is a valid US phone number.
+  ///
+  /// Supports various formats like:
+  /// - 1234567890
+  /// - 123-456-7890
+  /// - (123) 456-7890
+  /// - 123.456.7890
+  static bool isValidUSPhoneNumber(String phone) {
+    return RegExp(
+      r'^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$',
+    ).hasMatch(phone);
+  }
 }
