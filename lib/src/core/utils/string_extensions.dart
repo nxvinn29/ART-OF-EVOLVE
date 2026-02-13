@@ -178,5 +178,11 @@ extension StringExtensions on String {
     return RegExp(r'^[0-9]+$').hasMatch(this);
   }
 
+  /// Checks if the string contains only alphabetic characters (a-z, A-Z).
+  bool get isAlpha {
+    if (isEmpty) return false;
+    return RegExp(r'^[a-zA-Z]+$').hasMatch(this);
+  }
+
   // End of StringExtensions
 }
