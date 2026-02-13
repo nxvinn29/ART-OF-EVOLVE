@@ -184,5 +184,21 @@ extension StringExtensions on String {
     return RegExp(r'^[a-zA-Z]+$').hasMatch(this);
   }
 
+  /// Masks the string with [maskChar] between [start] and [end] indices.
+  ///
+  /// Useful for sensitive data like credit cards or emails.
+  String mask({int start = 0, int? end, String maskChar = '*'}) {
+    if (isEmpty) return this;
+    final actualEnd = end ?? length;
+    if (start < 0 || start >= length || actualEnd <= start) return this;
+
+    final prefix = substring(0, start);
+    final suffix = actualEnd < length ? substring(actualEnd) : '';
+    final maskLength = actualEnd - start;
+    final mask = maskChar * maskLength;
+
+    return '$prefix$mask$suffix';
+  }
+
   // End of StringExtensions
 }
