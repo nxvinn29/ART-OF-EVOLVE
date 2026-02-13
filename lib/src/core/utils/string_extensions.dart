@@ -172,5 +172,11 @@ extension StringExtensions on String {
     return values.any((value) => contains(value));
   }
 
+  /// Checks if the string contains only digits (0-9).
+  bool get containsOnlyDigits {
+    if (isEmpty) return false;
+    return RegExp(r'^[0-9]+$').hasMatch(this);
+  }
+
   // End of StringExtensions
 }
