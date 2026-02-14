@@ -435,6 +435,29 @@ void main() {
       });
     });
 
+    group('isFirstDayOfMonth', () {
+      test('returns true for Jan 1', () {
+        expect(AppDateUtils.isFirstDayOfMonth(DateTime(2026, 1, 1)), true);
+      });
+
+      test('returns true for Feb 1', () {
+        expect(AppDateUtils.isFirstDayOfMonth(DateTime(2026, 2, 1)), true);
+      });
+
+      test('returns false for Jan 2', () {
+        expect(AppDateUtils.isFirstDayOfMonth(DateTime(2026, 1, 2)), false);
+      });
+
+      test('returns false for Feb 28', () {
+        expect(AppDateUtils.isFirstDayOfMonth(DateTime(2026, 2, 28)), false);
+      });
+
+      test('ignores year and month', () {
+        expect(AppDateUtils.isFirstDayOfMonth(DateTime(2024, 5, 1)), true);
+        expect(AppDateUtils.isFirstDayOfMonth(DateTime(2025, 12, 1)), true);
+      });
+    });
+
     group('Integration Tests', () {
       test('formats and compares current date', () {
         final now = DateTime.now();

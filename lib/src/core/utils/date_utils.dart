@@ -125,6 +125,11 @@ class AppDateUtils {
     return date.day == daysInCurrentMonth;
   }
 
+  /// Checks if the given [date] is the first day of its month.
+  static bool isFirstDayOfMonth(DateTime date) {
+    return date.day == 1;
+  }
+
   /// Returns a human-readable relative time string.
   ///
   /// Example: "Just now", "5m ago", "2h ago", "3d ago".

@@ -2,6 +2,7 @@
 
 ## [1.6.0+24] - 2026-02-13
 ### Added
+- **Utilities**: Added `isFirstDayOfMonth` to `AppDateUtils` with comprehensive unit tests.
 - **Utilities**: Added `isWeekday` and `getQuarter` to `AppDateUtils` with comprehensive unit tests.
 - **Utilities**: Added `containsOnlyDigits`, `isAlpha`, and `mask` to `StringExtensions` with comprehensive unit tests.
 - **Utilities**: Added `isValidMACAddress` and `isValidUSPhoneNumber` to `ValidationUtils` with comprehensive unit tests.
