@@ -209,6 +209,12 @@ extension StringExtensions on String {
     return urlRegex.hasMatch(this);
   }
 
+  /// Repeats the string [times] number of times.
+  String repeat(int times) {
+    if (times <= 0) return '';
+    return this * times;
+  }
+
   /// Helper to convert to lowercase (internal use).
   String toLower() => toLowerCase();
 
