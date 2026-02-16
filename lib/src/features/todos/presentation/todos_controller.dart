@@ -26,27 +26,19 @@ final deletedTodosProvider = Provider<AsyncValue<List<Todo>>>((ref) {
   );
 });
 
-/// Controller for managing [Todo] items.
+/// Controller for managing [Todo] items using Riverpod's [StateNotifier].
 ///
 /// This controller handles basic CRUD operations as well as soft-deletion and restoration.
 /// Capabilities include:
-/// - Loading todos with sorting (uncompleted first).
-/// - Adding new todos.
-/// - Toggling completion status.
-/// - Soft deleting (move to trash).
-/// - Restoring from trash.
-/// - Permanent deletion.
+/// - Loading todos with custom sorting (uncompleted first).
+/// - Adding new todos with automatic category assignment.
+/// - Toggling completion status with state persistence.
+/// - Soft deleting (move to trash) with timestamping.
+/// - Restoring from trash (undo deletion).
+/// - Permanent deletion for storage optimization.
 ///
-/// It uses [ITodosRepository] for persistence.
-/// Controller for managing [Todo] items.
-///
-/// Operations:
-/// - `loadTodos`: Fetches and sorts todos.
-/// - `addTodo`: Creates a new todo.
-/// - `toggleTodo`: Switches completion status.
-/// - `deleteTodo`: Soft deletes a todo (moves to trash).
-/// - `restoreTodo`: Restores from trash.
-/// - `deletePermanently`: Removing from storage.
+/// It uses [ITodosRepository] for underlying persistence, which is typically
+/// implemented using Hive or a similar local database.
 class TodosController extends StateNotifier<AsyncValue<List<Todo>>> {
   final ITodosRepository _repository;
 
