@@ -177,4 +177,17 @@ class AppDateUtils {
     final day = date.day > nextMonthDays ? nextMonthDays : date.day;
     return DateTime(year, month, day, date.hour, date.minute, date.second);
   }
+
+  /// Returns the date of the same day in the previous month.
+  static DateTime getPreviousMonth(DateTime date) {
+    var year = date.year;
+    var month = date.month - 1;
+    if (month < 1) {
+      month = 12;
+      year--;
+    }
+    final prevMonthDays = getDaysInMonth(year, month);
+    final day = date.day > prevMonthDays ? prevMonthDays : date.day;
+    return DateTime(year, month, day, date.hour, date.minute, date.second);
+  }
 }
