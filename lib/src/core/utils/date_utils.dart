@@ -164,4 +164,17 @@ class AppDateUtils {
   static int getQuarter(DateTime date) {
     return (date.month - 1) ~/ 3 + 1;
   }
+
+  /// Returns the date of the same day in the next month.
+  static DateTime getNextMonth(DateTime date) {
+    var year = date.year;
+    var month = date.month + 1;
+    if (month > 12) {
+      month = 1;
+      year++;
+    }
+    final nextMonthDays = getDaysInMonth(year, month);
+    final day = date.day > nextMonthDays ? nextMonthDays : date.day;
+    return DateTime(year, month, day, date.hour, date.minute, date.second);
+  }
 }
