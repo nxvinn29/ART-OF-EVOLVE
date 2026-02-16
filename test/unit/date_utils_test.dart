@@ -543,5 +543,67 @@ void main() {
         expect(AppDateUtils.isWeekend(wednesday), false);
       });
     });
+
+    group('isSameTime', () {
+      test('returns true for same time', () {
+        final d1 = DateTime(2026, 1, 1, 10, 30, 45);
+        final d2 = DateTime(2025, 12, 31, 10, 30, 45);
+        expect(AppDateUtils.isSameTime(d1, d2), true);
+      });
+
+      test('returns false for different time', () {
+        final d1 = DateTime(2026, 1, 1, 10, 30, 45);
+        final d2 = DateTime(2026, 1, 1, 10, 30, 46);
+        expect(AppDateUtils.isSameTime(d1, d2), false);
+      });
+    });
+
+    group('getNextMonth', () {
+      test('returns same day in next month', () {
+        final date = DateTime(2026, 1, 15);
+        final next = AppDateUtils.getNextMonth(date);
+        expect(next.year, 2026);
+        expect(next.month, 2);
+        expect(next.day, 15);
+      });
+
+      test('handles year rollover', () {
+        final date = DateTime(2025, 12, 10);
+        final next = AppDateUtils.getNextMonth(date);
+        expect(next.year, 2026);
+        expect(next.month, 1);
+      });
+
+      test('handles shorter months', () {
+        final date = DateTime(2026, 1, 31);
+        final next = AppDateUtils.getNextMonth(date);
+        expect(next.month, 2);
+        expect(next.day, 28);
+      });
+    });
+
+    group('getPreviousMonth', () {
+      test('returns same day in previous month', () {
+        final date = DateTime(2026, 2, 15);
+        final prev = AppDateUtils.getPreviousMonth(date);
+        expect(prev.year, 2026);
+        expect(prev.month, 1);
+        expect(prev.day, 15);
+      });
+
+      test('handles year rollover', () {
+        final date = DateTime(2026, 1, 10);
+        final prev = AppDateUtils.getPreviousMonth(date);
+        expect(prev.year, 2025);
+        expect(prev.month, 12);
+      });
+
+      test('handles shorter months', () {
+        final date = DateTime(2026, 3, 31);
+        final prev = AppDateUtils.getPreviousMonth(date);
+        expect(prev.month, 2);
+        expect(prev.day, 28);
+      });
+    });
   });
 }

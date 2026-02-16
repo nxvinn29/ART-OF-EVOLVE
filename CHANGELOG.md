@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.6.0+25] - 2026-02-16
+### Added
+- **Utilities**: Added `isValidUrl`, `repeat`, and `slugify` to `StringExtensions` with comprehensive unit tests.
+- **Utilities**: Added `getNextMonth`, `getPreviousMonth`, and `isSameTime` to `AppDateUtils` with comprehensive unit tests.
+
+### Enhanced
+- **Documentation**: Enhanced KDoc documentation for `TodosController` with detailed class and method descriptions.
+- **Utilities**: Improved `isValidEmail` regex to support plus signs and complex subdomains.
+- **Project Tracking**: Implemented 10 distinct daily contributions for code quality improvement.
+
 ## [1.6.0+24] - 2026-02-13
 ### Added
 - **Utilities**: Added `isFirstDayOfMonth` to `AppDateUtils` with comprehensive unit tests.
