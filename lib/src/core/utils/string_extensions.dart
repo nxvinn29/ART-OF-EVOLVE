@@ -215,6 +215,16 @@ extension StringExtensions on String {
     return this * times;
   }
 
+  /// Converts the string to a URL-friendly slug.
+  String slugify() {
+    return toLower()
+        .trim()
+        .replaceAll(RegExp(r'[^a-z0-9\s-]'), '')
+        .replaceAll(RegExp(r'[\s_]+'), '-')
+        .replaceAll(RegExp(r'-+'), '-')
+        .replaceAll(RegExp(r'^-+|-+$'), '');
+  }
+
   /// Helper to convert to lowercase (internal use).
   String toLower() => toLowerCase();
 
