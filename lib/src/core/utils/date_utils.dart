@@ -49,6 +49,11 @@ class AppDateUtils {
     return a.year == b.year;
   }
 
+  /// Checks if two dates represent the same time (hour, minute, second).
+  static bool isSameTime(DateTime a, DateTime b) {
+    return a.hour == b.hour && a.minute == b.minute && a.second == b.second;
+  }
+
   /// Checks if the [date] is in the future.
   static bool isFuture(DateTime date) {
     return date.isAfter(DateTime.now());
