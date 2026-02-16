@@ -147,5 +147,29 @@ void main() {
       expect(text.containsAny(['Foo', 'Bar']), false);
       expect(''.containsAny(['A']), false);
     });
+
+    test('isValidUrl should validate URL formats', () {
+      expect('https://google.com'.isValidUrl, true);
+      expect('http://www.google.com'.isValidUrl, true);
+      expect('google.com'.isValidUrl, true);
+      expect('http://test.com/path'.isValidUrl, true);
+      expect('ftp://invalid.com'.isValidUrl, false);
+      expect('not a url'.isValidUrl, false);
+    });
+
+    test('repeat should repeat string correct number of times', () {
+      expect('a'.repeat(3), 'aaa');
+      expect('abc'.repeat(2), 'abcabc');
+      expect('hi'.repeat(0), '');
+      expect('hi'.repeat(-1), '');
+    });
+
+    test('slugify should create URL-friendly strings', () {
+      expect('Hello World!'.slugify(), 'hello-world');
+      expect('This is Case Sensitive'.slugify(), 'this-is-case-sensitive');
+      expect('Special @#\$% Characters!'.slugify(), 'special-characters');
+      expect('  spaces   everywhere  '.slugify(), 'spaces-everywhere');
+      expect('already-a-slug'.slugify(), 'already-a-slug');
+    });
   });
 }
