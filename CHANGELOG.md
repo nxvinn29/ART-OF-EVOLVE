@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.6.0+26] - 2026-02-17
+### Added
+- **Utilities**: Added `countOccurrences`, `isJson`, and `toBool` to `StringExtensions` with unit tests.
+- **Utilities**: Added `isSameQuarter`, `getStartOfYear`, `getEndOfYear`, `min`, and `max` to `AppDateUtils` with unit tests.
+- **Utilities**: Added `isValidUuid` and `isValidCreditCard` to `ValidationUtils` with unit tests.
+
 ## [1.6.0+25] - 2026-02-16
 ### Added
 - **Utilities**: Added `isValidUrl`, `repeat`, and `slugify` to `StringExtensions` with comprehensive unit tests.
