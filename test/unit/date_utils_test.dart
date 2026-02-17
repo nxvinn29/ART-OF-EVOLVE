@@ -605,5 +605,37 @@ void main() {
         expect(prev.day, 28);
       });
     });
+
+    group('isSameQuarter', () {
+      test('returns true for same quarter', () {
+        expect(
+          AppDateUtils.isSameQuarter(
+            DateTime(2026, 1, 1),
+            DateTime(2026, 3, 31),
+          ),
+          true,
+        );
+      });
+
+      test('returns false for different quarters', () {
+        expect(
+          AppDateUtils.isSameQuarter(
+            DateTime(2026, 3, 31),
+            DateTime(2026, 4, 1),
+          ),
+          false,
+        );
+      });
+
+      test('returns false for different years', () {
+        expect(
+          AppDateUtils.isSameQuarter(
+            DateTime(2025, 1, 1),
+            DateTime(2026, 1, 1),
+          ),
+          false,
+        );
+      });
+    });
   });
 }

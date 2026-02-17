@@ -195,4 +195,9 @@ class AppDateUtils {
     final day = date.day > prevMonthDays ? prevMonthDays : date.day;
     return DateTime(year, month, day, date.hour, date.minute, date.second);
   }
+
+  /// Checks if two dates are in the same quarter of the year.
+  static bool isSameQuarter(DateTime a, DateTime b) {
+    return a.year == b.year && getQuarter(a) == getQuarter(b);
+  }
 }
