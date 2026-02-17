@@ -165,5 +165,19 @@ void main() {
       ); // Too short
       expect(ValidationUtils.isValidUuid('invalid-uuid-format'), false);
     });
+
+    test('isValidCreditCard validates using Luhn algorithm', () {
+      // Known valid test card (Stripe)
+      expect(ValidationUtils.isValidCreditCard('4242 4242 4242 4242'), true);
+      expect(ValidationUtils.isValidCreditCard('4242-4242-4242-4242'), true);
+      expect(ValidationUtils.isValidCreditCard('4242424242424242'), true);
+
+      expect(
+        ValidationUtils.isValidCreditCard('4242 4242 4242 4243'),
+        false,
+      ); // Invalid check digit
+      expect(ValidationUtils.isValidCreditCard(''), false);
+      expect(ValidationUtils.isValidCreditCard('abc'), false);
+    });
   });
 }

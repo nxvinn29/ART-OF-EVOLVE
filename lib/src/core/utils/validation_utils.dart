@@ -153,4 +153,29 @@ class ValidationUtils {
       r'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$',
     ).hasMatch(uuid);
   }
+
+  /// Validates if the provided [cardNumber] is a valid credit card number using Luhn algorithm.
+  static bool isValidCreditCard(String cardNumber) {
+    if (cardNumber.isEmpty) return false;
+    // Remove spaces and dashes
+    final cleanNumber = cardNumber.replaceAll(RegExp(r'[\s-]'), '');
+    // Check if it contains only digits
+    if (!RegExp(r'^[0-9]+$').hasMatch(cleanNumber)) return false;
+
+    // Luhn algorithm implementation
+    int sum = 0;
+    bool alternate = false;
+    for (int i = cleanNumber.length - 1; i >= 0; i--) {
+      int n = int.parse(cleanNumber[i]);
+      if (alternate) {
+        n *= 2;
+        if (n > 9) {
+          n = (n % 10) + 1;
+        }
+      }
+      sum += n;
+      alternate = !alternate;
+    }
+    return sum % 10 == 0;
+  }
 }
