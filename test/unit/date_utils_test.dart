@@ -637,5 +637,15 @@ void main() {
         );
       });
     });
+
+    group('getStartOfYear', () {
+      test('returns Jan 1st of the same year', () {
+        final date = DateTime(2026, 5, 15);
+        final startOfYear = AppDateUtils.getStartOfYear(date);
+        expect(startOfYear.year, 2026);
+        expect(startOfYear.month, 1);
+        expect(startOfYear.day, 1);
+      });
+    });
   });
 }

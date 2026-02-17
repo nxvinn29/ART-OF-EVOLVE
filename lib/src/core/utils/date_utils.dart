@@ -200,4 +200,11 @@ class AppDateUtils {
   static bool isSameQuarter(DateTime a, DateTime b) {
     return a.year == b.year && getQuarter(a) == getQuarter(b);
   }
+
+  /// Returns the start of the year (January 1st) for the given [date].
+  ///
+  /// The returned date will have the time set to 00:00:00.
+  static DateTime getStartOfYear(DateTime date) {
+    return DateTime(date.year, 1, 1);
+  }
 }
