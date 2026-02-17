@@ -212,4 +212,14 @@ class AppDateUtils {
   static DateTime getEndOfYear(DateTime date) {
     return DateTime(date.year, 12, 31);
   }
+
+  /// Returns the earlier of two dates.
+  static DateTime min(DateTime a, DateTime b) {
+    return a.isBefore(b) ? a : b;
+  }
+
+  /// Returns the later of two dates.
+  static DateTime max(DateTime a, DateTime b) {
+    return a.isAfter(b) ? a : b;
+  }
 }

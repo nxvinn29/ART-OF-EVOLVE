@@ -657,5 +657,23 @@ void main() {
         expect(endOfYear.day, 31);
       });
     });
+
+    group('min', () {
+      test('returns earlier date', () {
+        final d1 = DateTime(2026, 1, 1);
+        final d2 = DateTime(2026, 1, 2);
+        expect(AppDateUtils.min(d1, d2), d1);
+        expect(AppDateUtils.min(d2, d1), d1);
+      });
+    });
+
+    group('max', () {
+      test('returns later date', () {
+        final d1 = DateTime(2026, 1, 1);
+        final d2 = DateTime(2026, 1, 2);
+        expect(AppDateUtils.max(d1, d2), d2);
+        expect(AppDateUtils.max(d2, d1), d2);
+      });
+    });
   });
 }
