@@ -146,4 +146,11 @@ class ValidationUtils {
       r'^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$',
     ).hasMatch(phone);
   }
+
+  /// Validates if the provided [uuid] is a valid UUID.
+  static bool isValidUuid(String uuid) {
+    return RegExp(
+      r'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$',
+    ).hasMatch(uuid);
+  }
 }

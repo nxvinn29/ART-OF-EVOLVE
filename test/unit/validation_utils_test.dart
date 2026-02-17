@@ -149,5 +149,21 @@ void main() {
         false,
       ); // No special chars
     });
+
+    test('isValidUuid validates UUID format', () {
+      expect(
+        ValidationUtils.isValidUuid('123e4567-e89b-12d3-a456-426614174000'),
+        true,
+      );
+      expect(
+        ValidationUtils.isValidUuid('00000000-0000-0000-0000-000000000000'),
+        true,
+      );
+      expect(
+        ValidationUtils.isValidUuid('123e4567-e89b-12d3-a456-42661417400'),
+        false,
+      ); // Too short
+      expect(ValidationUtils.isValidUuid('invalid-uuid-format'), false);
+    });
   });
 }
