@@ -647,5 +647,15 @@ void main() {
         expect(startOfYear.day, 1);
       });
     });
+
+    group('getEndOfYear', () {
+      test('returns Dec 31st of the same year', () {
+        final date = DateTime(2026, 5, 15);
+        final endOfYear = AppDateUtils.getEndOfYear(date);
+        expect(endOfYear.year, 2026);
+        expect(endOfYear.month, 12);
+        expect(endOfYear.day, 31);
+      });
+    });
   });
 }

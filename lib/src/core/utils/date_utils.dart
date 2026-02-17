@@ -207,4 +207,9 @@ class AppDateUtils {
   static DateTime getStartOfYear(DateTime date) {
     return DateTime(date.year, 1, 1);
   }
+
+  /// Returns the end of the year (December 31st) for the given [date].
+  static DateTime getEndOfYear(DateTime date) {
+    return DateTime(date.year, 12, 31);
+  }
 }
