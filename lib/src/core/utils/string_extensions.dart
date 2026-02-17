@@ -228,5 +228,11 @@ extension StringExtensions on String {
   /// Helper to convert to lowercase (internal use).
   String toLower() => toLowerCase();
 
+  /// Counts the number of occurrences of a [pattern] in the string.
+  int countOccurrences(String pattern) {
+    if (pattern.isEmpty || isEmpty) return 0;
+    return pattern.allMatches(this).length;
+  }
+
   // End of StringExtensions
 }

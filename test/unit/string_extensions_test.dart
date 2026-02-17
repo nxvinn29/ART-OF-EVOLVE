@@ -171,5 +171,13 @@ void main() {
       expect('  spaces   everywhere  '.slugify(), 'spaces-everywhere');
       expect('already-a-slug'.slugify(), 'already-a-slug');
     });
+
+    test('countOccurrences should return correct count', () {
+      expect('hello world'.countOccurrences('o'), 2);
+      expect('hello'.countOccurrences('l'), 2);
+      expect('hello'.countOccurrences('x'), 0);
+      expect(''.countOccurrences('a'), 0);
+      expect('a'.countOccurrences(''), 0);
+    });
   });
 }
