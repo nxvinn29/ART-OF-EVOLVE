@@ -242,5 +242,10 @@ extension StringExtensions on String {
         (trimmed.startsWith('[') && trimmed.endsWith(']'));
   }
 
+  /// Converts string "true" (case-insensitive) to boolean true, others to false.
+  bool get toBool {
+    return toLowerCase() == 'true';
+  }
+
   // End of StringExtensions
 }

@@ -187,5 +187,14 @@ void main() {
       expect('{'.isJson, false);
       expect(''.isJson, false);
     });
+
+    test('toBool should convert string to boolean', () {
+      expect('true'.toBool, true);
+      expect('TRUE'.toBool, true);
+      expect('True'.toBool, true);
+      expect('false'.toBool, false);
+      expect('random'.toBool, false);
+      expect(''.toBool, false);
+    });
   });
 }
