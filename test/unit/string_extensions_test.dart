@@ -179,5 +179,13 @@ void main() {
       expect(''.countOccurrences('a'), 0);
       expect('a'.countOccurrences(''), 0);
     });
+
+    test('isJson should detect json-like strings', () {
+      expect('{"a": 1}'.isJson, true);
+      expect('[1, 2]'.isJson, true);
+      expect('not json'.isJson, false);
+      expect('{'.isJson, false);
+      expect(''.isJson, false);
+    });
   });
 }

@@ -234,5 +234,13 @@ extension StringExtensions on String {
     return pattern.allMatches(this).length;
   }
 
+  /// Checks if the string is a valid JSON structure (starts with { or [ and ends with } or ]).
+  bool get isJson {
+    if (isEmpty) return false;
+    final trimmed = trim();
+    return (trimmed.startsWith('{') && trimmed.endsWith('}')) ||
+        (trimmed.startsWith('[') && trimmed.endsWith(']'));
+  }
+
   // End of StringExtensions
 }
