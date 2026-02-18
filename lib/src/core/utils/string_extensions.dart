@@ -256,5 +256,10 @@ extension StringExtensions on String {
   /// Checks if the string contains at least one special character.
   bool get hasSpecialCharacters => contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
 
+  /// Replaces multiple whitespace characters with a single space.
+  String get collapseWhitespace {
+    return trim().replaceAll(RegExp(r'\s+'), ' ');
+  }
+
   // End of StringExtensions
 }

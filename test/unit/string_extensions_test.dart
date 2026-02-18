@@ -218,5 +218,15 @@ void main() {
       expect('123'.hasSpecialCharacters, false);
       expect(''.hasSpecialCharacters, false);
     });
+    test(
+      'collapseWhitespace should replace multiple spaces with single space',
+      () {
+        expect('Hello   World'.collapseWhitespace, 'Hello World');
+        expect('  Hello  World  '.collapseWhitespace, 'Hello World');
+        expect('Hello\n\tWorld'.collapseWhitespace, 'Hello World');
+        expect('Hello World'.collapseWhitespace, 'Hello World');
+        expect(''.collapseWhitespace, '');
+      },
+    );
   });
 }
