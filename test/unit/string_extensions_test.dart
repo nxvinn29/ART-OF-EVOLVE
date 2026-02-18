@@ -196,5 +196,12 @@ void main() {
       expect('random'.toBool, false);
       expect(''.toBool, false);
     });
+    test('hasUpperCase should detect uppercase letters', () {
+      expect('Hello'.hasUpperCase, true);
+      expect('HELLO'.hasUpperCase, true);
+      expect('hello'.hasUpperCase, false);
+      expect('123'.hasUpperCase, false);
+      expect(''.hasUpperCase, false);
+    });
   });
 }

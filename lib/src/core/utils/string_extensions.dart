@@ -247,5 +247,8 @@ extension StringExtensions on String {
     return toLowerCase() == 'true';
   }
 
+  /// Checks if the string contains at least one uppercase letter.
+  bool get hasUpperCase => contains(RegExp(r'[A-Z]'));
+
   // End of StringExtensions
 }
