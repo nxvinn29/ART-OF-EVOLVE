@@ -253,5 +253,8 @@ extension StringExtensions on String {
   /// Checks if the string contains at least one lowercase letter.
   bool get hasLowerCase => contains(RegExp(r'[a-z]'));
 
+  /// Checks if the string contains at least one special character.
+  bool get hasSpecialCharacters => contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
+
   // End of StringExtensions
 }

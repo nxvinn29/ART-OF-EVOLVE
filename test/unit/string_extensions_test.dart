@@ -210,5 +210,13 @@ void main() {
       expect('123'.hasLowerCase, false);
       expect(''.hasLowerCase, false);
     });
+    test('hasSpecialCharacters should detect special characters', () {
+      expect('Hello!'.hasSpecialCharacters, true);
+      expect('@user'.hasSpecialCharacters, true);
+      expect('123#'.hasSpecialCharacters, true);
+      expect('Hello World'.hasSpecialCharacters, false);
+      expect('123'.hasSpecialCharacters, false);
+      expect(''.hasSpecialCharacters, false);
+    });
   });
 }
