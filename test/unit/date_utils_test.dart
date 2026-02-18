@@ -675,5 +675,15 @@ void main() {
         expect(AppDateUtils.max(d2, d1), d2);
       });
     });
+    test('isSameHour should work correctly', () {
+      final date1 = DateTime(2023, 1, 1, 10, 0);
+      final date2 = DateTime(2023, 1, 1, 10, 30);
+      final date3 = DateTime(2023, 1, 1, 11, 0);
+      final date4 = DateTime(2023, 1, 2, 10, 0);
+
+      expect(AppDateUtils.isSameHour(date1, date2), true);
+      expect(AppDateUtils.isSameHour(date1, date3), false);
+      expect(AppDateUtils.isSameHour(date1, date4), false);
+    });
   });
 }

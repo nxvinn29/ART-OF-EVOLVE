@@ -222,4 +222,9 @@ class AppDateUtils {
   static DateTime max(DateTime a, DateTime b) {
     return a.isAfter(b) ? a : b;
   }
+
+  /// Checks if two dates represent the same hour.
+  static bool isSameHour(DateTime a, DateTime b) {
+    return isSameDay(a, b) && a.hour == b.hour;
+  }
 }
