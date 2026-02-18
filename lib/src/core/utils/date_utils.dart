@@ -244,4 +244,9 @@ class AppDateUtils {
   static bool isAfternoon(DateTime date) {
     return date.hour >= 12 && date.hour < 18;
   }
+
+  /// Checks if the given [date] is in the evening (6:00 PM - 11:59 PM).
+  static bool isEvening(DateTime date) {
+    return date.hour >= 18;
+  }
 }
