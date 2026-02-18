@@ -261,5 +261,10 @@ extension StringExtensions on String {
     return trim().replaceAll(RegExp(r'\s+'), ' ');
   }
 
+  /// Removes all non-numeric characters from the string.
+  String get removeNonNumeric {
+    return replaceAll(RegExp(r'[^0-9]'), '');
+  }
+
   // End of StringExtensions
 }

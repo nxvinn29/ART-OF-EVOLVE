@@ -228,5 +228,12 @@ void main() {
         expect(''.collapseWhitespace, '');
       },
     );
+    test('removeNonNumeric should strip all non-digit characters', () {
+      expect('abc123def'.removeNonNumeric, '123');
+      expect('1-2-3'.removeNonNumeric, '123');
+      expect('(123) 456-7890'.removeNonNumeric, '1234567890');
+      expect('no digits'.removeNonNumeric, '');
+      expect('12345'.removeNonNumeric, '12345');
+    });
   });
 }
