@@ -250,5 +250,8 @@ extension StringExtensions on String {
   /// Checks if the string contains at least one uppercase letter.
   bool get hasUpperCase => contains(RegExp(r'[A-Z]'));
 
+  /// Checks if the string contains at least one lowercase letter.
+  bool get hasLowerCase => contains(RegExp(r'[a-z]'));
+
   // End of StringExtensions
 }

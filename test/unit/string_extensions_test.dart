@@ -203,5 +203,12 @@ void main() {
       expect('123'.hasUpperCase, false);
       expect(''.hasUpperCase, false);
     });
+    test('hasLowerCase should detect lowercase letters', () {
+      expect('Hello'.hasLowerCase, true);
+      expect('hello'.hasLowerCase, true);
+      expect('HELLO'.hasLowerCase, false);
+      expect('123'.hasLowerCase, false);
+      expect(''.hasLowerCase, false);
+    });
   });
 }
