@@ -234,4 +234,9 @@ class AppDateUtils {
   static int minutesBetween(DateTime a, DateTime b) {
     return a.difference(b).inMinutes.abs();
   }
+
+  /// Checks if the given [date] is in the morning (6:00 AM - 11:59 AM).
+  static bool isMorning(DateTime date) {
+    return date.hour >= 6 && date.hour < 12;
+  }
 }

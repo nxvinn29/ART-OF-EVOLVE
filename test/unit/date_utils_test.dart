@@ -695,5 +695,11 @@ void main() {
       expect(AppDateUtils.minutesBetween(date1, date3), 15);
       expect(AppDateUtils.minutesBetween(date1, date1), 0);
     });
+    test('isMorning should detect morning times correctly', () {
+      expect(AppDateUtils.isMorning(DateTime(2023, 1, 1, 6, 0)), true);
+      expect(AppDateUtils.isMorning(DateTime(2023, 1, 1, 11, 59)), true);
+      expect(AppDateUtils.isMorning(DateTime(2023, 1, 1, 5, 59)), false);
+      expect(AppDateUtils.isMorning(DateTime(2023, 1, 1, 12, 0)), false);
+    });
   });
 }
