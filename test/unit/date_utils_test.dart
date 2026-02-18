@@ -701,5 +701,11 @@ void main() {
       expect(AppDateUtils.isMorning(DateTime(2023, 1, 1, 5, 59)), false);
       expect(AppDateUtils.isMorning(DateTime(2023, 1, 1, 12, 0)), false);
     });
+    test('isAfternoon should detect afternoon times correctly', () {
+      expect(AppDateUtils.isAfternoon(DateTime(2023, 1, 1, 12, 0)), true);
+      expect(AppDateUtils.isAfternoon(DateTime(2023, 1, 1, 17, 59)), true);
+      expect(AppDateUtils.isAfternoon(DateTime(2023, 1, 1, 11, 59)), false);
+      expect(AppDateUtils.isAfternoon(DateTime(2023, 1, 1, 18, 0)), false);
+    });
   });
 }
