@@ -227,4 +227,11 @@ class AppDateUtils {
   static bool isSameHour(DateTime a, DateTime b) {
     return isSameDay(a, b) && a.hour == b.hour;
   }
+
+  /// Returns the number of minutes between [a] and [b].
+  ///
+  /// The result is absolute (always positive).
+  static int minutesBetween(DateTime a, DateTime b) {
+    return a.difference(b).inMinutes.abs();
+  }
 }

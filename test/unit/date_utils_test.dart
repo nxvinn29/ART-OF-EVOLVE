@@ -685,5 +685,15 @@ void main() {
       expect(AppDateUtils.isSameHour(date1, date3), false);
       expect(AppDateUtils.isSameHour(date1, date4), false);
     });
+    test('minutesBetween should return absolute minutes', () {
+      final date1 = DateTime(2023, 1, 1, 10, 0);
+      final date2 = DateTime(2023, 1, 1, 10, 30);
+      final date3 = DateTime(2023, 1, 1, 10, 15);
+
+      expect(AppDateUtils.minutesBetween(date1, date2), 30);
+      expect(AppDateUtils.minutesBetween(date2, date1), 30);
+      expect(AppDateUtils.minutesBetween(date1, date3), 15);
+      expect(AppDateUtils.minutesBetween(date1, date1), 0);
+    });
   });
 }
