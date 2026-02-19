@@ -249,4 +249,43 @@ class AppDateUtils {
   static bool isEvening(DateTime date) {
     return date.hour >= 18;
   }
+
+  /// Returns the start of the day (00:00:00) for the given [date].
+  static DateTime startOfDay(DateTime date) {
+    return DateTime(date.year, date.month, date.day);
+  }
+
+  /// Returns the end of the day (23:59:59.999) for the given [date].
+  static DateTime endOfDay(DateTime date) {
+    return DateTime(date.year, date.month, date.day, 23, 59, 59, 999);
+  }
+
+  /// Adds [years] to the given [date].
+  static DateTime addYears(DateTime date, int years) {
+    return DateTime(
+      date.year + years,
+      date.month,
+      date.day,
+      date.hour,
+      date.minute,
+      date.second,
+    );
+  }
+
+  /// Subtracts [years] from the given [date].
+  static DateTime subtractYears(DateTime date, int years) {
+    return DateTime(
+      date.year - years,
+      date.month,
+      date.day,
+      date.hour,
+      date.minute,
+      date.second,
+    );
+  }
+
+  /// Returns the number of months between [a] and [b].
+  static int diffInMonths(DateTime a, DateTime b) {
+    return (a.year - b.year).abs() * 12 + (a.month - b.month).abs();
+  }
 }
