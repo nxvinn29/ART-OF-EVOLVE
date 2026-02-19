@@ -68,14 +68,14 @@ extension StringExtensions on String {
     return double.tryParse(this) != null;
   }
 
-  /// Returns a new string with all characters in reverse order.
+  /// Returns a new string with all of its characters in reverse order.
   ///
   /// Example: "abc".reverse -> "cba"
   String get reverse {
     return split('').reversed.join('');
   }
 
-  /// Truncates the string to exactly [maxLength] characters.
+  /// Truncates the string to exactly [maxLength] characters without ellipsis.
   ///
   /// Optionally appends [suffix] if truncated. Default is empty string.
   String truncate(int maxLength, {String suffix = ''}) {
@@ -83,7 +83,7 @@ extension StringExtensions on String {
     return '${substring(0, maxLength)}$suffix';
   }
 
-  /// Converts the string to kebab-case (hyphen-separated).
+  /// Converts the string to kebab-case (hyphen-separated lowercase).
   ///
   /// Example: "Hello World" -> "hello-world"
   String get toKebabCase {
@@ -98,7 +98,7 @@ extension StringExtensions on String {
         .toLowerCase();
   }
 
-  /// Converts the string to snake_case (underscore-separated).
+  /// Converts the string to snake_case (underscore-separated lowercase).
   ///
   /// Example: "Hello World" -> "hello_world"
   String get toSnakeCase {
@@ -113,7 +113,7 @@ extension StringExtensions on String {
         .toLowerCase();
   }
 
-  /// Converts the string to camelCase (lowerCamelCase).
+  /// Converts the string to camelCase (starts with lower case).
   ///
   /// Example: "hello world" -> "helloWorld"
   String get toCamelCase {
