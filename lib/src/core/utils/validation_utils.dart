@@ -1,20 +1,44 @@
+/// Validation utility class for the Art of Evolve project.
+///
+/// This file contains methods for validating common input types such as email,
+/// passwords, phone numbers, and more.
 class ValidationUtils {
-  /// Validates if the provided [email] string is in a correct email format.
+  /// Validates if the provided [email] string adheres to a standard email format.
+  ///
+  /// Returns `true` if the email matches the regex pattern,
+  /// otherwise returns `false`.
   static bool isValidEmail(String email) {
     return RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+').hasMatch(email);
   }
 
-  /// Validates if the provided [password] meets the security requirements.
+  /// Validates if the provided [password] meets basic security requirements.
+  ///
+  /// A valid password must:
+  /// - Be at least 8 characters long.
+  /// - Contain at least one numeric character (0-9).
+  ///
+  /// Returns `true` if valid, otherwise `false`.
   static bool isValidPassword(String password) {
     return password.length >= 8 && RegExp(r'[0-9]').hasMatch(password);
   }
 
-  /// Validates if the provided [username] is acceptable.
+  /// Validates if the provided [username] meets length and presence requirements.
+  ///
+  /// A valid username must:
+  /// - Not be empty (non-blank).
+  /// - Have a length of at least 3 characters.
+  ///
+  /// Returns `true` if valid, otherwise `false`.
   static bool isValidUsername(String username) {
     return username.isNotEmpty && username.length >= 3;
   }
 
-  /// Sanitizes the [input] string by removing HTML tags.
+  /// Sanitizes the [input] string by stripping out any HTML tags.
+  ///
+  /// This method removes any substrings matching an HTML tag pattern (e.g., `<script>`)
+  /// and trims leading/trailing whitespace.
+  ///
+  /// Returns the sanitized and trimmed string.
   static String sanitizeInput(String input) {
     return input.replaceAll(RegExp(r'<[^>]*>'), '').trim();
   }
