@@ -3,14 +3,16 @@ import 'dart:convert';
 /// Extension methods for [String] to add common manipulation capabilities.
 extension StringExtensions on String {
   /// Capitalizes the first letter of the string.
+  /// No effect if the string is empty or already capitalized.
   ///
-  /// Example: "hello" -> "Hello"
+  /// Example: "hello".capitalize() -> "Hello"
   String get capitalize {
     if (isEmpty) return this;
     return '${this[0].toUpperCase()}${substring(1)}';
   }
 
-  /// Limits the string to [maxLength] characters and adds "..." if truncated.
+  /// Limits the string to [maxLength] characters and adds "..." if it is truncated.
+  /// If the string is already shorter than [maxLength], returns it as is.
   ///
   /// Example: "Hello World".limit(5) -> "Hello..."
   String limit(int maxLength) {
@@ -18,18 +20,21 @@ extension StringExtensions on String {
     return '${substring(0, maxLength)}...';
   }
 
-  /// Basic email validation check.
+  /// Basic email validation check using a standard regular expression.
+  /// Returns true if the string is a valid email format.
   bool get isValidEmail {
     final emailRegex = RegExp(r'^[\w-\.\+]+@([\w-]+\.)+[\w-]{2,4}$');
     return emailRegex.hasMatch(this);
   }
 
-  /// Removes special characters, leaving only alphanumeric characters and spaces.
+  /// Removes characters that are not letters (a-z), digits (0-9) or spaces.
+  /// Effectively strips all punctuation and symbols from the string.
   String get removeSpecialCharacters {
     return replaceAll(RegExp(r'[^a-zA-Z0-9 ]'), '');
   }
 
-  /// Converts the string to Title Case.
+  /// Converts the string to Title Case format.
+  /// Each word's first letter will be converted to upper case.
   ///
   /// Example: "hello world" -> "Hello World"
   String get toTitleCase {
@@ -37,10 +42,10 @@ extension StringExtensions on String {
     return split(' ').map((word) => word.capitalize).join(' ');
   }
 
-  /// Extracts initials from the string.
+  /// Extracts initials from the string using only the first character of words.
+  /// Always returns capitalized initials.
   ///
   /// Example: "Hello World" -> "HW"
-  /// Takes the first character of the first two words.
   String get initials {
     if (isEmpty) return '';
     final words = split(' ').where((w) => w.isNotEmpty).toList();
@@ -49,24 +54,28 @@ extension StringExtensions on String {
     return '${words[0][0]}${words[1][0]}'.toUpperCase();
   }
 
-  /// Returns the number of words in the string.
+  /// Returns the total number of words in the string based on whitespace splitting.
+  /// Empty strings return 0.
   int get wordCount {
     if (isEmpty) return 0;
     return split(RegExp(r'\s+')).where((w) => w.isNotEmpty).length;
   }
 
-  /// Checks if the string is numeric.
+  /// Returns true if the string can be parsed as a [double].
+  /// Does not allow trailing or leading whitespace.
   bool get isNumeric {
     if (isEmpty) return false;
     return double.tryParse(this) != null;
   }
 
-  /// Reverses the string.
+  /// Returns a new string with all characters in reverse order.
+  ///
+  /// Example: "abc".reverse -> "cba"
   String get reverse {
     return split('').reversed.join('');
   }
 
-  /// Truncates the string to [maxLength] characters.
+  /// Truncates the string to exactly [maxLength] characters.
   ///
   /// Optionally appends [suffix] if truncated. Default is empty string.
   String truncate(int maxLength, {String suffix = ''}) {
@@ -74,7 +83,7 @@ extension StringExtensions on String {
     return '${substring(0, maxLength)}$suffix';
   }
 
-  /// Converts the string to kebab-case.
+  /// Converts the string to kebab-case (hyphen-separated).
   ///
   /// Example: "Hello World" -> "hello-world"
   String get toKebabCase {
@@ -89,7 +98,7 @@ extension StringExtensions on String {
         .toLowerCase();
   }
 
-  /// Converts the string to snake_case.
+  /// Converts the string to snake_case (underscore-separated).
   ///
   /// Example: "Hello World" -> "hello_world"
   String get toSnakeCase {
@@ -104,10 +113,9 @@ extension StringExtensions on String {
         .toLowerCase();
   }
 
-  /// Converts the string to camelCase.
+  /// Converts the string to camelCase (lowerCamelCase).
   ///
   /// Example: "hello world" -> "helloWorld"
-  /// Example: "hello_world" -> "helloWorld"
   String get toCamelCase {
     if (isEmpty) return this;
     final words = split(
@@ -122,17 +130,16 @@ extension StringExtensions on String {
     return buffer.toString();
   }
 
-  /// Checks if the string contains only alphanumeric characters.
+  /// Checks if the string consists only of alphanumeric characters (a-z, A-Z, 0-9).
+  /// Returns false if the string is empty.
   bool get isAlphanumeric {
     if (isEmpty) return false;
     return RegExp(r'^[a-zA-Z0-9]+$').hasMatch(this);
   }
 
-  /// Converts the string to PascalCase.
+  /// Converts the string to PascalCase (UpperCamelCase).
   ///
   /// Example: "hello world" -> "HelloWorld"
-  /// Example: "hello_world" -> "HelloWorld"
-  /// Example: "helloWorld" -> "HelloWorld"
   String get toPascalCase {
     if (isEmpty) return this;
 
@@ -156,10 +163,10 @@ extension StringExtensions on String {
     return withSpaces.split(' ').map((w) => w.capitalize).join('');
   }
 
-  /// Checks if the string contains at least one numeric digit.
+  /// Returns true if the string contains at least one numeric digit (0-9).
   bool get containsDigit => RegExp(r'\d').hasMatch(this);
 
-  /// Checks if the string is null, empty or consists only of whitespace.
+  /// Returns true if the string is empty or contains only whitespace characters.
   bool get isBlank => trim().isEmpty;
 
   /// Removes all whitespace characters from the string.
