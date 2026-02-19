@@ -20,6 +20,7 @@ extension StringExtensions on String {
   ///
   /// Example: "Hello World".limit(5) -> "Hello..."
   String limit(int maxLength) {
+    // Return original string if length is within maxLength limit
     if (length <= maxLength) return this;
     return '${substring(0, maxLength)}...';
   }
