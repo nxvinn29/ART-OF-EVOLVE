@@ -28,6 +28,7 @@ extension StringExtensions on String {
   /// Basic email validation check using a standard regular expression.
   /// Returns true if the string is a valid email format.
   bool get isValidEmail {
+    // Regular expression for validating email format
     final emailRegex = RegExp(r'^[\w-\.\+]+@([\w-]+\.)+[\w-]{2,4}$');
     return emailRegex.hasMatch(this);
   }
