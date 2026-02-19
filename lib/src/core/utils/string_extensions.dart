@@ -83,9 +83,9 @@ extension StringExtensions on String {
     return split('').reversed.join('');
   }
 
-  /// Truncates the string to exactly [maxLength] characters without ellipsis.
+  /// Truncates the string to the specified [maxLength] without adding any suffix.
   ///
-  /// Optionally appends [suffix] if truncated. Default is empty string.
+  /// Optionally appends a [suffix] (like '...') if truncated. Default is empty.
   String truncate(int maxLength, {String suffix = ''}) {
     if (length <= maxLength) return this;
     return '${substring(0, maxLength)}$suffix';
