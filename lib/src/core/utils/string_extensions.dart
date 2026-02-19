@@ -91,7 +91,7 @@ extension StringExtensions on String {
     return '${substring(0, maxLength)}$suffix';
   }
 
-  /// Converts the string to kebab-case (hyphen-separated lowercase).
+  /// Converts the string to kebab-case format (lowercase words separated by hyphens).
   ///
   /// Example: "Hello World" -> "hello-world"
   String get toKebabCase {
