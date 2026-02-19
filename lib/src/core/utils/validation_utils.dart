@@ -1,59 +1,30 @@
 class ValidationUtils {
   /// Validates if the provided [email] string is in a correct email format.
-  ///
-  /// Returns `true` if the email matches the standard regex pattern,
-  /// otherwise returns `false`.
   static bool isValidEmail(String email) {
     return RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+').hasMatch(email);
   }
 
   /// Validates if the provided [password] meets the security requirements.
-  ///
-  /// A valid password must:
-  /// - Be at least 8 characters long.
-  /// - Contain at least one numeric character.
-  ///
-  /// Returns `true` if valid, otherwise `false`.
   static bool isValidPassword(String password) {
-    // Min 8 chars, at least one number
     return password.length >= 8 && RegExp(r'[0-9]').hasMatch(password);
   }
 
   /// Validates if the provided [username] is acceptable.
-  ///
-  /// A valid username must:
-  /// - Not be empty.
-  /// - Have a length of at least 3 characters.
-  ///
-  /// Returns `true` if valid, otherwise `false`.
   static bool isValidUsername(String username) {
     return username.isNotEmpty && username.length >= 3;
   }
 
   /// Sanitizes the [input] string by removing HTML tags.
-  ///
-  /// This method removes any substrings matching an HTML tag pattern (e.g., `<script>`)
-  /// and trims leading/trailing whitespace.
-  ///
-  /// Returns the sanitized string.
   static String sanitizeInput(String input) {
-    // Remove HTML tags and trim
     return input.replaceAll(RegExp(r'<[^>]*>'), '').trim();
   }
 
   /// Validates if the provided [phoneNumber] is a valid 10-digit number.
-  ///
-  /// Returns `true` if the phone number consists of exactly 10 digits,
-  /// otherwise returns `false`.
   static bool isValidPhoneNumber(String phoneNumber) {
     return RegExp(r'^\d{10}$').hasMatch(phoneNumber);
   }
 
   /// Validates if the provided [url] is a valid URL.
-  ///
-  /// Checks for http/https scheme and domain structure.
-  ///
-  /// Returns `true` if valid, otherwise `false`.
   static bool isValidUrl(String url) {
     final uri = Uri.tryParse(url);
     return uri != null && uri.isAbsolute && uri.host.isNotEmpty;
@@ -70,10 +41,6 @@ class ValidationUtils {
   }
 
   /// Validates if the [color] is a valid hex color string.
-  ///
-  /// Supports both 3-digit and 6-digit hex codes, optionally starting with '#'.
-  /// Use 6/8 digit hex codes for consistent parsing if needed, but this checks general format.
-  /// Pattern: ^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$
   static bool isValidHexColor(String color) {
     return RegExp(
       r'^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$',
@@ -91,8 +58,6 @@ class ValidationUtils {
   }
 
   /// Validates if the provided [ip] is a valid IPv4 address.
-  ///
-  /// Returns `true` if the IP address follows the x.x.x.x format with octets 0-255.
   static bool isValidIPAddress(String ip) {
     final ipRegex = RegExp(
       r'^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$',
@@ -109,13 +74,6 @@ class ValidationUtils {
   }
 
   /// Validates if the provided [password] is a strong password.
-  ///
-  /// A strong password must:
-  /// - Be at least 10 characters long.
-  /// - Contain at least one uppercase letter.
-  /// - Contain at least one lowercase letter.
-  /// - Contain at least one numeric character.
-  /// - Contain at least one special character.
   static bool isValidStrongPassword(String password) {
     if (password.length < 10) return false;
     final hasUppercase = password.contains(RegExp(r'[A-Z]'));
@@ -128,19 +86,11 @@ class ValidationUtils {
   }
 
   /// Validates if the provided [mac] address is a valid MAC address.
-  ///
-  /// Supports both colon-separated and hyphen-separated formats (e.g., 00:00:00:00:00:00 or 00-00-00-00-00-00).
   static bool isValidMACAddress(String mac) {
     return RegExp(r'^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$').hasMatch(mac);
   }
 
   /// Validates if the provided [phone] is a valid US phone number.
-  ///
-  /// Supports various formats like:
-  /// - 1234567890
-  /// - 123-456-7890
-  /// - (123) 456-7890
-  /// - 123.456.7890
   static bool isValidUSPhoneNumber(String phone) {
     return RegExp(
       r'^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$',
@@ -157,25 +107,65 @@ class ValidationUtils {
   /// Validates if the provided [cardNumber] is a valid credit card number using Luhn algorithm.
   static bool isValidCreditCard(String cardNumber) {
     if (cardNumber.isEmpty) return false;
-    // Remove spaces and dashes
     final cleanNumber = cardNumber.replaceAll(RegExp(r'[\s-]'), '');
-    // Check if it contains only digits
     if (!RegExp(r'^[0-9]+$').hasMatch(cleanNumber)) return false;
-
-    // Luhn algorithm implementation
     int sum = 0;
     bool alternate = false;
     for (int i = cleanNumber.length - 1; i >= 0; i--) {
       int n = int.parse(cleanNumber[i]);
       if (alternate) {
         n *= 2;
-        if (n > 9) {
-          n = (n % 10) + 1;
-        }
+        if (n > 9) n = (n % 10) + 1;
       }
       sum += n;
       alternate = !alternate;
     }
     return sum % 10 == 0;
+  }
+
+  /// Validates if the provided [version] is a valid semantic version.
+  static bool isValidSemVer(String version) {
+    return RegExp(
+      r'^v?(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$',
+    ).hasMatch(version);
+  }
+
+  /// Checks if the provided [str] is a valid double.
+  static bool isDouble(String str) {
+    return double.tryParse(str) != null;
+  }
+
+  /// Checks if the provided [str] is a valid integer.
+  static bool isInt(String str) {
+    return int.tryParse(str) != null;
+  }
+
+  /// Validates if the provided [port] is a valid port number (0-65535).
+  static bool isValidPort(int port) {
+    return port >= 0 && port <= 65535;
+  }
+
+  /// Validates if the provided [lat] is a valid latitude (-90 to 90).
+  static bool isValidLatitude(double lat) {
+    return lat >= -90.0 && lat <= 90.0;
+  }
+
+  /// Validates if the provided [password] has minimum complexity.
+  static bool isValidPasswordComplexity(String password) {
+    if (password.length < 8) return false;
+    final hasUppercase = password.contains(RegExp(r'[A-Z]'));
+    final hasLowercase = password.contains(RegExp(r'[a-z]'));
+    final hasDigits = password.contains(RegExp(r'[0-9]'));
+    return hasUppercase && hasLowercase && hasDigits;
+  }
+
+  /// Validates if the provided [username] has minimum complexity.
+  static bool isValidUsernameComplexity(String username) {
+    return username.length >= 3 && RegExp(r'^[a-zA-Z0-9]+$').hasMatch(username);
+  }
+
+  /// Validates if the [input] length is within [min] and [max].
+  static bool isValidLength(String input, int min, int max) {
+    return input.length >= min && input.length <= max;
   }
 }
