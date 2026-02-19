@@ -1,6 +1,9 @@
 import 'dart:convert';
 
-/// Extension methods for [String] to add common manipulation capabilities.
+/// String utility extensions for the Art of Evolve project.
+///
+/// This file provides common string manipulation methods such as capitalization,
+/// case conversion, validation, and masking.
 extension StringExtensions on String {
   /// Capitalizes the first letter of the string.
   /// No effect if the string is empty or already capitalized.
