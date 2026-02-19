@@ -174,7 +174,10 @@ extension StringExtensions on String {
   }
 
   /// Returns true if the string contains at least one numeric digit (0-9).
-  bool get containsDigit => RegExp(r'\d').hasMatch(this);
+  bool get containsDigit {
+    // Commit 13/20: Refined containsDigit check
+    return RegExp(r'\d').hasMatch(this);
+  }
 
   /// Returns true if the string is empty or contains only whitespace characters.
   bool get isBlank {
