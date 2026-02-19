@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 /// Extension methods for [String] to add common manipulation capabilities.
 extension StringExtensions on String {
   /// Capitalizes the first letter of the string.
@@ -264,6 +266,89 @@ extension StringExtensions on String {
   /// Removes all non-numeric characters from the string.
   String get removeNonNumeric {
     return replaceAll(RegExp(r'[^0-9]'), '');
+  }
+
+  /// Checks if the string contains only ASCII characters.
+  bool get isAscii {
+    if (isEmpty) return false;
+    return RegExp(r'^[\x00-\x7F]+$').hasMatch(this);
+  }
+
+  /// Checks if the entire string is upper case.
+  bool get isUpperCase {
+    if (isEmpty) return false;
+    return this == toUpperCase();
+  }
+
+  /// Checks if the entire string is lower case.
+  bool get isLowerCase {
+    if (isEmpty) return false;
+    return this == toLowerCase();
+  }
+
+  /// Returns the left [length] characters of the string.
+  String left(int length) {
+    if (length <= 0) return '';
+    if (length >= this.length) return this;
+    return substring(0, length);
+  }
+
+  /// Returns the right [length] characters of the string.
+  String right(int length) {
+    if (length <= 0) return '';
+    if (length >= this.length) return this;
+    return substring(this.length - length);
+  }
+
+  /// Returns the number of lines in the string.
+  int get countLines {
+    if (isEmpty) return 0;
+    return split('\n').length;
+  }
+
+  /// Encodes the string to Base64.
+  String get toBase64 {
+    return base64.encode(utf8.encode(this));
+  }
+
+  /// Decodes the string from Base64.
+  String get fromBase64 {
+    return utf8.decode(base64.decode(this));
+  }
+
+  /// Removes all numeric digits from the string.
+  String get removeDigits {
+    return replaceAll(RegExp(r'\d'), '');
+  }
+
+  /// Removes all alphabetic characters from the string.
+  String get removeLetters {
+    return replaceAll(RegExp(r'[a-zA-Z]'), '');
+  }
+
+  /// Converts the string to sentence case (only first letter capitalized).
+  String get toSentenceCase {
+    if (isEmpty) return this;
+    final lower = toLowerCase();
+    return '${lower[0].toUpperCase()}${lower.substring(1)}';
+  }
+
+  /// Masks the string showing only first two and last two characters.
+  String get maskSensitiveInfo {
+    if (length <= 4) return '*' * length;
+    return '${substring(0, 2)}${'*' * (length - 4)}${substring(length - 2)}';
+  }
+
+  /// Checks if the string contains only alphabetic characters.
+  bool get containsOnlyLetters {
+    if (isEmpty) return false;
+    return RegExp(r'^[a-zA-Z]+$').hasMatch(this);
+  }
+
+  /// Checks if the string contains only numeric characters.
+  bool get containsOnlyNumbers {
+    if (isEmpty) return false;
+    return RegExp(r'^[0-9]+$').hasMatch(this);
   }
 
   // End of StringExtensions
