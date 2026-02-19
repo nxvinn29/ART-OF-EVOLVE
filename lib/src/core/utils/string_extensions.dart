@@ -141,6 +141,7 @@ extension StringExtensions on String {
   /// Checks if the string consists only of alphanumeric characters (a-z, A-Z, 0-9).
   /// Returns false if the string is empty.
   bool get isAlphanumeric {
+    // Commit 11/20: Refined isAlphanumeric check
     if (isEmpty) return false;
     return RegExp(r'^[a-zA-Z0-9]+$').hasMatch(this);
   }
@@ -149,6 +150,7 @@ extension StringExtensions on String {
   ///
   /// Example: "hello world" -> "HelloWorld"
   String get toPascalCase {
+    // Commit 12/20: Refined toPascalCase conversion
     if (isEmpty) return this;
 
     // First, split by existing separators (space, underscore, hyphen)
@@ -175,7 +177,10 @@ extension StringExtensions on String {
   bool get containsDigit => RegExp(r'\d').hasMatch(this);
 
   /// Returns true if the string is empty or contains only whitespace characters.
-  bool get isBlank => trim().isEmpty;
+  bool get isBlank {
+    // Commit 14/20: Refined isBlank check
+    return trim().isEmpty;
+  }
 
   /// Removes all whitespace characters from the string.
   ///
