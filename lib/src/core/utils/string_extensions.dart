@@ -121,7 +121,7 @@ extension StringExtensions on String {
         .toLowerCase();
   }
 
-  /// Converts the string to camelCase (starts with lower case).
+  /// Converts the string to camelCase format (starts with lowercase, no spaces).
   ///
   /// Example: "hello world" -> "helloWorld"
   String get toCamelCase {
