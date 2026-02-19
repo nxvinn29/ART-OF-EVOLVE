@@ -76,7 +76,7 @@ extension StringExtensions on String {
     return double.tryParse(this) != null;
   }
 
-  /// Returns a new string with all of its characters in reverse order.
+  /// Returns a new string with its character sequence reversed.
   ///
   /// Example: "abc".reverse -> "cba"
   String get reverse {
