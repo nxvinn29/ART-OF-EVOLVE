@@ -61,8 +61,8 @@ extension StringExtensions on String {
     return split(RegExp(r'\s+')).where((w) => w.isNotEmpty).length;
   }
 
-  /// Returns true if the string can be parsed as a [double].
-  /// Does not allow trailing or leading whitespace.
+  /// Returns true if the string can be parsed as a double value.
+  /// Does not allow leading or trailing whitespace.
   bool get isNumeric {
     if (isEmpty) return false;
     return double.tryParse(this) != null;
