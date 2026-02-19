@@ -10,6 +10,7 @@ extension StringExtensions on String {
   ///
   /// Example: "hello".capitalize() -> "Hello"
   String get capitalize {
+    // Check if the string is empty before attempting capitalization
     if (isEmpty) return this;
     return '${this[0].toUpperCase()}${substring(1)}';
   }
