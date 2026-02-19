@@ -1,6 +1,9 @@
 import 'package:intl/intl.dart';
 
 /// Utility class for date and time formatting and comparison.
+/// Date utility functions for the Art of Evolve project.
+///
+/// This file contains common date manipulation and comparison methods.
 class AppDateUtils {
   /// Formats the [date] to 'MMM d, yyyy' (e.g., Jan 1, 2024).
   static String formatDate(DateTime date) {
@@ -250,7 +253,7 @@ class AppDateUtils {
     return date.hour >= 18;
   }
 
-  /// Returns the start of the day (00:00:00) for the given [date].
+  /// Returns a [DateTime] at the very beginning (00:00:00) of the given [date].
   static DateTime startOfDay(DateTime date) {
     return DateTime(date.year, date.month, date.day);
   }
