@@ -5,9 +5,10 @@ import 'package:intl/intl.dart';
 ///
 /// This file contains common date manipulation and comparison methods.
 class AppDateUtils {
-  /// Formats the [date] to 'MMM d, yyyy' (e.g., Jan 1, 2024).
-  static String formatDate(DateTime date) {
-    return DateFormat('MMM d, yyyy').format(date);
+  /// Formats the [date] to 'MMM d, yyyy' (e.g., Jan 1, 2024) or a custom [pattern].
+  static String formatDate(DateTime date, {String pattern = 'MMM d, yyyy'}) {
+    // Use the intl package for date formatting with the specified pattern
+    return DateFormat(pattern).format(date);
   }
 
   /// Formats the [date] time to 'h:mm a' (e.g., 5:30 PM).
@@ -24,6 +25,7 @@ class AppDateUtils {
   ///
   /// Ignores time components.
   static bool isSameDay(DateTime a, DateTime b) {
+    // Exact day comparison requires year, month, and day to match
     return a.year == b.year && a.month == b.month && a.day == b.day;
   }
 
@@ -243,8 +245,9 @@ class AppDateUtils {
     return date.hour >= 6 && date.hour < 12;
   }
 
-  /// Checks if the given [date] is in the afternoon (12:00 PM - 5:59 PM).
+  /// Returns true if the time of the given [date] is between 12:00 PM and 5:59 PM.
   static bool isAfternoon(DateTime date) {
+    // Commit 15/20: Refined isAfternoon check
     return date.hour >= 12 && date.hour < 18;
   }
 

@@ -40,6 +40,7 @@ class ValidationUtils {
   ///
   /// Returns the sanitized and trimmed string.
   static String sanitizeInput(String input) {
+    // Regex matches anything inside < > to remove potential HTML scripts
     return input.replaceAll(RegExp(r'<[^>]*>'), '').trim();
   }
 
