@@ -106,7 +106,7 @@ extension StringExtensions on String {
         .toLowerCase();
   }
 
-  /// Converts the string to snake_case (underscore-separated lowercase).
+  /// Converts the string to snake_case format (lowercase words separated by underscores).
   ///
   /// Example: "Hello World" -> "hello_world"
   String get toSnakeCase {
