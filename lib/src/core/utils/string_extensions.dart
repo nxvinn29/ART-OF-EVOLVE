@@ -36,6 +36,7 @@ extension StringExtensions on String {
   /// Removes characters that are not letters (a-z), digits (0-9) or spaces.
   /// Effectively strips all punctuation and symbols from the string.
   String get removeSpecialCharacters {
+    // Regex for capturing any character that is NOT a letter, digit or space
     return replaceAll(RegExp(r'[^a-zA-Z0-9 ]'), '');
   }
 
@@ -45,6 +46,7 @@ extension StringExtensions on String {
   /// Example: "hello world" -> "Hello World"
   String get toTitleCase {
     if (isEmpty) return this;
+    // Split by space, capitalize each word, and join back
     return split(' ').map((word) => word.capitalize).join(' ');
   }
 
