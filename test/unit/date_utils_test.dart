@@ -713,5 +713,129 @@ void main() {
       expect(AppDateUtils.isEvening(DateTime(2023, 1, 1, 17, 59)), false);
       expect(AppDateUtils.isEvening(DateTime(2023, 1, 1, 6, 0)), false);
     });
+
+    group('getStartOfMonth', () {
+      test('returns the 1st day of the month at 00:00:00', () {
+        final date = DateTime(2026, 5, 15, 10, 30);
+        final result = AppDateUtils.getStartOfMonth(date);
+        expect(result.year, 2026);
+        expect(result.month, 5);
+        expect(result.day, 1);
+        expect(result.hour, 0);
+        expect(result.minute, 0);
+      });
+
+      test('works for the 1st of the month', () {
+        final date = DateTime(2026, 1, 1);
+        final result = AppDateUtils.getStartOfMonth(date);
+        expect(result.day, 1);
+        expect(result.month, 1);
+      });
+    });
+
+    group('getEndOfMonth', () {
+      test('returns the last day of the month at 23:59:59.999', () {
+        final date = DateTime(2026, 1, 15);
+        final result = AppDateUtils.getEndOfMonth(date);
+        expect(result.year, 2026);
+        expect(result.month, 1);
+        expect(result.day, 31);
+        expect(result.hour, 23);
+        expect(result.minute, 59);
+        expect(result.second, 59);
+        expect(result.millisecond, 999);
+      });
+
+      test('handles December', () {
+        final date = DateTime(2026, 12, 10);
+        final result = AppDateUtils.getEndOfMonth(date);
+        expect(result.year, 2026);
+        expect(result.month, 12);
+        expect(result.day, 31);
+      });
+
+      test('handles leap year February', () {
+        final date = DateTime(2024, 2, 10);
+        final result = AppDateUtils.getEndOfMonth(date);
+        expect(result.month, 2);
+        expect(result.day, 29);
+      });
+    });
+
+    group('isWithinRange', () {
+      test('returns true for date within range', () {
+        final date = DateTime(2026, 1, 15);
+        final start = DateTime(2026, 1, 1);
+        final end = DateTime(2026, 1, 31);
+        expect(AppDateUtils.isWithinRange(date, start, end), true);
+      });
+
+      test('returns true for start date', () {
+        final date = DateTime(2026, 1, 1);
+        final start = DateTime(2026, 1, 1);
+        final end = DateTime(2026, 1, 31);
+        expect(AppDateUtils.isWithinRange(date, start, end), true);
+      });
+
+      test('returns true for end date', () {
+        final date = DateTime(2026, 1, 31);
+        final start = DateTime(2026, 1, 1);
+        final end = DateTime(2026, 1, 31);
+        expect(AppDateUtils.isWithinRange(date, start, end), true);
+      });
+
+      test('returns false for date before range', () {
+        final date = DateTime(2025, 12, 31);
+        final start = DateTime(2026, 1, 1);
+        final end = DateTime(2026, 1, 31);
+        expect(AppDateUtils.isWithinRange(date, start, end), false);
+      });
+
+      test('returns false for date after range', () {
+        final date = DateTime(2026, 2, 1);
+        final start = DateTime(2026, 1, 1);
+        final end = DateTime(2026, 1, 31);
+        expect(AppDateUtils.isWithinRange(date, start, end), false);
+      });
+    });
+
+    group('addMonths', () {
+      test('adds months correctly', () {
+        final date = DateTime(2026, 1, 1);
+        final result = AppDateUtils.addMonths(date, 5);
+        expect(result.year, 2026);
+        expect(result.month, 6);
+      });
+
+      test('handles year rollover', () {
+        final date = DateTime(2026, 10, 1);
+        final result = AppDateUtils.addMonths(date, 5);
+        expect(result.year, 2027);
+        expect(result.month, 3);
+      });
+
+      test('handles day overflow', () {
+        final date = DateTime(2026, 1, 31);
+        final result = AppDateUtils.addMonths(date, 1);
+        expect(result.month, 2);
+        expect(result.day, 28);
+      });
+    });
+
+    group('subtractMonths', () {
+      test('subtracts months correctly', () {
+        final date = DateTime(2026, 6, 1);
+        final result = AppDateUtils.subtractMonths(date, 5);
+        expect(result.year, 2026);
+        expect(result.month, 1);
+      });
+
+      test('handles year rollover', () {
+        final date = DateTime(2026, 3, 1);
+        final result = AppDateUtils.subtractMonths(date, 5);
+        expect(result.year, 2025);
+        expect(result.month, 10);
+      });
+    });
   });
 }

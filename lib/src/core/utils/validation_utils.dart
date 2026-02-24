@@ -134,10 +134,10 @@ class ValidationUtils {
     if (cardNumber.isEmpty) return false;
     final cleanNumber = cardNumber.replaceAll(RegExp(r'[\s-]'), '');
     if (!RegExp(r'^[0-9]+$').hasMatch(cleanNumber)) return false;
-    int sum = 0;
-    bool alternate = false;
-    for (int i = cleanNumber.length - 1; i >= 0; i--) {
-      int n = int.parse(cleanNumber[i]);
+    var sum = 0;
+    var alternate = false;
+    for (var i = cleanNumber.length - 1; i >= 0; i--) {
+      var n = int.parse(cleanNumber[i]);
       if (alternate) {
         n *= 2;
         if (n > 9) n = (n % 10) + 1;
@@ -192,5 +192,23 @@ class ValidationUtils {
   /// Validates if the [input] length is within [min] and [max].
   static bool isValidLength(String input, int min, int max) {
     return input.length >= min && input.length <= max;
+  }
+
+  /// Validates if the provided [iban] is a valid IBAN format (basic check).
+  static bool isValidIban(String iban) {
+    final cleanIban = iban.replaceAll(' ', '').toUpperCase();
+    return RegExp(r'^[A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}$').hasMatch(cleanIban);
+  }
+
+  /// Validates if the provided [bic] is a valid BIC format (basic check).
+  static bool isValidBic(String bic) {
+    return RegExp(
+      r'^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$',
+    ).hasMatch(bic.toUpperCase());
+  }
+
+  /// Validates if the provided [lng] is a valid longitude (-180 to 180).
+  static bool isValidLongitude(double lng) {
+    return lng >= -180.0 && lng <= 180.0;
   }
 }

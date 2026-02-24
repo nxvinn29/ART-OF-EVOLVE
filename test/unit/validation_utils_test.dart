@@ -178,6 +178,30 @@ void main() {
       ); // Invalid check digit
       expect(ValidationUtils.isValidCreditCard(''), false);
       expect(ValidationUtils.isValidCreditCard('abc'), false);
+      expect(ValidationUtils.isValidLength('abc', 2, 5), true);
+      expect(ValidationUtils.isValidLength('a', 2, 5), false);
+    });
+
+    test('isValidIban should validate IBAN format', () {
+      expect(ValidationUtils.isValidIban('DE12345678901234567890'), true);
+      expect(ValidationUtils.isValidIban('GB12 ABCD 1234 5678 9012 34'), true);
+      expect(ValidationUtils.isValidIban('INVALID'), false);
+      expect(ValidationUtils.isValidIban(''), false);
+    });
+
+    test('isValidBic should validate BIC format', () {
+      expect(ValidationUtils.isValidBic('ABCDEFGH'), true);
+      expect(ValidationUtils.isValidBic('ABCDEFGH123'), true);
+      expect(ValidationUtils.isValidBic('INVALID'), false);
+      expect(ValidationUtils.isValidBic(''), false);
+    });
+
+    test('isValidLongitude should validate longitude range', () {
+      expect(ValidationUtils.isValidLongitude(0.0), true);
+      expect(ValidationUtils.isValidLongitude(180.0), true);
+      expect(ValidationUtils.isValidLongitude(-180.0), true);
+      expect(ValidationUtils.isValidLongitude(180.1), false);
+      expect(ValidationUtils.isValidLongitude(-180.1), false);
     });
   });
 }

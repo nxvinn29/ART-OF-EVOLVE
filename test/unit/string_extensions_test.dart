@@ -235,5 +235,31 @@ void main() {
       expect('no digits'.removeNonNumeric, '');
       expect('12345'.removeNonNumeric, '12345');
     });
+
+    test('isBinary should detect binary strings', () {
+      expect('010101'.isBinary, true);
+      expect('0'.isBinary, true);
+      expect('1'.isBinary, true);
+      expect('021'.isBinary, false);
+      expect('abc'.isBinary, false);
+      expect(''.isBinary, false);
+    });
+
+    test('isHex should detect hexadecimal strings', () {
+      expect('1a2b3c'.isHex, true);
+      expect('ABCDEF'.isHex, true);
+      expect('0123456789'.isHex, true);
+      expect('g1'.isHex, false);
+      expect(''.isHex, false);
+    });
+
+    test('isOctal should detect octal strings', () {
+      expect('1234567'.isOctal, true);
+      expect('0'.isOctal, true);
+      expect('7'.isOctal, true);
+      expect('8'.isOctal, false);
+      expect('a1'.isOctal, false);
+      expect(''.isOctal, false);
+    });
   });
 }
