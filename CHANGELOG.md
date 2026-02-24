@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.6.0+27] - 2026-02-24
+### Added
+- **Utilities**: Added `isBinary`, `isHex`, and `isOctal` to `StringExtensions` with unit tests.
+- **Utilities**: Added `getStartOfMonth`, `getEndOfMonth`, `isWithinRange`, `addMonths`, and `subtractMonths` to `AppDateUtils` with unit tests.
+- **Utilities**: Added `isValidIban`, `isValidBic`, and `isValidLongitude` to `ValidationUtils` with unit tests.
+
 ## [1.6.0+26] - 2026-02-17
 ### Added
 - **Utilities**: Added `countOccurrences`, `isJson`, and `toBool` to `StringExtensions` with unit tests.
