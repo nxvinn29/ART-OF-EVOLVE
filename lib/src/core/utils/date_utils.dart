@@ -294,4 +294,55 @@ class AppDateUtils {
   static int diffInMonths(DateTime a, DateTime b) {
     return (a.year - b.year).abs() * 12 + (a.month - b.month).abs();
   }
+
+  /// Returns the start of the month (1st day at 00:00:00) for the given [date].
+  static DateTime getStartOfMonth(DateTime date) {
+    return DateTime(date.year, date.month, 1);
+  }
+
+  /// Returns the end of the month (last day at 23:59:59.999) for the given [date].
+  static DateTime getEndOfMonth(DateTime date) {
+    final nextMonth = DateTime(date.year, date.month + 1, 1);
+    return nextMonth.subtract(const Duration(milliseconds: 1));
+  }
+
+  /// Checks if the given [date] falls between [start] and [end] dates (inclusive).
+  static bool isWithinRange(DateTime date, DateTime start, DateTime end) {
+    return (date.isAfter(start) || date.isAtSameMomentAs(start)) &&
+        (date.isBefore(end) || date.isAtSameMomentAs(end));
+  }
+
+  /// Adds [months] to the given [date].
+  static DateTime addMonths(DateTime date, int months) {
+    var year = date.year;
+    var month = date.month + months;
+
+    while (month > 12) {
+      month -= 12;
+      year++;
+    }
+    while (month < 1) {
+      month += 12;
+      year--;
+    }
+
+    final daysInMonth = getDaysInMonth(year, month);
+    final day = date.day > daysInMonth ? daysInMonth : date.day;
+
+    return DateTime(
+      year,
+      month,
+      day,
+      date.hour,
+      date.minute,
+      date.second,
+      date.millisecond,
+      date.microsecond,
+    );
+  }
+
+  /// Subtracts [months] from the given [date].
+  static DateTime subtractMonths(DateTime date, int months) {
+    return addMonths(date, -months);
+  }
 }

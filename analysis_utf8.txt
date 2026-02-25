@@ -1,0 +1,7 @@
+﻿Analyzing ART-OF-EVOLVE...                                      
+
+   info - Unnecessary type annotation on a local variable - lib\src\core\utils\validation_utils.dart:137:5 - omit_local_variable_types
+   info - Unnecessary type annotation on a local variable - lib\src\core\utils\validation_utils.dart:138:5 - omit_local_variable_types
+   info - Unnecessary type annotation on a local variable - lib\src\core\utils\validation_utils.dart:139:10 - omit_local_variable_types
+   info - Unnecessary type annotation on a local variable - lib\src\core\utils\validation_utils.dart:140:7 - omit_local_variable_types
+
