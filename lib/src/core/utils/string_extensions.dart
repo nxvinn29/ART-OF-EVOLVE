@@ -374,5 +374,23 @@ extension StringExtensions on String {
     return RegExp(r'^[0-9]+$').hasMatch(this);
   }
 
+  /// Checks if the string is a valid binary number (contains only 0s and 1s).
+  bool get isBinary {
+    if (isEmpty) return false;
+    return RegExp(r'^[01]+$').hasMatch(this);
+  }
+
+  /// Checks if the string is a valid hexadecimal value.
+  bool get isHex {
+    if (isEmpty) return false;
+    return RegExp(r'^[0-9a-fA-F]+$').hasMatch(this);
+  }
+
+  /// Checks if the string is a valid octal value.
+  bool get isOctal {
+    if (isEmpty) return false;
+    return RegExp(r'^[0-7]+$').hasMatch(this);
+  }
+
   // End of StringExtensions
 }
