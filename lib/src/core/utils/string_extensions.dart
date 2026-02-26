@@ -399,5 +399,10 @@ extension StringExtensions on String {
     return digits.length >= 7;
   }
 
+  /// Checks if the string contains [other] while ignoring case.
+  bool containsAnyCase(String other) {
+    return toLowerCase().contains(other.toLowerCase());
+  }
+
   // End of StringExtensions
 }

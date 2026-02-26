@@ -270,5 +270,11 @@ void main() {
       expect(''.isPhoneNumber, false);
       expect('abc'.isPhoneNumber, false);
     });
+
+    test('containsAnyCase should search case-insensitively', () {
+      expect('Hello World'.containsAnyCase('hello'), true);
+      expect('Hello World'.containsAnyCase('WORLD'), true);
+      expect('Hello World'.containsAnyCase('foo'), false);
+    });
   });
 }
