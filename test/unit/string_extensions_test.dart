@@ -261,5 +261,14 @@ void main() {
       expect('a1'.isOctal, false);
       expect(''.isOctal, false);
     });
+
+    test('isPhoneNumber should detect valid formats', () {
+      expect('1234567'.isPhoneNumber, true);
+      expect('(123) 456-7890'.isPhoneNumber, true);
+      expect('1-234-567-8901'.isPhoneNumber, true);
+      expect('123456'.isPhoneNumber, false);
+      expect(''.isPhoneNumber, false);
+      expect('abc'.isPhoneNumber, false);
+    });
   });
 }

@@ -392,5 +392,12 @@ extension StringExtensions on String {
     return RegExp(r'^[0-7]+$').hasMatch(this);
   }
 
+  /// Checks if the string is a valid phone number (at least 7 digits).
+  bool get isPhoneNumber {
+    if (isEmpty) return false;
+    final digits = replaceAll(RegExp(r'[^0-9]'), '');
+    return digits.length >= 7;
+  }
+
   // End of StringExtensions
 }
