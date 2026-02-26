@@ -857,5 +857,31 @@ void main() {
         expect(AppDateUtils.getAge(birthDate), 25);
       });
     });
+
+    group('getSeason', () {
+      test('identifies Spring correctly', () {
+        expect(AppDateUtils.getSeason(DateTime(2026, 3, 20)), 'Spring');
+        expect(AppDateUtils.getSeason(DateTime(2026, 5, 10)), 'Spring');
+        expect(AppDateUtils.getSeason(DateTime(2026, 6, 20)), 'Spring');
+      });
+
+      test('identifies Summer correctly', () {
+        expect(AppDateUtils.getSeason(DateTime(2026, 6, 21)), 'Summer');
+        expect(AppDateUtils.getSeason(DateTime(2026, 7, 15)), 'Summer');
+        expect(AppDateUtils.getSeason(DateTime(2026, 9, 21)), 'Summer');
+      });
+
+      test('identifies Autumn correctly', () {
+        expect(AppDateUtils.getSeason(DateTime(2026, 9, 22)), 'Autumn');
+        expect(AppDateUtils.getSeason(DateTime(2026, 11, 11)), 'Autumn');
+        expect(AppDateUtils.getSeason(DateTime(2026, 12, 20)), 'Autumn');
+      });
+
+      test('identifies Winter correctly', () {
+        expect(AppDateUtils.getSeason(DateTime(2026, 12, 21)), 'Winter');
+        expect(AppDateUtils.getSeason(DateTime(2026, 1, 10)), 'Winter');
+        expect(AppDateUtils.getSeason(DateTime(2026, 3, 19)), 'Winter');
+      });
+    });
   });
 }

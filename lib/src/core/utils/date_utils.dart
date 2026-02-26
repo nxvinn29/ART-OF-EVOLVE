@@ -356,4 +356,32 @@ class AppDateUtils {
     }
     return age;
   }
+
+  /// Returns the astronomical season for the given [date].
+  ///
+  /// North hemisphere standard seasons:
+  /// - Spring: March 20 - June 20
+  /// - Summer: June 21 - September 21
+  /// - Autumn: September 22 - December 20
+  /// - Winter: December 21 - March 19
+  static String getSeason(DateTime date) {
+    final month = date.month;
+    final day = date.day;
+
+    if ((month == 3 && day >= 20) ||
+        (month > 3 && month < 6) ||
+        (month == 6 && day <= 20)) {
+      return 'Spring';
+    } else if ((month == 6 && day >= 21) ||
+        (month > 6 && month < 9) ||
+        (month == 9 && day <= 21)) {
+      return 'Summer';
+    } else if ((month == 9 && day >= 22) ||
+        (month > 9 && month < 12) ||
+        (month == 12 && day <= 20)) {
+      return 'Autumn';
+    } else {
+      return 'Winter';
+    }
+  }
 }
