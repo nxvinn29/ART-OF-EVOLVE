@@ -211,4 +211,21 @@ class ValidationUtils {
   static bool isValidLongitude(double lng) {
     return lng >= -180.0 && lng <= 180.0;
   }
+
+  /// Validates if the provided [expiry] is a valid credit card expiration date (MM/YY).
+  static bool isValidCreditCardExpiration(String expiry) {
+    if (!RegExp(r'^(0[1-9]|1[0-2])\/([0-9]{2})$').hasMatch(expiry))
+      return false;
+    final parts = expiry.split('/');
+    final month = int.parse(parts[0]);
+    final year = int.parse('20${parts[1]}');
+    final now = DateTime.now();
+    final expiryDate = DateTime(year, month + 1, 0); // Last day of month
+    return expiryDate.isAfter(now);
+  }
+
+  /// Validates if the provided [cvv] is a valid CVV (3 or 4 digits).
+  static bool isValidCVV(String cvv) {
+    return RegExp(r'^[0-9]{3,4}$').hasMatch(cvv);
+  }
 }

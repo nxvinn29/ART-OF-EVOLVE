@@ -203,5 +203,29 @@ void main() {
       expect(ValidationUtils.isValidLongitude(180.1), false);
       expect(ValidationUtils.isValidLongitude(-180.1), false);
     });
+
+    test('isValidCreditCardExpiration validates MM/YY format and date', () {
+      final now = DateTime.now();
+      final futureYear = (now.year % 100) + 1;
+      final futureExpiry = '12/${futureYear.toString().padLeft(2, '0')}';
+      expect(ValidationUtils.isValidCreditCardExpiration(futureExpiry), true);
+      expect(
+        ValidationUtils.isValidCreditCardExpiration('13/25'),
+        false,
+      ); // Invalid month
+      expect(
+        ValidationUtils.isValidCreditCardExpiration('12/20'),
+        false,
+      ); // Expired
+      expect(ValidationUtils.isValidCreditCardExpiration('abc'), false);
+    });
+
+    test('isValidCVV validates 3 or 4 digits', () {
+      expect(ValidationUtils.isValidCVV('123'), true);
+      expect(ValidationUtils.isValidCVV('1234'), true);
+      expect(ValidationUtils.isValidCVV('12'), false);
+      expect(ValidationUtils.isValidCVV('12345'), false);
+      expect(ValidationUtils.isValidCVV('abc'), false);
+    });
   });
 }
