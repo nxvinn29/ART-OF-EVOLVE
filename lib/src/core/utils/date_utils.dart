@@ -345,4 +345,15 @@ class AppDateUtils {
   static DateTime subtractMonths(DateTime date, int months) {
     return addMonths(date, -months);
   }
+
+  /// Calculates the age based on the [birthDate] and the current date.
+  static int getAge(DateTime birthDate) {
+    final now = DateTime.now();
+    var age = now.year - birthDate.year;
+    if (now.month < birthDate.month ||
+        (now.month == birthDate.month && now.day < birthDate.day)) {
+      age--;
+    }
+    return age;
+  }
 }

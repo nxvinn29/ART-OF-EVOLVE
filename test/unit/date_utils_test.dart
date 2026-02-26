@@ -837,5 +837,25 @@ void main() {
         expect(result.month, 10);
       });
     });
+
+    group('getAge', () {
+      test('calculates age correctly', () {
+        final now = DateTime.now();
+        final birthDate = DateTime(now.year - 25, now.month, now.day);
+        expect(AppDateUtils.getAge(birthDate), 25);
+      });
+
+      test('handles birthday not yet reached this year', () {
+        final now = DateTime.now();
+        final birthDate = DateTime(now.year - 25, now.month, now.day + 1);
+        expect(AppDateUtils.getAge(birthDate), 24);
+      });
+
+      test('handles birthday exactly today', () {
+        final now = DateTime.now();
+        final birthDate = DateTime(now.year - 25, now.month, now.day);
+        expect(AppDateUtils.getAge(birthDate), 25);
+      });
+    });
   });
 }
