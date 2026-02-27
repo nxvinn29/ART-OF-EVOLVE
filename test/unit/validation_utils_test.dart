@@ -227,5 +227,20 @@ void main() {
       expect(ValidationUtils.isValidCVV('12345'), false);
       expect(ValidationUtils.isValidCVV('abc'), false);
     });
+
+    test('isValidTime24h should validate correctly', () {
+      expect(ValidationUtils.isValidTime24h('13:45'), true);
+      expect(ValidationUtils.isValidTime24h('00:00'), true);
+      expect(ValidationUtils.isValidTime24h('23:59'), true);
+      expect(ValidationUtils.isValidTime24h('24:00'), false);
+      expect(ValidationUtils.isValidTime24h('1:1'), false);
+    });
+
+    test('isValidDate should validate format correctly', () {
+      expect(ValidationUtils.isValidDate('2024-01-01', 'yyyy-MM-dd'), true);
+      expect(ValidationUtils.isValidDate('01/01/2024', 'dd/MM/yyyy'), true);
+      expect(ValidationUtils.isValidDate('2024-13-01', 'yyyy-MM-dd'), false);
+      expect(ValidationUtils.isValidDate('abc', 'yyyy-MM-dd'), false);
+    });
   });
 }

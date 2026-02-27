@@ -13,4 +13,26 @@ extension NumExtensions on num {
     );
     return format.format(this);
   }
+
+  /// Checks if the number is between [min] and [max] (inclusive).
+  bool isBetween(num min, num max) {
+    return this >= min && this <= max;
+  }
+
+  /// Converts bytes to a human-readable file size string.
+  String toFileSize() {
+    if (this <= 0) return '0 B';
+    const suffixes = ['B', 'KB', 'MB', 'GB', 'TB'];
+    var i = (this == 0) ? 0 : (this.toString().length / 3).floor();
+    if (i >= suffixes.length) i = suffixes.length - 1;
+
+    double size = this.toDouble();
+    int suffixIndex = 0;
+    while (size >= 1024 && suffixIndex < suffixes.length - 1) {
+      size /= 1024;
+      suffixIndex++;
+    }
+
+    return '${size.toStringAsFixed(1)} ${suffixes[suffixIndex]}';
+  }
 }

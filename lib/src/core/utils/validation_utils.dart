@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 /// Validation utility class for the Art of Evolve project.
 ///
 /// This file contains methods for validating common input types such as email,
@@ -227,5 +229,20 @@ class ValidationUtils {
   /// Validates if the provided [cvv] is a valid CVV (3 or 4 digits).
   static bool isValidCVV(String cvv) {
     return RegExp(r'^[0-9]{3,4}$').hasMatch(cvv);
+  }
+
+  /// Validates if the provided [time] is in 24h format (HH:mm).
+  static bool isValidTime24h(String time) {
+    return RegExp(r'^([01]?[0-9]|2[0-3]):[0-5][0-9]$').hasMatch(time);
+  }
+
+  /// Validates if the provided [dateStr] matches the given [format].
+  static bool isValidDate(String dateStr, String format) {
+    try {
+      DateFormat(format).parseStrict(dateStr);
+      return true;
+    } catch (_) {
+      return false;
+    }
   }
 }
