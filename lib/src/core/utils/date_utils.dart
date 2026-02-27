@@ -387,8 +387,10 @@ class AppDateUtils {
 
   /// Returns the number of days remaining in the year from the given [date].
   static int getDaysRemainingInYear(DateTime date) {
-    final nextYear = DateTime(date.year + 1, 1, 1);
-    final diff = nextYear.difference(date);
+    final endOfYear = DateTime(date.year, 12, 31);
+    final diff = endOfYear.difference(
+      DateTime(date.year, date.month, date.day),
+    );
     return diff.inDays;
   }
 

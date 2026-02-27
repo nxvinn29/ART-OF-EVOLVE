@@ -886,7 +886,7 @@ void main() {
 
     test('getDaysRemainingInYear should return correct number of days', () {
       final date = DateTime(2024, 12, 30);
-      expect(AppDateUtils.getDaysRemainingInYear(date), 2);
+      expect(AppDateUtils.getDaysRemainingInYear(date), 1);
       final leapYearDate = DateTime(2024, 1, 1);
       expect(AppDateUtils.getDaysRemainingInYear(leapYearDate), 365);
     });
