@@ -276,5 +276,22 @@ void main() {
       expect('Hello World'.containsAnyCase('WORLD'), true);
       expect('Hello World'.containsAnyCase('foo'), false);
     });
+
+    test('isPalindrome should detect palindromes correctly', () {
+      expect('madam'.isPalindrome, true);
+      expect('Racecar'.isPalindrome, true);
+      expect('A man, a plan, a canal, Panama'.isPalindrome, true);
+      expect('hello'.isPalindrome, false);
+      expect(''.isPalindrome, false);
+      expect('121'.isPalindrome, true);
+    });
+
+    test('removeOccurrences should strip matches correctly', () {
+      expect('hello world'.removeOccurrences('o'), 'hell wrld');
+      expect('test string'.removeOccurrences('t'), 'es sring');
+      expect('banana'.removeOccurrences('na'), 'ba');
+      expect('hello'.removeOccurrences('x'), 'hello');
+      expect('hello'.removeOccurrences(''), 'hello');
+    });
   });
 }

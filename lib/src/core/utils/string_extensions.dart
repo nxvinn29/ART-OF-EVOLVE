@@ -399,9 +399,25 @@ extension StringExtensions on String {
     return digits.length >= 7;
   }
 
+  /// Checks if the string is a palindrome (reads the same forwards and backwards).
+  ///
+  /// Ignores case and non-alphanumeric characters.
+  bool get isPalindrome {
+    if (isEmpty) return false;
+    final clean = toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '');
+    if (clean.isEmpty) return false;
+    return clean == clean.reverse;
+  }
+
   /// Checks if the string contains [other] while ignoring case.
   bool containsAnyCase(String other) {
     return toLowerCase().contains(other.toLowerCase());
+  }
+
+  /// Removes all occurrences of the specified [pattern] from the string.
+  String removeOccurrences(String pattern) {
+    if (pattern.isEmpty) return this;
+    return replaceAll(pattern, '');
   }
 
   // End of StringExtensions
