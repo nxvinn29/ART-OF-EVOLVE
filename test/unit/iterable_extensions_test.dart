@@ -26,5 +26,31 @@ void main() {
       expect(grouped['A']?.length, 2);
       expect(grouped['B']?.length, 1);
     });
+
+    test('distinctBy should return unique elements by key', () {
+      final list = [
+        {'id': 1, 'name': 'A'},
+        {'id': 2, 'name': 'B'},
+        {'id': 3, 'name': 'A'},
+      ];
+      final distinct = list.distinctBy((e) => e['name']).toList();
+      expect(distinct.length, 2);
+      expect(distinct[0]['id'], 1);
+      expect(distinct[1]['id'], 2);
+    });
+
+    test('chunked should split iterable into correctly sized chunks', () {
+      final list = [1, 2, 3, 4, 5];
+      final chunks = list.chunked(2).toList();
+      expect(chunks.length, 3);
+      expect(chunks[0], [1, 2]);
+      expect(chunks[1], [3, 4]);
+      expect(chunks[2], [5]);
+    });
+
+    test('chunked should throw error for non-positive size', () {
+      expect(() => [1, 2].chunked(0).toList(), throwsArgumentError);
+      expect(() => [1, 2].chunked(-1).toList(), throwsArgumentError);
+    });
   });
 }

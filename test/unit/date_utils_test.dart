@@ -883,5 +883,31 @@ void main() {
         expect(AppDateUtils.getSeason(DateTime(2026, 3, 19)), 'Winter');
       });
     });
+
+    test('getDaysRemainingInYear should return correct number of days', () {
+      final date = DateTime(2024, 12, 30);
+      expect(AppDateUtils.getDaysRemainingInYear(date), 2);
+      final leapYearDate = DateTime(2024, 1, 1);
+      expect(AppDateUtils.getDaysRemainingInYear(leapYearDate), 365);
+    });
+
+    test('formatWithOrdinal should format correctly', () {
+      expect(
+        AppDateUtils.formatWithOrdinal(DateTime(2024, 1, 1)),
+        'Jan 1st, 2024',
+      );
+      expect(
+        AppDateUtils.formatWithOrdinal(DateTime(2024, 1, 2)),
+        'Jan 2nd, 2024',
+      );
+      expect(
+        AppDateUtils.formatWithOrdinal(DateTime(2024, 1, 3)),
+        'Jan 3rd, 2024',
+      );
+      expect(
+        AppDateUtils.formatWithOrdinal(DateTime(2024, 1, 11)),
+        'Jan 11th, 2024',
+      );
+    });
   });
 }

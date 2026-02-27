@@ -384,4 +384,36 @@ class AppDateUtils {
       return 'Winter';
     }
   }
+
+  /// Returns the number of days remaining in the year from the given [date].
+  static int getDaysRemainingInYear(DateTime date) {
+    final nextYear = DateTime(date.year + 1, 1, 1);
+    final diff = nextYear.difference(date);
+    return diff.inDays;
+  }
+
+  /// Formats the [date] with an ordinal suffix for the day (e.g., Jan 1st, 2024).
+  static String formatWithOrdinal(DateTime date) {
+    final day = date.day;
+    String suffix;
+    if (day >= 11 && day <= 13) {
+      suffix = 'th';
+    } else {
+      switch (day % 10) {
+        case 1:
+          suffix = 'st';
+          break;
+        case 2:
+          suffix = 'nd';
+          break;
+        case 3:
+          suffix = 'rd';
+          break;
+        default:
+          suffix = 'th';
+      }
+    }
+    final monthName = DateFormat('MMM').format(date);
+    return '$monthName $day$suffix, ${date.year}';
+  }
 }

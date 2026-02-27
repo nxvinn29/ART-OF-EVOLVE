@@ -9,6 +9,35 @@ extension IterableExtensions<T> on Iterable<T> {
     }
     return map;
   }
+
+  /// Returns a lazy iterable containing only the first element for each unique key.
+  Iterable<T> distinctBy<K>(K Function(T) keySelector) sync* {
+    final set = <K>{};
+    for (final element in this) {
+      final key = keySelector(element);
+      if (set.add(key)) {
+        yield element;
+      }
+    }
+  }
+
+  /// Splits the iterable into chunks of the given [size].
+  Iterable<List<T>> chunked(int size) sync* {
+    if (size <= 0) {
+      throw ArgumentError('Size must be positive');
+    }
+    var chunk = <T>[];
+    for (final element in this) {
+      chunk.add(element);
+      if (chunk.length == size) {
+        yield chunk;
+        chunk = [];
+      }
+    }
+    if (chunk.isNotEmpty) {
+      yield chunk;
+    }
+  }
 }
 
 /// Extension methods for [Iterable] of numbers.
