@@ -38,6 +38,16 @@ extension IterableExtensions<T> on Iterable<T> {
       yield chunk;
     }
   }
+
+  /// Returns a random element from the iterable.
+  ///
+  /// Throws [StateError] if the iterable is empty.
+  T get random {
+    if (isEmpty) {
+      throw StateError('Cannot get random element from empty iterable');
+    }
+    return elementAt(DateTime.now().millisecond % length);
+  }
 }
 
 /// Extension methods for [Iterable] of numbers.

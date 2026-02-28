@@ -295,6 +295,13 @@ void main() {
       expect(''.isInteger, false);
     });
 
+    test('wrap should wrap string with given wrapper', () {
+      expect('hello'.wrap("'"), "'hello'");
+      expect('world'.wrap('"'), '"world"');
+      expect('text'.wrap('***'), '***text***');
+      expect(''.wrap("'"), "''");
+    });
+
     test('removeOccurrences should strip matches correctly', () {
       expect('hello world'.removeOccurrences('o'), 'hell wrld');
       expect('test string'.removeOccurrences('t'), 'es sring');
