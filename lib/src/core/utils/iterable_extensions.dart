@@ -48,6 +48,15 @@ extension IterableExtensions<T> on Iterable<T> {
     }
     return elementAt(DateTime.now().millisecond % length);
   }
+
+  /// Returns the sum of all elements in the collection using the given [selector].
+  num sumBy(num Function(T) selector) {
+    num sum = 0;
+    for (final element in this) {
+      sum += selector(element);
+    }
+    return sum;
+  }
 }
 
 /// Extension methods for [Iterable] of numbers.

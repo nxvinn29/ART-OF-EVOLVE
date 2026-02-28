@@ -52,5 +52,15 @@ void main() {
       expect(() => [1, 2].chunked(0).toList(), throwsArgumentError);
       expect(() => [1, 2].chunked(-1).toList(), throwsArgumentError);
     });
+
+    test('random should return an element from the list', () {
+      final list = [1, 2, 3, 4, 5];
+      final randomElement = list.random;
+      expect(list.contains(randomElement), true);
+    });
+
+    test('random should throw error for empty list', () {
+      expect(() => <int>[].random, throwsStateError);
+    });
   });
 }
