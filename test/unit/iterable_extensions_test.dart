@@ -62,5 +62,15 @@ void main() {
     test('random should throw error for empty list', () {
       expect(() => <int>[].random, throwsStateError);
     });
+
+    test('sumBy should calculate sum correctly using selector', () {
+      final list = [
+        {'value': 10},
+        {'value': 20},
+        {'value': 30},
+      ];
+      expect(list.sumBy((e) => e['value'] as num), 60);
+      expect(<Map<String, int>>[].sumBy((e) => e['value'] as num), 0);
+    });
   });
 }
