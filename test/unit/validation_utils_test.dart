@@ -242,5 +242,13 @@ void main() {
       expect(ValidationUtils.isValidDate('2024-13-01', 'yyyy-MM-dd'), false);
       expect(ValidationUtils.isValidDate('abc', 'yyyy-MM-dd'), false);
     });
+
+    test('isValidPostalCode validates 5-digit postal codes', () {
+      expect(ValidationUtils.isValidPostalCode('12345'), true);
+      expect(ValidationUtils.isValidPostalCode('90210'), true);
+      expect(ValidationUtils.isValidPostalCode('1234'), false);
+      expect(ValidationUtils.isValidPostalCode('123456'), false);
+      expect(ValidationUtils.isValidPostalCode('abcde'), false);
+    });
   });
 }

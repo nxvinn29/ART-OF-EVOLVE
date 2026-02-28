@@ -35,4 +35,11 @@ extension NumExtensions on num {
 
     return '${size.toStringAsFixed(1)} ${suffixes[suffixIndex]}';
   }
+
+  /// Formats the number as a percentage string (e.g., 0.5 -> 50.0%).
+  ///
+  /// [decimalDigits] is the number of decimal places (default: 1).
+  String toPercentage({int decimalDigits = 1}) {
+    return '${(this * 100).toStringAsFixed(decimalDigits)}%';
+  }
 }
