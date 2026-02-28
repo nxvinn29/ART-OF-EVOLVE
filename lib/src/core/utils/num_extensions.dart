@@ -42,4 +42,10 @@ extension NumExtensions on num {
   String toPercentage({int decimalDigits = 1}) {
     return '${(this * 100).toStringAsFixed(decimalDigits)}%';
   }
+
+  /// Rounds the number to the specified number of [places].
+  double roundTo(int places) {
+    final mod = num.pow(10, places);
+    return (this * mod).round() / mod;
+  }
 }
