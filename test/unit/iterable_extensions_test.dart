@@ -72,5 +72,15 @@ void main() {
       expect(list.sumBy((e) => e['value'] as num), 60);
       expect(<Map<String, int>>[].sumBy((e) => e['value'] as num), 0);
     });
+
+    test('averageBy should calculate average correctly using selector', () {
+      final list = [
+        {'value': 10},
+        {'value': 20},
+        {'value': 30},
+      ];
+      expect(list.averageBy((e) => e['value'] as num), 20.0);
+      expect(<Map<String, int>>[].averageBy((e) => e['value'] as num), 0.0);
+    });
   });
 }

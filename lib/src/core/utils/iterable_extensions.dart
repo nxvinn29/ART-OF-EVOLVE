@@ -57,6 +57,14 @@ extension IterableExtensions<T> on Iterable<T> {
     }
     return sum;
   }
+
+  /// Returns the average of all elements in the collection using the given [selector].
+  ///
+  /// Returns 0.0 if the collection is empty.
+  double averageBy(num Function(T) selector) {
+    if (isEmpty) return 0.0;
+    return sumBy(selector) / length;
+  }
 }
 
 /// Extension methods for [Iterable] of numbers.
