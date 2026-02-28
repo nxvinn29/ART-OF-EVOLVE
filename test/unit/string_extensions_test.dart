@@ -286,6 +286,15 @@ void main() {
       expect('121'.isPalindrome, true);
     });
 
+    test('isInteger should detect integer strings', () {
+      expect('123'.isInteger, true);
+      expect('-5'.isInteger, true);
+      expect('0'.isInteger, true);
+      expect('12.34'.isInteger, false);
+      expect('abc'.isInteger, false);
+      expect(''.isInteger, false);
+    });
+
     test('removeOccurrences should strip matches correctly', () {
       expect('hello world'.removeOccurrences('o'), 'hell wrld');
       expect('test string'.removeOccurrences('t'), 'es sring');

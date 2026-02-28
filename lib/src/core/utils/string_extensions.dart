@@ -414,6 +414,19 @@ extension StringExtensions on String {
     return toLowerCase().contains(other.toLowerCase());
   }
 
+  /// Checks if the string can be parsed as an integer.
+  bool get isInteger {
+    if (isEmpty) return false;
+    return int.tryParse(this) != null;
+  }
+
+  /// Wraps the string with the given [wrapper].
+  ///
+  /// Example: 'hello'.wrap("'") -> "'hello'"
+  String wrap(String wrapper) {
+    return '$wrapper$this$wrapper';
+  }
+
   /// Removes all occurrences of the specified [pattern] from the string.
   String removeOccurrences(String pattern) {
     if (pattern.isEmpty) return this;
