@@ -245,4 +245,9 @@ class ValidationUtils {
       return false;
     }
   }
+
+  /// Validates if the provided [code] is a valid postal code (5 digits).
+  static bool isValidPostalCode(String code) {
+    return RegExp(r'^\d{5}$').hasMatch(code);
+  }
 }

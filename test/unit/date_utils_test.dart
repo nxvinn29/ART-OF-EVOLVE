@@ -926,5 +926,21 @@ void main() {
         expect(next.day, 1);
       });
     });
+
+    group('previousDay', () {
+      test('returns the previous day correctly', () {
+        final date = DateTime(2026, 1, 2);
+        final prev = AppDateUtils.previousDay(date);
+        expect(prev.day, 1);
+        expect(prev.month, 1);
+      });
+
+      test('handles month rollover', () {
+        final date = DateTime(2026, 2, 1);
+        final prev = AppDateUtils.previousDay(date);
+        expect(prev.month, 1);
+        expect(prev.day, 31);
+      });
+    });
   });
 }
