@@ -415,11 +415,17 @@ class AppDateUtils {
           suffix = 'th';
       }
     }
+    final monthName = DateFormat('MMM').format(date);
     return '$monthName $day$suffix, ${date.year}';
   }
 
   /// Returns the next day for the given [date].
   static DateTime nextDay(DateTime date) {
     return date.add(const Duration(days: 1));
+  }
+
+  /// Returns the previous day for the given [date].
+  static DateTime previousDay(DateTime date) {
+    return date.subtract(const Duration(days: 1));
   }
 }

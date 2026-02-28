@@ -909,5 +909,22 @@ void main() {
         'Jan 11th, 2024',
       );
     });
+
+    group('nextDay', () {
+      test('returns the next day correctly', () {
+        final date = DateTime(2026, 1, 1);
+        final next = AppDateUtils.nextDay(date);
+        expect(next.year, 2026);
+        expect(next.month, 1);
+        expect(next.day, 2);
+      });
+
+      test('handles month rollover', () {
+        final date = DateTime(2026, 1, 31);
+        final next = AppDateUtils.nextDay(date);
+        expect(next.month, 2);
+        expect(next.day, 1);
+      });
+    });
   });
 }
