@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:intl/intl.dart';
 
 /// Extension methods for [num].
@@ -45,7 +46,7 @@ extension NumExtensions on num {
 
   /// Rounds the number to the specified number of [places].
   double roundTo(int places) {
-    final mod = num.pow(10, places);
+    final mod = math.pow(10, places);
     return (this * mod).round() / mod;
   }
 }
