@@ -82,5 +82,12 @@ void main() {
       expect(list.averageBy((e) => e['value'] as num), 20.0);
       expect(<Map<String, int>>[].averageBy((e) => e['value'] as num), 0.0);
     });
+
+    test('firstWhereOrNull should return element or null', () {
+      final list = [1, 2, 3, 4, 5];
+      expect(list.firstWhereOrNull((e) => e > 3), 4);
+      expect(list.firstWhereOrNull((e) => e > 5), null);
+      expect(<int>[].firstWhereOrNull((e) => true), null);
+    });
   });
 }
