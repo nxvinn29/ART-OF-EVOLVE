@@ -428,4 +428,9 @@ class AppDateUtils {
   static DateTime previousDay(DateTime date) {
     return date.subtract(const Duration(days: 1));
   }
+
+  /// Returns the total number of days in the year of the given [date].
+  static int getDaysInYear(DateTime date) {
+    return isLeap(date) ? 366 : 365;
+  }
 }

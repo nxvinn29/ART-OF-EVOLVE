@@ -942,5 +942,15 @@ void main() {
         expect(prev.day, 31);
       });
     });
+
+    group('getDaysInYear', () {
+      test('returns 366 for leap year', () {
+        expect(AppDateUtils.getDaysInYear(DateTime(2024, 1, 1)), 366);
+      });
+
+      test('returns 365 for non-leap year', () {
+        expect(AppDateUtils.getDaysInYear(DateTime(2023, 1, 1)), 365);
+      });
+    });
   });
 }
