@@ -38,5 +38,20 @@ void main() {
       expect(10.5.roundTo(0), 11.0);
       expect(10.4.roundTo(0), 10.0);
     });
+
+    test('isPrime should detect prime numbers correctly', () {
+      expect(2.isPrime, true);
+      expect(3.isPrime, true);
+      expect(7.isPrime, true);
+      expect(13.isPrime, true);
+      expect(17.isPrime, true);
+      expect(4.isPrime, false);
+      expect(9.isPrime, false);
+      expect(15.isPrime, false);
+      expect(1.isPrime, false);
+      expect(0.isPrime, false);
+      expect((-7).isPrime, false);
+      expect(10.5.isPrime, false);
+    });
   });
 }

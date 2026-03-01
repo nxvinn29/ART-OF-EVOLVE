@@ -49,4 +49,16 @@ extension NumExtensions on num {
     final mod = math.pow(10, places);
     return (this * mod).round() / mod;
   }
+
+  /// Checks if the number is a prime number.
+  ///
+  /// Returns false if the number is not an integer, or if it is less than 2.
+  bool get isPrime {
+    if (this is! int || this < 2) return false;
+    final n = this as int;
+    for (var i = 2; i <= math.sqrt(n); i++) {
+      if (n % i == 0) return false;
+    }
+    return true;
+  }
 }
