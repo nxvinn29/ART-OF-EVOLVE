@@ -433,5 +433,22 @@ extension StringExtensions on String {
     return replaceAll(pattern, '');
   }
 
+  /// Swaps the case of each character in the string.
+  /// Upper case characters become lower case and vice versa.
+  ///
+  /// Example: "Hello World".swapCase -> "hELLO wORLD"
+  String get swapCase {
+    if (isEmpty) return this;
+    return split('')
+        .map((char) {
+          if (char == char.toUpperCase()) {
+            return char.toLowerCase();
+          } else {
+            return char.toUpperCase();
+          }
+        })
+        .join('');
+  }
+
   // End of StringExtensions
 }

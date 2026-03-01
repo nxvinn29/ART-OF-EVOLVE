@@ -309,5 +309,13 @@ void main() {
       expect('hello'.removeOccurrences('x'), 'hello');
       expect('hello'.removeOccurrences(''), 'hello');
     });
+
+    test('swapCase should swap upper and lower case characters', () {
+      expect('Hello World'.swapCase, 'hELLO wORLD');
+      expect('abc'.swapCase, 'ABC');
+      expect('XYZ'.swapCase, 'xyz');
+      expect('123!@#'.swapCase, '123!@#');
+      expect(''.swapCase, '');
+    });
   });
 }
