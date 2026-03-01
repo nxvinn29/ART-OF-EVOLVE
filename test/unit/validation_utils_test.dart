@@ -250,5 +250,22 @@ void main() {
       expect(ValidationUtils.isValidPostalCode('123456'), false);
       expect(ValidationUtils.isValidPostalCode('abcde'), false);
     });
+
+    test('isValidIsbn validates ISBN-10 and ISBN-13 correctly', () {
+      // ISBN-10
+      expect(ValidationUtils.isValidIsbn('0471958697'), true);
+      expect(ValidationUtils.isValidIsbn('0-471-95869-7'), true);
+      expect(ValidationUtils.isValidIsbn('047195869X'), false); // Invalid
+      expect(ValidationUtils.isValidIsbn('080442957X'), true); // Last char X
+
+      // ISBN-13
+      expect(ValidationUtils.isValidIsbn('9780470059029'), true);
+      expect(ValidationUtils.isValidIsbn('978-0-470-05902-9'), true);
+      expect(ValidationUtils.isValidIsbn('9780470059028'), false); // Invalid
+
+      // Edge cases
+      expect(ValidationUtils.isValidIsbn(''), false);
+      expect(ValidationUtils.isValidIsbn('123456789'), false);
+    });
   });
 }

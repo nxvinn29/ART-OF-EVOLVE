@@ -250,4 +250,31 @@ class ValidationUtils {
   static bool isValidPostalCode(String code) {
     return RegExp(r'^\d{5}$').hasMatch(code);
   }
+
+  /// Validates if the provided [isbn] is a valid ISBN-10 or ISBN-13.
+  static bool isValidIsbn(String isbn) {
+    final cleanIsbn = isbn.replaceAll(RegExp(r'[\s-]'), '');
+
+    if (cleanIsbn.length == 10) {
+      if (!RegExp(r'^\d{9}[\dX]$').hasMatch(cleanIsbn)) return false;
+      var sum = 0;
+      for (var i = 0; i < 9; i++) {
+        sum += int.parse(cleanIsbn[i]) * (10 - i);
+      }
+      final lastChar = cleanIsbn[9].toUpperCase();
+      sum += (lastChar == 'X') ? 10 : int.parse(lastChar);
+      return sum % 11 == 0;
+    } else if (cleanIsbn.length == 13) {
+      if (!RegExp(r'^\d{13}$').hasMatch(cleanIsbn)) return false;
+      var sum = 0;
+      for (var i = 0; i < 12; i++) {
+        final digit = int.parse(cleanIsbn[i]);
+        sum += (i % 2 == 0) ? digit : digit * 3;
+      }
+      final checkDigit = (10 - (sum % 10)) % 10;
+      return checkDigit == int.parse(cleanIsbn[12]);
+    }
+
+    return false;
+  }
 }
