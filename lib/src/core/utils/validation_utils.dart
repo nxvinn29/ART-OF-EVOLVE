@@ -284,4 +284,11 @@ class ValidationUtils {
       r'^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/(watch\?v=|embed\/|v\/|.+\?v=)?([^"&?\/\s]{11})$',
     ).hasMatch(url);
   }
+
+  /// Validates if the provided [url] is a valid GitHub URL.
+  static bool isValidGithubUrl(String url) {
+    return RegExp(
+      r'^(https?:\/\/)?(www\.)?github\.com\/[a-zA-Z0-9_-]+(\/[a-zA-Z0-9_-]+)?$',
+    ).hasMatch(url);
+  }
 }

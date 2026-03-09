@@ -287,5 +287,18 @@ void main() {
       );
       expect(ValidationUtils.isValidYoutubeUrl('invalid'), false);
     });
+
+    test('isValidGithubUrl validates GitHub URLs', () {
+      expect(
+        ValidationUtils.isValidGithubUrl('https://github.com/flutter'),
+        true,
+      );
+      expect(
+        ValidationUtils.isValidGithubUrl('https://github.com/flutter/flutter'),
+        true,
+      );
+      expect(ValidationUtils.isValidGithubUrl('github.com/flutter'), true);
+      expect(ValidationUtils.isValidGithubUrl('invalid'), false);
+    });
   });
 }
