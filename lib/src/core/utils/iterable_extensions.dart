@@ -81,6 +81,14 @@ extension IterableExtensions<T> on Iterable<T> {
     list.shuffle();
     return list;
   }
+
+  /// Returns [n] random elements from this iterable.
+  List<T> takeRandom(int n) {
+    if (n <= 0) return [];
+    final list = toList();
+    list.shuffle();
+    return list.take(n).toList();
+  }
 }
 
 /// Extension methods for [Iterable] of numbers.

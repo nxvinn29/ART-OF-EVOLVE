@@ -97,5 +97,14 @@ void main() {
       expect(shuffled, containsAll(list));
       // There's a tiny chance it could be the same, but for 10 elements it's very low.
     });
+
+    test('takeRandom should return n random elements', () {
+      final list = [1, 2, 3, 4, 5];
+      final result = list.takeRandom(3);
+      expect(result.length, 3);
+      for (final e in result) {
+        expect(list.contains(e), true);
+      }
+    });
   });
 }
