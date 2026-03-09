@@ -277,4 +277,11 @@ class ValidationUtils {
 
     return false;
   }
+
+  /// Validates if the provided [url] is a valid YouTube URL.
+  static bool isValidYoutubeUrl(String url) {
+    return RegExp(
+      r'^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/(watch\?v=|embed\/|v\/|.+\?v=)?([^"&?\/\s]{11})$',
+    ).hasMatch(url);
+  }
 }

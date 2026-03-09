@@ -267,5 +267,25 @@ void main() {
       expect(ValidationUtils.isValidIsbn(''), false);
       expect(ValidationUtils.isValidIsbn('123456789'), false);
     });
+
+    test('isValidYoutubeUrl validates YouTube URLs', () {
+      expect(
+        ValidationUtils.isValidYoutubeUrl(
+          'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        ),
+        true,
+      );
+      expect(
+        ValidationUtils.isValidYoutubeUrl('https://youtu.be/dQw4w9WgXcQ'),
+        true,
+      );
+      expect(
+        ValidationUtils.isValidYoutubeUrl(
+          'https://www.youtube.com/embed/dQw4w9WgXcQ',
+        ),
+        true,
+      );
+      expect(ValidationUtils.isValidYoutubeUrl('invalid'), false);
+    });
   });
 }
