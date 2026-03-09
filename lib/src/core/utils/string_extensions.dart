@@ -450,5 +450,15 @@ extension StringExtensions on String {
         .join('');
   }
 
+  /// Reverses the order of words in the string.
+  ///
+  /// Example: "Hello World".reverseWords -> "World Hello"
+  String get reverseWords {
+    if (isEmpty) return this;
+    final words = split(RegExp(r'\s+')).where((w) => w.isNotEmpty).toList();
+    if (words.isEmpty) return '';
+    return words.reversed.join(' ');
+  }
+
   // End of StringExtensions
 }

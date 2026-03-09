@@ -317,5 +317,13 @@ void main() {
       expect('123!@#'.swapCase, '123!@#');
       expect(''.swapCase, '');
     });
+
+    test('reverseWords should reverse the order of words', () {
+      expect('Hello World'.reverseWords, 'World Hello');
+      expect('One Two Three'.reverseWords, 'Three Two One');
+      expect('single'.reverseWords, 'single');
+      expect('   '.reverseWords, '');
+      expect(''.reverseWords, '');
+    });
   });
 }
