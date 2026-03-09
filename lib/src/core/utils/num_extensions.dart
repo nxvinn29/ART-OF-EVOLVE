@@ -66,4 +66,10 @@ extension NumExtensions on num {
   String toCompactString() {
     return NumberFormat.compact().format(this);
   }
+
+  /// Checks if the number is divisible by [divider].
+  bool isDivisibleBy(num divider) {
+    if (divider == 0) return false;
+    return this % divider == 0;
+  }
 }

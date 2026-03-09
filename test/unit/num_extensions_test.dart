@@ -59,5 +59,12 @@ void main() {
       expect(1200.toCompactString(), '1.2K');
       expect(1000000.toCompactString(), '1M');
     });
+
+    test('isDivisibleBy should detect divisibility', () {
+      expect(10.isDivisibleBy(2), true);
+      expect(10.isDivisibleBy(3), false);
+      expect(10.isDivisibleBy(5), true);
+      expect(10.isDivisibleBy(0), false);
+    });
   });
 }
