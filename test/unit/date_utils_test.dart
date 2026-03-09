@@ -966,5 +966,22 @@ void main() {
         expect(AppDateUtils.getWeekNumber(DateTime(2025, 12, 31)), 1);
       });
     });
+
+    group('DateTimeExtensions', () {
+      test('isLeapYear returns correct value', () {
+        expect(DateTime(2024, 1, 1).isLeapYear, true);
+        expect(DateTime(2023, 1, 1).isLeapYear, false);
+      });
+
+      test('startOfDay returns 00:00:00', () {
+        final date = DateTime(2026, 5, 15, 10, 30);
+        expect(date.startOfDay, DateTime(2026, 5, 15));
+      });
+
+      test('format returns formatted string', () {
+        final date = DateTime(2026, 1, 2);
+        expect(date.format(), 'Jan 2, 2026');
+      });
+    });
   });
 }

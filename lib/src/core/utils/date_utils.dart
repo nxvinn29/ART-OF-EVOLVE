@@ -446,3 +446,19 @@ class AppDateUtils {
     return (diffInDays / 7).floor() + 1;
   }
 }
+
+/// Extension methods for [DateTime].
+extension DateTimeExtensions on DateTime {
+  /// Checks if this [DateTime] falls in a leap year.
+  bool get isLeapYear => AppDateUtils.isLeapYear(year);
+
+  /// Returns a [DateTime] at the very beginning of the day.
+  DateTime get startOfDay => AppDateUtils.startOfDay(this);
+
+  /// Returns a [DateTime] at the very end of the day.
+  DateTime get endOfDay => AppDateUtils.endOfDay(this);
+
+  /// Formats this [DateTime] using the specified [pattern].
+  String format({String pattern = 'MMM d, yyyy'}) =>
+      AppDateUtils.formatDate(this, pattern: pattern);
+}
