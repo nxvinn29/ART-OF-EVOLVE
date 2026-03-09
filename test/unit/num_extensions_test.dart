@@ -53,5 +53,11 @@ void main() {
       expect((-7).isPrime, false);
       expect(10.5.isPrime, false);
     });
+
+    test('toCompactString should format compactly', () {
+      expect(1000.toCompactString(), '1K');
+      expect(1200.toCompactString(), '1.2K');
+      expect(1000000.toCompactString(), '1M');
+    });
   });
 }

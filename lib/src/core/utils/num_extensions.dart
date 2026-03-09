@@ -61,4 +61,9 @@ extension NumExtensions on num {
     }
     return true;
   }
+
+  /// Formats the number into a compact string (e.g., 1.2K, 3.5M).
+  String toCompactString() {
+    return NumberFormat.compact().format(this);
+  }
 }
