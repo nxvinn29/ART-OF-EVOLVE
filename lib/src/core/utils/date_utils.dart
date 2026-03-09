@@ -433,4 +433,16 @@ class AppDateUtils {
   static int getDaysInYear(DateTime date) {
     return isLeap(date) ? 366 : 365;
   }
+
+  /// Returns the ISO-8601 week number for the given [date].
+  static int getWeekNumber(DateTime date) {
+    // Week number calculation based on ISO-8601
+    final thursday = date.weekday >= DateTime.thursday
+        ? date.subtract(Duration(days: date.weekday - DateTime.thursday))
+        : date.add(Duration(days: DateTime.thursday - date.weekday));
+
+    final firstDayOfYear = DateTime(thursday.year, 1, 1);
+    final diffInDays = thursday.difference(firstDayOfYear).inDays;
+    return (diffInDays / 7).floor() + 1;
+  }
 }

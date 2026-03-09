@@ -952,5 +952,19 @@ void main() {
         expect(AppDateUtils.getDaysInYear(DateTime(2023, 1, 1)), 365);
       });
     });
+
+    group('getWeekNumber', () {
+      test('returns correct week number for standard dates', () {
+        expect(AppDateUtils.getWeekNumber(DateTime(2024, 1, 1)), 1); // Monday
+        expect(AppDateUtils.getWeekNumber(DateTime(2024, 1, 7)), 1); // Sunday
+        expect(AppDateUtils.getWeekNumber(DateTime(2024, 1, 8)), 2); // Monday
+      });
+
+      test('handles year boundaries correctly', () {
+        // Jan 1, 2026 is a Thursday. Week 1 starts Dec 29, 2025.
+        expect(AppDateUtils.getWeekNumber(DateTime(2026, 1, 1)), 1);
+        expect(AppDateUtils.getWeekNumber(DateTime(2025, 12, 31)), 1);
+      });
+    });
   });
 }
