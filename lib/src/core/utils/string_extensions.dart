@@ -460,5 +460,20 @@ extension StringExtensions on String {
     return words.reversed.join(' ');
   }
 
+  /// Truncates the string in the middle if it exceeds [maxLength].
+  ///
+  /// Keeps the start and end of the string, joining them with '...'.
+  /// Example: "Hello World".truncateMiddle(8) -> "He...rld"
+  String truncateMiddle(int maxLength) {
+    if (length <= maxLength) return this;
+    if (maxLength <= 3) return '...'.substring(0, maxLength);
+
+    final remaining = maxLength - 3;
+    final startLen = remaining ~/ 2;
+    final endLen = remaining - startLen;
+
+    return '${substring(0, startLen)}...${substring(length - endLen)}';
+  }
+
   // End of StringExtensions
 }

@@ -325,5 +325,15 @@ void main() {
       expect('   '.reverseWords, '');
       expect(''.reverseWords, '');
     });
+
+    test('truncateMiddle should truncate string in the middle', () {
+      const text = 'Hello World';
+      expect(text.truncateMiddle(8), 'He...rld');
+      expect(text.truncateMiddle(5), 'H...d');
+      expect(text.truncateMiddle(11), 'Hello World');
+      expect(text.truncateMiddle(15), 'Hello World');
+      expect(text.truncateMiddle(3), '...');
+      expect(text.truncateMiddle(2), '..');
+    });
   });
 }
