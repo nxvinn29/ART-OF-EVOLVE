@@ -74,6 +74,13 @@ extension IterableExtensions<T> on Iterable<T> {
     }
     return null;
   }
+
+  /// Returns a new list with elements from this iterable shuffled.
+  List<T> toShuffledList() {
+    final list = toList();
+    list.shuffle();
+    return list;
+  }
 }
 
 /// Extension methods for [Iterable] of numbers.

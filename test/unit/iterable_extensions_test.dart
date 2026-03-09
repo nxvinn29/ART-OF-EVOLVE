@@ -89,5 +89,13 @@ void main() {
       expect(list.firstWhereOrNull((e) => e > 5), null);
       expect(<int>[].firstWhereOrNull((e) => true), null);
     });
+
+    test('shuffle should return a shuffled list', () {
+      final list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      final shuffled = list.toShuffledList();
+      expect(shuffled.length, list.length);
+      expect(shuffled, containsAll(list));
+      // There's a tiny chance it could be the same, but for 10 elements it's very low.
+    });
   });
 }
